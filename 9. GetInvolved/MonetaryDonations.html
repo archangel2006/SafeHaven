@@ -1,0 +1,149 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetary Donations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .disaster {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin: 10px 0;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .disaster img {
+            width: 180px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .disaster-info {
+            flex: 2;
+            margin-left: 15px;
+            text-align: left;
+        }
+        .donate-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .donate-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Monetary Donations</h2>
+        <p>Select a disaster and make a contribution to help those in need.</p>
+
+        <div class="disaster">
+            <img src="flood.jpg" alt="Flood Disaster">
+            <div class="disaster-info">
+                <h3>Severe Floods in India</h3>
+                <p>Date: January 2025</p>
+                <p>Thousands displaced due to heavy rainfall and flooding.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('Severe Floods in India', 'January 2025', 'Relief Foundation')">Donate</button>
+        </div>
+
+        <div class="disaster">
+            <img src="earthquake.jpg" alt="Earthquake Disaster">
+            <div class="disaster-info">
+                <h3>Earthquake in Turkey</h3>
+                <p>Date: December 2024</p>
+                <p>A massive earthquake struck, causing widespread damage.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('Earthquake in Turkey', 'December 2024', 'Global Aid Organization')">Donate</button>
+        </div>
+
+        <div class="disaster">
+            <img src="wildfire.jpg" alt="Wildfire Disaster">
+            <div class="disaster-info">
+                <h3>LA Fire</h3>
+                <p>Date: August 2023</p>
+                <p>Massive wildfires spread across Los Angeles, destroying homes.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('LA Fire', 'August 2023', 'Wildfire Relief Fund')">Donate</button>
+        </div>
+
+        <div class="disaster">
+            <img src="australia-wildfire.jpg" alt="Australia Wildfire">
+            <div class="disaster-info">
+                <h3>Australia Wildfire</h3>
+                <p>Date: February 2008</p>
+                <p>Severe wildfires ravaged Australia, impacting wildlife and homes.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('Australia Wildfire', 'February 2008', 'Australian Relief Network')">Donate</button>
+        </div>
+
+        <div class="disaster">
+            <img src="tsunami.jpg" alt="Tsunami Disaster">
+            <div class="disaster-info">
+                <h3>2008 Tsunami</h3>
+                <p>Date: December 2008</p>
+                <p>Devastating tsunami waves hit multiple coastal regions.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('2008 Tsunami', 'December 2008', 'Tsunami Relief Fund')">Donate</button>
+        </div>
+
+        <div class="disaster">
+            <img src="hurricane.jpg" alt="Hurricane Disaster">
+            <div class="disaster-info">
+                <h3>Hurricane Katrina</h3>
+                <p>Date: August 2005</p>
+                <p>One of the deadliest hurricanes in US history.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('Hurricane Katrina', 'August 2005', 'Hurricane Relief Fund')">Donate</button>
+        </div>
+
+        <div class="disaster">
+            <img src="earthquake-haiti.jpg" alt="Haiti Earthquake">
+            <div class="disaster-info">
+                <h3>Haiti Earthquake</h3>
+                <p>Date: January 2010</p>
+                <p>A catastrophic 7.0 magnitude earthquake hit Haiti.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('Haiti Earthquake', 'January 2010', 'Haiti Relief Organization')">Donate</button>
+        </div>
+
+        <div class="disaster">
+            <img src="nepal-earthquake.jpg" alt="Nepal Earthquake">
+            <div class="disaster-info">
+                <h3>Nepal Earthquake</h3>
+                <p>Date: April 2015</p>
+                <p>A devastating earthquake killed thousands in Nepal.</p>
+            </div>
+            <button class="donate-btn" onclick="redirectToForm('Nepal Earthquake', 'April 2015', 'Nepal Earthquake Relief Fund')">Donate</button>
+        </div>
+
+        <script>
+            function redirectToForm(disasterName, disasterDate, organizationName) {
+                window.location.href = `Forms.html?disaster=${encodeURIComponent(disasterName)}&date=${encodeURIComponent(disasterDate)}&organization=${encodeURIComponent(organizationName)}`;
+            }
+        </script>
+    </div>
+</body>
+</html>

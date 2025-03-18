@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map with Home Button</title>
+    
+    <!-- Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Leaflet.js JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Leaflet Control Geocoder (for search functionality) -->
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #map { height: 500px; width: 100%; margin-top: 10px; }
+        #homeButton {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #homeButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h3>Location</h3>
+    <button id="homeButton">🏠 Home</button>
+    <div id="map"></div>
+
+    <script>
+        // Home location coordinates (Shibuya, Tokyo)
+        var homeCoords = [35.661777, 139.704051];
+
+        // Initialize the map centered on home location
+        var map = L.map('map').setView(homeCoords, 15); 
+
+        // Load OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Fixed home marker at Shibuya, Tokyo
+        var homeMarker = L.marker(homeCoords).addTo(map)
+            .bindPopup("<b>Home Location</b><br>1-1 Udagawacho, Shibuya City, Tokyo, Japan")
+            .openPopup();
+
+        // Add a search control (map moves, home marker stays)
+        L.Control.geocoder({
+            defaultMarkGeocode: true
+        }).on('markgeocode', function(e) {
+            var latlng = e.geocode.center;
+            map.setView(latlng, 15); // Move map to searched location
+        }).addTo(map);
+
+        // Home button resets map to original home location
+        document.getElementById("homeButton").addEventListener("click", function() {
+            map.setView(homeCoords, 15); // Reset map to home
+        });
+    </script>
+</body>
+</html>

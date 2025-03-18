@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Updates - Safe Heaven</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        
+        h2 {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .news-container {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            scroll-behavior: smooth;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .news-item {
+            flex: 0 0 auto;
+            width: 320px;
+            margin-right: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            background: white;
+            text-align: center;
+        }
+
+        .news-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-item p {
+            padding: 10px;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .news-item a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .news-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Live Updates</h2>
+    
+    <div class="news-container">
+        <div class="news-item">
+            <img src="https://i0.wp.com/www.directrelief.org/wp-content/uploads/2018/02/Japan-Earthquake-and-Tsunami-2011-68012881362.jpg?w=1323&ssl=1" alt="Aftermath of 2011 Tsunami">
+            <p><a href="https://www.directrelief.org/emergency/japan-earthquake-and-tsunami-2011/" target="_blank">Japan Earthquake and Tsunami Relief 2011</a></p>
+        </div>
+        
+        <div class="news-item">
+            <img src="https://www.ncei.noaa.gov/sites/g/files/anmtlf171/files/styles/max_1300x1300/public/sites/default/files/2011-japan-earthquake-1200x480.jpg?itok=NLfT1wNg" alt="Tohoku Earthquake">
+            <p><a href="https://www.ncei.noaa.gov/news/day-2011-japan-earthquake-and-tsunami" target="_blank">On This Day: 2011 Tohoku Earthquake & Tsunami</a></p>
+        </div>
+        
+        <div class="news-item">
+            <img src="https://cdn.theatlantic.com/thumbor/fILlleZo9p31px97G9srzs6NvB4=/900x584/media/img/photo/2011/03/japan-earthquake-rescue-recovery-and-reaction/j01_31406609/original.jpg" alt="Rescue Operations">
+            <p><a href="https://www.theatlantic.com/photo/2011/03/japan-earthquake-rescue-recovery-and-reaction/100024/" target="_blank">Japan Earthquake: Rescue & Recovery</a></p>
+        </div>
+        
+        <div class="news-item">
+            <img src="https://www.worldbank.org/content/dam/photos/780x439/2021/mar-2/jp-20210310-feature1.jpg" alt="Rebuilding Efforts">
+            <p><a href= "https://www.worldbank.org/en/news/feature/2021/03/11/learning-from-megadisasters-a-decade-of-lessons-from-the-great-east-japan-earthquake-drmhubtokyo" target="_blank">Learning from Megadisasters</a></p>
+        </div>
+
+        <div class="news-item">
+            <img src="https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2011/4/17/1303048982353/Kenichiro-Yagi--007.jpg?width=620&dpr=2&s=none&crop=none" alt="Survivors Struggles">
+            <p><a href="https://www.theguardian.com/world/2011/apr/18/japan-tsuanami-survivors" target="_blank">A Decade After the Disaster</a></p>
+        </div>
+
+        <div class="news-item">
+            <img src="https://www.npr.org/series/911193164/recovering-fukushima" alt="Recovering Fukushima">
+            <p><a href="https://i.pinimg.com/736x/25/b7/4b/25b74bf1c3599ce98826a1236785c1ef.jpg" target="_blank">Fukushima 10 Years Later</a></p>
+
+        </div>
+    </div>
+
+</body>
+</html>

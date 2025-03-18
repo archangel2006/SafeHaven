@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Control - AI Emergency Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary-color: #4a00e0;
+      --secondary-color: #8e2de2;
+      --bg-color: #f0f4f8;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      color: #fff;
+      padding: 1.5rem;
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
+    .instructions {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .instructions h2 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    .instructions ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+    }
+    .instructions ul li {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .action-buttons {
+      margin-bottom: 2rem;
+    }
+    .action-buttons button {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    .action-buttons button:hover {
+      background: var(--secondary-color);
+    }
+    .voice-demo {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 2px dashed var(--primary-color);
+      border-radius: 10px;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: #fff;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>Voice Control</header>
+  <div class="container">
+    <div class="instructions">
+      <h2>Voice Control Instructions</h2>
+      <ul>
+        <li>Click the "Start Voice Control" button to begin.</li>
+        <li>Speak clearly; your command will be captured.</li>
+        <li>Try commands like "Hello", "Evacuate", "Call for help", or "Stop".</li>
+        <li>Your spoken command and our response will appear below.</li>
+      </ul>
+    </div>
+    <div class="action-buttons">
+      <button id="startVoiceBtn"><i class="fas fa-microphone"></i> Start Voice Control</button>
+      <button onclick="window.location.href='AIassistant.html'"><i class="fas fa-arrow-left"></i> Back</button>
+    </div>
+    <div class="voice-demo" id="voiceOutput">
+      Voice command output will appear here.
+    </div>
+  </div>
+  <footer>
+    &copy; 2025 AI Emergency Assistant. All rights reserved.
+  </footer>
+  
+  <script>
+    const startVoiceBtn = document.getElementById('startVoiceBtn');
+    const voiceOutput = document.getElementById('voiceOutput');
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US'; // You can change this based on the selected language
+      
+      startVoiceBtn.addEventListener('click', () => {
+        voiceOutput.textContent = 'Listening...';
+        recognition.start();
+      });
+      
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        voiceOutput.textContent = "You said: " + transcript;
+        // Generate a simulated AI response
+        const response = getFallbackResponse(transcript);
+        setTimeout(() => {
+          voiceOutput.textContent += "\nAssistant: " + response;
+        }, 1500);
+      };
+      
+      recognition.onerror = function(event) {
+        voiceOutput.textContent = 'Error occurred: ' + event.error;
+      };
+    } else {
+      startVoiceBtn.disabled = true;
+      voiceOutput.textContent = "Voice recognition not supported in this browser.";
+    }
+    
+    function getFallbackResponse(message) {
+      const msg = message.toLowerCase();
+      if (msg.includes("hello") || msg.includes("hi")) {
+        return "Hello! How can I assist you today?";
+      } else if (msg.includes("evacuate")) {
+        return "Please follow the evacuation instructions and remain calm.";
+      } else if (msg.includes("medical")) {
+        return "For medical emergencies, please call 911 immediately.";
+      } else if (msg.includes("help")) {
+        return "I'm here to help! Could you please provide more details?";
+      } else if (msg.includes("thank")) {
+        return "You're welcome! Stay safe.";
+      } else {
+        return "I'm sorry, I didn't understand that. Could you please rephrase?";
+      }
+    }
+  </script>
+</body>
+</html>

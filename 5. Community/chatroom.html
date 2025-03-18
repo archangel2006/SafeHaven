@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Chatroom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .chat-header {
+            background: #0073e6;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: white;
+            object-fit: cover;
+        }
+
+        .clear-btn {
+            background: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .clear-btn:hover {
+            background: #ddd;
+        }
+
+        .chat-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: white;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .chat-message {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            background: #e6f7ff;
+        }
+
+        .chat-message img {
+            max-width: 150px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .chat-message strong {
+            color: #0073e6;
+        }
+
+        .chat-form {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #0073e6;
+        }
+
+        .chat-form input, .chat-form button {
+            padding: 10px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .chat-form input {
+            flex-grow: 1;
+            border-radius: 5px;
+        }
+
+        .chat-form button {
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+
+        .chat-form button:hover {
+            background: #ddd;
+        }
+
+        .file-input {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Profile & Clear Button -->
+    <div class="chat-header">
+        <div class="profile-container">
+            <img src="default-avatar.png" class="profile-img" id="profilePic">
+            <input type="text" id="username" placeholder="Enter your name" required>
+            <input type="file" id="profileInput" accept="image/*" onchange="updateProfile()">
+        </div>
+        <button class="clear-btn" onclick="clearChat()">Clear History</button>
+    </div>
+
+    <!-- Chat Messages -->
+    <div class="chat-container" id="chatContainer"></div>
+
+    <!-- Chat Input Box -->
+    <form class="chat-form" onsubmit="sendMessage(event)">
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <input type="file" id="imageInput" class="file-input" accept="image/*">
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        function updateProfile() {
+            let profileInput = document.getElementById("profileInput");
+            let profilePic = document.getElementById("profilePic");
+
+            if (profileInput.files.length > 0) {
+                let file = profileInput.files[0];
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePic.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+
+            let username = document.getElementById("username").value.trim();
+            let message = document.getElementById("messageInput").value.trim();
+            let imageInput = document.getElementById("imageInput");
+            let chatContainer = document.getElementById("chatContainer");
+
+            if (!username) return;
+
+            let messageElement = document.createElement("div");
+            messageElement.classList.add("chat-message");
+
+            // User Image Preview
+            let profilePic = document.getElementById("profilePic").src;
+            let userImage = document.createElement("img");
+            userImage.src = profilePic;
+            userImage.style.width = "40px";
+            userImage.style.height = "40px";
+            userImage.style.borderRadius = "50%";
+            userImage.style.marginRight = "10px";
+
+            messageElement.appendChild(userImage);
+
+            // If text is provided, add it
+            if (message) {
+                let messageText = document.createElement("span");
+                messageText.innerHTML = `<strong>${username}:</strong> ${message}`;
+                messageElement.appendChild(messageText);
+            }
+
+            // If an image is uploaded, add it
+            if (imageInput.files.length > 0) {
+                let file = imageInput.files[0];
+                let reader = new FileReader();
+
+                reader.onload = function (e) {
+                    let imgPreview = document.createElement("img");
+                    imgPreview.src = e.target.result;
+                    imgPreview.style.maxWidth = "150px";
+                    imgPreview.style.borderRadius = "5px";
+                    imgPreview.style.marginLeft = "10px";
+
+                    messageElement.appendChild(imgPreview);
+                };
+                reader.readAsDataURL(file);
+            }
+
+            if (message || imageInput.files.length > 0) {
+                chatContainer.appendChild(messageElement);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            document.getElementById("messageInput").value = "";
+            imageInput.value = "";
+        }
+
+        function clearChat() {
+            document.getElementById("chatContainer").innerHTML = "";
+        }
+    </script>
+
+</body>
+</html>

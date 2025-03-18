@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .proceed-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .proceed-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            display: none;
+        }
+        .qr-section {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Donation Form</h2>
+        <p><strong>Disaster:</strong> <span id="disasterName">Loading...</span></p>
+        <p><strong>Organization:</strong> <span id="organizationName">Loading...</span></p>
+
+        <form id="donationForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" required min="1">
+
+            <label for="job">Job:</label>
+            <input type="text" id="job" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <button id="proceedBtn" type="button" class="btn proceed-btn" disabled onclick="showQRCode()">Proceed to Pay</button>
+        </form>
+
+        <div id="qrSection" class="qr-section">
+            <h3>Scan to Donate</h3>
+            <img src="qrcode.png" alt="QR Code" width="200">
+            <p>After payment, click Submit</p>
+            <button id="submitBtn" class="btn submit-btn" onclick="showThankYou()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            // Get disaster and organization details from URL
+            const params = new URLSearchParams(window.location.search);
+            const disaster = decodeURIComponent(params.get("disaster") || "N/A");
+            const organization = decodeURIComponent(params.get("organization") || "N/A");
+
+            document.getElementById("disasterName").textContent = disaster;
+            document.getElementById("organizationName").textContent = organization;
+
+            // Enable "Proceed to Pay" only if all fields are filled
+            const form = document.getElementById("donationForm");
+            const proceedBtn = document.getElementById("proceedBtn");
+
+            form.addEventListener("input", function () {
+                const name = document.getElementById("name").value.trim();
+                const age = document.getElementById("age").value.trim();
+                const job = document.getElementById("job").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const email = document.getElementById("email").value.trim();
+
+                proceedBtn.disabled = !(name && age && job && phone && email);
+            });
+        };
+
+        function showQRCode() {
+            document.getElementById("qrSection").style.display = "block";
+            document.getElementById("submitBtn").style.display = "block";
+        }
+
+        function showThankYou() {
+            alert("🙏 Thank you for your generous donation! Your support is greatly appreciated.");
+        }
+    </script>
+
+</body>
+</html>

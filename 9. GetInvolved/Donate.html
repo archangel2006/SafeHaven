@@ -1,0 +1,151 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .panel {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .panel button {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .panel button:hover {
+            background-color: #0056b3;
+        }
+        .tracker, .ngo-section {
+            margin-top: 30px;
+        }
+        .cause {
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .ngo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .ngo-list li {
+            margin: 10px 0;
+        }
+        .ngo-list a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .ngo-list a:hover {
+            text-decoration: underline;
+        }
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            width: 30%;
+            margin: 0 auto;
+        }
+    </style>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Support Disaster Relief Efforts</h2>
+        <p>Select the type of donation you'd like to make:</p>
+
+        <!-- Donation Options Panel -->
+        <div class="panel">
+            <button onclick="window.location.href='MonetaryDonations.html'">💳 Monetary Donations</button>
+            <button onclick="window.location.href='MaterialDonations.html'">🎒 Material Donations</button>
+        </div>
+
+        <!-- Real-Time Impact Tracker -->
+        <div class="tracker">
+            <h3>Real-Time Impact Tracker</h3>
+            
+            <!-- Pie Chart -->
+            <div class="chart-container">
+                <canvas id="donationChart"></canvas>
+            </div>
+
+            <h4>📝 Stories & Testimonials</h4>
+            <ul type="*">
+                <li>"Thanks to the donations, we were able to rebuild our house." – Affected Family in India</li>
+                <li>"The food aid arrived just in time for my family." – Flood Victim in Nepal</li>
+                <li>"Your generous donations helped save lives during the earthquake." – Rescue Team in Turkey</li>
+                <li>"I lost everything in the fire, but the community's support has helped me start over." – LA Wildfire Survivor</li>
+            </ul>
+        </div>
+
+        <!-- NGO Partnership Section -->
+        <div class="ngo-section">
+            <h3>Our NGO & Government Partners</h3>
+            <p>We collaborate with trusted NGOs and government programs to make sure your donations reach the right people.</p>
+            <ul class="ngo-list">
+                <li><a href="https://www.ifrc.org/" target="_blank">International Federation of Red Cross and Red Crescent Societies (IFRC)</a></li>
+                <li><a href="https://www.oxfam.org/" target="_blank">Oxfam International</a></li>
+                <li><a href="https://www.savethechildren.org/" target="_blank">Save the Children</a></li>
+                <li><a href="https://www.worldvision.org/" target="_blank">World Vision International</a></li>
+                <li><a href="https://www.doctorswithoutborders.org/" target="_blank">Doctors Without Borders (MSF)</a></li>
+                <li><a href="https://www.unicef.org/" target="_blank">UNICEF</a></li>
+                <li><a href="https://www.globalgiving.org/" target="_blank">GlobalGiving</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script for Pie Chart -->
+    <script>
+        var ctx = document.getElementById('donationChart').getContext('2d');
+        var donationChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid'],
+                datasets: [{
+                    label: 'Donation Distribution',
+                    data: [10000000, 5000000, 3000000],  // Example data
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ₹ ' + tooltipItem.raw.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                aspectRatio: 1,  // Ensure the chart has a square aspect ratio
+                height: 150  // Set chart size
+            }
+        });
+    </script>
+</body>
+</html>

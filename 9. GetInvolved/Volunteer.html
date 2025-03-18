@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer - Safe Heaven</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .panel-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .panel {
+            width: 22%;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .panel img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .graph-container {
+            margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            margin: auto;
+        }
+
+        /* Adjust the size of the canvas for a smaller chart */
+        canvas {
+            max-width: 80% !important;
+            height: 250px !important;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Volunteer Roles</h2>
+        <div class="panel-container">
+            <div class="panel" style="background-color:#c5e1f3;">
+                <img src="https://i.pinimg.com/474x/35/6d/e7/356de79f39c71a655e68e3b265108455.jpg" alt="Medical Assistance">
+                <h3>🚑 Medical Assistance</h3>
+                <p>Help in emergency first aid</p>
+            </div>
+            <div class="panel" style="background-color:#aecdf1;">
+                <img src="https://i.pinimg.com/736x/4e/00/4e/4e004eb7195a52bc508209611fa910ed.jpg" alt="Rescue Operations">
+                <h3>🚜 Rescue Operations</h3>
+                <p>On-ground rescue missions</p>
+            </div>
+            <div class="panel" style="background-color:#c5e1f3;">
+                <img src="https://i.pinimg.com/474x/ed/0e/0d/ed0e0d54aae6ff49b203ec0d8518549e.jpg" alt="Supply Distribution">
+                <h3>📦 Supply Distribution</h3>
+                <p>Help distribute food, water & essentials</p>
+            </div>
+            <div class="panel" style="background-color:#aecdf1;">
+                <img src="https://i.pinimg.com/474x/7e/6c/74/7e6c746d981cebbe8d9501f56d5d81d6.jpg" alt="Awareness & Education">
+                <h3>📢 Awareness & Education</h3>
+                <p>Teach disaster preparedness in communities</p>
+            </div>
+        </div>
+
+        <h2>Volunteer Registration Form</h2>
+        <form id="volunteerForm" style="background-color:azure" >
+            <input type="text" placeholder="Name" id="name" required>
+            <input type="number" placeholder="Age" id="age" required>
+            <input type="text" placeholder="Location" id="location" required>
+            <input type="tel" placeholder="Contact Info" id="contact" required>
+            <select id="skill">
+                <option value="Medical">Medical</option>
+                <option value="Rescue">Rescue</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Awareness & Education">Awareness & Education</option>
+            </select>
+            <select id="availability">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Remote Help">Remote Help</option>
+            </select>
+            <button type="submit">Register</button>
+        </form>
+
+        <div class="graph-container">
+            <h2>📊 Volunteer Impact</h2>
+            <canvas id="volunteerChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById("volunteerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Registered Successfully! You will be receiving our call in about 60 seconds.");
+            document.getElementById("volunteerForm").reset();
+        });
+
+        // Chart.js Graph
+        const ctx = document.getElementById('volunteerChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Medical Assistance', 'Rescue Operations', 'Supply Distribution', 'Awareness & Education'],
+                datasets: [{
+                    label: 'Lives Impacted',
+                    data: [5000, 8000, 6000, 7000],
+                    backgroundColor: ['#ff5733', '#33ff57', '#3377ff', '#ff33a6']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

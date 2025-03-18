@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heaven</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            background-color: #f4f4f4;
+        }
+        
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 80px 20px 20px;
+        }
+
+        iframe {
+            width: 80%;
+            height: 400px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="#discussion">Discussion Board</a>
+        <a href="#live-updates">Live Updates</a>
+        <a href="#missing">Missing Persons</a>
+    </div>
+
+    <div class="container">
+        <h2 id="discussion">Community Discussion Board</h2>
+        <iframe src="chatroom.html"></iframe>
+
+        <h2 id="live-updates">Live Updates</h2>
+        <iframe src="LiveUpdates.html"></iframe>
+
+        <h2 id="missing">Missing Persons</h2>
+        <iframe src="MissingPerson.html"></iframe>
+    </div>
+
+</body>
+</html>

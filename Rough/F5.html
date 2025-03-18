@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heaven</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .top-panel {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        .sos-button {
+            background-color: red;
+            color: white;
+            padding: 15px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            width: 200px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .panel {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .panel img {
+            width: 100px;
+            height: 100px;
+        }
+        .ai-assistant {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .ai-circle {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .get-involved {
+            background: yellow;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .map-section {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-panel">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>Safe Heaven</h1>
+    </div>
+
+    <div class="container">
+        <h2>Report Hazard, Find Safety, Get Help</h2>
+        <button class="sos-button">Emergency SOS</button>
+    </div>
+
+    <div class="grid-container">
+        <div class="panel">
+            <img src="disaster_alerts.png" alt="Disaster Alerts">
+            <p>Disaster Alerts</p>
+        </div>
+        <div class="panel">
+            <img src="disaster_coordination.png" alt="Disaster Coordination">
+            <p>Disaster Coordination</p>
+        </div>
+        <div class="panel">
+            <img src="evacuation_safety.png" alt="Evacuation Safety">
+            <p>Evacuation & Safety</p>
+        </div>
+    </div>
+
+    <div class="ai-assistant">
+        <div class="ai-circle">
+            <img src="ai_assistant.png" alt="AI Assistant">
+        </div>
+        <p>AI Assistant</p>
+    </div>
+
+    <div class="grid-container">
+        <div class="panel">
+            <img src="community.png" alt="Community">
+            <p>Community</p>
+        </div>
+        <div class="panel">
+            <img src="whats_happening.png" alt="Know What's Happening?">
+            <p>Know What's Happening?</p>
+        </div>
+        <div class="panel">
+            <img src="get_educated.png" alt="Get Educated">
+            <p>Know the Hazards! Get Educated</p>
+        </div>
+    </div>
+
+    <div class="get-involved">
+        <h3>GET INVOLVED!</h3>
+        <button>Volunteer</button>
+        <button>Donate</button>
+    </div>
+
+    <div class="map-section">
+        <img src="map.png" alt="Map" width="100%">
+        <p>Your Location</p>
+    </div>
+</body>
+</html>
