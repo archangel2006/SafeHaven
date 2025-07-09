@@ -1,5 +1,11 @@
+# 🛡️ SafeHaven
+
+A disaster management and awareness platform to help individuals and communities stay informed, safe, and connected during crises.
+
+---
 
 ## 📦 Installation
+
 ```bash
 # Clone the repository
 git clone https://github.com/archangel2006/SafeHaven.git
@@ -9,10 +15,13 @@ cd SafeHaven
 npm install
 
 # Run HomePage.html Locally
+```
 
-----
+---
 
-## File Structure
+## 📁 File Structure
+
+```
 .
 ├── 1. HomePage/
 │   ├── HomePage.html
@@ -56,3 +65,28 @@ npm install
 │   └── Volunteer.html
 ├── Rough
 └── .gitattributes
+```
+
+---
+
+## 🚀 Features
+
+- Real-time alerts and risk assessments  
+- Disaster coordination tools for rescue teams  
+- Evacuation safety guidelines  
+- Community support and chatroom  
+- Educational resources on disaster preparedness  
+- AI-powered assistant for health and emergency queries  
+- Donation and volunteer engagement platform  
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please fork the repo and submit a pull request.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
