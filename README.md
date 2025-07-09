@@ -60,8 +60,8 @@ npm install
 ├── 8. AIAssistant/
 │   ├── AIAssistant.html
 │   ├── AIChatbot.html
-│   ├── MedicalHElp.html
-│   ├── SelectLAnguage.html
+│   ├── MedicalHelp.html
+│   ├── SelectLanguage.html
 │   └── VoiceControl.html
 ├── 9. GetInvolved/
 │   ├── Donate.html
