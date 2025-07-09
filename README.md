@@ -1,7 +1,10 @@
 # 🛡️ SafeHaven
-
+SafeHeaven is a Crowdsourced Disaster Management Platform. Assisting and guiding one in case of a disaster.
 A disaster management and awareness platform to help individuals and communities stay informed, safe, and connected during crises.
 
+---
+## Teck Stack
+``` HTML CSS JavaScript
 ---
 
 ## 📦 Installation
