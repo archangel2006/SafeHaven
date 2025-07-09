@@ -4,7 +4,10 @@ A disaster management and awareness platform to help individuals and communities
 
 ---
 ## Teck Stack
-``` HTML CSS JavaScript
+
+```
+HTML CSS JavaScript
+```
 ---
 
 ## 📦 Installation
