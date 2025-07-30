@@ -3,7 +3,7 @@ SafeHeaven is a Crowdsourced Disaster Management Platform. Assisting and guiding
 A disaster management and awareness platform to help individuals and communities stay informed, safe, and connected during crises.
 
 ---
-## Teck Stack
+## Tech Stack
 
 ```
 HTML CSS JavaScript
