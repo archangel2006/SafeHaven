@@ -2,6 +2,8 @@
 SafeHeaven is a Crowdsourced Disaster Management Platform. Assisting and guiding one in case of a disaster.
 A disaster management and awareness platform to help individuals and communities stay informed, safe, and connected during crises.
 
+⚠️ [Notice: This project is not part of GSSoC '25](https://github.com/archangel2006/SafeHaven/issues/6)
+
 ---
 ## Tech Stack
 
