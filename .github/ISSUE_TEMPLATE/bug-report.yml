@@ -1,1 +1,55 @@
-issue
+name: "🐞 Bug Report"
+description: "Report a bug in the project or algorithm implementation."
+title: "🐛: "
+labels: ["bug 🐛", "Up-for-Grabs ✋"]
+assignees: []
+
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: "Describe the Bug"
+      description: "What went wrong? Include error messages or unexpected behavior."
+      placeholder: "Example: Clicking the 'Submit' button throws a console error."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce"
+      placeholder: "1. Go to...\n2. Click on...\n3. See error..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Behavior"
+      placeholder: "Explain what you expected to happen."
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots 📷"
+      placeholder: "Attach screenshots or write N/A if not available."
+    validations:
+      required: false
+
+  - type: input
+    id: environment
+    attributes:
+      label: "Environment"
+      placeholder: "e.g. Windows 11 / Chrome 141.0 / Mobile or Desktop"
+    validations:
+      required: false
+
+  - type: input
+    id: contributor
+    attributes:
+      label: "Contributor Name"
+      placeholder: "Your full name"
+    validations:
+      required: true
