@@ -1,55 +1,91 @@
 name: "🐞 Bug Report"
-description: "Report a bug in the project or algorithm implementation."
+description: "Report a bug, malfunction, or issue in the project."
 title: "🐛: "
-labels: ["bug 🐛", "Up-for-Grabs ✋"]
+labels: ["bug 🐛"]
 assignees: []
 
 body:
-  - type: textarea
-    id: bug-description
+  - type: checkboxes
+    id: page
     attributes:
-      label: "Describe the Bug"
-      description: "What went wrong? Include error messages or unexpected behavior."
-      placeholder: "Example: Clicking the 'Submit' button throws a console error."
-    validations:
-      required: true
+      label: "📄 Affected Page(s)"
+      description: "Select the page where you found the bug."
+      options:
+        - label: "🏠 Home Page"
+        - label: "🚨 Alerts & Risks"
+        - label: "🤝 Disaster Coordination"
+        - label: "🦺 Evacuation Safety"
+        - label: "👥 Community"
+        - label: "🌍 Disaster Updates"
+        - label: "📘 Get Educated"
+        - label: "🙌 Get Involved"
+        - label: "🤖 AI Assistant"
+        - label: "🧩 Others (mention)"
 
   - type: textarea
-    id: steps
+    id: description
     attributes:
-      label: "Steps to Reproduce"
-      placeholder: "1. Go to...\n2. Click on...\n3. See error..."
+      label: "🔍 Description"
+      description: "Clearly explain the bug or issue you encountered."
+      placeholder: "Describe what went wrong, steps that led to it, and any visible errors..."
     validations:
       required: true
 
   - type: textarea
     id: expected
     attributes:
-      label: "Expected Behavior"
-      placeholder: "Explain what you expected to happen."
+      label: "✅ Expected Behavior"
+      description: "Explain what you expected to happen instead."
+      placeholder: "Describe the correct or intended behavior..."
     validations:
       required: true
 
   - type: textarea
-    id: screenshots
+    id: media
     attributes:
-      label: "Screenshots 📷"
-      placeholder: "Attach screenshots or write N/A if not available."
+      label: "📷 Screenshots / 🎥 Video"
+      description: "Attach relevant screenshots or videos showing the issue (optional)."
+      placeholder: "Drag and drop media files here."
     validations:
       required: false
 
-  - type: input
+  - type: textarea
     id: environment
     attributes:
-      label: "Environment"
-      placeholder: "e.g. Windows 11 / Chrome 141.0 / Mobile or Desktop"
+      label: "💻 Environment"
+      description: "Provide details about where you encountered the issue."
+      placeholder: "Example: Windows 11, Chrome 127, Mobile view, etc."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "💬 Additional Info"
+      placeholder: "Add any related issues, logs, or notes."
     validations:
       required: false
 
   - type: input
-    id: contributor
+    id: name
     attributes:
-      label: "Contributor Name"
-      placeholder: "Your full name"
+      label: "👤 Name"
+      placeholder: "Your name"
+    validations:
+      required: true
+
+  - type: input
+    id: github
+    attributes:
+      label: "GitHub ID"
+      placeholder: "@yourusername"
+    validations:
+      required: true
+
+  - type: input
+    id: email
+    attributes:
+      label: "📧 Contact Email"
+      placeholder: "example@email.com"
     validations:
       required: true
