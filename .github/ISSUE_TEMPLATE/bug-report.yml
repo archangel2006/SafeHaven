@@ -1,7 +1,7 @@
 name: "🐞 Bug Report"
 description: "Report a bug, malfunction, or issue in the project."
 title: "🐛: "
-labels: ["bug 🐛"]
+labels: ["bug"]
 assignees: []
 
 body:
