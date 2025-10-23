@@ -1,1 +1,75 @@
-issue
+name: "💡 New Feature Proposal"
+description: Suggest a new feature or idea for SafeHeaven.
+title: "✨: "
+labels: ["feature", "enhancement"]
+assignees: []
+
+body:
+  - type: textarea
+    id: overview
+    attributes:
+      label: "🌟 Feature Overview"
+      placeholder: "Briefly describe your proposed feature."
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "🎯 Motivation"
+      placeholder: "Why is this feature needed? What problem does it solve?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "🛠️ Implementation Idea"
+      placeholder: "Describe how this feature might be implemented (tech, design, flow)."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "🔄 Alternatives Considered"
+      placeholder: "If any, describe other options you thought about."
+    validations:
+      required: false
+
+  - type: textarea
+    id: media
+    attributes:
+      label: "📷 Mockups / References"
+      description: "Attach design mockups, sketches, or reference examples (optional)."
+      placeholder: "Drag and drop images or links here."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: page
+    attributes:
+      label: "📄 Related Page(s)"
+      description: "Select the section(s) of the project this feature relates to."
+      options:
+        - label: "Home Page"
+        - label: "Alerts & Risks"
+        - label: "Disaster Coordination"
+        - label: "Evacuation Safety"
+        - label: "Community"
+        - label: "Disaster Updates"
+        - label: "Get Educated"
+        - label: "Get Involved"
+        - label: "AI Assistant"
+        - label: "Others"
+    validations:
+      required: true
+
+  - type: textarea
+    id: contributor
+    attributes:
+      label: "👤 Contributor Info"
+      description: "Provide your **Name**, **GitHub ID**, and **Email** (for follow-up)."
+      placeholder: "Example:\nName: Alex\nGitHub ID: @alex123\nEmail: alex@example.com"
+    validations:
+      required: true
