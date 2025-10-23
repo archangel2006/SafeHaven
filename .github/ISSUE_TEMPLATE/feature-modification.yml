@@ -1,1 +1,61 @@
-issue
+name: "🔧 Feature Modification Request"
+description: "Suggest improvements or modifications to an existing feature."
+title: "🛠️: "
+labels: ["feature-modification", "enhancement"]
+assignees: []
+
+body:
+  - type: textarea
+    id: current_issue
+    attributes:
+      label: "⚙️ Current Feature & Limitation"
+      description: "Describe the existing feature and the issue or limitation you noticed."
+      placeholder: "Example:\nFeature: Evacuation Safety alerts\nIssue: The alert messages are too long and unclear."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal_outcome
+    attributes:
+      label: "💡 Proposed Modification & Expected Outcome"
+      description: "Explain your suggested change and how it will improve the experience or performance."
+      placeholder: "Example:\nProposal: Add concise alert titles with color-coded icons.\nExpected Outcome: Clearer, faster-to-read safety messages."
+    validations:
+      required: true
+
+  - type: textarea
+    id: media
+    attributes:
+      label: "📷 Screenshots / Video"
+      description: "Attach visuals or videos that show the issue or your idea (optional)."
+      placeholder: "Drag and drop or paste media here."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: page
+    attributes:
+      label: "📄 Affected Page(s)"
+      description: "Select which page(s) or section(s) are affected by this modification."
+      options:
+        - label: "Home Page"
+        - label: "Alerts & Risks"
+        - label: "Disaster Coordination"
+        - label: "Evacuation Safety"
+        - label: "Community"
+        - label: "Disaster Updates"
+        - label: "Get Educated"
+        - label: "Get Involved"
+        - label: "AI Assistant"
+        - label: "Others"
+    validations:
+      required: true
+
+  - type: textarea
+    id: contact
+    attributes:
+      label: "📞 Contact"
+      description: "Provide your contact details so we can reach you if needed."
+      placeholder: "Name\nGitHub ID\nEmail"
+    validations:
+      required: true
