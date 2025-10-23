@@ -1,1 +1,58 @@
-issue
+issuename: "📘 Add Resource / Content"
+description: Contribute educational or informational material for SafeHeaven.
+title: "📚: "
+labels: ["documentation", "resources"]
+assignees: []
+
+body:
+  - type: checkboxes
+    id: affected_pages
+    attributes:
+      label: "📄Related Page(s)"
+      description: "Select which page(s) this design affects."
+      options:
+        - label: "Home Page"
+        - label: "Alerts & Risks"
+        - label: "Disaster Coordination"
+        - label: "Evacuation Safety"
+        - label: "Community"
+        - label: "Disaster Updates"
+        - label: "Get Educated"
+        - label: "Get Involved"
+        - label: "AI Assistant"
+        - label: "Others"
+    validations:
+      required: true
+
+  - type: textarea
+    id: resource
+    attributes:
+      label: "📄 Resource Description"
+      placeholder: "Explain what resource or content you're adding and why it's useful."
+    validations:
+      required: true
+
+  - type: input
+    id: format
+    attributes:
+      label: "📂 Format Type"
+      placeholder: "e.g., Text, Image, Infographic, PDF, External Link"
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: "🔗 Source / Reference (if any)"
+      placeholder: "Provide links or credits if the content is adapted."
+    validations:
+      required: false
+
+  - type: textarea
+    id: contact
+    attributes:
+      label: "📞 Contact"
+      description: "Provide your details for acknowledgement or follow-up."
+      placeholder: "Name\nGitHub ID\nEmail"
+    validations:
+      required: true
