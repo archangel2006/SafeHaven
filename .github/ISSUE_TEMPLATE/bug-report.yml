@@ -5,23 +5,6 @@ labels: ["bug 🐛"]
 assignees: []
 
 body:
-  - type: checkboxes
-    id: page
-    attributes:
-      label: "📄 Affected Page(s)"
-      description: "Select the page where you found the bug."
-      options:
-        - label: "🏠 Home Page"
-        - label: "🚨 Alerts & Risks"
-        - label: "🤝 Disaster Coordination"
-        - label: "🦺 Evacuation Safety"
-        - label: "👥 Community"
-        - label: "🌍 Disaster Updates"
-        - label: "📘 Get Educated"
-        - label: "🙌 Get Involved"
-        - label: "🤖 AI Assistant"
-        - label: "🧩 Others (mention)"
-
   - type: textarea
     id: description
     attributes:
@@ -49,6 +32,23 @@ body:
     validations:
       required: false
 
+  - type: checkboxes
+    id: page
+    attributes:
+      label: "📄 Affected Page(s)"
+      description: "Select the page where you found the bug."
+      options:
+        - label: "Home Page"
+        - label: "Alerts & Risks"
+        - label: "Disaster Coordination"
+        - label: "Evacuation Safety"
+        - label: "Community"
+        - label: "Disaster Updates"
+        - label: "Get Educated"
+        - label: "Get Involved"
+        - label: "AI Assistant"
+        - label: "Others (mention)"
+
   - type: textarea
     id: environment
     attributes:
@@ -66,26 +66,11 @@ body:
     validations:
       required: false
 
-  - type: input
-    id: name
+  - type: textarea
+    id: contact
     attributes:
-      label: "👤 Name"
-      placeholder: "Your name"
-    validations:
-      required: true
-
-  - type: input
-    id: github
-    attributes:
-      label: "GitHub ID"
-      placeholder: "@yourusername"
-    validations:
-      required: true
-
-  - type: input
-    id: email
-    attributes:
-      label: "📧 Contact Email"
-      placeholder: "example@email.com"
+      label: "📞 Contact"
+      description: "Provide your details so we can reach you if needed."
+      placeholder: "Name:\nGitHub ID:\nEmail:"
     validations:
       required: true
