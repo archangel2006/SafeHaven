@@ -1,1 +1,66 @@
-issue
+name: "🎨 UI/UX or Design Improvements"
+description: "Request design tasks such as mockups, revamps, or visual adjustments."
+title: "🎨: "
+labels: ["uiux", "design"]
+assignees: []
+
+body:
+  - type: checkboxes
+    id: design_type
+    attributes:
+      label: "✏️ Design Type"
+      description: "Select what kind of design task this is about."
+      options:
+        - label: "Full Page Redesign / Revamp"
+        - label: "Figma Mockup Creation"
+        - label: "Logo / Icon Design"
+        - label: "Minor UI Adjustments (buttons, colors, spacing, etc.)"
+        - label: "Other (mention below)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "📝 Description"
+      description: "Explain your design idea, what should change, or attach a Figma link if available."
+      placeholder: "Describe the idea and vision."
+    validations:
+      required: true
+
+  - type: textarea
+    id: media
+    attributes:
+      label: "📷 Reference / Inspiration"
+      description: "Add screenshots or examples (optional)."
+      placeholder: "Drag and drop or paste visuals here."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: affected_pages
+    attributes:
+      label: "📄 Affected Page(s)"
+      description: "Select which page(s) this design affects."
+      options:
+        - label: "Home Page"
+        - label: "Alerts & Risks"
+        - label: "Disaster Coordination"
+        - label: "Evacuation Safety"
+        - label: "Community"
+        - label: "Disaster Updates"
+        - label: "Get Educated"
+        - label: "Get Involved"
+        - label: "AI Assistant"
+        - label: "Others"
+    validations:
+      required: true
+
+  - type: textarea
+    id: contact
+    attributes:
+      label: "📞 Contact"
+      description: "Provide your contact details so we can reach you if needed."
+      placeholder: "Name\nGitHub ID\nEmail"
+    validations:
+      required: true
