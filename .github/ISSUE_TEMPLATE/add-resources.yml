@@ -1,4 +1,4 @@
-issuename: "📘 Add Resource / Content"
+name: "📘 Add Resource / Content"
 description: Contribute educational or informational material for SafeHeaven.
 title: "📚: "
 labels: ["documentation", "resources"]
@@ -8,7 +8,7 @@ body:
   - type: checkboxes
     id: affected_pages
     attributes:
-      label: "📄Related Page(s)"
+      label: "📄 Related Page(s)"
       description: "Select which page(s) this design affects."
       options:
         - label: "Home Page"
