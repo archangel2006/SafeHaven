@@ -1,4 +1,4 @@
-# 🧾 Pull Request — SafeHaven
+# Pull Request — SafeHaven
 
 Thank you for contributing to **🛡️ SafeHaven: A Crowdsourced Disaster Management Platform**!  
 Please fill out the following details to help us review your PR efficiently.
@@ -10,13 +10,13 @@ Fixes # (mention issue number here)
 
 ---
 
-## ✨ Description of Changes
+## Description of Changes
 Describe your changes and their purpose.  
 > Example: Refactored navbar responsiveness / Added new section / Improved layout consistency.
 
 ---
 
-## 🧩 Type of Change
+## Type of Change
 - [ ] 🐛 Bug Fix  
 - [ ] 🔧 Feature Modification  
 - [ ] ✨ New Feature  
