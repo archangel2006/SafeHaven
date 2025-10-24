@@ -1,0 +1,56 @@
+name: 🧹 Maintenance / Cleanup
+description: Improve documentation, organize assets, or clean up code.
+title: "🧹 Maintenance: "
+labels: ["maintenance", "cleanup", "good-first-issue"]
+assignees: []
+
+body:
+  - type: checkboxes
+    id: cleanup_type
+    attributes:
+      label: "🧹 Type of Cleanup"
+      description: "Select all relevant maintenance tasks."
+      options:
+        - label: "Extract and move images to /assets/"
+        - label: "Separate inline CSS/JS into external files"
+        - label: "Fix or update broken links"
+        - label: "Reorganize folders or file names"
+        - label: "Update documentation or comments"
+        - label: "Other (mention below)"
+    validations:
+      required: true        
+
+  - type: checkboxes
+    id: affected_pages
+    attributes:
+      label: "📄 Affected Page(s)"
+      options:
+        - label: "Home Page"
+        - label: "Alerts & Risks"
+        - label: "Disaster Coordination"
+        - label: "Evacuation Safety"
+        - label: "Community"
+        - label: "Disaster Updates"
+        - label: "Get Educated"
+        - label: "Get Involved"
+        - label: "AI Assistant"
+        - label: "Others (mention below)"
+    validations:
+      required: true        
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "🧰 Details"
+      placeholder: "Briefly describe what changes you made or plan to make."
+    validations:
+      required: true
+
+  - type: textarea
+    id: contact
+    attributes:
+      label: "📞 Contact"
+      description: "Provide your contact details so we can reach you if needed."
+      placeholder: "Name\nGitHub ID\nEmail"
+    validations:
+      required: true
