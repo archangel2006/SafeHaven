@@ -1,15 +1,47 @@
 # 🛡️ SafeHaven
-SafeHeaven is a Crowdsourced Disaster Management Platform. Assisting and guiding one in case of a disaster.
-A disaster management and awareness platform to help individuals and communities stay informed, safe, and connected during crises.
+### Find Safety. Report Hazards. Get Help.
 
-<!-- ⚠️ [Notice: This project is not part of GSSoC '25](https://github.com/archangel2006/SafeHaven/issues/6) -->
+---
+
+🌟 Why SafeHeaven?
+
+🌪️ Disasters strike without warning - and information can mean survival.
+Yet even in 2025, millions still face chaos, misinformation, and delayed response when they need help the most.
+
+💡 SafeHeaven was born to change that.
+
+We’re building a disaster management platform that brings together
+🌍 AI, 🛰️ satellite data, and 👥 community power - to make disaster response faster, smarter, and human-centered.
+
+⚙️ Our mission?
+To create technology that doesn’t just predict danger, but actually protects people.
+
+❤️ This isn’t just another project - it’s an effort to use code for humanity, to make safety a shared reality for everyone.
+
+🚀 Join us in building tools that don’t just run in production - but save lives in the real world.
+
+---
+
+## ⚙️ Key Features
+- ⚠️ **Disaster Alerts** - Satellite and AI-based warnings with personalized safety notifications  
+- 🚨 **Emergency Coordination** - One-tap SOS, responder dashboard, and two-way communication  
+- 🛟 **Evacuation Routes** -AI-suggested safe paths, crowd movement tracking & shelter locator  
+- 📰 **Real-Time Updates** - Live rescue status, hazard maps, and verified announcements  
+- 🌍 **Community Space** - Connect with survivors, volunteers, and authorities  
+- 📚 **Disaster Education** - Awareness guides, first-aid help & preparedness resources  
+- 🧠 **AI Assistant** - Chatbot for evacuation steps, multilingual voice help & first-aid guidance  
+
 
 ---
 ## Tech Stack
-
-```
-HTML CSS JavaScript
-```
+| Category | Technology |
+|-----------|-------------|
+| **Frontend** | React, Tailwind CSS |
+| **Backend** | Node.js, Express |
+| **Database** | MongoDB / Firebase |
+| **AI Models** | Python (Risk Prediction, Alert Analysis) |
+| **APIs** | Google Maps, OpenWeather, Twitter |
+| **Hosting** | Vercel |
 ---
 
 ## 📦 Installation
@@ -75,19 +107,6 @@ npm install
 └── .gitattributes
 ```
 
----
-
-## 🚀 Features
-
-- Real-time alerts and risk assessments  
-- Disaster coordination tools for rescue teams  
-- Evacuation safety guidelines  
-- Community support and chatroom  
-- Educational resources on disaster preparedness  
-- AI-powered assistant for health and emergency queries  
-- Donation and volunteer engagement platform  
-
----
 
 ## 🤝 Contributing
 
