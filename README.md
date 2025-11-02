@@ -6,17 +6,19 @@
 🌟 Why SafeHeaven?
 
 🌪️ Disasters strike without warning - and information can mean survival.
-Yet even in 2025, millions still face chaos, misinformation, and delayed response when they need help the most.
+Even today, millions still face chaos, misinformation, and slow response when help is needed most.
 
-💡 SafeHeaven was born to change that.
+💡 SafeHeaven was built to change that.
+It’s a global, open-source disaster management platform that unites:
+- 🌍 AI intelligence for predicting and analyzing risks
+- 🛰️ Satellite data for real-time disaster insights
+- 👥 Community collaboration for on-ground accuracy
 
-We’re building a disaster management platform that brings together
-🌍 AI, 🛰️ satellite data, and 👥 community power - to make disaster response faster, smarter, and human-centered.
+⚙️ Our mission:
+To build technology that doesn’t just forecast danger - but actively protects lives.
 
-⚙️ Our mission?
-To create technology that doesn’t just predict danger, but actually protects people.
-
-❤️ This isn’t just another project - it’s an effort to use code for humanity, to make safety a shared reality for everyone.
+❤️ This is more than just another tech project.
+It’s a movement to use code for humanity and make safety a shared reality for everyone.
 
 🚀 Join us in building tools that don’t just run in production - but save lives in the real world.
 
@@ -44,18 +46,33 @@ To create technology that doesn’t just predict danger, but actually protects p
 | **Hosting** | Vercel |
 ---
 
-## 📦 Installation
+## 🚀 Getting Started
+
+### 🧰 Prerequisites
+Install before starting:
+- Node.js v16+
+- npm or Yarn
+- MongoDB / Firebase
+- Git
+
+---
+
+### 🛠️ Installation Guide
 
 ```bash
-# Clone the repository
-git clone https://github.com/archangel2006/SafeHaven.git
-cd SafeHaven
+# 1️⃣ Fork this repository
 
-# Install dependencies
+# 2️⃣ Clone your fork
+git clone https://github.com/<your-username>/SafeHeaven.git
+
+# 3️⃣ Navigate into the folder
+cd SafeHeaven
+
+# 4️⃣ Install dependencies
 npm install
 
-# Run HomePage.html Locally
-```
+# 5️⃣ Run the development server
+npm start
 
 ---
 
@@ -110,7 +127,13 @@ npm install
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please fork the repo and submit a pull request.
+We welcome contributors of all experience levels! 👇
+
+1️⃣ Fork the repo
+2️⃣ Create a feature branch → feature/your-feature
+3️⃣ Make changes & commit
+4️⃣ Push your branch
+5️⃣ Create a Pull Request ✅
 
 ---
 
