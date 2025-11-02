@@ -3,7 +3,7 @@
 
 ---
 
-🌟 Why SafeHeaven?
+## 🌟 Why SafeHeaven?
 
 🌪️ Disasters strike without warning - and information can mean survival.
 Even today, millions still face chaos, misinformation, and slow response when help is needed most.
@@ -123,6 +123,7 @@ npm start
 ├── Rough
 └── .gitattributes
 ```
+---
 
 
 ## 🤝 Contributing
