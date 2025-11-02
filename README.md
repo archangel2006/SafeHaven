@@ -2,6 +2,7 @@
 ### Find Safety. Report Hazards. Get Help.
 
 ---
+<br/>
 
 ## 🌟 Why SafeHeaven?
 
@@ -23,6 +24,7 @@ It’s a movement to use code for humanity and make safety a shared reality for 
 🚀 Join us in building tools that don’t just run in production - but save lives in the real world.
 
 ---
+<br/>
 
 ## ⚙️ Key Features
 - ⚠️ **Disaster Alerts** - Satellite and AI-based warnings with personalized safety notifications  
@@ -35,6 +37,8 @@ It’s a movement to use code for humanity and make safety a shared reality for 
 
 
 ---
+<br/>
+
 ## Tech Stack
 | Category | Technology |
 |-----------|-------------|
@@ -56,6 +60,7 @@ Install before starting:
 - Git
 
 ---
+<br/>
 
 ### 🛠️ Installation Guide
 
@@ -123,7 +128,9 @@ npm start
 ├── Rough
 └── .gitattributes
 ```
+
 ---
+<br/>
 
 
 ## 🤝 Contributing
