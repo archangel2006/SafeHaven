@@ -78,8 +78,10 @@ npm install
 
 # 5️⃣ Run the development server
 npm start
+```
 
 ---
+<br/>
 
 ## 📁 File Structure
 
@@ -144,6 +146,7 @@ We welcome contributors of all experience levels! 👇
 5️⃣ Create a Pull Request ✅
 
 ---
+<br/>
 
 ## 📄 License
 
