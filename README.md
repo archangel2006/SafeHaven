@@ -1,15 +1,43 @@
 # 🛡️ SafeHaven
-SafeHeaven is a Crowdsourced Disaster Management Platform. Assisting and guiding one in case of a disaster.
-A disaster management and awareness platform to help individuals and communities stay informed, safe, and connected during crises.
 
-<!-- ⚠️ [Notice: This project is not part of GSSoC '25](https://github.com/archangel2006/SafeHaven/issues/6) -->
+**SafeHaven** is a crowdsourced disaster management platform designed to help individuals and communities stay informed, prepared, and connected during emergencies.  
+The platform focuses on awareness, coordination, safety guidance, and community-driven support during disasters.
 
 ---
-## Tech Stack
 
-```
-HTML CSS JavaScript
-```
+## 🌍 About the Project
+
+SafeHaven aims to act as a **central hub during disasters**, providing:
+- Timely information and alerts
+- Evacuation and safety guidance
+- Community communication and coordination
+- Educational resources for disaster preparedness
+- Volunteer and donation engagement
+
+The project is built as a **social good initiative** and maintained as an **open-source platform** to encourage collaboration and real-world impact.
+
+---
+
+## 🚀 Features
+
+- **Real-time Alerts & Risk Awareness**
+- **Disaster Coordination Hub** for rescue and response
+- **Evacuation & Safety Guidelines**
+- **Community Support & Updates**
+- **Educational Resources** for disaster preparedness
+- **AI-powered Assistant** for emergency and medical queries
+- **Volunteer & Donation Engagement**
+
+---
+
+## 🧰 Tech Stack
+
+- **HTML**
+- **CSS**
+- **JavaScript**
+
+*(Currently a frontend-focused project; backend and integrations will be extended in the future.)*
+
 ---
 
 ## 📦 Installation
@@ -27,7 +55,7 @@ npm install
 
 ---
 
-## 📁 File Structure
+## 📂 Project Structure
 
 ```
 .
@@ -77,24 +105,23 @@ npm install
 
 ---
 
-## 🚀 Features
-
-- Real-time alerts and risk assessments  
-- Disaster coordination tools for rescue teams  
-- Evacuation safety guidelines  
-- Community support and chatroom  
-- Educational resources on disaster preparedness  
-- AI-powered assistant for health and emergency queries  
-- Donation and volunteer engagement platform  
-
----
-
 ## 🤝 Contributing
 
-Contributions are welcome! Please fork the repo and submit a pull request.
+Please read CONTRIBUTING.md
+ before submitting issues or pull requests.
 
----
+## 📜 Code of Conduct
+
+This project follows a community-driven Code of Conduct to ensure a respectful and inclusive environment.
+Read more in CODE_OF_CONDUCT.md
 
 ## 📄 License
 
 This project is licensed under the MIT License.
+See LICENSE.md
+ for details.
+
+## 🙌 Acknowledgements
+
+Thanks to all contributors and community members who help improve SafeHaven.
+Every contribution—big or small—supports the goal of building safer and more informed communities.
