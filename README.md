@@ -36,7 +36,7 @@ The project is built as a **social good initiative** and maintained as an **open
 - **CSS**
 - **JavaScript**
 
-*(Currently a frontend-focused project; backend and integrations will be extended in the future.)*
+<!-- *(Currently a frontend-focused project; backend and integrations will be extended in the future.)* -->
 
 ---
 
@@ -117,21 +117,20 @@ npm install
 
 ## 🤝 Contributing
 
-Please read CONTRIBUTING.md
- before submitting issues or pull requests.
+Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting issues or pull requests.
 
 ## 📜 Code of Conduct
 
-This project follows a community-driven Code of Conduct to ensure a respectful and inclusive environment.
-Read more in CODE_OF_CONDUCT.md
+This project follows a community-driven Code of Conduct to ensure a respectful and inclusive environment.  
+Read more in [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 
 ## 📄 License
 
-This project is licensed under the MIT License.
-See LICENSE.md
- for details.
+This project is licensed under the MIT License.  
+See [LICENSE.md](./LICENSE.md) for details.
 
 ## 🙌 Acknowledgements
 
-Thanks to all contributors and community members who help improve SafeHaven.
+Thanks to all contributors and community members who help improve SafeHaven.  
 Every contribution—big or small—supports the goal of building safer and more informed communities.
+
