@@ -132,5 +132,5 @@ See [LICENSE.md](./LICENSE.md) for details.
 ## 🙌 Acknowledgements
 
 Thanks to all contributors and community members who help improve SafeHaven.  
-Every contribution—big or small—supports the goal of building safer and more informed communities.
+
 
