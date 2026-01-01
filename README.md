@@ -119,6 +119,9 @@ npm install
 
 Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting issues or pull requests.
 
+**Use colors:** 
+<img width="964" height="313" alt="Section 1" src="https://github.com/user-attachments/assets/bd7649a2-ea88-4054-923d-dbbd8377fca7" />
+
 ## 📜 Code of Conduct
 
 This project follows a community-driven Code of Conduct to ensure a respectful and inclusive environment.  
