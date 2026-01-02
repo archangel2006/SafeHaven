@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Disaster Coordination Platform</title>
   <!-- Google Font & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
     :root {
@@ -16,7 +16,11 @@
       --card-bg: #ffffff;
       --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
       --hero-overlay: rgba(0,0,0,0.55);
+      --navbar-height: 70px;
+      --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
+    
     /* Global Reset & Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -25,7 +29,320 @@
       color: #333;
       line-height: 1.6;
       overflow-x: hidden;
+      padding-top: var(--navbar-height);
     }
+    
+    /* ===== NAVBAR WITH BACK ARROW ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--navbar-height);
+      background: var(--header-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 1000;
+      box-shadow: var(--shadow-light);
+    }
+    
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .back-button {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateX(-3px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .logo-icon {
+      font-size: 2rem;
+      color: white;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.5px;
+    }
+    
+    .navbar-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .location-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      backdrop-filter: blur(5px);
+      color: white;
+    }
+    
+    .alert-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      font-weight: 600;
+      color: #ffcc00;
+      position: relative;
+    }
+    
+    .alert-indicator {
+      width: 10px;
+      height: 10px;
+      background-color: #ffcc00;
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    .profile-container {
+      position: relative;
+    }
+    
+    .profile-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+    
+    .profile-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+    
+    /* Profile Dropdown */
+    .profile-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-medium);
+      min-width: 220px;
+      padding: 0.75rem 0;
+      margin-top: 0.75rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+    
+    .profile-dropdown.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-header {
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .dropdown-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    .dropdown-user-info h4 {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+    
+    .dropdown-user-info p {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .dropdown-list {
+      padding: 0.5rem 0;
+    }
+    
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: #f5f5f5;
+      color: var(--primary-color);
+    }
+    
+    .dropdown-item i {
+      width: 20px;
+      text-align: center;
+      color: var(--primary-color);
+    }
+    
+    .dropdown-divider {
+      height: 1px;
+      background: #eee;
+      margin: 0.5rem 0;
+    }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .navbar {
+        padding: 0 1rem;
+      }
+      
+      .page-title {
+        font-size: 1.3rem;
+      }
+      
+      .location-indicator, .alert-status {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+      
+      .navbar {
+        height: 60px;
+        padding: 0 1rem;
+      }
+      
+      .back-button, .profile-btn {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .logo-text {
+        font-size: 1.3rem;
+        display: none;
+      }
+      
+      .page-title {
+        font-size: 1.1rem;
+      }
+      
+      .location-indicator, .alert-status {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .navbar-right {
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 1rem;
+      }
+      
+      .navbar-left {
+        gap: 1rem;
+      }
+    }
+    
+    /* ===== REST OF YOUR EXISTING STYLES ===== */
     header {
       background: var(--header-bg);
       color: #fff;
@@ -34,7 +351,9 @@
       font-size: 2.8rem;
       font-weight: bold;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      margin-top: 0;
     }
+    
     /* Hero Section */
     .hero {
       position: relative;
@@ -46,6 +365,7 @@
       text-align: center;
       overflow: hidden;
     }
+    
     .hero::before {
       content: "";
       position: absolute;
@@ -53,6 +373,7 @@
       background: var(--hero-overlay);
       animation: fadeIn 2s ease;
     }
+    
     .hero-content {
       position: relative;
       z-index: 2;
@@ -60,21 +381,25 @@
       animation: slideIn 1.5s ease-out;
       padding: 0 1rem;
     }
+    
     .hero h1 {
       font-size: 3.5rem;
       margin-bottom: 1rem;
       letter-spacing: 1px;
     }
+    
     .hero p {
       font-size: 1.3rem;
       max-width: 600px;
       margin: 0 auto;
     }
+    
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideIn {
       from { transform: translateY(-50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+    
     /* Cards Container */
     .cards-container {
       display: grid;
@@ -84,6 +409,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
+    
     .card {
       background: var(--card-bg);
       border-radius: 15px;
@@ -92,19 +418,23 @@
       transition: transform 0.4s ease, box-shadow 0.4s ease;
       text-align: center;
     }
+    
     .card:hover {
       transform: translateY(-10px);
       box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     }
+    
     .card h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
       color: var(--primary-color);
     }
+    
     .card p {
       font-size: 1rem;
       margin-bottom: 1.5rem;
     }
+    
     .card button {
       padding: 0.8rem 1.5rem;
       background: var(--secondary-color);
@@ -115,10 +445,12 @@
       cursor: pointer;
       transition: background 0.4s ease, transform 0.4s ease;
     }
+    
     .card button:hover {
       background: var(--accent-color);
       transform: scale(1.05);
     }
+    
     footer {
       background: var(--primary-color);
       color: #fff;
@@ -126,6 +458,7 @@
       padding: 1rem;
       font-size: 0.9rem;
     }
+    
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.8rem; }
       .cards-container { grid-template-columns: 1fr; }
@@ -133,6 +466,81 @@
   </style>
 </head>
 <body>
+  <!-- Fixed Navbar with Back Arrow -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <button class="back-button" id="backButton" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="logo-container">
+        <i class="fas fa-handshake-angle logo-icon"></i>
+        <div class="logo-text">Coordination</div>
+      </div>
+    </div>
+    
+    <div class="navbar-center">
+      <div class="page-title">Disaster Coordination</div>
+    </div>
+    
+    <div class="navbar-right">
+      <div class="location-indicator">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Delhi, IN</span>
+      </div>
+      
+      <div class="alert-status">
+        <div class="alert-indicator"></div>
+        <span>Active Alerts</span>
+      </div>
+      
+      <div class="profile-container">
+        <button class="profile-btn" id="profileBtn">
+          <i class="fas fa-user"></i>
+        </button>
+        
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="dropdown-header">
+            <div class="dropdown-avatar">JD</div>
+            <div class="dropdown-user-info">
+              <h4>John Doe</h4>
+              <p>Coordinator</p>
+            </div>
+          </div>
+          
+          <div class="dropdown-list">
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-user-circle"></i>
+              <span>My Profile</span>
+            </a>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-bell"></i>
+              <span>Notifications</span>
+            </a>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-shield-alt"></i>
+              <span>Safety Settings</span>
+            </a>
+            
+            <div class="dropdown-divider"></div>
+            
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+  
   <header>Disaster Coordination Platform</header>
   
   <!-- Hero Section -->
@@ -177,5 +585,60 @@
   <footer>
     © 2025 Disaster Coordination Platform. All rights reserved.
   </footer>
+
+  <script>
+    // Back button functionality
+    function goBack() {
+      // Go to previous page in history
+      window.history.back();
+      // Or redirect to specific page:
+      // window.location.href = '../1.HomePage/index.html';
+    }
+    
+    // Profile dropdown toggle
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+    
+    if (profileBtn && profileDropdown) {
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        profileDropdown.classList.toggle('active');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+          profileDropdown.classList.remove('active');
+        }
+      });
+    }
+    
+    // Alert status toggle (for demo)
+    const alertStatus = document.querySelector('.alert-status');
+    if (alertStatus) {
+      setInterval(() => {
+        const isActive = alertStatus.textContent.includes('Active');
+        
+        if (isActive) {
+          alertStatus.innerHTML = '<div class="alert-indicator" style="background-color: #4caf50;"></div><span>All Clear</span>';
+          alertStatus.style.color = '#4caf50';
+          alertStatus.style.background = 'rgba(76, 175, 80, 0.1)';
+        } else {
+          alertStatus.innerHTML = '<div class="alert-indicator"></div><span>Active Alerts</span>';
+          alertStatus.style.color = '#ffcc00';
+          alertStatus.style.background = 'rgba(255, 255, 255, 0.1)';
+        }
+      }, 15000);
+    }
+    
+    // Mobile menu functionality (if needed)
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        // Add mobile menu functionality here
+        alert('Mobile menu would open here');
+      });
+    }
+  </script>
 </body>
 </html>

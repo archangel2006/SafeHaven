@@ -3,70 +3,682 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe Heaven</title>
+    <title>Community - Safe Haven</title>
+    <!-- Font Awesome for icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        :root {
+            --primary-blue: #0066cc;
+            --primary-blue-dark: #0052a3;
+            --primary-blue-light: #e6f2ff;
+            --community-green: #2e7d32;
+            --community-green-dark: #1b5e20;
+            --alert-orange: #ff9800;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --background-light: #f4f4f4;
+            --background-white: #ffffff;
+            --navbar-height: 70px;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             scroll-behavior: smooth;
-            background-color: #f4f4f4;
+            background-color: var(--background-light);
+            padding-top: var(--navbar-height);
         }
         
+        /* ===== NAVBAR WITH BACK ARROW ===== */
         .navbar {
-            background-color: #333;
-            overflow: hidden;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            background: linear-gradient(135deg, var(--community-green), var(--community-green-dark));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
             z-index: 1000;
+            box-shadow: var(--shadow-light);
         }
         
-        .navbar a {
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .back-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
             color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .location-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            color: white;
+        }
+        
+        .alert-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #ffcc00;
+            position: relative;
+        }
+        
+        .alert-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .profile-container {
+            position: relative;
+        }
+        
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            min-width: 220px;
+            padding: 0.75rem 0;
+            margin-top: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .dropdown-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--community-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .dropdown-user-info h4 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+        
+        .dropdown-user-info p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .dropdown-list {
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #333;
             text-decoration: none;
-            padding: 10px;
+            transition: all 0.3s ease;
         }
-
-        .navbar a:hover {
-            background-color: #575757;
+        
+        .dropdown-item:hover {
+            background: #f5f5f5;
+            color: var(--community-green);
         }
-
+        
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--community-green);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background: #eee;
+            margin: 0.5rem 0;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            
+            .page-title {
+                font-size: 1.3rem;
+            }
+            
+            .location-indicator, .alert-status {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0 1rem;
+            }
+            
+            .back-button, .profile-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 1.1rem;
+            }
+            
+            .location-indicator, .alert-status {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar-right {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1rem;
+            }
+            
+            .navbar-left {
+                gap: 1rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ===== REST OF YOUR EXISTING STYLES ===== */
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 80px 20px 20px;
+            margin: 20px 20px;
+            padding: 20px;
         }
-
+        
+        .section-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            background: var(--background-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: var(--community-green);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-blue-light);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title i {
+            font-size: 1.8rem;
+            color: var(--community-green);
+        }
+        
         iframe {
-            width: 80%;
-            height: 400px;
+            width: 100%;
+            height: 500px;
             border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        iframe:hover {
+            transform: scale(1.005);
+        }
+        
+        /* Quick Navigation */
+        .quick-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            background: var(--community-green);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-button:hover {
+            background: var(--community-green-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Statistics Cards */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--community-green);
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--community-green);
+            color: white;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
+    <!-- Fixed Navbar with Back Arrow -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="back-button" id="backButton" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo-container">
+                <i class="fas fa-users logo-icon"></i>
+                <div class="logo-text">Community</div>
+            </div>
+        </div>
+        
+        <div class="navbar-center">
+            <div class="page-title">Safe Haven Community</div>
+        </div>
+        
+        <div class="navbar-right">
+            <div class="location-indicator">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Delhi, IN</span>
+            </div>
+            
+            <div class="alert-status">
+                <div class="alert-indicator"></div>
+                <span>Community Active</span>
+            </div>
+            
+            <div class="profile-container">
+                <button class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <div class="dropdown-avatar">JD</div>
+                        <div class="dropdown-user-info">
+                            <h4>John Doe</h4>
+                            <p>Community Member</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-list">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user-circle"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-comments"></i>
+                            <span>My Posts</span>
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
-    <div class="navbar">
-        <a href="#discussion">Discussion Board</a>
-        <a href="#live-updates">Live Updates</a>
-        <a href="#missing">Missing Persons</a>
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+        <a href="#discussion" class="nav-button">
+            <i class="fas fa-comments"></i>
+            Discussion Board
+        </a>
+        <a href="#live-updates" class="nav-button">
+            <i class="fas fa-broadcast-tower"></i>
+            Live Updates
+        </a>
+        <a href="#missing" class="nav-button">
+            <i class="fas fa-search"></i>
+            Missing Persons
+        </a>
+    </div>
+
+    <!-- Community Statistics -->
+    <div class="stats-container container">
+        <div class="stat-card">
+            <i class="fas fa-users fa-2x" style="color: var(--community-green);"></i>
+            <div class="stat-number">1,245</div>
+            <div class="stat-label">Active Community Members</div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-comments fa-2x" style="color: var(--community-green);"></i>
+            <div class="stat-number">3,892</div>
+            <div class="stat-label">Total Discussions</div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-handshake fa-2x" style="color: var(--community-green);"></i>
+            <div class="stat-number">124</div>
+            <div class="stat-label">People Reunited</div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-clock fa-2x" style="color: var(--community-green);"></i>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Active Support</div>
+        </div>
     </div>
 
     <div class="container">
-        <h2 id="discussion">Community Discussion Board</h2>
-        <iframe src="chatroom.html"></iframe>
+        <!-- Discussion Board Section -->
+        <div class="section-container" id="discussion">
+            <h2 class="section-title">
+                <i class="fas fa-comments"></i>
+                Community Discussion Board
+            </h2>
+            <iframe src="chatroom.html"></iframe>
+        </div>
 
-        <h2 id="live-updates">Live Updates</h2>
-        <iframe src="LiveUpdates.html"></iframe>
+        <!-- Live Updates Section -->
+        <div class="section-container" id="live-updates">
+            <h2 class="section-title">
+                <i class="fas fa-broadcast-tower"></i>
+                Live Community Updates
+            </h2>
+            <iframe src="LiveUpdates.html"></iframe>
+        </div>
 
-        <h2 id="missing">Missing Persons</h2>
-        <iframe src="MissingPerson.html"></iframe>
+        <!-- Missing Persons Section -->
+        <div class="section-container" id="missing">
+            <h2 class="section-title">
+                <i class="fas fa-search"></i>
+                Missing Persons Registry
+            </h2>
+            <iframe src="MissingPerson.html"></iframe>
+        </div>
     </div>
 
+    <div class="footer">
+        © 2025 Safe Haven Community. All rights reserved. | Together We Are Stronger
+    </div>
+
+    <script>
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+            // Or redirect to homepage:
+            // window.location.href = '../1.HomePage/index.html';
+        }
+        
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        }
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                // Toggle mobile navigation
+                const quickNav = document.querySelector('.quick-nav');
+                if (quickNav) {
+                    quickNav.style.display = quickNav.style.display === 'none' ? 'flex' : 'none';
+                }
+            });
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Update community statistics (example - in real app would fetch from API)
+        function updateCommunityStats() {
+            // This would be replaced with actual API calls
+            console.log('Updating community statistics...');
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', updateCommunityStats);
+    </script>
 </body>
 </html>

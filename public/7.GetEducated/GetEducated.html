@@ -3,162 +3,845 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Educated - Safe Heaven</title>
+    <title>Get Educated - Safe Haven</title>
+    <!-- Font Awesome for icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        :root {
+            --primary-purple: #6a11cb;
+            --primary-purple-dark: #2575fc;
+            --accent-blue: #3498db;
+            --accent-green: #2ecc71;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --background-light: #f4f4f4;
+            --background-white: #ffffff;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --navbar-height: 70px;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
             padding: 0;
+            padding-top: var(--navbar-height);
+            min-height: 100vh;
         }
-
-        .dashboard {
+        
+        /* ===== NAVBAR WITH BACK ARROW ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark));
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #007bff;
-            padding: 15px;
-            color: white;
-            font-size: 20px;
+            padding: 0 2rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
         }
-
-        .dashboard a {
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-        }
-
-        .dashboard h2 {
-            margin: 0;
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .panel-container {
+        
+        .navbar-left {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            align-items: center;
+            gap: 1.5rem;
         }
-
+        
+        .back-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .location-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            color: white;
+        }
+        
+        .alert-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #ffcc00;
+            position: relative;
+        }
+        
+        .alert-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .profile-container {
+            position: relative;
+        }
+        
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            min-width: 220px;
+            padding: 0.75rem 0;
+            margin-top: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .dropdown-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-purple);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .dropdown-user-info h4 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+        
+        .dropdown-user-info p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .dropdown-list {
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: #f5f5f5;
+            color: var(--primary-purple);
+        }
+        
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary-purple);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background: #eee;
+            margin: 0.5rem 0;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            
+            .page-title {
+                font-size: 1.3rem;
+            }
+            
+            .location-indicator, .alert-status {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0 1rem;
+            }
+            
+            .back-button, .profile-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 1.1rem;
+            }
+            
+            .location-indicator, .alert-status {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar-right {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1rem;
+            }
+            
+            .navbar-left {
+                gap: 1rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ===== REST OF YOUR EXISTING STYLES ===== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.8rem;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .panel-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
         .panel {
-            width: 22%;
-            background-color: #ffffff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
             text-align: center;
             cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
         }
-
-        .panel img {
-            width: 80%;
-            height: auto;
-            border-radius: 10px;
+        
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark));
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
         }
-
-        .panel h3 {
-            color: #333;
-            margin-top: 15px;
-        }
-
-        .panel p {
-            color: #555;
-        }
-
+        
         .panel:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--primary-purple);
+        }
+        
+        .panel:hover::before {
+            transform: translateY(0);
+        }
+        
+        .panel img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .panel:hover img {
             transform: scale(1.05);
-            transition: transform 0.3s;
         }
-
+        
+        .panel h3 {
+            color: var(--text-dark);
+            margin: 15px 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .panel p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
         .panel a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #007bff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark));
+            color: white;
             text-decoration: none;
-            font-weight: bold;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
-
+        
         .panel a:hover {
-            text-decoration: underline;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .disaster-icon {
+            font-size: 1.8rem;
+        }
+        
+        .education-progress {
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            text-align: left;
+        }
+        
+        .progress-item {
+            margin: 15px 0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #dee2e6;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-green), #27ae60);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-dark));
+            color: white;
+            border-radius: 20px 20px 0 0;
         }
     </style>
 </head>
 <body>
-
-    <div class="dashboard">
-        <a href="HomePage.html">🏠</a>
-        <h2>Get Educated</h2>
-    </div>
+    <!-- Fixed Navbar with Back Arrow -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="back-button" id="backButton" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo-container">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <div class="logo-text">Education</div>
+            </div>
+        </div>
+        
+        <div class="navbar-center">
+            <div class="page-title">Get Educated</div>
+        </div>
+        
+        <div class="navbar-right">
+            <div class="location-indicator">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Delhi, IN</span>
+            </div>
+            
+            <div class="alert-status">
+                <div class="alert-indicator"></div>
+                <span>Learning Mode</span>
+            </div>
+            
+            <div class="profile-container">
+                <button class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <div class="dropdown-avatar">JD</div>
+                        <div class="dropdown-user-info">
+                            <h4>John Doe</h4>
+                            <p>Student</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-list">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user-circle"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-book"></i>
+                            <span>My Courses</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certificates</span>
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
     <div class="container">
-        <h2>Disaster Awareness and Preparedness</h2>
+        <div class="page-header">
+            <h1>Disaster Awareness and Preparedness</h1>
+            <p class="page-subtitle">
+                Learn essential skills and knowledge to prepare for, respond to, and recover from natural disasters and emergencies. 
+                Our comprehensive education modules are designed to keep you and your community safe.
+            </p>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Disaster Modules</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Learning Hours</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free Access</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Available</div>
+            </div>
+        </div>
 
         <!-- Disaster Panels -->
         <div class="panel-container">
-
             <!-- Earthquakes -->
             <div class="panel">
                 <img src="https://i.pinimg.com/474x/84/0f/ae/840faecb11404b8d4ed2f230033205f7.jpg" alt="Earthquake">
-                <h3>🌪 Earthquakes</h3>
-                <p>Learn about the causes, safety measures, and preparedness tips for earthquakes.</p>
-                <a href="earthquake.html">Learn More</a>
+                <h3><span class="disaster-icon">🌪</span> Earthquakes</h3>
+                <p>Learn about seismic activity, safety measures during shaking, and post-earthquake procedures to protect yourself and others.</p>
+                <a href="earthquake.html">
+                    <i class="fas fa-book-open"></i>
+                    Start Learning
+                </a>
             </div>
 
             <!-- Floods -->
             <div class="panel">
                 <img src="https://i.pinimg.com/474x/36/fc/c4/36fcc48c24a12e1665c3f91bbb973a6f.jpg" alt="Flood">
-                <h3>🌊 Floods</h3>
-                <p>Understand flood risks, evacuation strategies, and how to protect your community.</p>
-                <a href="flood.html">Learn More</a>
+                <h3><span class="disaster-icon">🌊</span> Floods</h3>
+                <p>Understand flood risks, evacuation strategies, emergency supplies, and how to protect your property from water damage.</p>
+                <a href="flood.html">
+                    <i class="fas fa-book-open"></i>
+                    Start Learning
+                </a>
             </div>
 
             <!-- Wildfires -->
             <div class="panel">
                 <img src="https://i.pinimg.com/474x/e1/b4/53/e1b453f454cb9556d2bc2e969593c499.jpg" alt="Wildfire">
-                <h3>🔥 Wildfires</h3>
-                <p>Get information on fire safety, preparation tips, and property protection during wildfires.</p>
-                <a href="wildfire.html">Learn More</a>
+                <h3><span class="disaster-icon">🔥</span> Wildfires</h3>
+                <p>Learn fire safety, evacuation planning, protective measures, and how to create defensible space around your property.</p>
+                <a href="wildfire.html">
+                    <i class="fas fa-book-open"></i>
+                    Start Learning
+                </a>
             </div>
 
             <!-- Hurricanes/Typhoons -->
             <div class="panel">
                 <img src="https://i.pinimg.com/474x/c7/ca/64/c7ca642c77887dd8ac61eee4a0b39c9c.jpg" alt="Hurricane">
-                <h3>🌀 Hurricanes/Typhoons</h3>
-                <p>Learn how to prepare, recognize warning signs, and evacuate during a hurricane or typhoon.</p>
-                <a href="hurricane.html">Learn More</a>
+                <h3><span class="disaster-icon">🌀</span> Hurricanes/Typhoons</h3>
+                <p>Prepare for tropical storms, recognize warning signs, secure your property, and plan safe evacuation routes.</p>
+                <a href="hurricane.html">
+                    <i class="fas fa-book-open"></i>
+                    Start Learning
+                </a>
             </div>
 
             <!-- Volcanic Eruptions -->
             <div class="panel">
                 <img src="https://i.pinimg.com/474x/c4/13/54/c41354cb7e8a5af1161055a1c41ac447.jpg" alt="Volcano">
-                <h3>🌋 Volcanic Eruptions</h3>
-                <p>Understand volcanic eruption risks, safety measures, and how to stay safe.</p>
-                <a href="volcano.html">Learn More</a>
+                <h3><span class="disaster-icon">🌋</span> Volcanic Eruptions</h3>
+                <p>Understand volcanic risks, ashfall protection, evacuation zones, and respiratory safety during eruptions.</p>
+                <a href="volcano.html">
+                    <i class="fas fa-book-open"></i>
+                    Start Learning
+                </a>
             </div>
 
             <!-- Terrorism/Chemical Attacks -->
             <div class="panel">
                 <img src="https://i.pinimg.com/474x/d1/ff/8d/d1ff8d893d545c884ec4320ab0657269.jpg" alt="Terrorism">
-                <h3>🧯 Terrorism/Chemical Attacks</h3>
-                <p>Learn how to respond to terrorism or chemical attack situations and stay safe.</p>
-                <a href="terrorism.html">Learn More</a>
+                <h3><span class="disaster-icon">🧯</span> Terrorism/Chemical Attacks</h3>
+                <p>Learn emergency response, shelter-in-place procedures, decontamination steps, and reporting suspicious activities.</p>
+                <a href="terrorism.html">
+                    <i class="fas fa-book-open"></i>
+                    Start Learning
+                </a>
             </div>
-
+        </div>
+        
+        <div class="education-progress">
+            <h3 style="color: var(--primary-purple); margin-bottom: 20px;">
+                <i class="fas fa-chart-line"></i> Your Learning Progress
+            </h3>
+            <div class="progress-item">
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Overall Completion</span>
+                    <span>35%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 35%;"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Modules Started</span>
+                    <span>3/6</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%;"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Quiz Scores</span>
+                    <span>85%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <div class="footer">
+        <h3><i class="fas fa-graduation-cap"></i> Safe Haven Education Platform</h3>
+        <p>Empowering communities through disaster preparedness education</p>
+        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
+            © 2025 Safe Haven Disaster Education. All content is free and accessible to everyone.
+        </p>
+    </div>
+
+    <script>
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+            // Or redirect to homepage:
+            // window.location.href = '../1.HomePage/index.html';
+        }
+        
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        }
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const statsBar = document.querySelector('.stats-bar');
+                if (statsBar) {
+                    statsBar.style.display = statsBar.style.display === 'none' ? 'flex' : 'none';
+                }
+            });
+        }
+        
+        // Panel click handlers
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.addEventListener('click', function(e) {
+                if (!e.target.closest('a')) {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        // Simulate learning progress update
+                        updateLearningProgress();
+                        // In real implementation, would navigate to module
+                        // window.location.href = link.href;
+                        alert(`Starting ${this.querySelector('h3').textContent} module...`);
+                    }
+                }
+            });
+        });
+        
+        // Update learning progress (simulated)
+        function updateLearningProgress() {
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-item:nth-child(1) span:last-child');
+            
+            if (progressFill && progressText) {
+                const currentWidth = parseInt(progressFill.style.width);
+                const newWidth = Math.min(100, currentWidth + 10);
+                
+                progressFill.style.width = newWidth + '%';
+                progressText.textContent = newWidth + '%';
+                
+                // Update modules started
+                const modulesText = document.querySelector('.progress-item:nth-child(2) span:last-child');
+                if (modulesText) {
+                    const [current, total] = modulesText.textContent.split('/').map(Number);
+                    modulesText.textContent = `${Math.min(current + 1, total)}/${total}`;
+                    
+                    const modulesProgress = document.querySelector('.progress-item:nth-child(2) .progress-fill');
+                    if (modulesProgress) {
+                        modulesProgress.style.width = `${((Math.min(current + 1, total)) / total) * 100}%`;
+                    }
+                }
+            }
+        }
+        
+        // Initialize progress bars with animation
+        window.addEventListener('load', () => {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
 </body>
 </html>

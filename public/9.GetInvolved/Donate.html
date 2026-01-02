@@ -3,149 +3,1030 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donation Page</title>
+    <title>Donate - Safe Haven</title>
+    <!-- Font Awesome for icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        :root {
+            --primary-gold: #FFD700;
+            --primary-gold-dark: #FFC107;
+            --donation-red: #e74c3c;
+            --donation-green: #27ae60;
+            --donation-blue: #3498db;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --background-light: #f4f4f4;
+            --background-white: #ffffff;
+            --navbar-height: 70px;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
+            padding-top: var(--navbar-height);
+            min-height: 100vh;
         }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .panel {
+        
+        /* ===== NAVBAR WITH BACK ARROW ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
             display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
         }
-        .panel button {
-            padding: 15px 25px;
-            font-size: 18px;
+        
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .back-button {
+            background: rgba(255, 255, 255, 0.15);
             border: none;
-            background-color: #007bff;
             color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
-        .panel button:hover {
-            background-color: #0056b3;
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-        .tracker, .ngo-section {
-            margin-top: 30px;
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
-        .cause {
-            padding: 10px;
-            background-color: #f9f9f9;
-            margin: 10px 0;
-            border-radius: 8px;
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: white;
+            animation: coinSpin 3s infinite linear;
         }
-        .ngo-list {
+        
+        @keyframes coinSpin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .location-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            color: white;
+        }
+        
+        .alert-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #ff6b6b;
+            position: relative;
+        }
+        
+        .alert-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .profile-container {
+            position: relative;
+        }
+        
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            min-width: 220px;
+            padding: 0.75rem 0;
+            margin-top: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .dropdown-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-gold);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .dropdown-user-info h4 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+        
+        .dropdown-user-info p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .dropdown-list {
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: #f5f5f5;
+            color: var(--primary-gold-dark);
+        }
+        
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary-gold-dark);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background: #eee;
+            margin: 0.5rem 0;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            
+            .page-title {
+                font-size: 1.3rem;
+            }
+            
+            .location-indicator, .alert-status {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0 1rem;
+            }
+            
+            .back-button, .profile-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 1.1rem;
+            }
+            
+            .location-indicator, .alert-status {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar-right {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1rem;
+            }
+            
+            .navbar-left {
+                gap: 1rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ===== REST OF YOUR EXISTING STYLES ===== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: var(--shadow-medium);
+            border: 3px solid var(--primary-gold);
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary-gold-dark);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .donation-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 200px;
+            border-top: 5px solid var(--primary-gold);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-gold-dark);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .donation-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .donation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .donation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-gold);
+        }
+        
+        .donation-card:hover::before {
+            transform: translateY(0);
+        }
+        
+        .donation-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+        }
+        
+        .donation-card h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        
+        .donation-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .donate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.3);
+        }
+        
+        .impact-tracker {
+            margin-top: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .tracker-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .tracker-header h3 {
+            font-size: 2rem;
+            color: var(--primary-gold-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 50%;
+            max-width: 400px;
+            margin: 0 auto 40px;
+        }
+        
+        .stories-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .stories-section h4 {
+            font-size: 1.5rem;
+            color: var(--primary-gold-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .story-list {
             list-style-type: none;
             padding: 0;
         }
+        
+        .story-list li {
+            padding: 20px;
+            margin: 15px 0;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-gold);
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .story-list li::before {
+            content: '"';
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            font-size: 3rem;
+            color: var(--primary-gold);
+            font-family: Georgia, serif;
+        }
+        
+        .ngo-section {
+            margin-top: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            border: 2px solid var(--primary-gold);
+        }
+        
+        .ngo-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .ngo-header h3 {
+            font-size: 2rem;
+            color: var(--primary-gold-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .ngo-list {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
         .ngo-list li {
-            margin: 10px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
         }
+        
+        .ngo-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+            border-left: 5px solid var(--primary-gold);
+        }
+        
         .ngo-list a {
-            color: #007bff;
+            color: var(--donation-blue);
             text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
         }
+        
         .ngo-list a:hover {
+            color: var(--primary-gold-dark);
             text-decoration: underline;
         }
-        /* Chart container */
-        .chart-container {
-            position: relative;
-            width: 30%;
-            margin: 0 auto;
+        
+        .trust-badge {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            border: 2px solid var(--donation-green);
+        }
+        
+        .trust-badge h4 {
+            color: var(--donation-green);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-dark));
+            color: white;
+            border-radius: 20px 20px 0 0;
         }
     </style>
-    <!-- Include Chart.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h2>Support Disaster Relief Efforts</h2>
-        <p>Select the type of donation you'd like to make:</p>
+    <!-- Fixed Navbar with Back Arrow -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="back-button" id="backButton" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo-container">
+                <i class="fas fa-hand-holding-heart logo-icon"></i>
+                <div class="logo-text">Donate</div>
+            </div>
+        </div>
+        
+        <div class="navbar-center">
+            <div class="page-title">Support Relief Efforts</div>
+        </div>
+        
+        <div class="navbar-right">
+            <div class="location-indicator">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Global</span>
+            </div>
+            
+            <div class="alert-status">
+                <div class="alert-indicator"></div>
+                <span>Urgent Donations Needed</span>
+            </div>
+            
+            <div class="profile-container">
+                <button class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <div class="dropdown-avatar">JD</div>
+                        <div class="dropdown-user-info">
+                            <h4>John Doe</h4>
+                            <p>Donor</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-list">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user-circle"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-history"></i>
+                            <span>Donation History</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-receipt"></i>
+                            <span>Tax Receipts</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Causes I Support</span>
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
-        <!-- Donation Options Panel -->
-        <div class="panel">
-            <button onclick="window.location.href='MonetaryDonations.html'">💳 Monetary Donations</button>
-            <button onclick="window.location.href='MaterialDonations.html'">🎒 Material Donations</button>
+    <div class="container">
+        <div class="page-header">
+            <h2>Support Disaster Relief Efforts</h2>
+            <p class="page-subtitle">
+                Your donation can provide immediate aid to disaster-affected communities. 
+                Every contribution helps save lives, rebuild communities, and restore hope.
+            </p>
+        </div>
+        
+        <div class="donation-stats">
+            <div class="stat-card">
+                <div class="stat-number">₹18M+</div>
+                <div class="stat-label">Total Donations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Lives Impacted</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Transparent</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Distribution</div>
+            </div>
         </div>
 
-        <!-- Real-Time Impact Tracker -->
-        <div class="tracker">
-            <h3>Real-Time Impact Tracker</h3>
+        <h2 style="color: var(--primary-gold-dark); text-align: center; margin: 40px 0 20px;">
+            <i class="fas fa-handshake"></i> Choose Your Donation Method
+        </h2>
+        
+        <div class="donation-options">
+            <div class="donation-card" onclick="window.location.href='MonetaryDonations.html'">
+                <div class="donation-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3>💳 Monetary Donations</h3>
+                <p>Make secure online donations via credit card, bank transfer, or digital wallets. 
+                   All transactions are encrypted and tax-deductible.</p>
+                <button class="donate-btn">
+                    <i class="fas fa-donate"></i>
+                    Donate Money
+                </button>
+            </div>
+            
+            <div class="donation-card" onclick="window.location.href='MaterialDonations.html'">
+                <div class="donation-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3>🎒 Material Donations</h3>
+                <p>Donate essential supplies like food, clothing, medical kits, and shelter materials. 
+                   We coordinate pickup from your location.</p>
+                <button class="donate-btn">
+                    <i class="fas fa-box"></i>
+                    Donate Supplies
+                </button>
+            </div>
+        </div>
+
+        <div class="impact-tracker">
+            <div class="tracker-header">
+                <h3><i class="fas fa-chart-pie"></i> Real-Time Impact Tracker</h3>
+                <p>See exactly how your donations are making a difference</p>
+            </div>
             
             <!-- Pie Chart -->
             <div class="chart-container">
                 <canvas id="donationChart"></canvas>
             </div>
-
-            <h4>📝 Stories & Testimonials</h4>
-            <ul type="*">
-                <li>"Thanks to the donations, we were able to rebuild our house." – Affected Family in India</li>
-                <li>"The food aid arrived just in time for my family." – Flood Victim in Nepal</li>
-                <li>"Your generous donations helped save lives during the earthquake." – Rescue Team in Turkey</li>
-                <li>"I lost everything in the fire, but the community's support has helped me start over." – LA Wildfire Survivor</li>
-            </ul>
+            
+            <div class="stories-section">
+                <h4><i class="fas fa-comment-dots"></i> Stories & Testimonials</h4>
+                <ul class="story-list">
+                    <li>"Thanks to the donations, we were able to rebuild our house after the floods destroyed everything." – Affected Family in India</li>
+                    <li>"The food aid arrived just in time for my family. We hadn't eaten in two days." – Flood Victim in Nepal</li>
+                    <li>"Your generous donations helped save hundreds of lives during the earthquake response." – Rescue Team in Turkey</li>
+                    <li>"I lost everything in the wildfire, but the community's support has helped me start over with dignity." – LA Wildfire Survivor</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- NGO Partnership Section -->
         <div class="ngo-section">
-            <h3>Our NGO & Government Partners</h3>
-            <p>We collaborate with trusted NGOs and government programs to make sure your donations reach the right people.</p>
+            <div class="ngo-header">
+                <h3><i class="fas fa-handshake"></i> Our Trusted Partners</h3>
+                <p>We collaborate with world-renowned NGOs and government programs to ensure your donations reach the right people efficiently.</p>
+            </div>
+            
             <ul class="ngo-list">
-                <li><a href="https://www.ifrc.org/" target="_blank">International Federation of Red Cross and Red Crescent Societies (IFRC)</a></li>
-                <li><a href="https://www.oxfam.org/" target="_blank">Oxfam International</a></li>
-                <li><a href="https://www.savethechildren.org/" target="_blank">Save the Children</a></li>
-                <li><a href="https://www.worldvision.org/" target="_blank">World Vision International</a></li>
-                <li><a href="https://www.doctorswithoutborders.org/" target="_blank">Doctors Without Borders (MSF)</a></li>
-                <li><a href="https://www.unicef.org/" target="_blank">UNICEF</a></li>
-                <li><a href="https://www.globalgiving.org/" target="_blank">GlobalGiving</a></li>
+                <li>
+                    <a href="https://www.ifrc.org/" target="_blank">
+                        <i class="fas fa-cross"></i>
+                        International Federation of Red Cross and Red Crescent Societies (IFRC)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.oxfam.org/" target="_blank">
+                        <i class="fas fa-globe-asia"></i>
+                        Oxfam International
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.savethechildren.org/" target="_blank">
+                        <i class="fas fa-child"></i>
+                        Save the Children
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.worldvision.org/" target="_blank">
+                        <i class="fas fa-eye"></i>
+                        World Vision International
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.doctorswithoutborders.org/" target="_blank">
+                        <i class="fas fa-stethoscope"></i>
+                        Doctors Without Borders (MSF)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.unicef.org/" target="_blank">
+                        <i class="fas fa-baby"></i>
+                        UNICEF
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.globalgiving.org/" target="_blank">
+                        <i class="fas fa-globe"></i>
+                        GlobalGiving
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.care.org/" target="_blank">
+                        <i class="fas fa-hands-helping"></i>
+                        CARE International
+                    </a>
+                </li>
             </ul>
+            
+            <div class="trust-badge">
+                <h4><i class="fas fa-shield-alt"></i> 100% Trust & Transparency</h4>
+                <p>All donations are tracked with blockchain technology. Receive real-time updates on how your contribution is being used.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Script for Pie Chart -->
+    <div class="footer">
+        <h3><i class="fas fa-hand-holding-heart"></i> Safe Haven Donation Platform</h3>
+        <p>Together, we can build a more resilient world. Every donation matters.</p>
+        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
+            © 2025 Safe Haven Disaster Relief Fund. All donations are tax-deductible.
+        </p>
+    </div>
+
     <script>
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+            // Or redirect to homepage:
+            // window.location.href = '../1.HomePage/index.html';
+        }
+        
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        }
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const statsBar = document.querySelector('.donation-stats');
+                if (statsBar) {
+                    statsBar.style.display = statsBar.style.display === 'none' ? 'flex' : 'none';
+                }
+            });
+        }
+        
+        // Donation card animations
+        document.querySelectorAll('.donation-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Chart.js Graph
         var ctx = document.getElementById('donationChart').getContext('2d');
         var donationChart = new Chart(ctx, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
-                labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid'],
+                labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid', 'Emergency Shelters'],
                 datasets: [{
                     label: 'Donation Distribution',
-                    data: [10000000, 5000000, 3000000],  // Example data
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    data: [4500000, 3200000, 2800000, 1500000],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 206, 86)',
+                        'rgb(75, 192, 192)'
+                    ],
+                    borderWidth: 2,
+                    hoverOffset: 15
                 }]
             },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top',
+                        position: 'right',
+                        labels: {
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 14
+                            },
+                            color: '#333',
+                            padding: 20
+                        }
                     },
                     tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 14
+                        },
+                        bodyFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 13
+                        },
                         callbacks: {
                             label: function(tooltipItem) {
-                                return tooltipItem.label + ': ₹ ' + tooltipItem.raw.toLocaleString();
+                                const value = tooltipItem.raw;
+                                const total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${tooltipItem.label}: ₹${value.toLocaleString()} (${percentage}%)`;
                             }
                         }
                     }
                 },
-                aspectRatio: 1,  // Ensure the chart has a square aspect ratio
-                height: 150  // Set chart size
+                cutout: '60%',
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
             }
         });
+        
+        // Animate chart on load
+        setTimeout(() => {
+            donationChart.update();
+        }, 500);
+        
+        // Update donation stats in real-time (simulated)
+        function updateDonationStats() {
+            const statNumber = document.querySelector('.stat-card:nth-child(1) .stat-number');
+            if (statNumber) {
+                const currentAmount = parseFloat(statNumber.textContent.replace('₹', '').replace('M+', '000000').replace('+', ''));
+                const newAmount = currentAmount + Math.floor(Math.random() * 10000);
+                statNumber.textContent = '₹' + (newAmount / 1000000).toFixed(1) + 'M+';
+                
+                // Add animation
+                statNumber.style.color = '#e74c3c';
+                setTimeout(() => {
+                    statNumber.style.color = 'var(--primary-gold-dark)';
+                }, 1000);
+            }
+        }
+        
+        // Update stats every 30 seconds
+        setInterval(updateDonationStats, 30000);
     </script>
 </body>
 </html>

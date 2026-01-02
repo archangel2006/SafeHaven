@@ -3,127 +3,700 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Know What's Happening Around?</title>
+    <title>Disaster Updates - Safe Haven</title>
+    <!-- Font Awesome for icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
+        :root {
+            --primary-orange: #ff6b35;
+            --primary-orange-dark: #e85a2c;
+            --warning-yellow: #ffb347;
+            --alert-red: #ff5252;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --background-light: #f4f4f4;
+            --background-white: #ffffff;
+            --navbar-height: 70px;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            padding-top: var(--navbar-height);
+        }
+        
+        /* ===== NAVBAR WITH BACK ARROW ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-dark));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .back-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .location-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            color: white;
+        }
+        
+        .alert-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #ffcc00;
+            position: relative;
+        }
+        
+        .alert-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .profile-container {
+            position: relative;
+        }
+        
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            min-width: 220px;
+            padding: 0.75rem 0;
+            margin-top: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .dropdown-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-orange);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .dropdown-user-info h4 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+        
+        .dropdown-user-info p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .dropdown-list {
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: #f5f5f5;
+            color: var(--primary-orange);
+        }
+        
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary-orange);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background: #eee;
+            margin: 0.5rem 0;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            
+            .page-title {
+                font-size: 1.3rem;
+            }
+            
+            .location-indicator, .alert-status {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0 1rem;
+            }
+            
+            .back-button, .profile-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 1.1rem;
+            }
+            
+            .location-indicator, .alert-status {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar-right {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1rem;
+            }
+            
+            .navbar-left {
+                gap: 1rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ===== REST OF YOUR EXISTING STYLES ===== */
         .dashboard {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 20px;
             font-weight: bold;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: rgb(57, 98, 113);
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #396271, #2a4d5a);
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
         }
-        .home-icon {
-            font-size: 24px;
-            text-decoration: none;
-            color: black;
-            margin-right: 15px;
-        }
-        .home-icon:hover {
-            color: #007BFF;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+        
         .weather {
             color: #fafafa;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        
         .time {
             color: #fafafa;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary-orange);
+            font-size: 2.5rem;
+            margin: 30px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px;
+            padding: 0 20px;
         }
+        
         .box {
-            border: 2px solid #000;
-            background: #fff;
-            padding: 15px;
+            border: 2px solid #ddd;
+            background: var(--background-white);
+            padding: 20px;
             text-align: center;
-            border-radius: 10px;
-            transition: transform 0.3s ease-in-out;
+            border-radius: 12px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-light);
+            cursor: pointer;
         }
+        
         .box:hover {
-            transform: scale(1.05);
-            background-color: #e0e0e0;
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-orange);
         }
+        
         .image {
-            height: 80px;
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-radius: 8px;
         }
+        
         .image img {
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
+        
+        .box:hover .image img {
+            transform: scale(1.05);
+        }
+        
+        .box p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        
+        .box strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
         a {
             text-decoration: none;
-            color: #000;
+            color: var(--primary-orange);
             font-weight: bold;
+            transition: color 0.3s ease;
         }
+        
         a:hover {
-            color: #007BFF;
+            color: var(--primary-orange-dark);
+            text-decoration: underline;
+        }
+        
+        .disaster-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .snow { background: #e3f2fd; color: #1565c0; }
+        .water { background: #e0f7fa; color: #00838f; }
+        .ship { background: #fff3e0; color: #ef6c00; }
+        .fire { background: #ffebee; color: #c62828; }
+        .earthquake { background: #f3e5f5; color: #7b1fa2; }
+        .typhoon { background: #e8f5e9; color: #2e7d32; }
+        
+        .urgency-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--alert-red);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .box {
+            position: relative;
+        }
+        
+        /* Live Indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--alert-red);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 10px;
+            animation: livePulse 2s infinite;
+        }
+        
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
 <body>
+    <!-- Fixed Navbar with Back Arrow -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="back-button" id="backButton" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo-container">
+                <i class="fas fa-newspaper logo-icon"></i>
+                <div class="logo-text">Updates</div>
+            </div>
+        </div>
+        
+        <div class="navbar-center">
+            <div class="page-title">Disaster Updates</div>
+        </div>
+        
+        <div class="navbar-right">
+            <div class="location-indicator">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Tokyo, JP</span>
+            </div>
+            
+            <div class="alert-status">
+                <div class="alert-indicator"></div>
+                <span>Live Updates <span class="live-indicator">LIVE</span></span>
+            </div>
+            
+            <div class="profile-container">
+                <button class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <div class="dropdown-avatar">JD</div>
+                        <div class="dropdown-user-info">
+                            <h4>John Doe</h4>
+                            <p>News Subscriber</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-list">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user-circle"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-bell"></i>
+                            <span>Alerts</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-rss"></i>
+                            <span>Subscriptions</span>
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
     <!-- Dashboard -->
     <div class="dashboard">
-        <a href="HomePage.html" class="home-icon">🏠</a> 
-        <p class="weather">Fetching weather...</p>
-        <p class="time">Fetching Japan time...</p>
+        <div class="weather">🌤 Fetching weather...</div>
+        <div class="time">🕒 Fetching Japan time...</div>
     </div>
 
     <h1>Know What's Happening Around?</h1>
+    <div class="page-subtitle">Real-time disaster alerts and emergency updates from across Japan</div>
 
     <div class="container">
         <div class="box">
-            <div class="image"><img src="https://www.aljazeera.com/wp-content/uploads/2025/02/12799153-1738821025.jpg?resize=1170%2C780&quality=80" alt="Snow"></div>
-            <p><strong><a href="https://www.aljazeera.com/gallery/2025/2/6/japans-hokkaido-faces-record-snowfall-disrupting-travel-and-deliveries" target="_blank">Recent Snow</a></strong></p>
-            <p>Heavy snowfall in Hokkaido. Cause of snowstorm?</p>
+            <div class="image">
+                <img src="https://www.aljazeera.com/wp-content/uploads/2025/02/12799153-1738821025.jpg?resize=1170%2C780&quality=80" alt="Snow">
+            </div>
+            <p><strong><a href="https://www.aljazeera.com/gallery/2025/2/6/japans-hokkaido-faces-record-snowfall-disrupting-travel-and-deliveries" target="_blank">Record Snowfall in Hokkaido</a></strong></p>
+            <p>Heavy snowfall disrupts travel and deliveries across northern Japan.</p>
+            <span class="disaster-type snow">❄️ Snowstorm</span>
         </div>
+        
         <div class="box">
-            <div class="image"><img src="https://dims.apnews.com/dims4/default/c97b1b7/2147483647/strip/true/crop/3000x2108+0+0/resize/1440x1012!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F56%2F8c%2F7bcc8791feb5685299adcb12123e%2Fcc0909f2c6d24fee93791b801b3441ce" alt="Waves"></div>
-            <p><strong><a href="https://apnews.com/article/japan-earthquake-tsunami-warning-c9f7ee7959770dbc4ea12debfe68fd4c" target="_blank">Water Level Rising</a></strong></p>
-            <p>Near the coast of Japan.</p>
+            <div class="image">
+                <img src="https://dims.apnews.com/dims4/default/c97b1b7/2147483647/strip/true/crop/3000x2108+0+0/resize/1440x1012!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F56%2F8c%2F7bcc8791feb5685299adcb12123e%2Fcc0909f2c6d24fee93791b801b3441ce" alt="Waves">
+            </div>
+            <p><strong><a href="https://apnews.com/article/japan-earthquake-tsunami-warning-c9f7ee7959770dbc4ea12debfe68fd4c" target="_blank">Coastal Water Levels Rising</a></strong></p>
+            <p>Tsunami warning issued after undersea earthquake near Japanese coast.</p>
+            <span class="disaster-type water">🌊 Tsunami Alert</span>
         </div>
+        
         <div class="box">
-            <div class="image"><img src="https://vid.alarabiya.net/images/2024/01/16/d1de48d4-2917-41dd-a7ac-34cb18a52fd3/d1de48d4-2917-41dd-a7ac-34cb18a52fd3_16x9_1200x676.JPG?width=801&format=jpg" alt="Ship"></div>
-            <p><strong><a href="https://english.alarabiya.net/News/middle-east/2024/01/16/Japan-s-biggest-shipping-company-suspends-vessel-transits-in-Red-Sea-" target="_blank">Ship Routes Closed</a></strong></p>
-            <p>Closed due to uneven ocean water patterns.</p>
+            <div class="image">
+                <img src="https://vid.alarabiya.net/images/2024/01/16/d1de48d4-2917-41dd-a7ac-34cb18a52fd3/d1de48d4-2917-41dd-a7ac-34cb18a52fd3_16x9_1200x676.JPG?width=801&format=jpg" alt="Ship">
+            </div>
+            <p><strong><a href="https://english.alarabiya.net/News/middle-east/2024/01/16/Japan-s-biggest-shipping-company-suspends-vessel-transits-in-Red-Sea-" target="_blank">Shipping Routes Suspended</a></strong></p>
+            <p>Major Japanese shipping company suspends Red Sea transits due to security concerns.</p>
+            <span class="disaster-type ship">🚢 Maritime Alert</span>
         </div>
+        
         <div class="box">
-            <div class="image"><img src="https://cdn4.premiumread.com/?url=https://www.japantimes.co.jp/japantimes/uploads/images/2024/11/28/436926.jpg?v=3.1&w=1000&q=100&f=jpg&t=1.52" alt="Fire"></div>
-            <p><strong><a href="https://www.japantimes.co.jp/news/2024/11/28/japan/politics/kuniko-inoguchi-fire/" target="_blank">Building Burst into Flames</a></strong></p>
-            <p>Area in Tokyo.</p>
+            <div class="image">
+                <img src="https://cdn4.premiumread.com/?url=https://www.japantimes.co.jp/japantimes/uploads/images/2024/11/28/436926.jpg?v=3.1&w=1000&q=100&f=jpg&t=1.52" alt="Fire">
+            </div>
+            <p><strong><a href="https://www.japantimes.co.jp/news/2024/11/28/japan/politics/kuniko-inoguchi-fire/" target="_blank">Major Building Fire in Tokyo</a></strong></p>
+            <p>Large-scale fire engulfs commercial building in central Tokyo area.</p>
+            <span class="disaster-type fire">🔥 Fire Emergency</span>
         </div>
+        
         <div class="box">
-            <div class="image"><img src="https://gdb.voanews.com/e697f033-b835-4550-b7af-b4d022fed44e_cx4_cy0_cw95_w1023_r1_s.jpg" alt="Earthquake"></div>
-            <p><strong><a href="https://www.voanews.com/a/earthquake-rattles-southwestern-japan-followed-by-tsunami-warning/7934799.html" target="_blank">Earthquake Alert</a></strong></p>
-            <p>Magnitude 6.2 tremor near Osaka.</p>
+            <span class="urgency-badge">URGENT</span>
+            <div class="image">
+                <img src="https://gdb.voanews.com/e697f033-b835-4550-b7af-b4d022fed44e_cx4_cy0_cw95_w1023_r1_s.jpg" alt="Earthquake">
+            </div>
+            <p><strong><a href="https://www.voanews.com/a/earthquake-rattles-southwestern-japan-followed-by-tsunami-warning/7934799.html" target="_blank">Earthquake Alert: Osaka Region</a></strong></p>
+            <p>Magnitude 6.2 tremor detected near Osaka, tsunami warning issued.</p>
+            <span class="disaster-type earthquake">🌋 Earthquake</span>
         </div>
+        
         <div class="box">
-            <div class="image"><img src="https://www.ntv.co.jp/englishnews/images_cms/qzubiy4esp59f8o4ay2vowoz31mwjs.jpg" alt="Typhoon"></div>
-            <p><strong><a href="https://www.ntv.co.jp/englishnews/articles/20214pjzgtycxjly79t1.html" target="_blank">Typhoon Approaching</a></strong></p>
-            <p>Expected to hit Okinawa by weekend.</p>
+            <span class="urgency-badge">WARNING</span>
+            <div class="image">
+                <img src="https://www.ntv.co.jp/englishnews/images_cms/qzubiy4esp59f8o4ay2vowoz31mwjs.jpg" alt="Typhoon">
+            </div>
+            <p><strong><a href="https://www.ntv.co.jp/englishnews/articles/20214pjzgtycxjly79t1.html" target="_blank">Typhoon Approaching Okinawa</a></strong></p>
+            <p>Category 3 typhoon expected to make landfall in Okinawa by weekend.</p>
+            <span class="disaster-type typhoon">🌀 Typhoon Alert</span>
         </div>
     </div>
 
     <script>
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+            // Or redirect to homepage:
+            // window.location.href = '../1.HomePage/index.html';
+        }
+        
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        }
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                // Add mobile menu functionality here
+                const dashboard = document.querySelector('.dashboard');
+                if (dashboard) {
+                    dashboard.style.display = dashboard.style.display === 'none' ? 'flex' : 'none';
+                }
+            });
+        }
+        
+        // Weather API
         async function fetchWeather() {
             const apiKey = "dfe237a4e8c943519ac100729252202"; 
             const city = "Tokyo"; 
@@ -134,22 +707,70 @@
                 const data = await response.json();
                 const temperature = data.current.temp_c;
                 const weatherDescription = data.current.condition.text;
+                const weatherIcon = data.current.condition.icon;
 
-                document.querySelector(".weather").innerText = `🌤 ${weatherDescription}, ${temperature}°C in ${city}`;
+                document.querySelector(".weather").innerHTML = 
+                    `<img src="${weatherIcon}" alt="${weatherDescription}" style="width: 24px; height: 24px;"> ${weatherDescription}, ${temperature}°C in ${city}`;
             } catch (error) {
                 document.querySelector(".weather").innerText = "Failed to load weather data.";
             }
         }
 
+        // Japan Time
         function updateJapanTime() {
             const now = new Date();
-            const options = { timeZone: "Asia/Tokyo", hour12: true, weekday: "short", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" };
-            document.querySelector(".time").innerText = `🕒 ${new Intl.DateTimeFormat("en-US", options).format(now)}`;
+            const options = { 
+                timeZone: "Asia/Tokyo", 
+                hour12: true, 
+                weekday: "short", 
+                year: "numeric", 
+                month: "short", 
+                day: "numeric", 
+                hour: "2-digit", 
+                minute: "2-digit", 
+                second: "2-digit" 
+            };
+            
+            const japanTime = new Intl.DateTimeFormat("en-US", options).format(now);
+            document.querySelector(".time").innerHTML = `🕒 ${japanTime}`;
         }
 
+        // Initialize
         fetchWeather();
         updateJapanTime();
-        setInterval(updateJapanTime, 1000); // Update time every second
+        setInterval(updateJapanTime, 1000);
+        
+        // Box click handlers
+        document.querySelectorAll('.box').forEach(box => {
+            box.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'A') {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.open(link.href, '_blank');
+                    }
+                }
+            });
+        });
+        
+        // Alert status rotation
+        const alertStatus = document.querySelector('.alert-status');
+        if (alertStatus) {
+            setInterval(() => {
+                const isLive = alertStatus.textContent.includes('Live Updates');
+                const statuses = [
+                    'Live Updates',
+                    'Breaking News',
+                    'Emergency Alerts',
+                    'Disaster Watch'
+                ];
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                
+                if (isLive) {
+                    alertStatus.innerHTML = `<div class="alert-indicator"></div>
+                                           <span>${randomStatus} <span class="live-indicator">LIVE</span></span>`;
+                }
+            }, 10000);
+        }
     </script>
 </body>
 </html>

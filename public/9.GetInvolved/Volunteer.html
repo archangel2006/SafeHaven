@@ -3,150 +3,941 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer - Safe Heaven</title>
+    <title>Volunteer - Safe Haven</title>
+    <!-- Font Awesome for icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        :root {
+            --primary-teal: #20c997;
+            --primary-teal-dark: #17a589;
+            --volunteer-blue: #3498db;
+            --volunteer-green: #2ecc71;
+            --accent-orange: #e67e22;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --background-light: #f4f4f4;
+            --background-white: #ffffff;
+            --navbar-height: 70px;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f1f8e9 100%);
+            padding-top: var(--navbar-height);
+            min-height: 100vh;
         }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .panel-container {
+        
+        /* ===== NAVBAR WITH BACK ARROW ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
             display: flex;
-            justify-content: space-around;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .back-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: white;
+            animation: heartBeat 2s infinite;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+        
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .location-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            color: white;
+        }
+        
+        .alert-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #ffcc00;
+            position: relative;
+        }
+        
+        .alert-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .profile-container {
+            position: relative;
+        }
+        
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+        
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            min-width: 220px;
+            padding: 0.75rem 0;
+            margin-top: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .dropdown-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-teal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .dropdown-user-info h4 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+        
+        .dropdown-user-info p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .dropdown-list {
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: #f5f5f5;
+            color: var(--primary-teal);
+        }
+        
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary-teal);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background: #eee;
+            margin: 0.5rem 0;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            
+            .page-title {
+                font-size: 1.3rem;
+            }
+            
+            .location-indicator, .alert-status {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0 1rem;
+            }
+            
+            .back-button, .profile-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 1.1rem;
+            }
+            
+            .location-indicator, .alert-status {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar-right {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1rem;
+            }
+            
+            .navbar-left {
+                gap: 1rem;
+            }
+            
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ===== REST OF YOUR EXISTING STYLES ===== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-teal);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .volunteer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
             flex-wrap: wrap;
         }
-
-        .panel {
-            width: 22%;
+        
+        .stat-card {
             background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 180px;
+            border-top: 5px solid var(--primary-teal);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
             text-align: center;
         }
-
+        
+        .panel-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .panel:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-teal);
+        }
+        
+        .panel:hover::before {
+            transform: translateY(0);
+        }
+        
         .panel img {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
             border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
         }
-
-        form {
-            background: white;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        
+        .panel:hover img {
+            transform: scale(1.05);
         }
-
+        
+        .panel h3 {
+            color: var(--text-dark);
+            margin: 15px 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .panel p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Role-specific colors */
+        .panel:nth-child(1) {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        }
+        
+        .panel:nth-child(2) {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+        
+        .panel:nth-child(3) {
+            background: linear-gradient(135deg, #fff3e0, #ffecb3);
+        }
+        
+        .panel:nth-child(4) {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+        }
+        
+        .registration-form {
+            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            text-align: left;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-header h3 {
+            font-size: 2rem;
+            color: var(--primary-teal);
+            margin-bottom: 10px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
         input, select, button {
             width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 12px 15px;
+            margin-top: 5px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
-
-        button {
-            background-color: #28a745;
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(32, 201, 151, 0.1);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
             color: white;
-            font-size: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            padding: 15px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
-
-        button:hover {
-            background-color: #218838;
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(32, 201, 151, 0.3);
         }
-
+        
         .graph-container {
-            margin-top: 40px;
+            margin-top: 50px;
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            margin: auto;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
         }
-
-        /* Adjust the size of the canvas for a smaller chart */
-        canvas {
-            max-width: 80% !important;
-            height: 250px !important;
+        
+        .graph-header {
+            margin-bottom: 30px;
+        }
+        
+        .graph-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary-teal);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .graph-container canvas {
+            max-width: 100% !important;
+            height: 300px !important;
             margin: 0 auto;
+        }
+        
+        .volunteer-quote {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-light);
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-teal);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
+            color: white;
+            border-radius: 20px 20px 0 0;
         }
     </style>
 </head>
 <body>
+    <!-- Fixed Navbar with Back Arrow -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="back-button" id="backButton" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo-container">
+                <i class="fas fa-hands-helping logo-icon"></i>
+                <div class="logo-text">Volunteer</div>
+            </div>
+        </div>
+        
+        <div class="navbar-center">
+            <div class="page-title">Join Our Team</div>
+        </div>
+        
+        <div class="navbar-right">
+        
+            <div class="alert-status">
+                <div class="alert-indicator"></div>
+                <span>Volunteers Needed</span>
+            </div>
+            
+            <div class="profile-container">
+                <button class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <div class="dropdown-avatar">JD</div>
+                        <div class="dropdown-user-info">
+                            <h4>John Doe</h4>
+                            <p>Active Volunteer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-list">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user-circle"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-tasks"></i>
+                            <span>My Assignments</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Volunteer Hours</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-award"></i>
+                            <span>Achievements</span>
+                        </a>
+                        
+                        <div class="dropdown-divider"></div>
+                        
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
     <div class="container">
-        <h2>Volunteer Roles</h2>
-        <div class="panel-container">
-            <div class="panel" style="background-color:#c5e1f3;">
-                <img src="https://i.pinimg.com/474x/35/6d/e7/356de79f39c71a655e68e3b265108455.jpg" alt="Medical Assistance">
-                <h3>🚑 Medical Assistance</h3>
-                <p>Help in emergency first aid</p>
+        <div class="page-header">
+            <h2>Make a Difference as a Volunteer</h2>
+            <p class="page-subtitle">
+                Join our community of dedicated volunteers and help save lives during disasters. 
+                Your skills and time can make a real impact in emergency response and recovery efforts.
+            </p>
+        </div>
+        
+        <div class="volunteer-stats">
+            <div class="stat-card">
+                <div class="stat-number">2,847</div>
+                <div class="stat-label">Active Volunteers</div>
             </div>
-            <div class="panel" style="background-color:#aecdf1;">
-                <img src="https://i.pinimg.com/736x/4e/00/4e/4e004eb7195a52bc508209611fa910ed.jpg" alt="Rescue Operations">
-                <h3>🚜 Rescue Operations</h3>
-                <p>On-ground rescue missions</p>
+            <div class="stat-card">
+                <div class="stat-number">50,000+</div>
+                <div class="stat-label">Lives Impacted</div>
             </div>
-            <div class="panel" style="background-color:#c5e1f3;">
-                <img src="https://i.pinimg.com/474x/ed/0e/0d/ed0e0d54aae6ff49b203ec0d8518549e.jpg" alt="Supply Distribution">
-                <h3>📦 Supply Distribution</h3>
-                <p>Help distribute food, water & essentials</p>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Emergency Response</div>
             </div>
-            <div class="panel" style="background-color:#aecdf1;">
-                <img src="https://i.pinimg.com/474x/7e/6c/74/7e6c746d981cebbe8d9501f56d5d81d6.jpg" alt="Awareness & Education">
-                <h3>📢 Awareness & Education</h3>
-                <p>Teach disaster preparedness in communities</p>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Satisfaction Rate</div>
             </div>
         </div>
 
-        <h2>Volunteer Registration Form</h2>
-        <form id="volunteerForm" style="background-color:azure" >
-            <input type="text" placeholder="Name" id="name" required>
-            <input type="number" placeholder="Age" id="age" required>
-            <input type="text" placeholder="Location" id="location" required>
-            <input type="tel" placeholder="Contact Info" id="contact" required>
-            <select id="skill">
-                <option value="Medical">Medical</option>
-                <option value="Rescue">Rescue</option>
-                <option value="Logistics">Logistics</option>
-                <option value="Awareness & Education">Awareness & Education</option>
-            </select>
-            <select id="availability">
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Remote Help">Remote Help</option>
-            </select>
-            <button type="submit">Register</button>
-        </form>
+        <h2 style="color: var(--primary-teal); text-align: center; margin: 40px 0 20px;">
+            <i class="fas fa-briefcase"></i> Available Volunteer Roles
+        </h2>
+        
+        <div class="panel-container">
+            <div class="panel">
+                <img src="https://i.pinimg.com/474x/35/6d/e7/356de79f39c71a655e68e3b265108455.jpg" alt="Medical Assistance">
+                <h3><i class="fas fa-ambulance"></i> Medical Assistance</h3>
+                <p>Provide emergency first aid, triage support, and medical care in disaster zones. Training provided.</p>
+                <div style="color: var(--accent-orange); font-weight: 600; margin-top: 10px;">
+                    <i class="fas fa-clock"></i> Immediate Need
+                </div>
+            </div>
+            
+            <div class="panel">
+                <img src="https://i.pinimg.com/736x/4e/00/4e/4e004eb7195a52bc508209611fa910ed.jpg" alt="Rescue Operations">
+                <h3><i class="fas fa-truck"></i> Rescue Operations</h3>
+                <p>Participate in on-ground rescue missions, evacuation support, and search operations.</p>
+                <div style="color: var(--accent-orange); font-weight: 600; margin-top: 10px;">
+                    <i class="fas fa-exclamation-triangle"></i> Physical Fitness Required
+                </div>
+            </div>
+            
+            <div class="panel">
+                <img src="https://i.pinimg.com/474x/ed/0e/0d/ed0e0d54aae6ff49b203ec0d8518549e.jpg" alt="Supply Distribution">
+                <h3><i class="fas fa-boxes"></i> Supply Distribution</h3>
+                <p>Help organize and distribute food, water, medical supplies, and essential items to affected communities.</p>
+                <div style="color: var(--volunteer-green); font-weight: 600; margin-top: 10px;">
+                    <i class="fas fa-users"></i> Team Coordination
+                </div>
+            </div>
+            
+            <div class="panel">
+                <img src="https://i.pinimg.com/474x/7e/6c/74/7e6c746d981cebbe8d9501f56d5d81d6.jpg" alt="Awareness & Education">
+                <h3><i class="fas fa-bullhorn"></i> Awareness & Education</h3>
+                <p>Teach disaster preparedness, conduct workshops, and raise awareness in local communities.</p>
+                <div style="color: var(--volunteer-blue); font-weight: 600; margin-top: 10px;">
+                    <i class="fas fa-chalkboard-teacher"></i> Communication Skills
+                </div>
+            </div>
+        </div>
+
+        <div class="volunteer-quote">
+            <i class="fas fa-quote-left" style="font-size: 1.5rem; color: var(--primary-teal); margin-right: 10px;"></i>
+            The best way to find yourself is to lose yourself in the service of others.
+            <i class="fas fa-quote-right" style="font-size: 1.5rem; color: var(--primary-teal); margin-left: 10px;"></i>
+            <div style="margin-top: 10px; font-weight: 600; color: var(--primary-teal);">- Mahatma Gandhi</div>
+        </div>
+
+        <div class="registration-form">
+            <div class="form-header">
+                <h3><i class="fas fa-user-plus"></i> Volunteer Registration</h3>
+                <p>Fill out the form below to join our volunteer network. We'll contact you within 24 hours.</p>
+            </div>
+            
+            <form id="volunteerForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" placeholder="Enter your full name" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age"><i class="fas fa-birthday-cake"></i> Age</label>
+                        <input type="number" placeholder="Your age" id="age" min="18" max="80" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
+                        <input type="text" placeholder="City, State" id="location" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact"><i class="fas fa-phone"></i> Contact Information</label>
+                        <input type="tel" placeholder="Phone number" id="contact" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skill"><i class="fas fa-tools"></i> Primary Skill</label>
+                        <select id="skill" required>
+                            <option value="">Select your skill</option>
+                            <option value="Medical">Medical/First Aid</option>
+                            <option value="Rescue">Search & Rescue</option>
+                            <option value="Logistics">Logistics/Coordination</option>
+                            <option value="Awareness & Education">Community Outreach</option>
+                            <option value="Technical">Technical Support</option>
+                            <option value="Other">Other Skills</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="availability"><i class="fas fa-calendar-alt"></i> Availability</label>
+                        <select id="availability" required>
+                            <option value="">Select availability</option>
+                            <option value="Full-time">Full-time (40+ hours/week)</option>
+                            <option value="Part-time">Part-time (20-40 hours/week)</option>
+                            <option value="Weekends">Weekends Only</option>
+                            <option value="Emergency">Emergency Response Only</option>
+                            <option value="Remote">Remote Support</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-user-check"></i> Register as Volunteer
+                </button>
+            </form>
+        </div>
 
         <div class="graph-container">
-            <h2>📊 Volunteer Impact</h2>
+            <div class="graph-header">
+                <h3><i class="fas fa-chart-bar"></i> Volunteer Impact Statistics</h3>
+                <p>See how our volunteers have made a difference in communities across the region</p>
+            </div>
             <canvas id="volunteerChart"></canvas>
         </div>
     </div>
 
+    <div class="footer">
+        <h3><i class="fas fa-hands-helping"></i> Safe Haven Volunteer Network</h3>
+        <p>Together, we can build resilient communities and save lives during emergencies</p>
+        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
+            © 2025 Safe Haven Disaster Response. All volunteers undergo training and certification.
+        </p>
+    </div>
+
     <script>
+        // Back button functionality
+        function goBack() {
+            window.history.back();
+            // Or redirect to homepage:
+            // window.location.href = '../1.HomePage/index.html';
+        }
+        
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        }
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const statsBar = document.querySelector('.volunteer-stats');
+                if (statsBar) {
+                    statsBar.style.display = statsBar.style.display === 'none' ? 'flex' : 'none';
+                }
+            });
+        }
+        
         // Handle form submission
         document.getElementById("volunteerForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            alert("Registered Successfully! You will be receiving our call in about 60 seconds.");
-            document.getElementById("volunteerForm").reset();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const skill = document.getElementById('skill').value;
+            
+            // Show success animation
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Success message with volunteer details
+                alert(`🎉 Registration Successful!\n\nWelcome ${name}! \n\nYou have been registered for ${skill} role.\n\nOur team will contact you within 60 seconds to complete your onboarding.`);
+                
+                // Reset form
+                document.getElementById("volunteerForm").reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Update volunteer stats
+                updateVolunteerStats();
+            }, 1500);
         });
-
+        
+        // Update volunteer statistics
+        function updateVolunteerStats() {
+            const statNumber = document.querySelector('.stat-card:nth-child(1) .stat-number');
+            if (statNumber) {
+                const currentCount = parseInt(statNumber.textContent.replace(',', ''));
+                statNumber.textContent = (currentCount + 1).toLocaleString();
+                
+                // Add animation
+                statNumber.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    statNumber.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+        
         // Chart.js Graph
         const ctx = document.getElementById('volunteerChart').getContext('2d');
         new Chart(ctx, {
@@ -154,19 +945,109 @@
             data: {
                 labels: ['Medical Assistance', 'Rescue Operations', 'Supply Distribution', 'Awareness & Education'],
                 datasets: [{
-                    label: 'Lives Impacted',
-                    data: [5000, 8000, 6000, 7000],
-                    backgroundColor: ['#ff5733', '#33ff57', '#3377ff', '#ff33a6']
+                    label: 'Lives Impacted (Thousands)',
+                    data: [85, 120, 95, 70],
+                    backgroundColor: [
+                        'rgba(255, 87, 51, 0.8)',
+                        'rgba(51, 255, 87, 0.8)',
+                        'rgba(51, 119, 255, 0.8)',
+                        'rgba(255, 51, 166, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 87, 51)',
+                        'rgb(51, 255, 87)',
+                        'rgb(51, 119, 255)',
+                        'rgb(255, 51, 166)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8
                 }]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: "'Poppins', sans-serif"
+                            },
+                            color: '#333'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleFont: {
+                            family: "'Poppins', sans-serif"
+                        },
+                        bodyFont: {
+                            family: "'Poppins', sans-serif"
+                        }
+                    }
+                },
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif"
+                            },
+                            callback: function(value) {
+                                return value + 'K';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 12
+                            }
+                        }
                     }
                 }
             }
+        });
+        
+        // Panel click handlers
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.addEventListener('click', function() {
+                const role = this.querySelector('h3').textContent;
+                const skillSelect = document.getElementById('skill');
+                
+                // Map panel to skill option
+                const roleMap = {
+                    'Medical Assistance': 'Medical/First Aid',
+                    'Rescue Operations': 'Search & Rescue',
+                    'Supply Distribution': 'Logistics/Coordination',
+                    'Awareness & Education': 'Community Outreach'
+                };
+                
+                if (roleMap[role]) {
+                    skillSelect.value = roleMap[role];
+                    
+                    // Scroll to form
+                    document.querySelector('.registration-form').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Highlight the form
+                    const form = document.querySelector('.registration-form');
+                    form.style.boxShadow = '0 0 0 3px rgba(32, 201, 151, 0.3)';
+                    setTimeout(() => {
+                        form.style.boxShadow = '';
+                    }, 2000);
+                }
+            });
         });
     </script>
 </body>

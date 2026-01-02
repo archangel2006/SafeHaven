@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
-  <!-- Removed Leaflet libraries as they're no longer needed -->
   <style>
     /* Global Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,21 +16,217 @@
       background: #333; 
       color: #fff; 
     }
-    header { 
-      background: linear-gradient(135deg, #1e3c72, #2a5298); 
-      padding: 2rem; 
-      text-align: center; 
-      font-size: 2rem; 
-      font-weight: bold; 
-      text-transform: uppercase; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 12px; 
-      letter-spacing: 1px;
+    
+    /* ===== NAVBAR WITH BACK ARROW ===== */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .back-button {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateX(-3px);
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .logo-icon {
+      font-size: 1.8rem;
+      color: #ffcc00;
+    }
+    
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, #fff, #ffcc00);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .location-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(5px);
+    }
+    
+    .alert-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 50, 50, 0.25);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      color: #ff6b6b;
       position: relative;
     }
-    /* Tabs */
+    
+    .alert-indicator {
+      width: 8px;
+      height: 8px;
+      background-color: #ff6b6b;
+      border-radius: 50%;
+      animation: blink 1.5s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    .profile-container {
+      position: relative;
+    }
+    
+    .profile-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+    
+    .profile-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+    
+    /* Profile Dropdown */
+    .profile-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #2a5298;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      min-width: 200px;
+      padding: 0.75rem 0;
+      margin-top: 0.75rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+    
+    .profile-dropdown.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 1.25rem;
+    }
+    
+    .dropdown-item i {
+      width: 20px;
+      text-align: center;
+    }
+    
+    .dropdown-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 0.5rem 0;
+    }
+    
+    /* Mobile Menu Button (for smaller screens) */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0.75rem 1rem;
+      }
+      
+      .location-indicator, .alert-status {
+        display: none;
+      }
+      
+      .logo-text {
+        font-size: 1.3rem;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .navbar-right {
+        gap: 1rem;
+      }
+    }
+    
+    /* ===== REST OF YOUR EXISTING STYLES ===== */
     .tab-bar {
       display: flex; 
       justify-content: center; 
@@ -83,7 +278,7 @@
       color: #333;
     }
     
-    /* Map Container - now used for static image */
+    /* Map Container */
     .map-container { 
       width: 90%; 
       height: 350px; 
@@ -97,7 +292,7 @@
       object-fit: cover;
     }
     
-    /* Chart Container - Enlarged */
+    /* Chart Container */
     .chart-container { 
       width: 90%; 
       max-width: 800px; 
@@ -108,7 +303,7 @@
       color: #333; 
     }
     
-    /* Risk Meter Grid - one row */
+    /* Risk Meter Grid */
     .risk-meter-grid { 
       display: flex; 
       flex-wrap: nowrap; 
@@ -177,9 +372,60 @@
   </style>
 </head>
 <body>
-  <header>
-    <i class="fas fa-exclamation-triangle"></i> Disaster Management Dashboard
-  </header>
+  <!-- New Navbar with Back Arrow -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <button class="back-button" id="backButton" onclick="goBack()" href="public/1.HomePage/index.html">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="logo-container">
+        <i class="fas fa-exclamation-triangle logo-icon"></i>
+        <div class="logo-text">Disaster Dashboard</div>
+      </div>
+    </div>
+    
+    <div class="navbar-right">
+      <div class="location-indicator">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Delhi, IN</span>
+      </div>
+      
+      <div class="alert-status">
+        <div class="alert-indicator"></div>
+        <span>Alerts Active</span>
+      </div>
+      
+      <div class="profile-container">
+        <button class="profile-btn" id="profileBtn">
+          <i class="fas fa-user"></i>
+        </button>
+        
+        <div class="profile-dropdown" id="profileDropdown">
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-user-circle"></i>
+            <span>My Profile</span>
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
   
   <!-- Tabs -->
   <div class="tab-bar">
@@ -234,6 +480,29 @@
   </div>
   
   <script>
+    // Back button functionality
+    function goBack() {
+      window.history.back();
+      // Or redirect to a specific page:
+      // window.location.href = '../1.HomePage/index.html';
+    }
+    
+    // Profile dropdown toggle
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+    
+    profileBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove('active');
+      }
+    });
+    
     // JavaScript for interactive tabs and dynamic data insertion
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -323,6 +592,21 @@
       }
     });
     
+    // Alert status toggle (for demo)
+    const alertStatus = document.querySelector('.alert-status');
+    setInterval(() => {
+      const isAlertActive = alertStatus.textContent.includes('Active');
+      
+      if (isAlertActive) {
+        alertStatus.innerHTML = '<div class="alert-indicator" style="background-color: #4caf50;"></div><span>All Clear</span>';
+        alertStatus.style.backgroundColor = 'rgba(76, 175, 80, 0.25)';
+        alertStatus.style.color = '#4caf50';
+      } else {
+        alertStatus.innerHTML = '<div class="alert-indicator"></div><span>Alerts Active</span>';
+        alertStatus.style.backgroundColor = 'rgba(255, 50, 50, 0.25)';
+        alertStatus.style.color = '#ff6b6b';
+      }
+    }, 15000);
   </script>
 </body>
 </html>
