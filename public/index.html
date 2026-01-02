@@ -3,258 +3,1262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe Heaven</title>
+    <title>SafeHaven - Report Hazard, Find Safety, Get Help</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== CSS RESET & VARIABLES ===== */
+        :root {
+            --primary-blue: #0066cc;
+            --primary-blue-dark: #0052a3;
+            --primary-blue-light: #e6f2ff;
+            --emergency-red: #e63946;
+            --emergency-red-dark: #d32f2f;
+            --warning-orange: #ff9800;
+            --success-green: #4caf50;
+            --text-dark: #333333;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --background-light: #f8f9fa;
+            --background-white: #ffffff;
+            --border-light: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --font-heading: 'Segoe UI', Arial, sans-serif;
+            --font-body: 'Arial', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            text-align: center;
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            line-height: 1.6;
         }
-        .top-panel {
-            display: flex;
-            align-items: left;
-            padding: 30px;
-            background-color: #52caec;
-            justify-content: left;
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-sm);
         }
-        .top-panel img {
-            height: 80px;
-            margin-right: 10px;
+
+        a {
+            text-decoration: none;
+            color: inherit;
         }
-        .main-tagline {
-            margin: 20px 0 10px;
-            font-size: 20px;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
-        .sos-button {
-            background-color: red;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            font-size: 18px;
+
+        ul {
+            list-style: none;
+        }
+
+        button {
             cursor: pointer;
-            margin-bottom: 20px;
+            font-family: inherit;
+            border: none;
         }
-        
+
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 30px; 
-            margin: 20px;
-        }
-        .iframe-container {
-            width: 300px;
-            height: 300px;
-            background-color: #adeaf9;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px; 
-            justify-content: center;
-            align-items: center;
-        }
-        .grid-item {
-            background-color: #ddd;
-            text-align: center;
-            border-radius: 10px;
-            width: 150px;
-            height: 150px;
-            overflow: hidden; 
-        }
-        .grid-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover; 
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
         }
-        .grid-item .text {
-            margin-top: 10px; 
-            font-size: 16px; 
-            color: #333; 
-            font-weight: bold; 
-            display: block; 
+
+        .section {
+            padding: var(--spacing-xl) 0;
         }
-        .sidebar {
-            width: 350px;
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
-        .ai-assistant-container {
+
+        /* ===== COMPACT NAVBAR (Location, Alerts, Profile Only) ===== */
+        header {
+            background-color: var(--background-white);
+            box-shadow: 0 2px 10px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+        }
+
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
+            gap: 0.75rem;
         }
-        .ai-assistant {
-            background-color: #ddd;
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            border-radius: var(--border-radius-sm);
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo-text span {
+            color: var(--emergency-red);
+        }
+
+        .navbar-right {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-right: 15px; 
+            gap: var(--spacing-md);
         }
-        .ai-assistant img {
-            width: 60%;
-            height: 60%;
+
+        /* Location Indicator */
+        .location-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--background-light);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .location-indicator i {
+            color: var(--primary-blue);
+        }
+
+        /* Alert Status */
+        .alert-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #ffeaea;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            color: var(--emergency-red);
+            position: relative;
+        }
+
+        .alert-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: var(--emergency-red);
             border-radius: 50%;
+            animation: blink 1.5s infinite;
         }
-        .ai-assistant-text {
-            font-size: 18px;
-            color: #333;
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
-        .get-involved {
-            background-color: #ffcc00;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            width: 100%;
+
+        /* Profile Icon */
+        .profile-container {
+            position: relative;
         }
-        .buttons button {
-            padding: 12px 20px;
-            margin: 5px;
+
+        .profile-btn {
+            background: none;
             border: none;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
-        .volunteer-btn, .donate-btn {
-            background-color: #007bff; 
+
+        .profile-btn:hover {
+            background-color: var(--primary-blue-light);
+            color: var(--primary-blue);
+        }
+
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--background-white);
+            border-radius: var(--border-radius-sm);
+            box-shadow: 0 5px 20px var(--shadow-medium);
+            min-width: 200px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .dropdown-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
             color: white;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            width: 150px;
-        }
-        .volunteer-btn:hover, .donate-btn:hover {
-            background-color: #0056b3; 
-        }
-        .volunteer-btn:active, .donate-btn:active {
-            background-color: #003f7f;
-        }
-        .volunteer-btn, .donate-btn {
-            padding: 12px 20px;
-            margin: 10px 5px;
-        }
-        .location {
-            background-color: #f4f4f4;
-            padding: 20px;
-            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 600;
         }
-        .location img {
-            width: 500px;
-            height: 200px;
-            margin-right: 10px;
+
+        .dropdown-user-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .dropdown-user-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .dropdown-list {
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--background-light);
+            color: var(--primary-blue);
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--border-light);
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Menu Button (for navigation) */
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            padding: var(--spacing-xs);
+            display: none;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--background-white);
+            z-index: 1001;
+            padding: var(--spacing-xl) var(--spacing-md);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .mobile-location-alerts {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: var(--spacing-lg);
+            padding: 1rem;
+            background-color: var(--background-light);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .mobile-location {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+        }
+
+        .mobile-alert {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--emergency-red);
+            font-weight: 600;
+        }
+
+        .mobile-nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-link:hover, .mobile-nav-link.active {
+            color: var(--primary-blue);
+            background-color: var(--primary-blue-light);
+        }
+
+        .mobile-nav-link i {
+            margin-right: var(--spacing-sm);
+            width: 24px;
+            text-align: center;
+        }
+
+        .mobile-nav-footer {
+            margin-top: auto;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .mobile-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--background-light);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .mobile-profile-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .location-indicator, .alert-status {
+                display: none;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #52caec 100%);
+            color: white;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-lg);
+            opacity: 0.9;
+        }
+
+        /* ===== SOS BUTTON ===== */
+        .sos-section {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            background-color: var(--background-white);
+        }
+
+        .sos-button {
+            background-color: var(--emergency-red);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-xl);
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: var(--border-radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .sos-button:hover {
+            background-color: var(--emergency-red-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.4);
+        }
+
+        .sos-button:active {
+            transform: translateY(-1px);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(230, 57, 70, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); }
+        }
+
+        .sos-instruction {
+            margin-top: var(--spacing-sm);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ===== MAIN CONTENT GRID ===== */
+        .main-content {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        /* ===== EMERGENCY CONTACTS ===== */
+        .emergency-contacts {
+            background-color: var(--background-white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-title i {
+            font-size: 1.8rem;
+        }
+
+        .contacts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .contact-item {
+            background-color: var(--background-light);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-blue-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+        }
+
+        .contact-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--emergency-red);
+        }
+
+        .flag-container {
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .flag {
+            width: 100px;
+            border-radius: var(--border-radius-sm);
+            margin: 0 auto var(--spacing-sm);
+        }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background-color: var(--background-white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-medium);
+        }
+
+        .feature-image {
+            height: 160px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .feature-content {
+            padding: var(--spacing-lg);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-blue);
+        }
+
+        .feature-description {
+            color: var(--text-medium);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--primary-blue);
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+            gap: var(--spacing-sm);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .ai-assistant-card {
+            background-color: var(--background-white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: 0 5px 15px var(--shadow-light);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .ai-assistant-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ai-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #f0f7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+        }
+
+        .ai-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-blue);
+        }
+
+        .ai-description {
+            color: var(--text-medium);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .ai-button {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .ai-button:hover {
+            background-color: var(--primary-blue-dark);
+        }
+
+        .get-involved-card {
+            background-color: var(--background-white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: 0 5px 15px var(--shadow-light);
+            text-align: center;
+        }
+
+        .get-involved-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-blue);
+        }
+
+        .get-involved-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .involved-btn {
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .involved-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .volunteer-btn {
+            background-color: var(--success-green);
+            color: white;
+        }
+
+        .donate-btn {
+            background-color: var(--warning-orange);
+            color: white;
+        }
+
+        /* ===== RESPONSIVE DESIGN FOR CONTENT ===== */
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .get-involved-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-sm {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .mb-md {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mb-lg {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .mt-sm {
+            margin-top: var(--spacing-sm);
+        }
+
+        .mt-md {
+            margin-top: var(--spacing-md);
+        }
+
+        .mt-lg {
+            margin-top: var(--spacing-lg);
         }
     </style>
 </head>
 <body>
-    <div class="top-panel">
-
-        <a href="index.html">
-            <img style="border-radius: 20px;" src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Logo">
-        </a>
-        <h1>Safe Haven</h1>
-    </div>
-    <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
-    <button class="sos-button" onclick="sendSOS()">Emergency! SOS!</button>
-    <div class="container">
-        <div class="iframe-container">
-            <iframe srcdoc="
-                <style>
-                    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; text-align: center; }
-                    h2 { font-size: 18px; margin-bottom: 10px; }
-                    img { width: 150px; border-radius: 10px; margin-bottom: 10px; }
-                    ul { list-style: none; padding: 0; }
-                    li { font-size: 12px; margin-bottom: 8px; font-weight: bold; color: #333; }
-                    a { display: block; margin-top: 8px; color: #007bff; text-decoration: none; font-size: 14px; }
-                    a:hover { text-decoration: underline; }
-                </style>
-                <h2>Japan Emergency Contacts</h2>
-                <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/800px-Flag_of_Japan.svg.png' alt='Japan Flag'>
-                <ul>
-                    <li>🇯🇵 <strong>Police:</strong> 110</li>
-                    <li>🚑 <strong>Ambulance & Fire:</strong> 119</li>
-                    <li>📞 <strong>Disaster Emergency Message Dial:</strong> 171</li>
-                    <li>⚓ <strong>Coast Guard:</strong> 118</li>
-                    <li>🧠 <strong>Mental Health Helpline:</strong> 0570-064-556</li>
-                    <li>🏥 <strong>Disaster Relief (JDR):</strong> 03-5215-0693</li>
-                    <li>🛂 <strong>Foreign Residents Hotline:</strong> 0570-013-130</li>
-                    <li>🏛️ <strong>Japan Embassy:</strong> +81-3-3580-3311</li>
-                </ul>
-                <a href='https://www.japan.travel/en/' target='_blank'>🌐 Japan Travel Website</a>
-                <a href='https://www.japanembassy.org/' target='_blank'>🏛️ Japanese Embassy</a>
-            " width="100%" height="300px" frameborder="0" scrolling="yes"></iframe>
+    <!-- Header with Compact Navbar -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="SafeHaven Logo" class="logo">
+                    <div class="logo-text">SAFE<span>HAVEN</span></div>
+                </div>
+                
+                <!-- Right Side: Location, Alerts, Profile -->
+                <div class="navbar-right">
+                    <!-- Location Indicator -->
+                    <div class="location-indicator">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Delhi, IN</span>
+                    </div>
+                    
+                    <!-- Alert Status -->
+                    <div class="alert-status">
+                        <div class="alert-indicator"></div>
+                        <span>Alerts On</span>
+                    </div>
+                    
+                    <!-- Profile with Dropdown -->
+                    <div class="profile-container">
+                        <button class="profile-btn" id="profileBtn">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        
+                        <!-- Profile Dropdown -->
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <div class="dropdown-header">
+                                <div class="dropdown-avatar">JD</div>
+                                <div class="dropdown-user-info">
+                                    <h4>John Doe</h4>
+                                    <p>Verified User</p>
+                                </div>
+                            </div>
+                            
+                            <div class="dropdown-list">
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span>My Profile</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Notifications</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Safety Settings</span>
+                                </a>
+                                
+                                <div class="dropdown-divider"></div>
+                                
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                        <span class="sr-only">Menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="logo-container">
+                <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="SafeHaven Logo" class="logo">
+                <div class="logo-text">SAFE<span>HAVEN</span></div>
+            </div>
+            <button class="mobile-menu-btn" id="closeMobileMenuBtn">
+                <i class="fas fa-times"></i>
+                <span class="sr-only">Close menu</span>
+            </button>
         </div>
         
-        <div class="grid-container">
-            <div class="grid-item">
-                <a href="../2.AlertsRisks/AlertsRisks.html">
-                    <img src="https://i.pinimg.com/736x/b6/54/cc/b654cc705dc20add9ad6867d3776bb72.jpg" alt="Disaster Alerts">
-                </a>
+        <div class="mobile-location-alerts">
+            <div class="mobile-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Delhi, IN</span>
             </div>
-            <div class="grid-item">
-                <a href="../3.DisasterCoordination/DisasterCoordination.html">
-                    <img src="https://i.pinimg.com/736x/57/ca/93/57ca93f3d564cba443222c53b83d1791.jpg" alt="Disaster Coordination">
-                </a>
-            </div>
-            <div class="grid-item">
-                <a href="../4.EvacuationSafety/EvacuationSafety.html">
-                    <img src="https://i.pinimg.com/474x/a7/38/fc/a738fcde7c17ac8673f39634c46dacfa.jpg" alt="Evacuation Safety">
-                </a>
-            </div>
-            <div class="grid-item">
-                <a href="../5.Community/Community.html">
-                    <img src="https://i.pinimg.com/474x/21/fa/ca/21faca127887fac9576846e69fa0eb09.jpg" alt="Community">
-                </a>
-            </div>
-            <div class="grid-item">
-                <a href="../6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html">
-                    <img src="https://i.pinimg.com/474x/92/07/39/9207390a16f27561b5d105d0957ac4b9.jpg" alt="What's Happening?">
-                </a>
-            </div>
-            <div class="grid-item">
-                <a href="../7.GetEducated/GetEducated.html">
-                    <img src="https://i.pinimg.com/736x/81/67/12/8167129b1e32014d2a97d96a1f8990ec.jpg" alt="Education">
-                </a>
+            <div class="mobile-alert">
+                <div class="alert-indicator"></div>
+                <span>Alerts Active</span>
             </div>
         </div>
-        <div class="sidebar">
-            <a href="../8.AIAssistant/AIAssistant.html">
-                <div class="ai-assistant-container">
-                    <div class="ai-assistant">
-                        <img src="https://i.pinimg.com/474x/84/8a/66/848a6696ad98779868a826290b7b8dbd.jpg" alt="AI Assistant">
-                    </div>
-                    <div class="ai-assistant-text">Your AI Assistant</div>
-                </div>
-            </a>
-            <div class="get-involved">
-                <h2>GET INVOLVED!</h2>
-                <div class="buttons">
-                    <a href="../9.GetInvolved/Volunteer.html"><button class="volunteer-btn">Volunteer</button></a>
-                    <a href="../9.GetInvolved/Donate.html"><button class="donate-btn">Donate</button></a>
+        
+        <ul class="mobile-nav-list">
+            <li><a href="index.html" class="mobile-nav-link active">
+                <i class="fas fa-home"></i>
+                Home
+            </a></li>
+            <li><a href="../2.AlertsRisks/AlertsRisks.html" class="mobile-nav-link">
+                <i class="fas fa-bell"></i>
+                Alerts & Risks
+            </a></li>
+            <li><a href="../3.DisasterCoordination/DisasterCoordination.html" class="mobile-nav-link">
+                <i class="fas fa-sitemap"></i>
+                Disaster Coordination
+            </a></li>
+            <li><a href="../4.EvacuationSafety/EvacuationSafety.html" class="mobile-nav-link">
+                <i class="fas fa-person-walking-arrow-right"></i>
+                Evacuation Safety
+            </a></li>
+            <li><a href="../5.Community/Community.html" class="mobile-nav-link">
+                <i class="fas fa-users"></i>
+                Community
+            </a></li>
+            <li><a href="../6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html" class="mobile-nav-link">
+                <i class="fas fa-newspaper"></i>
+                Disaster Updates
+            </a></li>
+            <li><a href="../7.GetEducated/GetEducated.html" class="mobile-nav-link">
+                <i class="fas fa-graduation-cap"></i>
+                Get Educated
+            </a></li>
+            <li><a href="../8.AIAssistant/AIAssistant.html" class="mobile-nav-link">
+                <i class="fas fa-robot"></i>
+                AI Assistant
+            </a></li>
+            <li><a href="../9.GetInvolved/Volunteer.html" class="mobile-nav-link">
+                <i class="fas fa-hands-helping"></i>
+                Volunteer
+            </a></li>
+        </ul>
+        
+        <div class="mobile-nav-footer">
+            <div class="mobile-profile">
+                <div class="mobile-profile-avatar">JD</div>
+                <div>
+                    <h4 style="margin-bottom: 0.25rem;">John Doe</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Verified User</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="location">
-        <iframe src="../1.HomePage/Map.html" width="1200" height="500" frameborder="1"></iframe>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Report Hazard, Find Safety, Get Help</h1>
+                <p class="hero-tagline">Your trusted platform for disaster preparedness, emergency response, and community support in times of crisis.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOS Section -->
+    <section class="sos-section">
+        <div class="container">
+            <button class="sos-button" id="sosButton">
+                <i class="fas fa-exclamation-triangle"></i>
+                Emergency! SOS!
+            </button>
+            <p class="sos-instruction">Click 3 times to send emergency alert with your location</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Left Column: Features Grid -->
+                <div class="features-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-compass"></i>
+                        Quick Access
+                    </h2>
+                    
+                    <div class="features-grid">
+                        <!-- Feature 1: Alerts & Risks -->
+                        <div class="feature-card">
+                            <img src="https://i.pinimg.com/736x/b6/54/cc/b654cc705dc20add9ad6867d3776bb72.jpg" alt="Disaster Alerts" class="feature-image">
+                            <div class="feature-content">
+                                <h3 class="feature-title">Alerts & Risks</h3>
+                                <p class="feature-description">Real-time disaster alerts and risk assessments for your area.</p>
+                                <a href="../2.AlertsRisks/AlertsRisks.html" class="feature-link">
+                                    View Alerts
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 2: Disaster Coordination -->
+                        <div class="feature-card">
+                            <img src="https://i.pinimg.com/736x/57/ca/93/57ca93f3d564cba443222c53b83d1791.jpg" alt="Disaster Coordination" class="feature-image">
+                            <div class="feature-content">
+                                <h3 class="feature-title">Disaster Coordination</h3>
+                                <p class="feature-description">Coordination centers and emergency response plans.</p>
+                                <a href="../3.DisasterCoordination/DisasterCoordination.html" class="feature-link">
+                                    View Centers
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 3: Evacuation Safety -->
+                        <div class="feature-card">
+                            <img src="https://i.pinimg.com/474x/a7/38/fc/a738fcde7c17ac8673f39634c46dacfa.jpg" alt="Evacuation Safety" class="feature-image">
+                            <div class="feature-content">
+                                <h3 class="feature-title">Evacuation Safety</h3>
+                                <p class="feature-description">Safe evacuation routes and shelter locations.</p>
+                                <a href="../4.EvacuationSafety/EvacuationSafety.html" class="feature-link">
+                                    View Routes
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 4: Community -->
+                        <div class="feature-card">
+                            <img src="https://i.pinimg.com/474x/21/fa/ca/21faca127887fac9576846e69fa0eb09.jpg" alt="Community" class="feature-image">
+                            <div class="feature-content">
+                                <h3 class="feature-title">Community</h3>
+                                <p class="feature-description">Connect with others and access community resources.</p>
+                                <a href="../5.Community/Community.html" class="feature-link">
+                                    Connect Now
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 5: Disaster Updates -->
+                        <div class="feature-card">
+                            <img src="https://i.pinimg.com/474x/92/07/39/9207390a16f27561b5d105d0957ac4b9.jpg" alt="What's Happening?" class="feature-image">
+                            <div class="feature-content">
+                                <h3 class="feature-title">Disaster Updates</h3>
+                                <p class="feature-description">Latest news and updates on ongoing disaster situations.</p>
+                                <a href="../6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html" class="feature-link">
+                                    Check Updates
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 6: Education -->
+                        <div class="feature-card">
+                            <img src="https://i.pinimg.com/736x/81/67/12/8167129b1e32014d2a97d96a1f8990ec.jpg" alt="Education" class="feature-image">
+                            <div class="feature-content">
+                                <h3 class="feature-title">Get Educated</h3>
+                                <p class="feature-description">Learn disaster preparedness and survival skills.</p>
+                                <a href="../7.GetEducated/GetEducated.html" class="feature-link">
+                                    Learn More
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Sidebar -->
+                <div class="sidebar">
+                    <!-- AI Assistant Card -->
+                    <div class="ai-assistant-card">
+                        <div class="ai-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="ai-title">Your AI Assistant</h3>
+                        <p class="ai-description">Get personalized disaster preparedness advice and emergency guidance.</p>
+                        <a href="../8.AIAssistant/AIAssistant.html" class="ai-button">
+                            Chat Now
+                            <i class="fas fa-comment ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Get Involved Card -->
+                    <div class="get-involved-card">
+                        <h3 class="get-involved-title">GET INVOLVED!</h3>
+                        <p class="mb-md">Support disaster response efforts in your community.</p>
+                        <div class="get-involved-buttons">
+                            <a href="../9.GetInvolved/Volunteer.html" class="involved-btn volunteer-btn">
+                                <i class="fas fa-hands-helping"></i>
+                                Volunteer
+                            </a>
+                            <a href="../9.GetInvolved/Donate.html" class="involved-btn donate-btn">
+                                <i class="fas fa-donate"></i>
+                                Donate
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Emergency Contacts -->
+                    <div class="emergency-contacts">
+                        <h2 class="section-title">
+                            <i class="fas fa-phone-alt"></i>
+                            Japan Emergency Contacts
+                        </h2>
+                        
+                        <div class="flag-container">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/800px-Flag_of_Japan.svg.png" alt="Japan Flag" class="flag">
+                            <h3>Emergency Numbers</h3>
+                        </div>
+                        
+                        <div class="contacts-container">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-police-box"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Police</h4>
+                                    <p>110</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-ambulance"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Ambulance & Fire</h4>
+                                    <p>119</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Disaster Emergency Message</h4>
+                                    <p>171</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-ship"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Coast Guard</h4>
+                                    <p>118</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-md text-center">
+                            <a href="https://www.japan.travel/en/" target="_blank" class="feature-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Japan Travel Website
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
-        let clickCount = 0;
-        function sendSOS() {
-            clickCount++;
-            if (clickCount === 3) {
-                alert("SOS sent with your location and phone number successfully!");
-                clickCount = 0;
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Profile Dropdown Toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        profileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('active');
+        });
+        
+        // Close profile dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
             }
-        }
+        });
+        
+        // SOS Button Functionality
+        let clickCount = 0;
+        const sosButton = document.getElementById('sosButton');
+        
+        sosButton.addEventListener('click', function() {
+            clickCount++;
+            
+            // Visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Check for triple click
+            if (clickCount === 3) {
+                // Reset counter
+                clickCount = 0;
+                
+                // Show success message
+                alert("SOS alert sent successfully! Emergency services have been notified with your location.");
+                
+                // In a real application, this would send actual emergency data
+                console.log("SOS Alert Sent - Location: [User's Location], Phone: [User's Phone]");
+            }
+            
+            // Reset counter after 2 seconds if not triple clicked
+            setTimeout(() => {
+                if (clickCount > 0 && clickCount < 3) {
+                    clickCount = 0;
+                }
+            }, 2000);
+        });
+        
+        // Alert Status Toggle (for demo purposes)
+        const alertStatus = document.querySelector('.alert-status');
+        const mobileAlert = document.querySelector('.mobile-alert');
+        
+        setInterval(() => {
+            const isAlertOn = alertStatus.textContent.includes('Alerts On');
+            
+            if (isAlertOn) {
+                alertStatus.innerHTML = '<div class="alert-indicator" style="background-color: #4caf50;"></div><span>Alerts Normal</span>';
+                alertStatus.style.backgroundColor = '#e8f5e9';
+                alertStatus.style.color = '#4caf50';
+                
+                if (mobileAlert) {
+                    mobileAlert.innerHTML = '<div class="alert-indicator" style="background-color: #4caf50;"></div><span>Alerts Normal</span>';
+                    mobileAlert.style.color = '#4caf50';
+                }
+            } else {
+                alertStatus.innerHTML = '<div class="alert-indicator"></div><span>Alerts On</span>';
+                alertStatus.style.backgroundColor = '#ffeaea';
+                alertStatus.style.color = 'var(--emergency-red)';
+                
+                if (mobileAlert) {
+                    mobileAlert.innerHTML = '<div class="alert-indicator"></div><span>Alerts Active</span>';
+                    mobileAlert.style.color = 'var(--emergency-red)';
+                }
+            }
+        }, 10000);
     </script>
 </body>
 </html>
