@@ -1,110 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafeHaven | Home</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SafeHaven | Home</title>
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Geocoder -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
-  <!-- Geocoder -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #f5f7fb;
+  color: #1e293b;
+}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: #f5f7fb;
-      color: #1e293b;
-    }
+/* SECTION */
+.map-section {
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
 
-    /* SECTION */
-    .map-section {
-      padding: 4rem 1.5rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+/* HEADER */
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
 
-    /* HEADER */
-    .map-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
+.map-header h2 {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-    .map-header h2 {
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+/* ACTIONS */
+.map-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
-    .view-map {
-      font-size: 0.9rem;
-      color: #2563eb;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 500;
-    }
+.map-actions a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
 
-    /* CARD */
-    .map-card {
-      background: #ffffff;
-      border-radius: 18px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-      overflow: hidden;
-      position: relative;
-    }
+.home-btn {
+  background: #2563eb;
+  color: #fff;
+}
 
-    /* SEARCH BAR (your custom input removed to avoid duplicate) */
+.view-map {
+  background: #f1f5f9;
+  color: #2563eb;
+  border: 1px solid #e5e7eb;
+}
 
-    .fullscreen {
-      position: fixed !important;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 9999;
-      background: #fff;
-    }
+/* CARD */
+.map-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
 
-    .map-wrapper {
-      height: 420px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
-    }
+/* MAP */
+.map-wrapper {
+  height: 320px;
+  margin: 1rem;
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
 
-    .map-wrapper.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.map-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    #map {
-      height: 100%;
-      width: 100%;
-    }
+#map {
+  height: 100%;
+  width: 100%;
+}
 
-    .map-footer {
-      font-size: 0.8rem;
-      color: #6b7280;
-      text-align: center;
-      padding: 0.6rem 0;
-      background: #f9fafb;
-    }
+/* FOOTER */
+.map-footer {
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-align: center;
+  padding: 0.6rem 0;
+  background: #f9fafb;
+}
 
-    @media (max-width: 768px) {
-      .map-wrapper {
-        height: 280px;
-      }
-    }
-  </style>
+/* SEARCH BAR */
+.leaflet-control-geocoder {
+  width: 260px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  background: #fff;
+}
+
+.leaflet-control-geocoder-form {
+  position: relative;
+}
+
+.leaflet-control-geocoder-form input {
+  width: 100%;
+  height: 40px;
+  padding-left: 38px;
+  padding-right: 12px;
+  font-size: 0.9rem;
+  color: #111827;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: left !important;
+}
+
+.leaflet-control-geocoder-form input::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+/* Search icon */
+.leaflet-control-geocoder-form::before {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.leaflet-control-geocoder-icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .map-wrapper {
+    height: 260px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -113,76 +170,94 @@
 
   <div class="map-header">
     <h2>📍 Location Near You</h2>
-    <a class="view-map">View Full Map →</a>
+
+    <div class="map-actions">
+      <a href="/" class="home-btn">🏠 Home</a>
+
+     <a href="full-map.html" target="_blank" class="view-map">
+  View Full Map →
+</a>
+    </div>
   </div>
 
   <div class="map-card">
-
     <div class="map-wrapper" id="mapWrapper">
       <div id="map"></div>
     </div>
 
     <div class="map-footer">
-      Location data is approximate. For full map features, click above.
+      Location data is approximate. For full map features, click “View Full Map”.
     </div>
-
   </div>
 
 </section>
-
 <script>
-  let mapLoaded = false;
-  let map; // make map global
+let mapLoaded = false;
+let map;
+let homeMarker;
 
-  function initMap() {
-    if (mapLoaded) return;
+function initMap() {
+  if (mapLoaded) return;
 
-    const indiaGate = [28.6129, 77.2295];
+  const indiaGate = [28.6129, 77.2295];
 
-    map = L.map("map", {
-      zoomControl: true
-    }).setView(indiaGate, 14);
+  map = L.map("map").setView(indiaGate, 15);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors"
-    }).addTo(map);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
+  }).addTo(map);
 
-    L.marker(indiaGate)
-      .addTo(map)
-      .bindPopup("<b>India Gate</b><br>Rajpath Area, New Delhi, India")
-      .openPopup();
+  // Home marker
+  homeMarker = L.marker(indiaGate)
+    .addTo(map)
+    .bindPopup(
+      `<b>Home Location</b><br>India Gate, New Delhi, India`,
+      {
+        closeButton: true,
+        autoClose: false,
+        closeOnClick: false
+      }
+    )
+    .openPopup();
 
-    // Add geocoder (search box)
-    const geocoder = L.Control.geocoder({
-      defaultMarkGeocode: true,
-      placeholder: "Search location…"
-    })
-      .on("markgeocode", function(e) {
-        map.setView(e.geocode.center, 15);
-      });
-    geocoder.addTo(map);
+  // Search control
+  const geocoder = L.Control.geocoder({
+    collapsed: false,
+    placeholder: "Search location",
+    defaultMarkGeocode: true
+  }).addTo(map);
 
-    document.getElementById("mapWrapper").classList.add("visible");
-    mapLoaded = true;
+  geocoder.on("markgeocode", e => {
+    map.setView(e.geocode.center, 15);
+  });
+
+  document.getElementById("mapWrapper").classList.add("visible");
+  mapLoaded = true;
+}
+
+// Lazy load map
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    initMap();
+    observer.disconnect(); // prevent re-trigger
   }
+});
 
-  // Lazy-load map
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) initMap();
-    });
+observer.observe(document.getElementById("map-section"));
+
+// Auto-load when opened via hash
+if (window.location.hash === "#map-section") {
+  window.addEventListener("load", () => {
+    document
+      .getElementById("map-section")
+      .scrollIntoView({ behavior: "smooth" });
+    setTimeout(initMap, 300);
   });
-  observer.observe(document.getElementById("map-section"));
-
-  // Fullscreen toggle
-  document.querySelector(".view-map").addEventListener("click", () => {
-    const mapWrapper = document.getElementById("mapWrapper");
-    mapWrapper.classList.toggle("fullscreen");
-
-    // Resize map after changing size
-    if (map) map.invalidateSize();
-  });
+}
 </script>
+
+
+
 
 </body>
 </html>
