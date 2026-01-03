@@ -25,20 +25,95 @@
             height: 80px;
             margin-right: 10px;
         }
+
+        /* ===== SOS SECTION START ===== */
         .main-tagline {
-            margin: 20px 0 10px;
-            font-size: 20px;
+            margin: 12px 0 8px;
+            font-size: 19px;
+            font-weight: 600;
+            color: #333;
         }
+
+        /* SOS Button */
         .sos-button {
-            background-color: red;
-            color: white;
-            padding: 15px 30px;
+            background-color: #e60000;
+            color: #ffffff;
+            padding: 18px 42px;
+            font-size: 20px;
+            font-weight: 600;
             border: none;
-            font-size: 18px;
+            border-radius: 14px;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 20px rgba(230, 0, 0, 0.45);
+            transition: transform 0.15s ease,
+                 box-shadow 0.15s ease,
+                 background-color 0.15s ease;
+            animation: sos-pulse 2.5s infinite;
         }
-        
+
+        /* Hover (desktop) */
+        .sos-button:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+            box-shadow: 0 10px 26px rgba(230, 0, 0, 0.6);
+        }
+
+        /* Active / Pressed (mobile & click) */
+        .sos-button:active {
+            transform: scale(0.96);
+            box-shadow: 0 4px 12px rgba(230, 0, 0, 0.5);
+        }
+
+        /* Accessibility: visible focus outline for keyboard navigation */
+        .sos-button:focus-visible {
+            outline: 3px solid #ffd6d6;
+            outline-offset: 4px;
+        }
+
+        /* Subtle pulse animation */
+        @keyframes sos-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.35);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(230, 0, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(230, 0, 0, 0);
+            }
+        }
+
+        /* SOS Section Container */
+        .sos-section {
+            background: #fff3f3;
+            border: 2px solid #ff4d4d;
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin: 32px auto 20px;
+            max-width: 460px;
+            text-align: center;
+            box-shadow: 0 8px 22px rgba(255, 77, 77, 0.25);
+            outline: 3px solid rgba(255, 77, 77, 0.2);
+            outline-offset: -10px;
+        }
+
+        /* SOS Description */
+        .sos-description {
+            font-size: 16px;
+            font-weight: 550;
+            color: #444;
+            margin: 18px 0 10px;
+            line-height: 1.5;
+        }
+
+        /* Space between button and text */
+        .sos-section .sos-button {
+            margin-top: 8px;
+        }
+
+        /* ===== SOS SECTION END ===== */
+
         .container {
             display: flex;
             justify-content: center;
@@ -161,8 +236,19 @@
         </a>
         <h1>Safe Haven</h1>
     </div>
-    <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
-    <button class="sos-button" onclick="sendSOS()">Emergency! SOS!</button>
+    
+    <!-- ===== SOS SECTION START ===== -->
+
+    <section class="sos-section">
+        <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
+        <p class="sos-description">
+            Press the SOS button to immediately notify emergency services with your location.
+        </p>
+        <button class="sos-button" onclick="sendSOS()">🚨 EMERGENCY SOS</button>
+    </section>
+
+    <!-- ===== SOS SECTION END ===== --> 
+
     <div class="container">
         <div class="iframe-container">
             <iframe srcdoc="
