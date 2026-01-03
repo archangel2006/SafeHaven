@@ -1,71 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map with Home Button</title>
-    
-    <!-- Leaflet.js CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Leaflet.js JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Leaflet Control Geocoder (for search functionality) -->
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #map { height: 500px; width: 100%; margin-top: 10px; }
-        #homeButton {
-            margin-top: 10px;
-            padding: 8px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        #homeButton:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeHaven | Home</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Geocoder -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #f5f7fb;
+      color: #1e293b;
+    }
+
+    /* SECTION */
+    .map-section {
+      padding: 4rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* HEADER */
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .map-header h2 {
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .view-map {
+      font-size: 0.9rem;
+      color: #2563eb;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* CARD */
+    .map-card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* SEARCH BAR (your custom input removed to avoid duplicate) */
+
+    .fullscreen {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      background: #fff;
+    }
+
+    .map-wrapper {
+      height: 420px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .map-wrapper.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    .map-footer {
+      font-size: 0.8rem;
+      color: #6b7280;
+      text-align: center;
+      padding: 0.6rem 0;
+      background: #f9fafb;
+    }
+
+    @media (max-width: 768px) {
+      .map-wrapper {
+        height: 280px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h3>Location</h3>
-    <button id="homeButton">🏠 Home</button>
-    <div id="map"></div>
 
-    <script>
-        // Home location coordinates (Shibuya, Tokyo)
-        var homeCoords = [35.661777, 139.704051];
+<section class="map-section" id="map-section">
 
-        // Initialize the map centered on home location
-        var map = L.map('map').setView(homeCoords, 15); 
+  <div class="map-header">
+    <h2>📍 Location Near You</h2>
+    <a class="view-map">View Full Map →</a>
+  </div>
 
-        // Load OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+  <div class="map-card">
 
-        // Fixed home marker at Shibuya, Tokyo
-        var homeMarker = L.marker(homeCoords).addTo(map)
-            .bindPopup("<b>Home Location</b><br>1-1 Udagawacho, Shibuya City, Tokyo, Japan")
-            .openPopup();
+    <div class="map-wrapper" id="mapWrapper">
+      <div id="map"></div>
+    </div>
 
-        // Add a search control (map moves, home marker stays)
-        L.Control.geocoder({
-            defaultMarkGeocode: true
-        }).on('markgeocode', function(e) {
-            var latlng = e.geocode.center;
-            map.setView(latlng, 15); // Move map to searched location
-        }).addTo(map);
+    <div class="map-footer">
+      Location data is approximate. For full map features, click above.
+    </div>
 
-        // Home button resets map to original home location
-        document.getElementById("homeButton").addEventListener("click", function() {
-            map.setView(homeCoords, 15); // Reset map to home
-        });
-    </script>
+  </div>
+
+</section>
+
+<script>
+  let mapLoaded = false;
+  let map; // make map global
+
+  function initMap() {
+    if (mapLoaded) return;
+
+    const indiaGate = [28.6129, 77.2295];
+
+    map = L.map("map", {
+      zoomControl: true
+    }).setView(indiaGate, 14);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors"
+    }).addTo(map);
+
+    L.marker(indiaGate)
+      .addTo(map)
+      .bindPopup("<b>India Gate</b><br>Rajpath Area, New Delhi, India")
+      .openPopup();
+
+    // Add geocoder (search box)
+    const geocoder = L.Control.geocoder({
+      defaultMarkGeocode: true,
+      placeholder: "Search location…"
+    })
+      .on("markgeocode", function(e) {
+        map.setView(e.geocode.center, 15);
+      });
+    geocoder.addTo(map);
+
+    document.getElementById("mapWrapper").classList.add("visible");
+    mapLoaded = true;
+  }
+
+  // Lazy-load map
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) initMap();
+    });
+  });
+  observer.observe(document.getElementById("map-section"));
+
+  // Fullscreen toggle
+  document.querySelector(".view-map").addEventListener("click", () => {
+    const mapWrapper = document.getElementById("mapWrapper");
+    mapWrapper.classList.toggle("fullscreen");
+
+    // Resize map after changing size
+    if (map) map.invalidateSize();
+  });
+</script>
+
 </body>
 </html>
