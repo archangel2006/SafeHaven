@@ -1,147 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer - Safe Heaven</title>
+    <title>Volunteer - Safe Haven</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #28a745;
+            --primary-dark: #218838;
+            --secondary-color: #007bff;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
+        h2 {
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Roles Grid */
         .panel-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .panel {
-            width: 22%;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            border: 1px solid #e1e4e8;
+            cursor: pointer;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
 
         .panel img {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
-        form {
-            background: white;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        .panel h3 {
+            margin: 10px 0;
+            font-size: 1.25rem;
+            color: #2d3748;
         }
 
-        input, select, button {
+        .panel p {
+            color: #718096;
+            font-size: 0.95rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .form-intro {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #718096;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        input,
+        select {
             width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
         }
 
-        button {
-            background-color: #28a745;
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
             color: white;
-            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
         }
 
-        button:hover {
-            background-color: #218838;
+        button[type="submit"]:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* Graph Section */
         .graph-container {
-            margin-top: 40px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            margin: auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        /* Adjust the size of the canvas for a smaller chart */
-        canvas {
-            max-width: 80% !important;
-            height: 250px !important;
-            margin: 0 auto;
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .form-section {
+                padding: 25px;
+            }
+
+            .chart-wrapper {
+                height: 300px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Volunteer Roles</h2>
         <div class="panel-container">
-            <div class="panel" style="background-color:#c5e1f3;">
-                <img src="https://i.pinimg.com/474x/35/6d/e7/356de79f39c71a655e68e3b265108455.jpg" alt="Medical Assistance">
+            <div class="panel">
+                <img src="assets/medical.jpg" alt="Medical Assistance">
                 <h3>🚑 Medical Assistance</h3>
-                <p>Help in emergency first aid</p>
+                <p>Provide emergency first aid and healthcare support.</p>
             </div>
-            <div class="panel" style="background-color:#aecdf1;">
-                <img src="https://i.pinimg.com/736x/4e/00/4e/4e004eb7195a52bc508209611fa910ed.jpg" alt="Rescue Operations">
+            <div class="panel">
+                <img src="assets/rescue.jpg" alt="Rescue Operations">
                 <h3>🚜 Rescue Operations</h3>
-                <p>On-ground rescue missions</p>
+                <p>Participate in on-ground search and rescue missions.</p>
             </div>
-            <div class="panel" style="background-color:#c5e1f3;">
-                <img src="https://i.pinimg.com/474x/ed/0e/0d/ed0e0d54aae6ff49b203ec0d8518549e.jpg" alt="Supply Distribution">
+            <div class="panel">
+                <img src="assets/supply.jpg" alt="Supply Distribution">
                 <h3>📦 Supply Distribution</h3>
-                <p>Help distribute food, water & essentials</p>
+                <p>Ensure food, water, and essentials reach those in need.</p>
             </div>
-            <div class="panel" style="background-color:#aecdf1;">
-                <img src="https://i.pinimg.com/474x/7e/6c/74/7e6c746d981cebbe8d9501f56d5d81d6.jpg" alt="Awareness & Education">
+            <div class="panel">
+                <img src="assets/education.jpg" alt="Awareness & Education">
                 <h3>📢 Awareness & Education</h3>
-                <p>Teach disaster preparedness in communities</p>
+                <p>Educate communities on disaster preparedness and safety.</p>
             </div>
         </div>
 
         <h2>Volunteer Registration Form</h2>
-        <form id="volunteerForm" style="background-color:azure" >
-            <input type="text" placeholder="Name" id="name" required>
-            <input type="number" placeholder="Age" id="age" required>
-            <input type="text" placeholder="Location" id="location" required>
-            <input type="tel" placeholder="Contact Info" id="contact" required>
-            <select id="skill">
-                <option value="Medical">Medical</option>
-                <option value="Rescue">Rescue</option>
-                <option value="Logistics">Logistics</option>
-                <option value="Awareness & Education">Awareness & Education</option>
-            </select>
-            <select id="availability">
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Remote Help">Remote Help</option>
-            </select>
-            <button type="submit">Register</button>
-        </form>
+        <div class="form-section">
+            <p class="form-intro">Join our network of heroes. Fill out the form below to get started.</p>
+            <form id="volunteerForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" placeholder="e.g. John Doe" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" placeholder="e.g. 25" id="age" min="18" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Current Location</label>
+                    <input type="text" placeholder="e.g. New York, USA" id="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Information</label>
+                    <input type="tel" placeholder="e.g. +1 234 567 8900" id="contact" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="skill">Preferred Role</label>
+                    <select id="skill">
+                        <option value="Medical">Medical</option>
+                        <option value="Rescue">Rescue</option>
+                        <option value="Logistics">Logistics</option>
+                        <option value="Awareness & Education">Awareness & Education</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="availability">Availability</label>
+                    <select id="availability">
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Remote Help">Remote Help</option>
+                    </select>
+                </div>
+
+                <button type="submit">Register Now</button>
+            </form>
+        </div>
 
         <div class="graph-container">
             <h2>📊 Volunteer Impact</h2>
-            <canvas id="volunteerChart"></canvas>
+            <div class="chart-wrapper">
+                <canvas id="volunteerChart"></canvas>
+            </div>
         </div>
     </div>
 
     <script>
         // Handle form submission
-        document.getElementById("volunteerForm").addEventListener("submit", function(event) {
+        document.getElementById("volunteerForm").addEventListener("submit", function (event) {
             event.preventDefault();
             alert("Registered Successfully! You will be receiving our call in about 60 seconds.");
             document.getElementById("volunteerForm").reset();
@@ -152,7 +306,7 @@
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Medical Assistance', 'Rescue Operations', 'Supply Distribution', 'Awareness & Education'],
+                labels: [['Medical', 'Assistance'], ['Rescue', 'Operations'], ['Supply', 'Distribution'], ['Awareness', '& Education']],
                 datasets: [{
                     label: 'Lives Impacted',
                     data: [5000, 8000, 6000, 7000],
@@ -161,13 +315,27 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        bottom: 10
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true
+                    },
+                    x: {
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 0,
+                            minRotation: 0
+                        }
                     }
                 }
             }
         });
     </script>
 </body>
+
 </html>
