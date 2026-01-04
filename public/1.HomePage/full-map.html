@@ -44,15 +44,33 @@ body {
 .map-topbar h1 {
   font-size: 1.1rem;
   font-weight: 600;
+  margin: 0;
 }
 
-.map-topbar a {
+/* BUTTON GROUP */
+.map-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.map-topbar a,
+.map-topbar button {
   text-decoration: none;
   font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
+  padding: 0.45rem 0.85rem;
   border-radius: 8px;
-  background: #2563eb;
+  background: #446dc7;
   color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.map-topbar button {
+  background: #2563eb;
+}
+
+.map-topbar button:hover {
+  background: #4076ec;
 }
 
 /* MAP */
@@ -61,7 +79,7 @@ body {
   width: 100%;
 }
 
-/* 🔍 SEARCH BAR */
+/* SEARCH BAR */
 .leaflet-control-geocoder {
   width: 280px;
   border-radius: 10px;
@@ -70,41 +88,17 @@ body {
   background: #ffffff;
 }
 
-.leaflet-control-geocoder-form {
-  position: relative;
-}
-
 .leaflet-control-geocoder-form input {
   width: 100%;
   height: 42px;
-  padding-left: 42px;
+  padding-left: 12px;
   padding-right: 12px;
   font-size: 0.9rem;
-  color: #111827;
   border: none;
   outline: none;
   background: transparent;
-  text-align: left !important;
 }
 
-.leaflet-control-geocoder-form input::placeholder {
-  color: #6b7280;
-  opacity: 1;
-}
-
-/* SEARCH ICON */
-.leaflet-control-geocoder-form::before {
-  
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-/* Hide default icon */
 .leaflet-control-geocoder-icon {
   display: none;
 }
@@ -122,26 +116,43 @@ body {
 <!-- TOP BAR -->
 <div class="map-topbar">
   <h1>📍 Full Map View – New Delhi</h1>
-  <a href="../index.html">← Back to Home</a>
+
+  <div class="map-actions">
+     <!-- MAP HOME BUTTON -->
+    <button onclick="resetToHome()">🏠 Map Home</button>
+    <!-- BACK BUTTON (unchanged) -->
+    <a href="../index.html">← Back to Home</a>
+
+   
+  </div>
 </div>
 
 <!-- MAP -->
 <div id="map"></div>
 
 <script>
-const indiaGate = [28.6129, 77.2295];
+/* Home location: India Gate */
+const homeLocation = [28.6129, 77.2295];
 
-const map = L.map("map").setView(indiaGate, 12);
+/* Initialize map */
+const map = L.map("map").setView(homeLocation, 12);
 
+/* Tile layer */
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "© OpenStreetMap contributors"
 }).addTo(map);
 
 /* Default marker */
-L.marker(indiaGate)
+const homeMarker = L.marker(homeLocation)
   .addTo(map)
   .bindPopup("<b>India Gate</b><br>New Delhi, India")
   .openPopup();
+
+/* Reset map to home */
+function resetToHome() {
+  map.setView(homeLocation, 12);
+  homeMarker.openPopup();
+}
 
 /* Geocoder */
 const geocoder = L.Control.geocoder({
@@ -154,7 +165,7 @@ geocoder.on("markgeocode", e => {
   map.setView(e.geocode.center, 15);
 });
 
-/* Optional: click to drop marker */
+/* Click to drop marker */
 map.on("click", e => {
   L.marker(e.latlng)
     .addTo(map)
