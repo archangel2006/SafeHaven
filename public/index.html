@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safe Heaven</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -11,9 +18,11 @@
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
+
         body {
             text-align: center;
         }
+
         .top-panel {
             display: flex;
             align-items: left;
@@ -21,14 +30,17 @@
             background-color: #52caec;
             justify-content: left;
         }
+
         .top-panel img {
             height: 80px;
             margin-right: 10px;
         }
+
         .main-tagline {
             margin: 20px 0 10px;
             font-size: 20px;
         }
+
         .sos-button {
             background-color: red;
             color: white;
@@ -38,55 +50,63 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
-        
+
         .container {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 30px; 
+            gap: 30px;
             margin: 20px;
         }
+
         .iframe-container {
             width: 300px;
             height: 300px;
             background-color: #adeaf9;
         }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px; 
+            gap: 30px;
             justify-content: center;
             align-items: center;
         }
+
         .grid-item {
             background-color: #ddd;
             text-align: center;
             border-radius: 10px;
             width: 150px;
             height: 150px;
-            overflow: hidden; 
+            overflow: hidden;
         }
+
         .grid-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; 
+            object-fit: cover;
         }
+
         .grid-item .text {
-            margin-top: 10px; 
-            font-size: 16px; 
-            color: #333; 
-            font-weight: bold; 
-            display: block; 
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+            display: block;
         }
+
         .sidebar {
             width: 350px;
         }
+
         .ai-assistant-container {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
         }
+
         .ai-assistant {
             background-color: #ddd;
             border-radius: 50%;
@@ -95,17 +115,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px; 
+            margin-right: 15px;
         }
+
         .ai-assistant img {
             width: 60%;
             height: 60%;
             border-radius: 50%;
         }
+
         .ai-assistant-text {
             font-size: 18px;
             color: #333;
         }
+
         .get-involved {
             background-color: #ffcc00;
             padding: 20px;
@@ -113,6 +136,7 @@
             border-radius: 10px;
             width: 100%;
         }
+
         .buttons button {
             padding: 12px 20px;
             margin: 5px;
@@ -120,24 +144,33 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .volunteer-btn, .donate-btn {
-            background-color: #007bff; 
+
+        .volunteer-btn,
+        .donate-btn {
+            background-color: #007bff;
             color: white;
             border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
             width: 150px;
         }
-        .volunteer-btn:hover, .donate-btn:hover {
-            background-color: #0056b3; 
+
+        .volunteer-btn:hover,
+        .donate-btn:hover {
+            background-color: #0056b3;
         }
-        .volunteer-btn:active, .donate-btn:active {
+
+        .volunteer-btn:active,
+        .donate-btn:active {
             background-color: #003f7f;
         }
-        .volunteer-btn, .donate-btn {
+
+        .volunteer-btn,
+        .donate-btn {
             padding: 12px 20px;
             margin: 10px 5px;
         }
+
         .location {
             background-color: #f4f4f4;
             padding: 20px;
@@ -146,18 +179,100 @@
             align-items: center;
             justify-content: center;
         }
+
         .location img {
             width: 500px;
             height: 200px;
             margin-right: 10px;
         }
+
+        
+            .map-section {
+                padding-top: 6rem; 
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .map-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .map-actions button,
+        .map-actions a {
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .home-btn {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .view-map {
+            background: #f1f5f9;
+            color: #2563eb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .map-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        .map-wrapper {
+            height: 320px;
+            margin: 1rem;
+            border-radius: 14px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .map-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .map-footer {
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-align: center;
+            padding: 0.6rem 0;
+            background: #f9fafb;
+        }
+    
+
     </style>
 </head>
+
 <body>
     <div class="top-panel">
 
         <a href="index.html">
-            <img style="border-radius: 20px;" src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Logo">
+            <img style="border-radius: 20px;"
+                src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Logo">
         </a>
         <h1>Safe Haven</h1>
     </div>
@@ -191,21 +306,24 @@
                 <a href='https://www.japanembassy.org/' target='_blank'>🏛️ Japanese Embassy</a>
             " width="100%" height="300px" frameborder="0" scrolling="yes"></iframe>
         </div>
-        
+
         <div class="grid-container">
             <div class="grid-item">
                 <a href="../2.AlertsRisks/AlertsRisks.html">
-                    <img src="https://i.pinimg.com/736x/b6/54/cc/b654cc705dc20add9ad6867d3776bb72.jpg" alt="Disaster Alerts">
+                    <img src="https://i.pinimg.com/736x/b6/54/cc/b654cc705dc20add9ad6867d3776bb72.jpg"
+                        alt="Disaster Alerts">
                 </a>
             </div>
             <div class="grid-item">
                 <a href="../3.DisasterCoordination/DisasterCoordination.html">
-                    <img src="https://i.pinimg.com/736x/57/ca/93/57ca93f3d564cba443222c53b83d1791.jpg" alt="Disaster Coordination">
+                    <img src="https://i.pinimg.com/736x/57/ca/93/57ca93f3d564cba443222c53b83d1791.jpg"
+                        alt="Disaster Coordination">
                 </a>
             </div>
             <div class="grid-item">
                 <a href="../4.EvacuationSafety/EvacuationSafety.html">
-                    <img src="https://i.pinimg.com/474x/a7/38/fc/a738fcde7c17ac8673f39634c46dacfa.jpg" alt="Evacuation Safety">
+                    <img src="https://i.pinimg.com/474x/a7/38/fc/a738fcde7c17ac8673f39634c46dacfa.jpg"
+                        alt="Evacuation Safety">
                 </a>
             </div>
             <div class="grid-item">
@@ -215,7 +333,8 @@
             </div>
             <div class="grid-item">
                 <a href="../6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html">
-                    <img src="https://i.pinimg.com/474x/92/07/39/9207390a16f27561b5d105d0957ac4b9.jpg" alt="What's Happening?">
+                    <img src="https://i.pinimg.com/474x/92/07/39/9207390a16f27561b5d105d0957ac4b9.jpg"
+                        alt="What's Happening?">
                 </a>
             </div>
             <div class="grid-item">
@@ -228,7 +347,8 @@
             <a href="../8.AIAssistant/AIAssistant.html">
                 <div class="ai-assistant-container">
                     <div class="ai-assistant">
-                        <img src="https://i.pinimg.com/474x/84/8a/66/848a6696ad98779868a826290b7b8dbd.jpg" alt="AI Assistant">
+                        <img src="https://i.pinimg.com/474x/84/8a/66/848a6696ad98779868a826290b7b8dbd.jpg"
+                            alt="AI Assistant">
                     </div>
                     <div class="ai-assistant-text">Your AI Assistant</div>
                 </div>
@@ -242,8 +362,92 @@
             </div>
         </div>
     </div>
-    <div class="location">
-        <iframe src="./1.HomePage/Map.html" width="1200" height="500" frameborder="1"></iframe>
+    <section class="map-section" id="map-section">
+
+        <div class="map-header">
+            <h2>📍 Location Near You</h2>
+
+            <div class="map-actions">
+                <!-- MAP HOME BUTTON -->
+                <button id="homeButton" class="home-btn">🏠 Home</button>
+
+                <!-- FULL MAP PAGE -->
+                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
+                    View Full Map →
+                </a>
+            </div>
+        </div>
+
+        <div class="map-card">
+            <div class="map-wrapper" id="mapWrapper">
+                <div id="map"></div>
+            </div>
+
+            <div class="map-footer">
+                Location data is approximate. For full map features, click “View Full Map”.
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        let mapLoaded = false;
+        let map;
+        let homeMarker;
+
+        // Home location: India Gate, New Delhi
+        const homeCoords = [28.6129, 77.2295];
+        const homeZoom = 15;
+
+        function initMap() {
+            if (mapLoaded) return;
+
+            map = L.map("map").setView(homeCoords, homeZoom);
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "© OpenStreetMap contributors"
+            }).addTo(map);
+
+            // Fixed Home Marker
+            homeMarker = L.marker(homeCoords)
+                .addTo(map)
+                .bindPopup(
+                    "<b>Home Location</b><br>India Gate, New Delhi, India",
+                    { autoClose: false, closeOnClick: false }
+                )
+                .openPopup();
+
+            // Search (moves map only)
+            L.Control.geocoder({
+                collapsed: false,
+                placeholder: "Search location",
+                defaultMarkGeocode: true
+            })
+                .on("markgeocode", e => {
+                    map.setView(e.geocode.center, homeZoom);
+                })
+                .addTo(map);
+
+            // Home button = reset map view
+            document.getElementById("homeButton").addEventListener("click", () => {
+                map.setView(homeCoords, homeZoom);
+                homeMarker.openPopup();
+            });
+
+            document.getElementById("mapWrapper").classList.add("visible");
+            mapLoaded = true;
+        }
+
+        // Lazy load when section visible
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                initMap();
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.getElementById("map-section"));
+    </script>
 
 
     <script>
@@ -257,4 +461,5 @@
         }
     </script>
 </body>
+
 </html>
