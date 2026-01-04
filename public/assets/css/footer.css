@@ -1,0 +1,112 @@
+/* SafeHaven Footer Styles */
+.site-footer {
+    background-color: #1e3c72;
+    color: white;
+    padding: 20px 50px;
+    font-family: 'Poppins', Arial, sans-serif;
+    text-align: left;
+    margin-top: 30px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 10px;
+}
+
+.brand-section {
+    flex: 2;
+    min-width: 300px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-logo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: white;
+    padding: 2px;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.brand-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #adeaf9;
+    max-width: 400px;
+}
+
+.footer-section h3 {
+    color: #52caec;
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #e0f7fa;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #52caec;
+    padding-left: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .footer-container {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 30px 20px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .brand-section {
+        min-width: 100%;
+    }
+}
