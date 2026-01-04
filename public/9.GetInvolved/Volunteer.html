@@ -134,7 +134,8 @@
         }
 
         input,
-        select {
+        select,
+        textarea {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e2e8f0;
@@ -145,7 +146,8 @@
         }
 
         input:focus,
-        select:focus {
+        select:focus,
+        textarea:focus {
             outline: none;
             border-color: var(--primary-color);
             background-color: #fff;
@@ -263,6 +265,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" placeholder="e.g. john@example.com" id="email" required>
+                </div>
+
+                <div class="form-group">
                     <label for="skill">Preferred Role</label>
                     <select id="skill">
                         <option value="Medical">Medical</option>
@@ -279,6 +286,11 @@
                         <option value="Part-time">Part-time</option>
                         <option value="Remote Help">Remote Help</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Skills & Experience</label>
+                    <textarea id="experience" rows="4" placeholder="Briefly describe your relevant skills or experience..."></textarea>
                 </div>
 
                 <button type="submit">Register Now</button>
