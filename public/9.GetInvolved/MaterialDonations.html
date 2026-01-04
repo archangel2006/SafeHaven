@@ -12,6 +12,28 @@
             background-color: #f4f4f4;
             text-align: center;
         }
+        .hero{
+            background: linear-gradient(135deg,#1d5cff,#00b4d8);
+            color: white;
+            padding: 60px 20px; 
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label{
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
         .donation-form {
             background: white;
             padding: 20px;
@@ -22,12 +44,16 @@
             text-align: left;
         }
         input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
+           width: 100%;
+            padding: 12px;
+            margin-top: 12px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 16px;
+        }
+        input:focus,select:focus{
+            outline: 2px solid #28a745;
+            border-color: #28a745;
         }
         .submit-btn {
             width: 100%;
@@ -48,18 +74,44 @@
         .submit-btn.active:hover {
             background-color: #218838;
         }
+        .donation-image img{
+            width: 100%;
+            max-width:500px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 600px) {
+            .donation-form {
+            padding: 15px;
+        }
+
+        body {
+            padding: 10px;
+        }
+        }
+
     </style>
 </head>
 <body>
-
-<h2>Material Donation Form</h2>
+<div class="hero">
+    <h1>Material Donation</h1>
+    <p>Your contribution can save lives. Donate essential materials to those in need.</p>
+</div>
+<h2>Material Donation Form</h2>    
 <div class="donation-form">
+    <label for="name">Full Name</label>
     <input type="text" id="name" placeholder="Name" required oninput="validateForm()">
+    <label for="phone">Phone Number</label>
     <input type="tel" id="phone" placeholder="Phone Number" required oninput="validateForm()">
+    <label for="email">Email Address</label>
     <input type="email" id="email" placeholder="Email" required oninput="validateForm()">
+    <label for="address">Home Address</label>
     <input type="text" id="address" placeholder="Home Address" required oninput="validateForm()">
+    <label for="police">Nearest Police Station</label>
     <input type="text" id="police" placeholder="Nearest Police Station" required oninput="validateForm()">
-
+    <label for="donationType">Type of Donation</label>
     <select id="donationType" required onchange="validateForm()">
         <option value="" disabled selected>Select Donation Type</option>
         <option>Food</option>
@@ -68,6 +120,9 @@
     </select>
 
     <button class="submit-btn" id="submitBtn" disabled onclick="showMessage()">Submit</button>
+    <div class="donation-image">
+        <img src="../../assets/9.GetInvolved/Material Donation.png" alt="Material Donation">
+    </div>
 </div>
 
 <script>
