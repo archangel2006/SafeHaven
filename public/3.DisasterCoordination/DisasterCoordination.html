@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,10 +16,16 @@
       --bg-color: #f6f9fc;
       --card-bg: #ffffff;
       --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
-      --hero-overlay: rgba(0,0,0,0.55);
+      --hero-overlay: rgba(0, 0, 0, 0.55);
     }
+
     /* Global Reset & Styles */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: var(--bg-color);
@@ -26,6 +33,7 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
+
     header {
       background: var(--header-bg);
       color: #fff;
@@ -33,8 +41,9 @@
       text-align: center;
       font-size: 2.8rem;
       font-weight: bold;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     }
+
     /* Hero Section */
     .hero {
       position: relative;
@@ -46,6 +55,7 @@
       text-align: center;
       overflow: hidden;
     }
+
     .hero::before {
       content: "";
       position: absolute;
@@ -53,6 +63,7 @@
       background: var(--hero-overlay);
       animation: fadeIn 2s ease;
     }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -60,21 +71,41 @@
       animation: slideIn 1.5s ease-out;
       padding: 0 1rem;
     }
+
     .hero h1 {
       font-size: 3.5rem;
       margin-bottom: 1rem;
       letter-spacing: 1px;
     }
+
     .hero p {
       font-size: 1.3rem;
       max-width: 600px;
       margin: 0 auto;
     }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     /* Cards Container */
     .cards-container {
       display: grid;
@@ -84,27 +115,32 @@
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .card {
       background: var(--card-bg);
       border-radius: 15px;
       padding: 1.8rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
       text-align: center;
     }
+
     .card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     }
+
     .card h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
       color: var(--primary-color);
     }
+
     .card p {
       font-size: 1rem;
       margin-bottom: 1.5rem;
     }
+
     .card button {
       padding: 0.8rem 1.5rem;
       background: var(--secondary-color);
@@ -115,10 +151,12 @@
       cursor: pointer;
       transition: background 0.4s ease, transform 0.4s ease;
     }
+
     .card button:hover {
       background: var(--accent-color);
       transform: scale(1.05);
     }
+
     footer {
       background: var(--primary-color);
       color: #fff;
@@ -126,15 +164,22 @@
       padding: 1rem;
       font-size: 0.9rem;
     }
+
     @media (max-width: 768px) {
-      .hero h1 { font-size: 2.8rem; }
-      .cards-container { grid-template-columns: 1fr; }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>Disaster Coordination Platform</header>
-  
+
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -142,7 +187,7 @@
       <p>Your unified platform for managing every phase of disaster response.</p>
     </div>
   </section>
-  
+
   <!-- Feature Cards arranged in two columns -->
   <section class="cards-container">
     <!-- Emergency Call & Data Processing Card -->
@@ -151,21 +196,21 @@
       <p>Initiate immediate alerts and report incidents in real time.</p>
       <button onclick="window.open('sos.html', '_blank')">Activate SOS</button>
     </div>
-    
+
     <!-- Emergency Coordination System Card -->
     <div class="card">
       <h2>Emergency Coordination System</h2>
       <p>Manage resources and communication among first responders efficiently.</p>
       <button onclick="window.open('coordination.html', '_blank')">Access System</button>
     </div>
-    
+
     <!-- Personalized Coordination Hub Card -->
     <div class="card">
       <h2>Personalized Coordination Hub</h2>
       <p>Connect with government, NGOs, and private partners seamlessly.</p>
       <button onclick="window.open('hub.html', '_blank')">Connect Now</button>
     </div>
-    
+
     <!-- Two-Way Communication Card -->
     <div class="card">
       <h2>Two-Way Communication</h2>
@@ -173,9 +218,9 @@
       <button onclick="window.open('rescue.html', '_blank')">Send Signal</button>
     </div>
   </section>
+
   
-  <footer>
-    © 2025 Disaster Coordination Platform. All rights reserved.
-  </footer>
+    <script src="../assets/js/footer.js"></script>
 </body>
+
 </html>
