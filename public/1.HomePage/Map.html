@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map with Home Button</title>
-    
+    <title>Interactive Map</title>
+
     <!-- Leaflet.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
+
     <!-- Leaflet.js JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Leaflet Control Geocoder (for search functionality) -->
+
+    <!-- Leaflet Control Geocoder -->
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #map { height: 500px; width: 100%; margin-top: 10px; }
-        #homeButton {
-            margin-top: 10px;
-            padding: 8px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
         }
-        #homeButton:hover {
-            background-color: #0056b3;
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Style the search control to look more like the mockup */
+        .leaflet-control-geocoder {
+            border-radius: 8px !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
         }
     </style>
 </head>
+
 <body>
-    <h3>Location</h3>
-    <button id="homeButton">🏠 Home</button>
     <div id="map"></div>
 
     <script>
-        // Home location coordinates (Shibuya, Tokyo)
-        var homeCoords = [35.661777, 139.704051];
+        // India Gate, New Delhi
+        var homeCoords = [28.6129, 77.2295];
 
-        // Initialize the map centered on home location
-        var map = L.map('map').setView(homeCoords, 15); 
+        var map = L.map('map', {
+            zoomControl: true
+        }).setView(homeCoords, 15);
 
-        // Load OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+            attribution: '&copy; Leaflet | &copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Fixed home marker at Shibuya, Tokyo
         var homeMarker = L.marker(homeCoords).addTo(map)
-            .bindPopup("<b>Home Location</b><br>1-1 Udagawacho, Shibuya City, Tokyo, Japan")
+            .bindPopup("<b>Home Location</b><br>India Gate, New Delhi, India")
             .openPopup();
 
-        // Add a search control (map moves, home marker stays)
         L.Control.geocoder({
-            defaultMarkGeocode: true
-        }).on('markgeocode', function(e) {
+            defaultMarkGeocode: true,
+            placeholder: "Search location...",
+            collapsed: false
+        }).on('markgeocode', function (e) {
             var latlng = e.geocode.center;
-            map.setView(latlng, 15); // Move map to searched location
+            map.setView(latlng, 15);
         }).addTo(map);
 
-        // Home button resets map to original home location
-        document.getElementById("homeButton").addEventListener("click", function() {
-            map.setView(homeCoords, 15); // Reset map to home
-        });
+        // Expose reset function for parent page
+        window.resetToHome = function () {
+            map.setView(homeCoords, 15);
+            homeMarker.openPopup();
+        };
     </script>
-    <script src="../assets/js/footer.js"></script>
 </body>
+
 </html>
