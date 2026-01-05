@@ -10,6 +10,15 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-wrapper {
+            flex: 1;
             padding: 20px;
         }
 
@@ -84,88 +93,92 @@
 </head>
 
 <body>
-    <div class="container">
-        <h2>Support Disaster Relief Efforts</h2>
-        <p>Select the type of donation you'd like to make:</p>
+    <div class="main-wrapper">
+        <div class="container">
+            <h2>Support Disaster Relief Efforts</h2>
+            <p>Select the type of donation you'd like to make:</p>
 
-        <!-- Donation Options Panel -->
-        <div class="panel">
-            <button onclick="window.location.href='MonetaryDonations.html'">💳 Monetary Donations</button>
-            <button onclick="window.location.href='MaterialDonations.html'">🎒 Material Donations</button>
-        </div>
-
-        <!-- Real-Time Impact Tracker -->
-        <div class="tracker">
-            <h3>Real-Time Impact Tracker</h3>
-
-            <!-- Pie Chart -->
-            <div class="chart-container">
-                <canvas id="donationChart"></canvas>
+            <!-- Donation Options Panel -->
+            <div class="panel">
+                <button onclick="window.location.href='MonetaryDonations.html'">💳 Monetary Donations</button>
+                <button onclick="window.location.href='MaterialDonations.html'">🎒 Material Donations</button>
             </div>
 
-            <h4>📝 Stories & Testimonials</h4>
-            <ul type="*">
-                <li>"Thanks to the donations, we were able to rebuild our house." – Affected Family in India</li>
-                <li>"The food aid arrived just in time for my family." – Flood Victim in Nepal</li>
-                <li>"Your generous donations helped save lives during the earthquake." – Rescue Team in Turkey</li>
-                <li>"I lost everything in the fire, but the community's support has helped me start over." – LA Wildfire
-                    Survivor</li>
-            </ul>
+            <!-- Real-Time Impact Tracker -->
+            <div class="tracker">
+                <h3>Real-Time Impact Tracker</h3>
+
+                <!-- Pie Chart -->
+                <div class="chart-container">
+                    <canvas id="donationChart"></canvas>
+                </div>
+
+                <h4>📝 Stories & Testimonials</h4>
+                <ul type="*">
+                    <li>"Thanks to the donations, we were able to rebuild our house." – Affected Family in India</li>
+                    <li>"The food aid arrived just in time for my family." – Flood Victim in Nepal</li>
+                    <li>"Your generous donations helped save lives during the earthquake." – Rescue Team in Turkey</li>
+                    <li>"I lost everything in the fire, but the community's support has helped me start over." – LA
+                        Wildfire
+                        Survivor</li>
+                </ul>
+            </div>
+
+            <!-- NGO Partnership Section -->
+            <div class="ngo-section">
+                <h3>Our NGO & Government Partners</h3>
+                <p>We collaborate with trusted NGOs and government programs to make sure your donations reach the right
+                    people.</p>
+                <ul class="ngo-list">
+                    <li><a href="https://www.ifrc.org/" target="_blank">International Federation of Red Cross and Red
+                            Crescent Societies (IFRC)</a></li>
+                    <li><a href="https://www.oxfam.org/" target="_blank">Oxfam International</a></li>
+                    <li><a href="https://www.savethechildren.org/" target="_blank">Save the Children</a></li>
+                    <li><a href="https://www.worldvision.org/" target="_blank">World Vision International</a></li>
+                    <li><a href="https://www.doctorswithoutborders.org/" target="_blank">Doctors Without Borders
+                            (MSF)</a>
+                    </li>
+                    <li><a href="https://www.unicef.org/" target="_blank">UNICEF</a></li>
+                    <li><a href="https://www.globalgiving.org/" target="_blank">GlobalGiving</a></li>
+                </ul>
+            </div>
         </div>
 
-        <!-- NGO Partnership Section -->
-        <div class="ngo-section">
-            <h3>Our NGO & Government Partners</h3>
-            <p>We collaborate with trusted NGOs and government programs to make sure your donations reach the right
-                people.</p>
-            <ul class="ngo-list">
-                <li><a href="https://www.ifrc.org/" target="_blank">International Federation of Red Cross and Red
-                        Crescent Societies (IFRC)</a></li>
-                <li><a href="https://www.oxfam.org/" target="_blank">Oxfam International</a></li>
-                <li><a href="https://www.savethechildren.org/" target="_blank">Save the Children</a></li>
-                <li><a href="https://www.worldvision.org/" target="_blank">World Vision International</a></li>
-                <li><a href="https://www.doctorswithoutborders.org/" target="_blank">Doctors Without Borders (MSF)</a>
-                </li>
-                <li><a href="https://www.unicef.org/" target="_blank">UNICEF</a></li>
-                <li><a href="https://www.globalgiving.org/" target="_blank">GlobalGiving</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Script for Pie Chart -->
-    <script>
-        var ctx = document.getElementById('donationChart').getContext('2d');
-        var donationChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid'],
-                datasets: [{
-                    label: 'Donation Distribution',
-                    data: [10000000, 5000000, 3000000],  // Example data
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (tooltipItem) {
-                                return tooltipItem.label + ': ₹ ' + tooltipItem.raw.toLocaleString();
+        <!-- Script for Pie Chart -->
+        <script>
+            var ctx = document.getElementById('donationChart').getContext('2d');
+            var donationChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid'],
+                    datasets: [{
+                        label: 'Donation Distribution',
+                        data: [10000000, 5000000, 3000000],  // Example data
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return tooltipItem.label + ': ₹ ' + tooltipItem.raw.toLocaleString();
+                                }
                             }
                         }
-                    }
-                },
-                aspectRatio: 1,  // Ensure the chart has a square aspect ratio
-                height: 150  // Set chart size
-            }
-        });
-    </script>
-
+                    },
+                    aspectRatio: 1,  // Ensure the chart has a square aspect ratio
+                    height: 150  // Set chart size
+                }
+            });
+        </script>
+    </div>
+    <script src="../assets/js/footer.js"></script>
 </body>
 
 </html>
