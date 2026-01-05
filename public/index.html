@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safe Heaven</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -165,17 +171,10 @@
             margin: 10px 5px;
         }
 
-        .map-section-wrapper {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            text-align: left;
-        }
-
-        .map-header {
+        .location {
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin-top: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -183,70 +182,90 @@
             padding: 0 5px;
         }
 
-        .map-title {
-            font-size: 26px;
-            font-weight: 800;
-            color: #1a1a1a;
+        .location img {
+            width: 500px;
+            height: 200px;
+            margin-right: 10px;
+        }
+
+        
+            .map-section {
+                padding-top: 6rem; 
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .map-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 1.2rem;
         }
 
         .map-actions {
             display: flex;
-            gap: 15px;
+            gap: 1rem;
         }
 
-        .map-btn {
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
+        .map-actions button,
+        .map-actions a {
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
             border: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .home-btn {
-            background: #3b82f6;
-            color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .home-btn:hover {
             background: #2563eb;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+            color: #fff;
         }
 
-        .full-map-btn {
-            background: #eef2ff;
-            color: #4f46e5;
-        }
-
-        .full-map-btn:hover {
-            background: #e0e7ff;
-            transform: translateY(-1px);
-        }
-
-        .map-container-new {
-            border-radius: 15px;
-            overflow: hidden;
+        .view-map {
+            background: #f1f5f9;
+            color: #2563eb;
             border: 1px solid #e5e7eb;
-            background: #f8fafc;
         }
 
-        .map-caption {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #64748b;
-            text-align: center;
-            font-weight: 500;
+        .map-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
         }
+
+        .map-wrapper {
+            height: 320px;
+            margin: 1rem;
+            border-radius: 14px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .map-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .map-footer {
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-align: center;
+            padding: 0.6rem 0;
+            background: #f9fafb;
+        }
+    
+
     </style>
 </head>
 
@@ -292,19 +311,19 @@
 
         <div class="grid-container">
             <div class="grid-item">
-                <a href="2.AlertsRisks/AlertsRisks.html">
+                <a href="../2.AlertsRisks/AlertsRisks.html">
                     <img src="https://i.pinimg.com/736x/b6/54/cc/b654cc705dc20add9ad6867d3776bb72.jpg"
                         alt="Disaster Alerts">
                 </a>
             </div>
             <div class="grid-item">
-                <a href="3.DisasterCoordination/DisasterCoordination.html">
+                <a href="../3.DisasterCoordination/DisasterCoordination.html">
                     <img src="https://i.pinimg.com/736x/57/ca/93/57ca93f3d564cba443222c53b83d1791.jpg"
                         alt="Disaster Coordination">
                 </a>
             </div>
             <div class="grid-item">
-                <a href="4.EvacuationSafety/EvacuationSafety.html">
+                <a href="../4.EvacuationSafety/EvacuationSafety.html">
                     <img src="https://i.pinimg.com/474x/a7/38/fc/a738fcde7c17ac8673f39634c46dacfa.jpg"
                         alt="Evacuation Safety">
                 </a>
@@ -315,7 +334,7 @@
                 </a>
             </div>
             <div class="grid-item">
-                <a href="6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html">
+                <a href="../6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html">
                     <img src="https://i.pinimg.com/474x/92/07/39/9207390a16f27561b5d105d0957ac4b9.jpg"
                         alt="What's Happening?">
                 </a>
@@ -345,18 +364,92 @@
             </div>
         </div>
     </div>
-    <div class="map-section-wrapper">
+    <section class="map-section" id="map-section">
+
         <div class="map-header">
-            <h2 class="map-title">📍 Location Near You</h2>
+            <h2>📍 Location Near You</h2>
+
             <div class="map-actions">
-                <a href="1.HomePage/Map.html" target="_blank" class="map-btn full-map-btn">View Full Map &rarr;</a>
+                <!-- MAP HOME BUTTON -->
+                <button id="homeButton" class="home-btn">🏠 Home</button>
+
+                <!-- FULL MAP PAGE -->
+                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
+                    View Full Map →
+                </a>
             </div>
         </div>
-        <div class="map-container-new">
-            <iframe id="mapIframe" src="1.HomePage/Map.html?v=2" width="100%" height="450" frameborder="0"></iframe>
+
+        <div class="map-card">
+            <div class="map-wrapper" id="mapWrapper">
+                <div id="map"></div>
+            </div>
+
+            <div class="map-footer">
+                Location data is approximate. For full map features, click “View Full Map”.
+            </div>
         </div>
-        <p class="map-caption">Location data is approximate. For full map features, click "View Full Map".</p>
-    </div>
+
+    </section>
+
+    <script>
+        let mapLoaded = false;
+        let map;
+        let homeMarker;
+
+        // Home location: India Gate, New Delhi
+        const homeCoords = [28.6129, 77.2295];
+        const homeZoom = 15;
+
+        function initMap() {
+            if (mapLoaded) return;
+
+            map = L.map("map").setView(homeCoords, homeZoom);
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "© OpenStreetMap contributors"
+            }).addTo(map);
+
+            // Fixed Home Marker
+            homeMarker = L.marker(homeCoords)
+                .addTo(map)
+                .bindPopup(
+                    "<b>Home Location</b><br>India Gate, New Delhi, India",
+                    { autoClose: false, closeOnClick: false }
+                )
+                .openPopup();
+
+            // Search (moves map only)
+            L.Control.geocoder({
+                collapsed: false,
+                placeholder: "Search location",
+                defaultMarkGeocode: true
+            })
+                .on("markgeocode", e => {
+                    map.setView(e.geocode.center, homeZoom);
+                })
+                .addTo(map);
+
+            // Home button = reset map view
+            document.getElementById("homeButton").addEventListener("click", () => {
+                map.setView(homeCoords, homeZoom);
+                homeMarker.openPopup();
+            });
+
+            document.getElementById("mapWrapper").classList.add("visible");
+            mapLoaded = true;
+        }
+
+        // Lazy load when section visible
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                initMap();
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.getElementById("map-section"));
+    </script>
 
 
     <script>

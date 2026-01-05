@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SafeHaven | Full Map View</title>
+
+<!-- Leaflet -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Geocoder -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+/>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #f5f7fb;
+  color: #1e293b;
+}
+
+/* HEADER */
+.map-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.2rem;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.map-topbar h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* BUTTON GROUP */
+.map-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.map-topbar a,
+.map-topbar button {
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  background: #446dc7;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.map-topbar button {
+  background: #2563eb;
+}
+
+.map-topbar button:hover {
+  background: #4076ec;
+}
+
+/* MAP */
+#map {
+  height: calc(100vh - 58px);
+  width: 100%;
+}
+
+/* SEARCH BAR */
+.leaflet-control-geocoder {
+  width: 280px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  background: #ffffff;
+}
+
+.leaflet-control-geocoder-form input {
+  width: 100%;
+  height: 42px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.leaflet-control-geocoder-icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .leaflet-control-geocoder {
+    width: 220px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="map-topbar">
+  <h1>📍 Full Map View – New Delhi</h1>
+
+  <div class="map-actions">
+     <!-- MAP HOME BUTTON -->
+    <button onclick="resetToHome()">🏠 Map Home</button>
+    <!-- BACK BUTTON (unchanged) -->
+    <a href="../index.html">← Back to Home</a>
+
+   
+  </div>
+</div>
+
+<!-- MAP -->
+<div id="map"></div>
+
+<script>
+/* Home location: India Gate */
+const homeLocation = [28.6129, 77.2295];
+
+/* Initialize map */
+const map = L.map("map").setView(homeLocation, 12);
+
+/* Tile layer */
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap contributors"
+}).addTo(map);
+
+/* Default marker */
+const homeMarker = L.marker(homeLocation)
+  .addTo(map)
+  .bindPopup("<b>India Gate</b><br>New Delhi, India")
+  .openPopup();
+
+/* Reset map to home */
+function resetToHome() {
+  map.setView(homeLocation, 12);
+  homeMarker.openPopup();
+}
+
+/* Geocoder */
+const geocoder = L.Control.geocoder({
+  collapsed: false,
+  placeholder: "Search any location",
+  defaultMarkGeocode: true
+}).addTo(map);
+
+geocoder.on("markgeocode", e => {
+  map.setView(e.geocode.center, 15);
+});
+
+/* Click to drop marker */
+map.on("click", e => {
+  L.marker(e.latlng)
+    .addTo(map)
+    .bindPopup(
+      `Latitude: ${e.latlng.lat.toFixed(4)}<br>
+       Longitude: ${e.latlng.lng.toFixed(4)}`
+    )
+    .openPopup();
+});
+</script>
+
+</body>
+</html>

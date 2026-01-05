@@ -3,131 +3,758 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donation Form</title>
+    <title>Support Disaster Relief - SafeHaven</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #111827;
+            line-height: 1.6;
+        }
+
+        /* Top blue bar */
+        .top-header {
+            background: #245aa9;
+            color: #ffffff;
+            padding: 16px 20px;
             text-align: center;
-            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
-        .container {
-            width: 50%;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+        .main-container {
+            max-width: 900px;
+            margin: 24px auto 40px;
+            padding: 0 16px;
         }
-        label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
+
+        /* Form header with centered text + cross */
+        .form-header {
+            margin-bottom: 24px;
         }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+
+        .form-header-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
         }
-        .btn {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
+
+        .form-header-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .form-header .heart {
+            color: #ef4444;
+            margin-right: 4px;
+        }
+
+        .selected-text {
+            margin-top: 6px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .selected-text span {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .close-btn {
+            background: none;
             border: none;
-            border-radius: 5px;
+            color: #6b7280;
+            font-size: 1.4rem;
             cursor: pointer;
+            padding: 4px 6px;
         }
-        .proceed-btn {
-            background-color: #28a745;
-            color: white;
+
+        .close-btn:hover {
+            color: #111827;
         }
-        .proceed-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+
+        .section {
+            margin-top: 28px;
         }
-        .submit-btn {
-            background-color: #28a745;
-            color: white;
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-title span {
+            margin-right: 6px;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 14px;
+        }
+
+        /* Amount buttons row */
+        .amount-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .amount-option {
+            position: relative;
+        }
+
+        .amount-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .amount-option label {
+            display: block;
+            padding: 12px 10px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            background-color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #111827;
+            cursor: pointer;
+            transition: all 0.15s ease-out;
+        }
+
+        .amount-option input[type="radio"]:checked + label {
+            background-color: #10b981;
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 3px 8px rgba(16, 185, 129, 0.35);
+        }
+
+        .amount-option label:hover {
+            border-color: #10b981;
+        }
+
+        /* Custom amount */
+        .custom-amount-row {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .custom-input-wrapper {
+            position: relative;
+        }
+
+        .custom-input-wrapper::before {
+            content: "₹";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        #customAmount {
+            width: 100%;
+            padding: 10px 10px 10px 24px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 0.95rem;
+        }
+
+        #customAmount:focus {
+            outline: none;
+            border-color: #245aa9;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+        }
+
+        .currency-toggle {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* Inputs */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px 16px;
+            margin-top: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #374151;
+        }
+
+        .form-group label .required {
+            color: #dc2626;
+        }
+
+        .form-control {
+            padding: 10px 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #245aa9;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+        }
+
+        .form-control.error {
+            border-color: #dc2626;
+        }
+
+        .error-message {
+            font-size: 0.8rem;
+            color: #dc2626;
+            margin-top: 3px;
             display: none;
         }
+
+        .checkbox-row {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+
+        .checkbox-row input {
+            width: 16px;
+            height: 16px;
+            accent-color: #245aa9;
+        }
+
+        /* Fund allocation */
+        .allocation-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .allocation-pill {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 10px;
+            border-radius: 999px;
+            border: 1px solid #d1d5db;
+            background-color: #ffffff;
+            font-size: 0.9rem;
+            color: #111827;
+            cursor: pointer;
+            transition: all 0.15s ease-out;
+        }
+
+        .allocation-pill input {
+            width: 14px;
+            height: 14px;
+            accent-color: #10b981;
+        }
+
+        .allocation-pill.active {
+            border-color: #10b981;
+            background-color: #ecfdf5;
+        }
+
+        /* Donate button */
+        .submit-section {
+            margin-top: 24px;
+        }
+
+        #proceedBtn {
+            width: 100%;
+            padding: 12px 0;
+            border-radius: 8px;
+            border: none;
+            background-color: #10b981;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+        }
+
+        #proceedBtn:hover:not(:disabled) {
+            background-color: #059669;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.35);
+        }
+
+        #proceedBtn:disabled {
+            background-color: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Centered trust footer + logos */
+        .trust-footer {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .trust-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+        .lock-icon {
+            font-size: 1rem;
+        }
+
+        .trust-text strong {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .partners {
+            color: #111827;
+            font-weight: 500;
+        }
+
+        .payment-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .payment-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            height: 32px;
+        }
+
+        .payment-icon img {
+            max-height: 20px;
+            width: auto;
+        }
+
+        /* QR redesigned card */
         .qr-section {
             display: none;
-            text-align: center;
-            margin-top: 20px;
+            margin-top: 24px;
+        }
+
+        .qr-card {
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            background-color: #f9fafb;
+            padding: 18px 20px;
+        }
+
+        .qr-header {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .qr-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .qr-subtitle {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .qr-body {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .qr-image-wrapper {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .qr-image-wrapper img {
+            max-width: 170px;
+            border-radius: 6px;
+        }
+
+        .qr-text p {
+            font-size: 0.86rem;
+            color: #4b5563;
+            margin-bottom: 4px;
+        }
+
+        .qr-note {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .qr-confirm-btn {
+            width: 100%;
+            max-width: 260px;
+            padding: 9px 0;
+            border-radius: 8px;
+            border: 1px solid #10b981;
+            background-color: #ffffff;
+            color: #047857;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease-out;
+        }
+
+        .qr-confirm-btn:hover {
+            background-color: #ecfdf5;
+        }
+
+        .toast {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #065f46;
+            background-color: #ecfdf5;
+            border: 1px solid #6ee7b7;
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 640px) {
+            .main-container { margin-top: 16px; }
+            .allocation-grid { grid-template-columns: 1fr; }
+            .qr-body { grid-template-columns: 1fr; text-align: center; }
+            .qr-text { text-align: left; }
         }
     </style>
 </head>
 <body>
+    <div class="top-header" id="pageTitle">
+        Disaster in India
+    </div>
 
-    <div class="container">
-        <h2>Donation Form</h2>
-        <p><strong>Disaster:</strong> <span id="disasterName">Loading...</span></p>
-        <p><strong>Organization:</strong> <span id="organizationName">Loading...</span></p>
-
-        <form id="donationForm">
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" required>
-
-            <label for="age">Age:</label>
-            <input type="number" id="age" required min="1">
-
-            <label for="job">Job:</label>
-            <input type="text" id="job" required>
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-
-            <button id="proceedBtn" type="button" class="btn proceed-btn" disabled onclick="showQRCode()">Proceed to Pay</button>
-        </form>
-
-        <div id="qrSection" class="qr-section">
-            <h3>Scan to Donate</h3>
-            <img src="qrcode.png" alt="QR Code" width="200">
-            <p>After payment, click Submit</p>
-            <button id="submitBtn" class="btn submit-btn" onclick="showThankYou()">Submit</button>
+    <div class="main-container">
+        <div class="form-header">
+            <div class="form-header-top">
+                <div class="form-header-text">
+                    <h1><span class="heart">❤</span> Support Disaster Relief</h1>
+                    <p class="selected-text">
+                        (Selected: <span id="disasterName">Loading...</span>)
+                    </p>
+                </div>
+                <button class="close-btn" type="button" onclick="window.history.back()">✕</button>
+            </div>
         </div>
+
+        <form id="donationForm" novalidate>
+            <!-- 1. Enter Amount -->
+            <div class="section">
+                <div class="section-title"><span>1.</span>Enter Amount</div>
+                <p class="section-subtitle">Choose a suggested amount or enter a custom donation.</p>
+
+                <div class="amount-row">
+                    <div class="amount-option">
+                        <input type="radio" name="amount" id="amount500" value="500">
+                        <label for="amount500">₹ 500</label>
+                    </div>
+                    <div class="amount-option">
+                        <input type="radio" name="amount" id="amount1000" value="1000">
+                        <label for="amount1000">₹ 1,000</label>
+                    </div>
+                    <div class="amount-option">
+                        <input type="radio" name="amount" id="amount2500" value="2500">
+                        <label for="amount2500">₹ 2,500</label>
+                    </div>
+                </div>
+
+                <div class="custom-amount-row">
+                    <div class="custom-input-wrapper">
+                        <input type="number" id="customAmount" placeholder="Custom amount" min="1">
+                    </div>
+                    <div class="currency-toggle">USD in INR ▾</div>
+                </div>
+            </div>
+
+            <!-- 2. Your Information -->
+            <div class="section">
+                <div class="section-title"><span>2.</span>Your Information</div>
+                <p class="section-subtitle">Share basic details so we can send your receipt and updates.</p>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="anonymous">
+                    <label for="anonymous">Donate anonymously</label>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="email">Email<span class="required">*</span></label>
+                        <input type="email" id="email" class="form-control" required>
+                        <span id="emailError" class="error-message">Enter a valid email.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone<span class="required">*</span></label>
+                        <input type="tel" id="phone" class="form-control" required pattern="[0-9]{10}" placeholder="10-digit number">
+                        <span id="phoneError" class="error-message">Enter a 10-digit phone number.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Full Name<span class="required">*</span></label>
+                        <input type="text" id="name" class="form-control" required>
+                        <span id="nameError" class="error-message">Name is required.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age<span class="required">*</span></label>
+                        <input type="number" id="age" class="form-control" required min="18" max="120">
+                        <span id="ageError" class="error-message">Age 18–120 only.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="job">Job<span class="required">*</span></label>
+                        <input type="text" id="job" class="form-control" required>
+                        <span id="jobError" class="error-message">Job is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Fund Allocation -->
+            <div class="section">
+                <div class="section-title"><span>3.</span>Fund Allocation</div>
+                <p class="section-subtitle">Choose how you’d like your donation to be used.</p>
+
+                <div class="allocation-grid">
+                    <label class="allocation-pill active">
+                        <input type="radio" name="allocation" value="relief" checked>
+                        <span>Disaster Relief Fund</span>
+                    </label>
+                    <label class="allocation-pill">
+                        <input type="radio" name="allocation" value="medical">
+                        <span>Medical Aid</span>
+                    </label>
+                    <label class="allocation-pill">
+                        <input type="radio" name="allocation" value="food">
+                        <span>Food & Shelter</span>
+                    </label>
+                    <label class="allocation-pill">
+                        <input type="radio" name="allocation" value="org">
+                        <span>Let Organization Decide</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Donate button -->
+            <div class="submit-section">
+                <button id="proceedBtn" type="button" disabled>Donate Securely</button>
+            </div>
+
+            <!-- Trust & Payment Footer -->
+            <div class="trust-footer">
+                <div class="trust-row">
+                    <span class="lock-icon">🔒</span>
+                    <span class="trust-text">
+                        <strong>100% safe &amp; secure.</strong>
+                        Trusted partners: <span class="partners">IFRC</span>
+                    </span>
+                </div>
+                <div class="payment-icons">
+                    <div class="payment-icon upi-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/200px-UPI-Logo-vector.svg.png"
+                             alt="UPI">
+                    </div>
+                    <div class="payment-icon card-icon">
+                        <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+                            <rect width="32" height="20" rx="3" fill="#0066CC" />
+                            <rect x="2" y="2" width="28" height="16" rx="2" fill="#fff" />
+                            <rect x="2" y="6" width="28" height="4" fill="#0066CC" />
+                        </svg>
+                    </div>
+                    <div class="payment-icon card-icon">
+                        <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+                            <rect width="32" height="20" rx="3" fill="#FF5F00" />
+                            <circle cx="12" cy="10" r="6" fill="#EB001B" />
+                            <circle cx="20" cy="10" r="6" fill="#F79E1B" />
+                        </svg>
+                    </div>
+                    <div class="payment-icon paypal-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/200px-PayPal.svg.png"
+                             alt="PayPal">
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR + confirm -->
+            <div id="qrSection" class="qr-section">
+                <div class="qr-card">
+                    <div class="qr-header">
+                        <div class="qr-title">Scan &amp; Pay</div>
+                        <div class="qr-subtitle">Use any UPI or banking app</div>
+                    </div>
+                    <div class="qr-body">
+                        <div class="qr-image-wrapper">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=190x190&data=upi://pay?pa=safehaven@upi"
+                                 alt="QR Code">
+                        </div>
+                        <div class="qr-text">
+                            <p>Open your payment app, scan this QR, and complete the transfer.</p>
+                            <p class="qr-note">You’ll see “SafeHaven Relief Fund” as the recipient.</p>
+                            <button id="submitBtn" type="button" class="qr-confirm-btn">I have completed the payment</button>
+                            <div id="thankToast" class="toast">
+                                Thank you for your generous donation! Your support means a lot.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
     <script>
-        window.onload = function () {
-            // Get disaster and organization details from URL
-            const params = new URLSearchParams(window.location.search);
-            const disaster = decodeURIComponent(params.get("disaster") || "N/A");
-            const organization = decodeURIComponent(params.get("organization") || "N/A");
+        // set disaster from URL
+        const params = new URLSearchParams(window.location.search);
+        const disaster = decodeURIComponent(params.get("disaster") || "Severe Floods in India");
+        document.getElementById("disasterName").textContent = disaster;
+        document.getElementById("pageTitle").textContent = disaster;
 
-            document.getElementById("disasterName").textContent = disaster;
-            document.getElementById("organizationName").textContent = organization;
+        const amountRadios = document.querySelectorAll('input[name="amount"]');
+        const customAmount = document.getElementById("customAmount");
+        const proceedBtn = document.getElementById("proceedBtn");
+        const qrSection = document.getElementById("qrSection");
+        const submitBtn = document.getElementById("submitBtn");
+        const thankToast = document.getElementById("thankToast");
 
-            // Enable "Proceed to Pay" only if all fields are filled
-            const form = document.getElementById("donationForm");
-            const proceedBtn = document.getElementById("proceedBtn");
+        const requiredFields = ["email", "phone", "name", "age", "job"];
 
-            form.addEventListener("input", function () {
-                const name = document.getElementById("name").value.trim();
-                const age = document.getElementById("age").value.trim();
-                const job = document.getElementById("job").value.trim();
-                const phone = document.getElementById("phone").value.trim();
-                const email = document.getElementById("email").value.trim();
-
-                proceedBtn.disabled = !(name && age && job && phone && email);
+        // allocation pills active style
+        document.querySelectorAll(".allocation-pill").forEach(pill => {
+            pill.addEventListener("click", () => {
+                document.querySelectorAll(".allocation-pill").forEach(p => p.classList.remove("active"));
+                pill.classList.add("active");
             });
-        };
+        });
 
-        function showQRCode() {
-            document.getElementById("qrSection").style.display = "block";
-            document.getElementById("submitBtn").style.display = "block";
+        // preset amounts
+        amountRadios.forEach(radio => {
+            radio.addEventListener("change", () => {
+                if (radio.checked) customAmount.value = "";
+                checkReady();
+            });
+        });
+
+        // custom amount
+        if (customAmount) {
+            customAmount.addEventListener("input", () => {
+                if (customAmount.value) {
+                    amountRadios.forEach(r => r.checked = false);
+                }
+                checkReady();
+            });
         }
 
-        function showThankYou() {
-            alert("🙏 Thank you for your generous donation! Your support is greatly appreciated.");
+        // field listeners
+        requiredFields.forEach(id => {
+            const input = document.getElementById(id);
+            const err = document.getElementById(id + "Error");
+            if (!input) return;
+
+            input.addEventListener("input", () => {
+                if (input.classList.contains("error")) validateField(input, err);
+                checkReady();
+            });
+            input.addEventListener("blur", () => validateField(input, err));
+        });
+
+        function validateField(input, errSpan) {
+            if (!input) return true;
+            if (!input.checkValidity()) {
+                input.classList.add("error");
+                if (errSpan) errSpan.style.display = "block";
+                return false;
+            } else {
+                input.classList.remove("error");
+                if (errSpan) errSpan.style.display = "none";
+                return true;
+            }
         }
+
+        function hasAmount() {
+            const selected = document.querySelector('input[name="amount"]:checked');
+            const customVal = customAmount ? customAmount.value.trim() : "";
+            return !!selected || !!customVal;
+        }
+
+        function allFieldsFilled() {
+            return requiredFields.every(id => {
+                const el = document.getElementById(id);
+                return el && el.value.trim() !== "" && el.checkValidity();
+            });
+        }
+
+        function checkReady() {
+            const ready = hasAmount() && allFieldsFilled();
+            proceedBtn.disabled = !ready;
+        }
+
+        // show QR section
+        proceedBtn.addEventListener("click", () => {
+            let ok = true;
+            requiredFields.forEach(id => {
+                const input = document.getElementById(id);
+                const err = document.getElementById(id + "Error");
+                if (input && !validateField(input, err)) ok = false;
+            });
+            if (!hasAmount()) ok = false;
+            if (!ok) return;
+
+            qrSection.style.display = "block";
+            qrSection.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+
+        // final confirmation
+        submitBtn.addEventListener("click", () => {
+            thankToast.style.display = "block";
+            setTimeout(() => { thankToast.style.display = "none"; }, 4000);
+        });
     </script>
-
-    <script src="../assets/js/footer.js"></script>
 </body>
 </html>
