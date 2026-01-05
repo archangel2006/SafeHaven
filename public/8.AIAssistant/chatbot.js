@@ -204,7 +204,7 @@ const chatbotHTML = `
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   overflow: hidden;
-  display: flex;
+ 
   flex-direction: column;
   animation: slideUp 0.3s ease-out;
 }
