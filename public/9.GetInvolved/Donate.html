@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate | Safe Haven</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Official Palette */
@@ -32,11 +32,11 @@
             padding: 0;
         }
 
-        /* --- Navbar --- */
+        /* --- SCALED Navbar --- */
         header {
             background-color: var(--main-theme);
             padding: 0 5%;
-            height: 65px;
+            height: 50px; /* Reduced from 65px */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,10 +45,10 @@
         }
 
         .header-logo-box {
-            width: 48px;
-            height: 48px;
+            width: 38px; /* Reduced from 48px */
+            height: 38px;
             background: white;
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -61,115 +61,124 @@
         }
 
         header h1 {
-            font-size: 1.5rem;
+            font-size: 1.2rem; /* Reduced from 1.5rem */
             font-weight: 500;
             margin: 0;
             flex-grow: 1;
             text-align: center;
         }
 
-        /* --- Page Layout --- */
+        /* --- SCALED Page Layout --- */
         .page-wrapper {
-            max-width: 950px;
-            margin: 40px auto;
+            max-width: 900px;
+            margin: 15px auto; /* Reduced from 40px */
             padding: 0 20px;
         }
 
         .main-title-section {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 15px; /* Reduced from 35px */
         }
 
         .main-title-section h2 {
             font-weight: 600;
-            font-size: 1.8rem;
-            margin-bottom: 8px;
+            font-size: 1.4rem; /* Reduced from 1.8rem */
+            margin-bottom: 4px;
         }
 
-        /* --- Donation Buttons --- */
+        /* --- SCALED Donation Buttons --- */
         .donation-options {
             display: flex;
-            gap: 25px;
+            gap: 15px; /* Reduced from 25px */
             justify-content: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px; /* Reduced from 40px */
         }
 
         .btn-glass {
             flex: 1;
-            padding: 22px;
-            border-radius: 14px;
+            padding: 12px; /* Reduced from 22px */
+            border-radius: 10px;
             border: none;
-            font-size: 1.1rem;
+            font-size: 0.95rem; /* Reduced from 1.1rem */
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             transition: all 0.3s ease;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Monetary Button: Blue background, White text */
         .monetary-btn {
             background: linear-gradient(to right, var(--button-base), var(--accent-blue-light));
             color: white;
         }
 
-        /* Material Button: Peach/Yellow background, BLACK text */
         .material-btn {
             background: linear-gradient(to right, #f2d9c0, var(--accent-yellow));
             color: rgb(63, 56, 56);
         }
 
         .btn-glass:hover {
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
         }
 
-        /* --- Glassmorphism Sections --- */
+        /* --- SCALED Glassmorphism Sections --- */
         .glass-card {
             background: var(--glass-white);
             backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 35px;
+            border-radius: 15px;
+            padding: 20px; /* Reduced from 35px */
             border: 1px solid var(--border-glass);
             box-shadow: var(--shadow-soft);
-            margin-bottom: 35px;
+            margin-bottom: 20px; /* Reduced from 35px */
             text-align: center;
         }
 
         .card-title {
-            font-size: 1.1rem;
+            font-size: 0.9rem; /* Reduced from 1.1rem */
             color: var(--main-theme);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 25px;
+            margin-bottom: 15px; /* Reduced from 25px */
             font-weight: 500;
         }
 
-        /* --- Tracker Layout --- */
+        /* --- SCALED Tracker Layout --- */
         .impact-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 30px; /* Reduced from 40px */
             flex-wrap: wrap;
         }
 
-        /* UPDATED: Chart Box now has the white border styling */
+        .impact-big-text {
+            font-size: 2rem; /* Reduced from 2.8rem */
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px; /* Reduced from 35px */
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .impact-small-text {
+            font-size: 1rem; /* Reduced from 1.2rem */
+            font-weight: 400;
+            color: #636e72;
+        }
+
         .chart-box {
-            width: 300px;
-            /* Increased slightly to accommodate padding */
-            height: 300px;
+            width: 220px; /* Reduced from 300px */
+            height: 220px; /* Reduced from 300px */
             background: white;
-            /* Creates the white border effect */
             border-radius: 50%;
-            /* Makes the container circular */
-            padding: 15px;
-            /* The thickness of the white border */
+            padding: 10px; /* Reduced from 15px */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            /* Subtle depth like the mockup */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -178,44 +187,54 @@
         .legend-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px; /* Reduced from 12px */
             text-align: left;
         }
 
         .legend-pill {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: white;
-            padding: 10px 20px;
+            padding: 8px 15px; /* Reduced from 10px 20px */
             border-radius: 8px;
-            min-width: 220px;
+            min-width: 180px; /* Reduced from 220px */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-            font-size: 0.9rem;
+            font-size: 0.8rem; /* Reduced from 0.9rem */
         }
 
-        /* --- Testimonials --- */
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
+        /* --- Testimonials Section (Unchanged logic, scaled width) --- */
+        .testimonial-viewport {
+            overflow-x: auto;
+            width: 100%;
+            margin-bottom: 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
+
+        .testimonial-viewport::-webkit-scrollbar { display: none; }
+
+        .testimonial-track { display: flex; gap: 20px; width: max-content; }
 
         .test-card {
             background: white;
             padding: 30px 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
+            width: 415px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-snap-align: center;
         }
 
-        .test-card p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #444;
-            margin-bottom: 15px;
+        .test-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(60, 93, 162, 0.15);
         }
+
+        .test-card p { font-size: 0.95rem; line-height: 1.6; color: #444; margin-bottom: 15px; }
 
         .author-box {
             display: flex;
@@ -227,42 +246,20 @@
             color: #7f8c8d;
         }
 
-        /* Official Pin Colors */
-        .pin-red {
-            color: var(--accent-pink);
-        }
-
-        .pin-blue {
-            color: var(--main-theme);
-        }
-
-        .pin-navy {
-            color: #1a2a44;
-        }
-
-        .pin-yellow {
-            color: var(--accent-yellow);
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
+        .pagination { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: #dfe6e9;
             border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            padding: 0;
         }
 
-        .dot.active {
-            width: 24px;
-            background: var(--main-theme);
-            border-radius: 10px;
-        }
+        .dot.active { width: 28px; background: var(--main-theme); border-radius: 10px; }
 
         /* --- Partners Section --- */
         .partner-white-box {
@@ -283,23 +280,11 @@
             gap: 15px;
         }
 
-        .partner-col img {
-            height: 50px;
-            width: auto;
-        }
+        .partner-col img { height: 60px; width: auto; object-fit: contain; }
 
-        .partner-col span {
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-align: left;
-            line-height: 1.2;
-        }
+        .partner-col span { font-size: 0.85rem; font-weight: 500; text-align: left; line-height: 1.2; }
 
-        .v-divider {
-            width: 1px;
-            height: 60px;
-            background-color: #e0e0e0;
-        }
+        .v-divider { width: 1px; height: 60px; background-color: #e0e0e0; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -308,17 +293,18 @@
 
     <header>
         <div class="header-logo-box">
-            <img src="../../assets/logo.png" alt="Safe Haven Logo">
+            <img src="../../assets/9.getinvolved/logo.jpg" alt="Safe Haven Logo">
         </div>
         <h1>Donate</h1>
-        <div style="cursor: pointer; font-size: 1.8rem;">👤</div>
+        <div style="cursor: pointer; font-size: 1.2rem;">👤</div>
     </header>
+
 
     <div class="page-wrapper">
 
         <div class="main-title-section">
             <h2>Support Disaster Relief Efforts</h2>
-            <p style="color: #636e72;">Select the type of donation you'd like to make:</p>
+            <p style="color: #636e72; font-size: 0.9rem;">Select the type of donation you'd like to make:</p>
         </div>
 
         <div class="donation-options">
@@ -331,67 +317,75 @@
         </div>
 
         <div class="glass-card">
-            <h1 class="card-title">Real-Time Impact Tracker</h1>
-            <p style="font-weight: 600; font-size: 1rem; margin-bottom: 30px;">₹ 2.5 CR <span
-                    style="font-weight: 400; font-size: 0.9rem;">raised in total!</span></p>
+            <h3 class="card-title">Real-Time Impact Tracker</h3>
+            <div class="impact-big-text">
+                ₹ 2.5 CR
+                <span class="impact-small-text">raised in total!</span>
+            </div>
             <div class="impact-content">
                 <div class="chart-box"><canvas id="donationChart"></canvas></div>
                 <div class="legend-grid">
                     <div class="legend-pill"><span style="color: var(--accent-pink)">■</span> Disaster Relief Fund</div>
                     <div class="legend-pill"><span style="color: var(--accent-yellow)">■</span> Food & Medical Aid</div>
-                    <div class="legend-pill"><span style="color: var(--accent-blue-light)">■</span> Rebuilding
-                        Communities</div>
+                    <div class="legend-pill"><span style="color: var(--accent-blue-light)">■</span> Rebuilding Communities</div>
                 </div>
             </div>
         </div>
 
         <div class="glass-card">
             <h3 class="card-title">📝 Stories & Testimonials</h3>
-            <div class="testimonial-grid">
-                <div class="test-card">
-                    <p>“Thanks to the donations, we were able to rebuild our house.”</p>
-                    <div class="author-box"><span class="pin-red">📍</span> Affected Family in India</div>
-                </div>
-                <div class="test-card">
-                    <p>“The food aid arrived just in time for my family.”</p>
-                    <div class="author-box"><span class="pin-blue">📍</span> Flood Victim in Nepal</div>
-                </div>
-                <div class="test-card">
-                    <p>“Your generous donations helped save lives during the earthquake.”</p>
-                    <div class="author-box"><span class="pin-navy">📍</span> Rescue Team in Turkey</div>
-                </div>
-                <div class="test-card">
-                    <p>“The community's support has helped me start over.”</p>
-                    <div class="author-box"><span class="pin-yellow">📍</span> LA Wildfire Survivor</div>
+            <div class="testimonial-viewport" id="testimonialViewport">
+                <div class="testimonial-track">
+                    <div class="test-card">
+                        <p>“Thanks to the donations, we were able to rebuild our house after the floods in Wayanad.”</p>
+                        <div class="author-box"><span style="color:var(--accent-pink)">📍</span> Rajesh Kumar, Kerala</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“The food aid arrived just in time for my family after the cyclone in Odisha.”</p>
+                        <div class="author-box"><span style="color:var(--main-theme)">📍</span> Sunita Devi, Odisha</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“Generous medical kits helped save lives during the flash floods in Himachal.”</p>
+                        <div class="author-box"><span style="color:#1a2a44">📍</span> Amit Sharma, Shimla</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“Support from Safe Haven helped me start over after the cyclone hits Gujarat coast.”</p>
+                        <div class="author-box"><span style="color:var(--accent-yellow)">📍</span> Meera Patel, Gujarat</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“The construction materials provided allowed us to reopen our village school in Bihar.”</p>
+                        <div class="author-box"><span style="color:var(--accent-pink)">📍</span> Suresh Singh, Patna</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“Immediate clean water and sanitation supplies prevented diseases in our camp.”</p>
+                        <div class="author-box"><span style="color:var(--main-theme)">📍</span> Kavita Reddy, Andhra Pradesh</div>
+                    </div>
                 </div>
             </div>
             <div class="pagination">
-                <div class="dot"></div>
-                <div class="dot active"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                <button class="dot active" onclick="moveCarousel(0)"></button>
+                <button class="dot" onclick="moveCarousel(1)"></button>
+                <button class="dot" onclick="moveCarousel(2)"></button>
             </div>
         </div>
 
         <div class="glass-card">
             <h3 class="card-title">Our NGO & Government Partners</h3>
-            <p style="font-size: 0.9rem; color: #666; margin-bottom: 25px;">We collaborate with trusted NGOs and
-                government programs to ensure your donations reach the right people.</p>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 25px;">We collaborate with trusted Indian NGOs and government bodies to ensure your donations reach the right people.</p>
             <div class="partner-white-box">
                 <div class="partner-col">
-                    <img src="../../assets/9.GetInvolved/redcross.png" alt="IFRC">
-                    <span>International Federation of Red-Crescent Societies (IFRC)</span>
+                    <img src="../../assets/9.GetInvolved/NDRF.png" alt="NDRF Logo">
+                    <span>National Disaster Response Force (NDRF)</span>
                 </div>
                 <div class="v-divider"></div>
                 <div class="partner-col">
-                    <img src="../../assets/9.GetInvolved/oxfam.png" alt="Oxfam">
-                    <span>Oxfam</span>
+                    <img src="../../assets/9.GetInvolved/IRCS.png" alt="IRCS Logo">
+                    <span>Indian Red Cross Society (IRCS)</span>
                 </div>
                 <div class="v-divider"></div>
                 <div class="partner-col">
-                    <img src="../../assets/9.GetInvolved/oxfam-int.png" alt="Oxfam International">
-                    <span>Oxfam International</span>
+                    <img src="../../assets/9.GetInvolved/UNICEF.png" alt="UNICEF India Logo">
+                    <span>UNICEF India</span>
                 </div>
             </div>
         </div>
@@ -404,7 +398,7 @@
             data: {
                 labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid'],
                 datasets: [{
-                    data: [10000000, 5000000, 3000000,],
+                    data: [10000000, 5000000, 3000000],
                     backgroundColor: ['#F36682', '#46A1FE', '#FEC467'],
                     borderWidth: 0,
                     hoverOffset: 15
@@ -415,6 +409,23 @@
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } }
             }
+        });
+
+        const viewport = document.getElementById('testimonialViewport');
+        const dots = document.querySelectorAll('.dot');
+
+        function moveCarousel(index) {
+            const scrollAmount = index * (415 * 2 + 40); 
+            viewport.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        }
+
+        viewport.addEventListener('scroll', () => {
+            const scrollLeft = viewport.scrollLeft;
+            const index = Math.round(scrollLeft / (435 * 2));
+            dots.forEach((dot, idx) => {
+                if (idx === index) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
         });
     </script>
 </body>
