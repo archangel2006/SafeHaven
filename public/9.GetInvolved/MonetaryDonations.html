@@ -1,147 +1,536 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monetary Donations</title>
+    <title>Monetary Donations - SafeHaven</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button class="back-btn" onclick="window.history.back()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <h1 class="header-title">Monetary Donations</h1>
+        <button class="profile-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="10" r="3"/>
+                <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="donations-grid">
+            <!-- Kerala Floods 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/kerala-floods.jpeg" alt="Kerala Floods 2024" class="disaster-image">
+                    <span class="disaster-type">Flood Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Kerala Floods</h3>
+                    <p class="disaster-date">Date: August 2024</p>
+                    <p class="disaster-description">Severe monsoon floods displaced thousands across Kerala, affecting multiple districts.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹18,50,000" data-target="₹25,00,000">
+                            <div class="progress-bar" style="width: 74%"></div>
+                        </div>
+                        <span class="urgent-badge">URGENT</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Kerala Floods', 'August 2024')">Donate</button>
+            </div>
+
+            <!-- Assam Floods 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/assam-floods.jpeg" alt="Assam Floods 2024" class="disaster-image">
+                    <span class="disaster-type">Flood Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Assam Floods</h3>
+                    <p class="disaster-date">Date: June 2024</p>
+                    <p class="disaster-description">Heavy rainfall caused devastating floods in Assam, affecting millions of people.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹12,40,000" data-target="₹20,00,000">
+                            <div class="progress-bar" style="width: 62%"></div>
+                        </div>
+                        <span class="urgent-badge">URGENT</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Assam Floods', 'June 2024')">Donate</button>
+            </div>
+
+            <!-- Uttarakhand Floods 2023 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/uttarakhand-floods.jpeg" alt="Uttarakhand Floods 2023" class="disaster-image">
+                    <span class="disaster-type">Flood Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Uttarakhand Flash Floods</h3>
+                    <p class="disaster-date">Date: October 2023</p>
+                    <p class="disaster-description">Cloudburst triggered flash floods in Uttarakhand, causing landslides and damage.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹15,00,000" data-target="₹15,00,000">
+                            <div class="progress-bar achieved" style="width: 100%"></div>
+                        </div>
+                        <span class="target-badge">Target Met</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Uttarakhand Flash Floods', 'October 2023')">Donate</button>
+            </div>
+
+            <!-- Gujarat Earthquake 2023 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/gujarat-earthquake.jpeg" alt="Gujarat Earthquake 2023" class="disaster-image">
+                    <span class="disaster-type earthquake">Earthquake Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Gujarat Earthquake</h3>
+                    <p class="disaster-date">Date: March 2023</p>
+                    <p class="disaster-description">A 5.5 magnitude earthquake struck Gujarat, damaging buildings and infrastructure.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹8,20,000" data-target="₹12,00,000">
+                            <div class="progress-bar earthquake-bar" style="width: 68%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Gujarat Earthquake', 'March 2023')">Donate</button>
+            </div>
+
+            <!-- Manipur Wildfire 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/manipur-wildfire.jpeg" alt="Manipur Wildfire 2024" class="disaster-image">
+                    <span class="disaster-type wildfire">Wildfire Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Manipur Forest Fires</h3>
+                    <p class="disaster-date">Date: April 2024</p>
+                    <p class="disaster-description">Widespread forest fires in Manipur destroyed vegetation and threatened communities.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹6,50,000" data-target="₹10,00,000">
+                            <div class="progress-bar wildfire-bar" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Manipur Forest Fires', 'April 2024')">Donate</button>
+            </div>
+
+            <!-- Odisha Cyclone 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/odisha-cyclone.jpeg" alt="Odisha Cyclone 2024" class="disaster-image">
+                    <span class="disaster-type cyclone">Cyclone Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Cyclone Dana - Odisha</h3>
+                    <p class="disaster-date">Date: October 2024</p>
+                    <p class="disaster-description">Cyclone Dana made landfall in Odisha, causing extensive damage to coastal areas.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹22,00,000" data-target="₹30,00,000">
+                            <div class="progress-bar cyclone-bar" style="width: 73%"></div>
+                        </div>
+                        <span class="urgent-badge">URGENT</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Cyclone Dana - Odisha', 'October 2024')">Donate</button>
+            </div>
+
+            <!-- Himachal Pradesh Landslide 2023 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/himachalPradesh-landslide.jpeg" alt="Himachal Pradesh Landslide 2023" class="disaster-image">
+                    <span class="disaster-type landslide">Landslide Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Himachal Pradesh Landslides</h3>
+                    <p class="disaster-date">Date: July 2023</p>
+                    <p class="disaster-description">Heavy monsoon rains triggered multiple landslides across Himachal Pradesh.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹11,00,000" data-target="₹18,00,000">
+                            <div class="progress-bar landslide-bar" style="width: 61%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Himachal Pradesh Landslides', 'July 2023')">Donate</button>
+            </div>
+
+            <!-- Maharashtra Drought 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/assets/9.GetInvolved/MonetaryDonation/maharashtra-drought.jpeg" alt="Maharashtra Drought 2024" class="disaster-image">
+                    <span class="disaster-type drought">Drought Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Maharashtra Drought Relief</h3>
+                    <p class="disaster-date">Date: May 2024</p>
+                    <p class="disaster-description">Severe drought conditions affected farmers and communities in Maharashtra.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹9,80,000" data-target="₹16,00,000">
+                            <div class="progress-bar drought-bar" style="width: 61%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Maharashtra Drought Relief', 'May 2024')">Donate</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Redirect to central donation form
+        function redirectToForm(disasterName, disasterDate) {
+            window.location.href = `Forms.html?disaster=${encodeURIComponent(disasterName)}&date=${encodeURIComponent(disasterDate)}`;
+        }
+
+        // Add hover tooltips for progress bars
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressWrappers = document.querySelectorAll('.progress-bar-wrapper');
+            
+            progressWrappers.forEach(wrapper => {
+                const raised = wrapper.getAttribute('data-raised');
+                const target = wrapper.getAttribute('data-target');
+                
+                if (raised && target) {
+                    // Create tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'progress-tooltip';
+                    tooltip.textContent = `${raised} raised of ${target}`;
+                    wrapper.appendChild(tooltip);
+                    
+                    // Show/hide tooltip on hover
+                    wrapper.addEventListener('mouseenter', () => {
+                        tooltip.style.opacity = '1';
+                        tooltip.style.visibility = 'visible';
+                    });
+                    
+                    wrapper.addEventListener('mouseleave', () => {
+                        tooltip.style.opacity = '0';
+                        tooltip.style.visibility = 'hidden';
+                    });
+                }
+            });
+        });
+    </script>
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: #333;
         }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .disaster {
+
+        /* Header Styles */
+        .header {
+            background-color: #5568b8;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
-            margin: 10px 0;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .disaster img {
-            width: 180px;
-            height: 120px;
-            border-radius: 10px;
+
+        .back-btn, .profile-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-btn:hover, .profile-btn:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .header-title {
+            color: white;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px;
+        }
+
+        /* Donations Grid */
+        .donations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        /* Disaster Card */
+        .disaster-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .disaster-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .disaster-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .disaster-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
-        .disaster-info {
-            flex: 2;
-            margin-left: 15px;
-            text-align: left;
-        }
-        .donate-btn {
-            background-color: #007bff;
+
+        .disaster-type {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(76, 175, 80, 0.9);
             color: white;
-            border: none;
-            padding: 8px 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .disaster-type.earthquake {
+            background: rgba(255, 152, 0, 0.9);
+        }
+
+        .disaster-type.wildfire {
+            background: rgba(244, 67, 54, 0.9);
+        }
+
+        .disaster-type.cyclone {
+            background: rgba(33, 150, 243, 0.9);
+        }
+
+        .disaster-type.landslide {
+            background: rgba(121, 85, 72, 0.9);
+        }
+
+        .disaster-type.drought {
+            background: rgba(255, 193, 7, 0.9);
+        }
+
+        .disaster-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .disaster-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .disaster-date {
             font-size: 14px;
-            border-radius: 5px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+        }
+
+        .disaster-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        /* Progress Container */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .progress-bar-wrapper {
+            position: relative;
+            flex: 1;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
             cursor: pointer;
         }
-        .donate-btn:hover {
-            background-color: #0056b3;
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50 0%, #45a049 100%);
+            border-radius: 20px;
+            transition: width 0.3s ease;
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Monetary Donations</h2>
-        <p>Select a disaster and make a contribution to help those in need.</p>
 
-        <div class="disaster">
-            <img src="flood.jpg" alt="Flood Disaster">
-            <div class="disaster-info">
-                <h3>Severe Floods in India</h3>
-                <p>Date: January 2025</p>
-                <p>Thousands displaced due to heavy rainfall and flooding.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('Severe Floods in India', 'January 2025', 'Relief Foundation')">Donate</button>
-        </div>
+        .progress-bar.earthquake-bar {
+            background: linear-gradient(90deg, #ff9800 0%, #f57c00 100%);
+        }
 
-        <div class="disaster">
-            <img src="earthquake.jpg" alt="Earthquake Disaster">
-            <div class="disaster-info">
-                <h3>Earthquake in Turkey</h3>
-                <p>Date: December 2024</p>
-                <p>A massive earthquake struck, causing widespread damage.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('Earthquake in Turkey', 'December 2024', 'Global Aid Organization')">Donate</button>
-        </div>
+        .progress-bar.wildfire-bar {
+            background: linear-gradient(90deg, #f44336 0%, #d32f2f 100%);
+        }
 
-        <div class="disaster">
-            <img src="wildfire.jpg" alt="Wildfire Disaster">
-            <div class="disaster-info">
-                <h3>LA Fire</h3>
-                <p>Date: August 2023</p>
-                <p>Massive wildfires spread across Los Angeles, destroying homes.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('LA Fire', 'August 2023', 'Wildfire Relief Fund')">Donate</button>
-        </div>
+        .progress-bar.cyclone-bar {
+            background: linear-gradient(90deg, #2196f3 0%, #1976d2 100%);
+        }
 
-        <div class="disaster">
-            <img src="australia-wildfire.jpg" alt="Australia Wildfire">
-            <div class="disaster-info">
-                <h3>Australia Wildfire</h3>
-                <p>Date: February 2008</p>
-                <p>Severe wildfires ravaged Australia, impacting wildlife and homes.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('Australia Wildfire', 'February 2008', 'Australian Relief Network')">Donate</button>
-        </div>
+        .progress-bar.landslide-bar {
+            background: linear-gradient(90deg, #795548 0%, #5d4037 100%);
+        }
 
-        <div class="disaster">
-            <img src="tsunami.jpg" alt="Tsunami Disaster">
-            <div class="disaster-info">
-                <h3>2008 Tsunami</h3>
-                <p>Date: December 2008</p>
-                <p>Devastating tsunami waves hit multiple coastal regions.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('2008 Tsunami', 'December 2008', 'Tsunami Relief Fund')">Donate</button>
-        </div>
+        .progress-bar.drought-bar {
+            background: linear-gradient(90deg, #ffc107 0%, #ffa000 100%);
+        }
 
-        <div class="disaster">
-            <img src="hurricane.jpg" alt="Hurricane Disaster">
-            <div class="disaster-info">
-                <h3>Hurricane Katrina</h3>
-                <p>Date: August 2005</p>
-                <p>One of the deadliest hurricanes in US history.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('Hurricane Katrina', 'August 2005', 'Hurricane Relief Fund')">Donate</button>
-        </div>
+        .progress-bar.achieved {
+            background: linear-gradient(90deg, #4caf50 0%, #388e3c 100%);
+        }
 
-        <div class="disaster">
-            <img src="earthquake-haiti.jpg" alt="Haiti Earthquake">
-            <div class="disaster-info">
-                <h3>Haiti Earthquake</h3>
-                <p>Date: January 2010</p>
-                <p>A catastrophic 7.0 magnitude earthquake hit Haiti.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('Haiti Earthquake', 'January 2010', 'Haiti Relief Organization')">Donate</button>
-        </div>
+        /* Progress Tooltip */
+        .progress-tooltip {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 10;
+            pointer-events: none;
+        }
 
-        <div class="disaster">
-            <img src="nepal-earthquake.jpg" alt="Nepal Earthquake">
-            <div class="disaster-info">
-                <h3>Nepal Earthquake</h3>
-                <p>Date: April 2015</p>
-                <p>A devastating earthquake killed thousands in Nepal.</p>
-            </div>
-            <button class="donate-btn" onclick="redirectToForm('Nepal Earthquake', 'April 2015', 'Nepal Earthquake Relief Fund')">Donate</button>
-        </div>
+        .progress-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: rgba(0,0,0,0.85);
+        }
 
-        <script>
-            function redirectToForm(disasterName, disasterDate, organizationName) {
-                window.location.href = `Forms.html?disaster=${encodeURIComponent(disasterName)}&date=${encodeURIComponent(disasterDate)}&organization=${encodeURIComponent(organizationName)}`;
+        /* Badges */
+        .urgent-badge, .target-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .urgent-badge {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .target-badge {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* Donate Button */
+        .donate-btn {
+            width: calc(100% - 40px);
+            margin: 0 20px 20px;
+            padding: 12px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .donate-btn:hover {
+            background: #1976d2;
+            transform: scale(1.02);
+        }
+
+        .donate-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .donations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .main-content {
+                padding: 24px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .disaster-image-container {
+                height: 180px;
+            }
+
+            .disaster-content {
+                padding: 16px;
+            }
+
+            .disaster-title {
+                font-size: 18px;
             }
         </script>
     </div>
