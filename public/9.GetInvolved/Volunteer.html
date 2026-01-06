@@ -24,6 +24,11 @@
             --radius: 8px;
         }
 
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -602,127 +607,131 @@
                 max-width: 300px;
             }
         }
+
+        @media (max-width: 480px) {
+            .roles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-area {
+                font-size: 1.2rem;
+            }
+
+            h2.section-title {
+                font-size: 1.3rem;
+            }
+
+            .impact-chart {
+                height: 200px;
+            }
+
+            /* Fix for Times Grid on mobile */
+            .times-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Adjust padding for small screens */
+            .form-wrapper {
+                padding: 15px;
+            }
+
+            /* Ensure checkboxes text wraps properly */
+            .custom-check-item,
+            .c-blue-simple {
+                white-space: normal;
+                align-items: flex-start;
+            }
+
+            .check-box,
+            .square-box {
+                margin-top: 2px;
+                /* Align checkbox with first line of text */
+                flex-shrink: 0;
+                /* Prevent checkbox shrinking */
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Header -->
     <header>
-        <div class="logo-area">
-            <span>Volunteer</span>
-        </div>
-        <div class="user-icon">
-            <i class="far fa-user-circle"></i>
-        </div>
+        <div class="logo-area"><span>Volunteer</span></div>
+        <div class="user-icon"><i class="far fa-user-circle"></i></div>
     </header>
-
     <div class="container">
         <!-- Roles Section -->
         <h2 class="section-title">Volunteer Roles</h2>
         <div class="roles-grid">
-            <div class="role-card">
-                <img src="assets/medical.jpg" alt="Medical">
+            <div class="role-card"><img src="assets/medical.jpg" alt="Medical">
                 <h4>Medical Assistance</h4>
                 <p>Help in emergency first aid</p>
             </div>
-            <div class="role-card">
-                <img src="assets/rescue.jpg" alt="Rescue">
+            <div class="role-card"><img src="assets/rescue.jpg" alt="Rescue">
                 <h4>Rescue Operations</h4>
                 <p>On-ground rescue missions</p>
             </div>
-            <div class="role-card">
-                <img src="assets/supply.jpg" alt="Supply">
+            <div class="role-card"><img src="assets/supply.jpg" alt="Supply">
                 <h4>Supply Distribution</h4>
-                <p>Help distribute food, water & essentials</p>
+                <p>Help distribute food,
+                    water & essentials</p>
             </div>
-            <div class="role-card">
-                <img src="assets/education.jpg" alt="Education">
+            <div class="role-card"><img src="assets/education.jpg" alt="Education">
                 <h4>Awareness & Education</h4>
                 <p>Teach disaster preparedness in communities</p>
             </div>
         </div>
-
         <!-- Registration Form -->
         <h2 class="section-title">Volunteer Registration</h2>
         <div class="form-wrapper">
             <form id="regForm" novalidate>
-                <div class="form-row">
-                    <input type="text" class="form-control" id="fullName" placeholder="Name" required>
+                <div class="form-row"><input type="text" class="form-control" id="fullName" placeholder="Name" required>
                     <div class="error-msg">Full Name is required</div>
                 </div>
-                <div class="form-row">
-                    <input type="number" class="form-control" id="age" placeholder="Age" min="18" max="100" required>
+                <div class="form-row"><input type="number" class="form-control" id="age" placeholder="Age" min="18"
+                        max="100" required>
                     <div class="error-msg">Valid age (18+) is required</div>
                 </div>
-                <div class="form-row">
-                    <input type="text" class="form-control" id="location" placeholder="Location" required>
+                <div class="form-row"><input type="text" class="form-control" id="location" placeholder="Location"
+                        required>
                     <div class="error-msg">Location is required</div>
                 </div>
                 <!-- Contact Info -->
-                <div class="form-row">
-                    <input type="tel" class="form-control" id="contact" placeholder="+91 9876543210" pattern="[0-9]{10}"
-                        maxlength="10" required>
+                <div class="form-row"><input type="tel" class="form-control" id="contact" placeholder="+91 9876543210"
+                        pattern="[0-9]{10}" maxlength="10" required>
                     <div class="error-msg">Valid 10-digit number required</div>
                 </div>
                 <!-- Role/Profession Dropdown -->
-                <div class="form-row">
-                    <select class="form-control" id="profession">
+                <div class="form-row"><select class="form-control" id="profession">
                         <option value="">Select Profession / Skill</option>
                         <option value="medical">Medical Professional</option>
                         <option value="student">Student</option>
                         <option value="engineer">Engineer</option>
                         <option value="other">Other</option>
                     </select>
+                    <div class="error-msg">Please select a profession</div>
                 </div>
-
                 <!-- Area of Interest -->
                 <!-- Area of Interest -->
                 <div class="interest-section">
-                    <div class="interest-header" onclick="toggleSection(this)" style="cursor: pointer;">
-                        <span>Area of Interest</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="interest-grid">
-                        <label class="custom-check-item c-green">
-                            <input type="checkbox" name="interest" value="medical" checked>
-                            <span class="check-box"></span>
-                            Medical Assistance
-                        </label>
-
-                        <label class="custom-check-item c-blue">
-                            <input type="checkbox" name="interest" value="rescue" checked>
-                            <span class="check-box"></span>
-                            Rescue Operations
-                        </label>
-
-                        <label class="custom-check-item c-green">
-                            <input type="checkbox" name="interest" value="awareness" checked>
-                            <span class="check-box"></span>
-                            Awareness & Education
-                        </label>
-
-                        <label class="custom-check-item c-green">
-                            <input type="checkbox" name="interest" value="supply" checked>
-                            <span class="check-box"></span>
-                            Supply Distribution
-                        </label>
-
-                        <label class="custom-check-item c-blue">
-                            <input type="checkbox" name="interest" value="helpline" checked>
-                            <span class="check-box"></span>
-                            Phone Helpline Support
-                        </label>
-
-                        <label class="custom-check-item c-green">
-                            <input type="checkbox" name="interest" value="logistics" checked>
-                            <span class="check-box"></span>
-                            Phone Helpline Support (Logistics)
-                        </label>
-                    </div>
-                    <div class="error-msg" id="interestError" style="margin: 0 20px 15px;">Select at least one area of
-                        interest</div>
+                    <div class="interest-header" onclick="toggleSection(this)" style="cursor: pointer;"><span>Area of
+                            Interest</span><i class="fas fa-chevron-down"></i></div>
+                    <div class="interest-grid"><label class="custom-check-item c-green"><input type="checkbox"
+                                name="interest" value="medical"><span class="check-box"></span>Medical Assistance
+                        </label><label class="custom-check-item c-blue"><input type="checkbox" name="interest"
+                                value="rescue"><span class="check-box"></span>Rescue Operations </label><label
+                            class="custom-check-item c-green"><input type="checkbox" name="interest"
+                                value="awareness"><span class="check-box"></span>Awareness & Education
+                        </label><label class="custom-check-item c-green"><input type="checkbox" name="interest"
+                                value="supply"><span class="check-box"></span>Supply Distribution </label><label
+                            class="custom-check-item c-blue"><input type="checkbox" name="interest"
+                                value="helpline"><span class="check-box"></span>Phone Helpline Support
+                        </label><label class="custom-check-item c-green"><input type="checkbox" name="interest"
+                                value="logistics"><span class="check-box"></span>Phone Helpline Support (Logistics)
+                        </label></div>
+                    <div class="error-msg" id="interestError" style="margin: 0 20px 15px;">
+                        Select at least one area of interest</div>
                 </div>
-
                 <div class="availability-row">
                     <!-- Availability -->
                     <!-- Availability Custom Design -->
@@ -730,99 +739,85 @@
                         style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; margin-bottom: 25px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
                         <div class="interest-header" onclick="toggleSection(this)"
                             style="background-color: #EBF5F8; padding: 15px 20px; font-weight: 600; color: #2c3e50; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                            <span>Availability</span>
-                            <i class="fas fa-chevron-down" style="color: #7f8c8d;"></i>
+                            <span>Availability</span><i class="fas fa-chevron-down" style="color: #7f8c8d;"></i>
                         </div>
-
                         <div class="availability-content"
                             style="padding: 0; flex: 1; display: flex; flex-direction: column;">
+                            <div class="error-msg" id="availError" style="margin: 10px 15px 0;">Please select an
+                                availability type</div>
                             <!-- Part-Time Option -->
-                            <div class="avail-option" style="padding: 15px; border-bottom: 1px solid #f0f0f0;">
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
-                                    <label class="custom-radio-item"
-                                        style="display: flex; align-items: center; cursor: pointer;">
-                                        <input type="radio" name="availType" value="part-time"
-                                            style="opacity: 0; position: absolute;">
-                                        <span class="radio-circle"
-                                            style="width: 20px; height: 20px; border: 2px solid #d1d5db; border-radius: 50%; margin-right: 12px; position: relative; display: flex; align-items: center; justify-content: center;">
-                                            <span class="inner-dot"
-                                                style="width: 10px; height: 10px; background-color: #5B9BD5; border-radius: 50%; display: none;"></span>
-                                        </span>
-                                        <div style="font-size: 0.95rem; color: #333;">
-                                            <strong>Part-Time</strong> (On-Ground)
+                                <div class="avail-option" style="padding: 15px; border-bottom: 1px solid #f0f0f0;">
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
+                                        <label class="custom-radio-item"
+                                            style="display: flex; align-items: center; cursor: pointer;"><input
+                                                type="radio" name="availType" value="part-time"
+                                                style="opacity: 0; position: absolute;"><span class="radio-circle"
+                                                style="width: 20px; height: 20px; border: 2px solid #d1d5db; border-radius: 50%; margin-right: 12px; position: relative; display: flex; align-items: center; justify-content: center;"><span
+                                                    class="inner-dot"
+                                                    style="width: 10px; height: 10px; background-color: #5B9BD5; border-radius: 50%; display: none;"></span></span>
+                                            <div style="font-size: 0.95rem; color: #333;">
+                                                <strong>Part-Time</strong>(On-Ground)
+                                            </div>
+                                        </label>
+                                        <div class="sub-options-inline"
+                                            style="display: flex; flex-direction: column; gap: 8px;">
+                                            <label
+                                                style="display: flex; align-items: center; font-size: 0.85rem; color: #666; cursor: pointer; opacity: 0.5;"
+                                                id="lblPart1"><input type="checkbox" id="partTimeCheck1"
+                                                    style="margin-right: 8px;" disabled>1-4-hours / day
+                                            </label><label
+                                                style="display: flex; align-items: center; font-size: 0.85rem; color: #666; cursor: pointer; opacity: 0.5;"
+                                                id="lblPart2"><input type="checkbox" id="partTimeCheck2"
+                                                    style="margin-right: 8px;" disabled>Weekends only </label>
                                         </div>
-                                    </label>
-
-                                    <div class="sub-options-inline"
-                                        style="display: flex; flex-direction: column; gap: 8px;">
-                                        <label
-                                            style="display: flex; align-items: center; font-size: 0.85rem; color: #666; cursor: pointer; opacity: 0.5;"
-                                            id="lblPart1">
-                                            <input type="checkbox" id="partTimeCheck1" style="margin-right: 8px;"
-                                                disabled> 1-4-hours / day
-                                        </label>
-                                        <label
-                                            style="display: flex; align-items: center; font-size: 0.85rem; color: #666; cursor: pointer; opacity: 0.5;"
-                                            id="lblPart2">
-                                            <input type="checkbox" id="partTimeCheck2" style="margin-right: 8px;"
-                                                disabled> Weekends only
-                                        </label>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Remote Volunteer Option -->
-                            <div class="avail-option" style="padding: 15px; border-bottom: 1px solid #f0f0f0;">
-                                <label class="custom-radio-item"
-                                    style="display: flex; align-items: flex-start; cursor: pointer;">
-                                    <input type="radio" name="availType" value="remote"
-                                        style="opacity: 0; position: absolute;">
-                                    <span class="icon-container"
-                                        style="margin-right: 12px; margin-top: 2px; color: #2980b9; font-size: 1.2rem;">
-                                        <i class="fas fa-laptop"></i>
-                                    </span>
-                                    <div>
-                                        <div
-                                            style="font-size: 0.95rem; color: #333; font-weight: 600; margin-bottom: 4px;">
-                                            Remote Volunteer</div>
-                                        <div style="font-size: 0.8rem; color: #666;">
-                                            Help from home: Phone helpline, data entry, awareness calls
+                                <!-- Remote Volunteer Option -->
+                                <div class="avail-option" style="padding: 15px; border-bottom: 1px solid #f0f0f0;">
+                                    <label class="custom-radio-item"
+                                        style="display: flex; align-items: flex-start; cursor: pointer;"><input
+                                            type="radio" name="availType" value="remote"
+                                            style="opacity: 0; position: absolute;"><span class="icon-container"
+                                            style="margin-right: 12px; margin-top: 2px; color: #2980b9; font-size: 1.2rem;"><i
+                                                class="fas fa-laptop"></i></span>
+                                        <div>
+                                            <div
+                                                style="font-size: 0.95rem; color: #333; font-weight: 600; margin-bottom: 4px;">
+                                                Remote Volunteer</div>
+                                            <div style="font-size: 0.8rem; color: #666;">
+                                                Help from home: Phone helpline,
+                                                data entry,
+                                                awareness calls </div>
                                         </div>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <!-- Emergency Option -->
-                            <div class="avail-option" style="padding: 15px;">
-                                <label class="custom-radio-item"
-                                    style="display: flex; align-items: flex-start; cursor: pointer;">
-                                    <input type="radio" name="availType" value="emergency"
-                                        style="opacity: 0; position: absolute;">
-                                    <span class="icon-container"
-                                        style="margin-right: 12px; margin-top: 2px; color: #e74c3c; font-size: 1.2rem;">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </span>
-                                    <div>
-                                        <div
-                                            style="font-size: 0.95rem; color: #333; font-weight: 600; margin-bottom: 4px;">
-                                            Emergency Only</div>
-                                        <div style="font-size: 0.8rem; color: #666;">
-                                            Available during disasters · On-call basis
+                                    </label>
+                                </div>
+                                <!-- Emergency Option -->
+                                <div class="avail-option" style="padding: 15px;"><label class="custom-radio-item"
+                                        style="display: flex; align-items: flex-start; cursor: pointer;"><input
+                                            type="radio" name="availType" value="emergency"
+                                            style="opacity: 0; position: absolute;"><span class="icon-container"
+                                            style="margin-right: 12px; margin-top: 2px; color: #e74c3c; font-size: 1.2rem;"><i
+                                                class="fas fa-exclamation-triangle"></i></span>
+                                        <div>
+                                            <div
+                                                style="font-size: 0.95rem; color: #333; font-weight: 600; margin-bottom: 4px;">
+                                                Emergency Only</div>
+                                            <div style="font-size: 0.8rem; color: #666;">
+                                                Available during disasters ·
+                                                On-call basis </div>
                                         </div>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <!-- Footer Note -->
-                            <div class="avail-footer"
-                                style="background-color: #EBF5F8; padding: 20px; font-size: 0.9rem; color: #444; border-top: 1px solid #e0e0e0; margin-top: auto;">
-                                You don't need to be on the ground to <strong>make a difference</strong>. Even one hour
-                                of help can save lives.
-                            </div>
+                                    </label></div>
+                                <!-- Footer Note -->
+                                <div class="avail-footer"
+                                    style="background-color: #EBF5F8; padding: 20px; font-size: 0.9rem; color: #444; border-top: 1px solid #e0e0e0; margin-top: auto;">
+                                    You don't need to be on the ground
+                                    to <strong>make a
+                                        difference</strong>. Even one
+                                    hour
+                                    of help can save lives. </div>
                         </div>
                     </div>
-
                     <style>
                         /* Radio Button Logic */
                         .custom-radio-item input:checked+.radio-circle {
@@ -851,20 +846,19 @@
 
                         <div style="padding: 15px 20px 20px; flex: 1; display: flex; flex-direction: column;">
                             <!-- Times Grid -->
-                            <div class="times-grid"
-                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                            <div class="times-grid" style="display: grid; gap: 12px; margin-bottom: 20px;">
                                 <label class="custom-check-item c-blue-simple">
-                                    <input type="checkbox" name="time" value="morning" checked>
+                                    <input type="checkbox" name="time" value="morning">
                                     <span class="square-box"></span>
                                     Morning
                                 </label>
                                 <label class="custom-check-item c-blue-simple">
-                                    <input type="checkbox" name="time" value="afternoon" checked>
+                                    <input type="checkbox" name="time" value="afternoon">
                                     <span class="square-box"></span>
                                     Afternoon
                                 </label>
                                 <label class="custom-check-item c-blue-simple">
-                                    <input type="checkbox" name="time" value="evening" checked>
+                                    <input type="checkbox" name="time" value="evening">
                                     <span class="square-box"></span>
                                     Evening
                                 </label>
@@ -874,7 +868,7 @@
                                     1-2 hrs per week
                                 </label>
                                 <label class="custom-check-item c-blue-simple">
-                                    <input type="checkbox" name="time" value="flexible" checked>
+                                    <input type="checkbox" name="time" value="flexible">
                                     <span class="square-box"></span>
                                     Flexible
                                 </label>
@@ -884,6 +878,8 @@
                                     3-5 hrs per week
                                 </label>
                             </div>
+                            <div class="error-msg" id="timeError" style="margin-bottom: 10px;">Select at least one
+                                preferred time</div>
 
                             <style>
                                 /* Simple Square Checkbox */
@@ -940,6 +936,8 @@
                                     <option value="sibling">Sibling</option>
                                     <option value="friend">Friend</option>
                                 </select>
+                                <div class="error-msg">Please select an emergency
+                                    contact</div>
                             </div>
 
                             <!-- Agreement -->
@@ -947,10 +945,12 @@
                                 style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.95rem; color: #333; margin-bottom: 10px;">
                                 <input type="checkbox" id="agreeBox" required
                                     style="width: 18px; height: 18px; margin-top: 3px;">
-                                <label for="agreeBox" style="line-height: 1.3;">I understand risks and agree to
+                                <label for="agreeBox" style="line-height: 1.3;">I
+                                    understand risks and agree to
                                     participate voluntarily.</label>
                             </div>
-                            <div class="error-msg" id="agreeError">You must agree to proceed</div>
+                            <div class="error-msg" id="agreeError">You must agree to
+                                proceed</div>
 
                             <!-- Register Button -->
                             <button type="submit" class="btn-submit"
@@ -973,13 +973,15 @@
                 <div class="impact-title">
                     <img src="https://img.icons8.com/color/48/000000/bar-chart.png" alt="chart icon"
                         style="width: 28px; height: 28px;">
-                    <h2 style="margin: 0; font-size: 1.6rem; color: #000; font-weight: 600;">Volunteer Impact</h2>
+                    <h2 style="margin: 0; font-size: 1.6rem; color: #000; font-weight: 600;">Volunteer
+                        Impact</h2>
                 </div>
 
                 <!-- Right Stats Card -->
                 <div class="impact-stats-container">
                     <div class="impact-stats-card">
-                        <h5 style="margin: 0 0 5px; color: #666; font-size: 0.9rem; font-weight: 500;">Registered
+                        <h5 style="margin: 0 0 5px; color: #666; font-size: 0.9rem; font-weight: 500;">
+                            Registered
                             Volunteers</h5>
                         <h2 style="margin: 0; font-size: 2rem; color: #333; font-weight: 400;">1,258</h2>
                     </div>
@@ -1080,15 +1082,21 @@
             let isValid = true;
 
             // Simple validation helper
-            function validateField(id, errorIndex = 0) { // errorIndex is relative to container
+            function validateField(id) {
                 const field = document.getElementById(id);
-                const error = field.parentElement.querySelector('.error-msg');
+                // Look for error-msg in parent or next sibling
+                let error = field.parentElement.querySelector('.error-msg') || field.nextElementSibling;
+                // If next sibling isn't error msg, try to find it in parent
+                if (!error || !error.classList.contains('error-msg')) {
+                    error = field.parentElement.querySelector('.error-msg');
+                }
+
                 if (!field.value.trim()) {
-                    error.style.display = 'block';
+                    if (error) error.style.display = 'block';
                     field.style.borderColor = '#e74c3c';
                     return false;
                 } else {
-                    error.style.display = 'none';
+                    if (error) error.style.display = 'none';
                     field.style.borderColor = '#e0e0e0';
                     return true;
                 }
@@ -1097,6 +1105,8 @@
             isValid &= validateField('fullName');
             isValid &= validateField('age');
             isValid &= validateField('location');
+            isValid &= validateField('profession');
+            isValid &= validateField('emergencyContact');
 
             // Phone validation
             const phone = document.getElementById('contact');
@@ -1120,6 +1130,26 @@
                 interestError.style.display = 'none';
             }
 
+            // Availability Type Validation
+            const availRadios = document.querySelectorAll('input[name="availType"]:checked');
+            const availError = document.getElementById('availError');
+            if (availRadios.length === 0) {
+                if (availError) availError.style.display = 'block';
+                isValid = false;
+            } else {
+                if (availError) availError.style.display = 'none';
+            }
+
+            // Preferred Time Validation
+            const timeChecks = document.querySelectorAll('input[name="time"]:checked');
+            const timeError = document.getElementById('timeError');
+            if (timeChecks.length === 0) {
+                if (timeError) timeError.style.display = 'block';
+                isValid = false;
+            } else {
+                if (timeError) timeError.style.display = 'none';
+            }
+
             // Agreement Validation
             const agree = document.getElementById('agreeBox');
             const agreeError = document.getElementById('agreeError');
@@ -1134,6 +1164,8 @@
                 // Show Success Modal
                 document.getElementById('successModal').style.display = 'flex';
                 form.reset();
+                // Reset visual states
+                updatePartTimeState();
             }
         });
 
