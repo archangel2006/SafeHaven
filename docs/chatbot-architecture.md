@@ -65,7 +65,7 @@ disaster-management context.
 - Updates theme (dark/light) dynamically.
 
 ### 4.2 Backend (`server.js`)
-- Exposes a REST API endpoint `/api/chat`.
+- Exposes a REST API endpoint `/chatbot`.
 - Receives user messages from the frontend.
 - Adds platform context and system prompt before forwarding messages to the LLM.
 - Returns the chatbot’s response to the frontend.
@@ -76,7 +76,7 @@ disaster-management context.
 - Example:
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
-
+```
 
 ## 5. Chatbot Logic
 
