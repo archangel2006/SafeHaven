@@ -1,4 +1,3 @@
-// server.js
 import express from 'express';
 import OpenAI from 'openai';
 import cors from 'cors';
@@ -10,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: '*', // restrict in production
+  origin: '*', 
 }));
 app.use(express.json());
 
@@ -22,16 +21,16 @@ const openai = new OpenAI({
 // Chatbot endpoint
 app.post('/chatbot', async (req, res) => {
   try {
-    const { message } = req.body;
+    const { conversation } = req.body;
 
-    // Validate user input
-    if (!message || typeof message !== 'string' || message.trim() === '') {
+    // Validate conversation
+    if (!Array.isArray(conversation) || conversation.length === 0) {
       return res.status(400).json({
-        text: 'Please enter a valid message.'
+        text: 'Conversation is missing or invalid.'
       });
     }
 
-   const systemPrompt = `
+    const systemPrompt = `
 You are the official AI assistant for the SafeHaven Disaster Management Platform.
 
 PRIMARY PURPOSE:
@@ -61,9 +60,8 @@ IMPORTANT BEHAVIOR RULES:
 RESPONSE STYLE (MANDATORY):
 • Use short paragraphs (2–4 lines maximum)
 • Use bullet points ONLY when listing steps or options
-• only one point in one line with bullet other in next line 
-• well structure
-
+• One bullet point per line
+• Well structured
 • Keep language simple, calm, and reassuring
 • Be action-oriented and platform-focused
 • Avoid long explanations or technical terms
@@ -90,16 +88,15 @@ COMMUNITY PAGE:
 • Encourage responsible and accurate information sharing
 `;
 
-
-    // OpenAI API call
+    
     const completion = await openai.chat.completions.create({
       model: 'gpt-4.1-mini',
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: message }
+        ...conversation
       ],
-      temperature: 0.3,   // focused replies
-      max_tokens: 120     // prevents long text
+      temperature: 0.3,
+      max_tokens: 120
     });
 
     const reply = completion.choices[0].message.content.trim();
@@ -117,5 +114,5 @@ COMMUNITY PAGE:
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ SafeHaven chatbot backend running on port ${PORT}`);
+  console.log(`SafeHaven chatbot backend running on port ${PORT}`);
 });

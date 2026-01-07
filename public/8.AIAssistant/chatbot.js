@@ -153,60 +153,33 @@ const chatbotHTML = `
   font-size: 15px;
   cursor: pointer;
 }
-
 @media (max-width: 600px) {
   #chatbot-popup {
     position: fixed;
-    top: env(safe-area-inset-top, 0);
     bottom: env(safe-area-inset-bottom, 0);
     left: 0;
     right: 0;
 
-    width: 100vw;
-    height: 100dvh;
+    width: 100%;
+    height: auto;          
+    max-height: 60vh;      
 
-    border-radius: 0;
-    max-height: none;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
   }
 
-  /* Sticky header so close button is ALWAYS visible */
+  #chatbot-messages {
+    overflow-y: auto;     
+  }
+
   #chatbot-header {
     position: sticky;
     top: 0;
     z-index: 10;
     font-size: 15px;
   }
-
-  #chatbot-toggle {
-    width: 52px;
-    height: 52px;
-  }
 }
 
-  #chatbot-toggle {
-    width: 52px;
-    height: 52px;
-  }
-
-  #chatbot-header {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 380px) {
-  #chatbot-popup {
-    height: 88vh;
-  }
-
-  .message {
-    font-size: 13px;
-  }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
 </style>
 `;
 // Insert chatbot into page
