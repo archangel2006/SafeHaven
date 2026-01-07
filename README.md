@@ -47,10 +47,7 @@ The project is built as a **social good initiative** and maintained as an **open
 git clone https://github.com/archangel2006/SafeHaven.git
 cd SafeHaven
 
-# Install dependencies
-npm install
-
-# Run HomePage.html Locally
+# Run index.html Locally
 ```
 
 ---
