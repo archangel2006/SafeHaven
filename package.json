@@ -1,0 +1,27 @@
+{
+  "name": "safehaven",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "**SafeHaven** is a crowdsourced disaster management platform designed to help individuals and communities stay informed, prepared, and connected during emergencies.   The platform focuses on awareness, coordination, safety guidance, and community-driven support during disasters.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Khushi5155/SafeHaven.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Khushi5155/SafeHaven/issues"
+  },
+  "homepage": "https://github.com/Khushi5155/SafeHaven#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "openai": "^6.15.0"
+  }
+}
