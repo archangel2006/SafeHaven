@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rescue Communication</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- === Navbar CSS and Fonts === -->
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
   <style>
     :root {
       --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
-      --body-bg: linear-gradient(135deg, #be7f7f, #d685a8c4); /* Soft pastel blue gradient */
-      --chat-bg: #ffffff; /* White background for chat container */
-      --user-bg: #b8e1c2;      /* Soft green for user messages */
+      --body-bg: linear-gradient(135deg, #be7f7f, #d685a8c4);
+      /* Soft pastel blue gradient */
+      --chat-bg: #ffffff;
+      /* White background for chat container */
+      --user-bg: #b8e1c2;
+      /* Soft green for user messages */
       --user-text: #0b3d0b;
-      --rescuer-bg: #b5d0dd;   /* Soft blue for rescuer messages */
+      --rescuer-bg: #b5d0dd;
+      /* Soft blue for rescuer messages */
       --rescuer-text: #0a2732;
       --text-color: #333;
-    }
-    /* Global Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--body-bg);
-      color: var(--text-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-      min-height: 100vh;
     }
     header {
       width: 100%;
@@ -37,8 +34,9 @@
       font-size: 2.5rem;
       text-align: center;
       position: relative;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+
     /* Back Button in Header (arrow icon only) */
     header .back-btn {
       position: absolute;
@@ -50,25 +48,29 @@
       color: #fff;
       transition: opacity 0.3s ease;
     }
+
     header .back-btn:hover {
       opacity: 0.8;
     }
+
     .container {
       width: 100%;
       max-width: 600px;
       background: var(--chat-bg);
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       margin: 2rem auto;
       overflow: hidden;
       display: flex;
       flex-direction: column;
     }
+
     .chat-box {
       display: flex;
       flex-direction: column;
       height: 400px;
     }
+
     .chat-messages {
       flex: 1;
       padding: 1rem;
@@ -77,6 +79,7 @@
       display: flex;
       flex-direction: column;
     }
+
     .message {
       margin-bottom: 1rem;
       padding: 10px 15px;
@@ -84,29 +87,41 @@
       max-width: 75%;
       word-wrap: break-word;
       animation: fadeIn 0.4s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
+
     .message.user {
       align-self: flex-end;
       background: var(--user-bg);
       color: var(--user-text);
       text-align: right;
     }
+
     .message.rescuer {
       align-self: flex-start;
       background: var(--rescuer-bg);
       color: var(--rescuer-text);
       text-align: left;
     }
+
     .chat-input {
       display: flex;
       border-top: 1px solid #ddd;
       background: #fff;
     }
+
     .chat-input input {
       flex: 1;
       padding: 1rem;
@@ -114,6 +129,7 @@
       font-size: 1rem;
       outline: none;
     }
+
     .chat-input button {
       padding: 1rem;
       border: none;
@@ -122,10 +138,12 @@
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
     }
+
     .chat-input button:hover {
       background: #e63946;
       transform: translateY(-2px);
     }
+
     footer {
       width: 100%;
       text-align: center;
@@ -137,18 +155,24 @@
     }
   </style>
 </head>
-<body>
-  <header>
-    <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
-    Rescue Communication
-  </header>
+<!-- ===Body with navbar=== -->
+
+<body data-nav="internal" data-title="Rescue">
+  <nav class="navbar">
+    <div class="nav-left" id="nav-left"></div>
+    <div class="nav-center" id="nav-center"></div>
+    <div class="nav-right" id="nav-right"></div>
+  </nav>
+  <script src="../js/navbar.js"></script>
+
   <div class="container">
     <div class="chat-box" id="chatBox">
       <div class="chat-messages" id="chatMessages">
         <!-- Chat messages will appear here -->
       </div>
       <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()">
+        <input type="text" id="chatInput" placeholder="Type your message..."
+          onkeydown="if(event.key==='Enter') sendMessage()">
         <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
       </div>
     </div>
@@ -156,12 +180,12 @@
   <footer>
     © 2025 AI Emergency Assistant. All rights reserved.
   </footer>
-  
+
   <script>
     function goBack() {
       window.location.href = "DisasterCoordination.html";
     }
-    
+
     // Generate a rescuer response based on keywords
     function getResponderResponse(message) {
       const msg = message.toLowerCase();
@@ -177,23 +201,23 @@
         return "Please remain calm, help is on the way.";
       }
     }
-    
+
     function sendMessage() {
       const input = document.getElementById('chatInput');
       const message = input.value.trim();
       if (!message) return;
-      
+
       const chatMessages = document.getElementById('chatMessages');
-      
+
       // Append user's message (right-aligned)
       const userMsg = document.createElement('div');
       userMsg.className = 'message user';
       userMsg.textContent = "You: " + message;
       chatMessages.appendChild(userMsg);
-      
+
       input.value = '';
       chatMessages.scrollTop = chatMessages.scrollHeight;
-      
+
       // Simulate rescuer response after 1.5 seconds
       setTimeout(() => {
         const response = getResponderResponse(message);
@@ -207,4 +231,5 @@
   </script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
+
 </html>

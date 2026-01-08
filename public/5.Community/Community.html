@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safe Heaven</title>
+    
+  <!-- === Navbar CSS and Fonts === -->
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,7 +19,7 @@
             background-color: #f4f4f4;
         }
         
-        .navbar {
+        .navbar2 {
             background-color: #333;
             overflow: hidden;
             padding: 10px;
@@ -25,13 +31,13 @@
             z-index: 1000;
         }
         
-        .navbar a {
+        .navbar2 a {
             color: white;
             text-decoration: none;
             padding: 10px;
         }
 
-        .navbar a:hover {
+        .navbar2 a:hover {
             background-color: #575757;
         }
 
@@ -49,9 +55,18 @@
         }
     </style>
 </head>
-<body>
+<body data-nav="primary" data-title="Community">
 
-    <div class="navbar">
+  <nav class="navbar">
+    <div class="nav-left" id="nav-left"></div>
+    <div class="nav-center" id="nav-center"></div>
+    <div class="nav-right" id="nav-right"></div>
+  </nav>
+
+  <!-- ===navbar load script=== -->
+  <script src="../js/navbar.js"></script>
+
+    <div class="navbar2">
         <a href="#discussion">Discussion Board</a>
         <a href="#live-updates">Live Updates</a>
         <a href="#missing">Missing Persons</a>

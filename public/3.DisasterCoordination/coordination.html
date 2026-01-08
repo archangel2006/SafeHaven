@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Emergency Coordination System</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- === Navbar CSS and Fonts === -->
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
   <style>
     :root {
       --primary-color: #ff416c;
       --secondary-color: #ff4b2b;
       --bg-color: #f6f9fc;
       --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-color);
-      color: #333;
-      padding: 1rem;
     }
     header {
       background: var(--header-bg);
@@ -28,6 +26,7 @@
       position: relative;
       text-align: center;
     }
+
     header .back-btn {
       position: absolute;
       left: 1rem;
@@ -38,40 +37,48 @@
       color: #fff;
       transition: opacity 0.3s ease;
     }
+
     header .back-btn:hover {
       opacity: 0.8;
     }
+
     .container {
       max-width: 1000px;
       margin: 2rem auto;
       padding: 1rem;
       text-align: center;
     }
+
     .info {
       font-size: 1.2rem;
       margin-bottom: 1rem;
     }
+
     .dashboard {
       background: #fff;
       padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       margin-top: 2rem;
       text-align: left;
     }
+
     .dashboard h2 {
       color: var(--primary-color);
       margin-bottom: 1rem;
       font-size: 1.8rem;
     }
+
     .resource {
       padding: 0.5rem 0;
       border-bottom: 1px solid #eee;
       font-size: 1.2rem;
     }
+
     .resource:last-child {
       border-bottom: none;
     }
+
     .refresh-btn {
       margin-top: 1.5rem;
       padding: 0.8rem 1.5rem;
@@ -81,11 +88,13 @@
       border-radius: 30px;
       font-size: 1.1rem;
       cursor: pointer;
-      transition:0.3s ease;
+      transition: 0.3s ease;
     }
+
     .refresh-btn:hover {
       background: var(--secondary-color);
     }
+
     footer {
       margin-top: 2rem;
       font-size: 0.9rem;
@@ -94,11 +103,16 @@
     }
   </style>
 </head>
-<body>
-  <header>
-    <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
-    Emergency Coordination System
-  </header>
+<!-- ===Body with navbar=== -->
+
+<body data-nav="internal" data-title="Coordination">
+  <nav class="navbar">
+    <div class="nav-left" id="nav-left"></div>
+    <div class="nav-center" id="nav-center"></div>
+    <div class="nav-right" id="nav-right"></div>
+  </nav>
+  <script src="../js/navbar.js"></script>
+
   <div class="container">
     <p class="info">
       Monitor and manage real-time resource allocation and communication among responders.
@@ -126,20 +140,20 @@
   <footer>
     © 2025 AI Emergency Assistant. All rights reserved.
   </footer>
-  
+
   <script>
     // Back button - redirect to index.html
     function goBack() {
       window.location.href = "DisasterCoordination.html";
     }
-    
+
     // Update resource counts randomly (simulating real-time updates)
     function updateResources() {
       // Generate random counts within desired ranges
       const ambulanceCount = Math.floor(Math.random() * 6) + 3; // 3 to 8
       const fireTruckCount = Math.floor(Math.random() * 3) + 2; // 2 to 4
       const rescueTeamCount = Math.floor(Math.random() * 8) + 5;  // 5 to 12
-      
+
       // Update the DOM with new counts
       document.getElementById("ambulanceCount").textContent = ambulanceCount;
       document.getElementById("fireTruckCount").textContent = fireTruckCount;
@@ -148,4 +162,5 @@
   </script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
+
 </html>

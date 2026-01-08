@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personalized Coordination Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- === Navbar CSS and Fonts === -->
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
   <style>
     :root {
       --primary-color: #ff416c;
       --bg-color: #f6f9fc;
     }
-    /* Global Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-color);
-      color: #333;
-      padding: 1rem;
-      text-align: center;
-    }
+
     header {
       background: linear-gradient(135deg, var(--primary-color), #ff4b2b);
       color: #fff;
@@ -28,6 +25,7 @@
       position: relative;
       text-align: center;
     }
+
     header .back-btn {
       position: absolute;
       left: 1rem;
@@ -38,52 +36,63 @@
       color: #fff;
       transition: opacity 0.3s ease;
     }
+
     header .back-btn:hover {
       opacity: 0.8;
     }
+
     .container {
       max-width: 900px;
       margin: 2rem auto;
       padding: 1rem;
     }
+
     .info {
       font-size: 1.2rem;
       margin-bottom: 1rem;
     }
+
     .org-list {
       text-align: left;
       background: #fff;
       padding: 1.5rem;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       margin-top: 2rem;
     }
+
     .org-item {
       padding: 0.8rem 0;
       border-bottom: 1px solid #eee;
       font-size: 1.1rem;
       line-height: 1.5;
     }
+
     .org-item:last-child {
       border-bottom: none;
     }
+
     .org-item strong {
       color: var(--primary-color);
     }
+
     .org-item a {
       text-decoration: none;
       color: #4a00e0;
       margin-right: 1rem;
     }
+
     .org-item a:hover {
       text-decoration: underline;
     }
+
     .call-link {
       color: #4a00e0;
       cursor: pointer;
       font-weight: bold;
       text-decoration: underline;
     }
+
     footer {
       margin-top: 2rem;
       font-size: 0.9rem;
@@ -93,11 +102,16 @@
     }
   </style>
 </head>
-<body>
-  <header>
-    <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
-    Personalized Coordination Hub
-  </header>
+<!-- ===Body with navbar=== -->
+
+<body data-nav="internal" data-title="Hub">
+  <nav class="navbar">
+    <div class="nav-left" id="nav-left"></div>
+    <div class="nav-center" id="nav-center"></div>
+    <div class="nav-right" id="nav-right"></div>
+  </nav>
+  <script src="../js/navbar.js"></script>
+
   <div class="container">
     <p class="info">
       Seamlessly collaborate with government agencies, NGOs, and private partners to enhance disaster response.
@@ -141,16 +155,17 @@
   <footer>
     © 2025 AI Emergency Assistant. All rights reserved.
   </footer>
-  
+
   <script>
     function goBack() {
       window.location.href = "DisasterCoordination.html.html";
     }
-    
+
     function placeCall(org) {
       alert("Call placed to " + org + ". We will connect you shortly.");
     }
   </script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
+
 </html>

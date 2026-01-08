@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Educated - Safe Heaven</title>
+<<<<<<< HEAD
     <style>
         * {
             box-sizing: border-box;
@@ -14,15 +16,24 @@
             margin: 0;
             padding: 0;
         }
+=======
+>>>>>>> a2a0bb0 (Fix navbar responsiveness across pages)
 
+    <!-- === Navbar CSS and Fonts === -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
+    <style>
         .dashboard {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #007bff;
-            padding: 15px;
+            background-color: white;
+            padding: 0px;
             color: white;
             font-size: 20px;
+            width: 100%;
         }
 
         .dashboard a {
@@ -163,10 +174,20 @@
 
     </style>
 </head>
-<body>
+
+<body data-nav="primary" data-title="What's Happening Around">
+
+    <nav class="navbar">
+        <div class="nav-left" id="nav-left"></div>
+        <div class="nav-center" id="nav-center"></div>
+        <div class="nav-right" id="nav-right"></div>
+    </nav>
+
+    <!-- ===navbar load script=== -->
+    <script src="../js/navbar.js"></script>
 
     <div class="dashboard">
-        <a href="HomePage.html">🏠</a>
+        <a href="/index.html">🏠</a>
         <h2>Get Educated</h2>
     </div>
 
@@ -229,4 +250,8 @@
     <script src="../8.AIAssistant/chatbot.js"></script>
 
 </body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a2a0bb0 (Fix navbar responsiveness across pages)
 </html>

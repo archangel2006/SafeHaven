@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Chatroom</title>
+    <!-- === Navbar CSS and Fonts === -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +23,7 @@
         .chat-header {
             background: #0073e6;
             color: white;
+            width: 100%;
             padding: 15px;
             display: flex;
             align-items: center;
@@ -85,7 +91,8 @@
             background: #0073e6;
         }
 
-        .chat-form input, .chat-form button {
+        .chat-form input,
+        .chat-form button {
             padding: 10px;
             border: none;
             font-size: 16px;
@@ -112,7 +119,15 @@
         }
     </style>
 </head>
-<body>
+<!-- ===Body with navbar=== -->
+
+<body data-nav="internal" data-title="Community Chatroom">
+    <nav class="navbar">
+        <div class="nav-left" id="nav-left"></div>
+        <div class="nav-center" id="nav-center"></div>
+        <div class="nav-right" id="nav-right"></div>
+    </nav>
+    <script src="../js/navbar.js"></script>
 
     <!-- Header with Profile & Clear Button -->
     <div class="chat-header">
@@ -212,4 +227,5 @@
     </script>
     
 </body>
+
 </html>

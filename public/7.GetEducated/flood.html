@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flood Safety - Safe Heaven</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> 
+    <!-- === Navbar CSS and Fonts === -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Flood Safety</h1>
-        </header>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+ .primary{
+   margin: 0 auto;
+   position:absolute
+ }
+</style>
+
+<body data-nav="internal" data-title="Flood Safety">
+    <nav class="navbar">
+        <div class="nav-left" id="nav-left"></div>
+        <div class="nav-center" id="nav-center"></div>
+        <div class="nav-right" id="nav-right"></div>
+    </nav>
+
+    <!-- ===navbar load script=== -->
+    <script src="../js/navbar.js"></script>
 
         <section class="disaster-info">
             <h2>What is a Flood?</h2>

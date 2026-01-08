@@ -1,0 +1,118 @@
+/* ================= NAVBAR CONTAINER ================= */
+.navbar {
+  height: 90px;
+  background: #3f5ea9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  color: white;
+
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* ================= LEFT / CENTER / RIGHT ================= */
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.nav-center {
+  flex: 1;
+  justify-content: center;
+}
+.nav-title {
+  font-size: 22px;      
+  font-weight: 600;
+}
+
+/* ================= LOGO ================= */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.logo-img {
+  height: 42px;
+  width: 40px;
+  border-radius: 6px;
+}
+
+.logo-text {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+/* ================= NAV ITEMS (ICON + TEXT) ================= */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* ================= ICONS ================= */
+.navbar .material-symbols-outlined {
+  font-size: 40px;  
+  line-height: 1;
+}
+
+.profile-icon {
+  font-size: 30px;
+  cursor: pointer;
+  color: aliceblue;
+  text-decoration: none;
+}
+.href-none {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= BACK BUTTON ================= */
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  /* hide text ONLY, keep icons stable */
+  .logo-text{
+    font-size: 20px;
+  }
+  .nav-item span:last-child {
+    display: none;
+  }
+
+  .nav-right {
+    gap: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar {
+    height: 64px;
+    padding: 0 12px;
+  }
+
+  .navbar .material-symbols-outlined {
+    font-size: 26px;
+  }
+
+  .logo-img {
+    height: 34px;
+    width: 34px;
+  }
+}

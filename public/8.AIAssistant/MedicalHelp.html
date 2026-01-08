@@ -7,6 +7,11 @@
   <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        
+    <!-- === Navbar CSS and Fonts === -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
   <style>
     :root {
       --primary-color: #4a00e0;
@@ -81,8 +86,16 @@
     }
   </style>
 </head>
-<body>
-  <header>Medical Help</header>
+<body data-nav="internal" data-title="Medical Help">
+    <nav class="navbar">
+        <div class="nav-left" id="nav-left"></div>
+        <div class="nav-center" id="nav-center"></div>
+        <div class="nav-right" id="nav-right"></div>
+    </nav>
+
+    <!-- ===navbar load script=== -->
+    <script src="../js/navbar.js"></script>
+
   <div class="container">
     <div class="instructions">
       <h2>First-Aid Instructions</h2>

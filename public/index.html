@@ -7,9 +7,15 @@
     <title>Safe Heaven</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+̥
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <!-- === NAVBAR CSS AND FONTS === -->
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 
     <style>
         * {
@@ -25,11 +31,18 @@
 
         .top-panel {
             display: flex;
-            align-items: left;
-            padding: 30px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            width: 100%;
             background-color: #52caec;
-            justify-content: left;
+            flex-wrap: wrap;
+            /* allow wrapping */
+            height: auto;
+            /* ensure auto height */
         }
+
 
         .top-panel img {
             height: 80px;
@@ -186,9 +199,9 @@
             margin-right: 10px;
         }
 
-        
-            .map-section {
-                padding-top: 6rem; 
+
+        .map-section {
+            padding-top: 6rem;
             padding: 4rem 1.5rem;
             max-width: 1200px;
             margin: auto;
@@ -262,20 +275,14 @@
             padding: 0.6rem 0;
             background: #f9fafb;
         }
-       
+    
 
     </style>
 </head>
 
-<body>
-    <div class="top-panel">
+<body data-nav="home">
 
-        <a href="index.html">
-            <img style="border-radius: 20px;"
-                src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Logo">
-        </a>
-        <h1>Safe Haven</h1>
-    </div>
+    <div id="navbar"></div>
     <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
     <button class="sos-button" onclick="sendSOS()">Emergency! SOS!</button>
     <div class="container">
@@ -453,8 +460,6 @@
             }
         }
     </script>
-   <script src="../public/8.AIAssistant/chatbot.js"></script>
-
 </body>
 
 </html>

@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Updates - Safe Heaven</title>
+      <!-- === Navbar CSS and Fonts === -->
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,10 +70,16 @@
         }
     </style>
 </head>
-<body>
+<body data-nav="internal" data-title="Live Updates">
+  <nav class="navbar">
+    <div class="nav-left" id="nav-left"></div>
+    <div class="nav-center" id="nav-center"></div>
+    <div class="nav-right" id="nav-right"></div>
+  </nav>
 
-    <h2>Live Updates</h2>
-    
+  <!-- ===navbar load script=== -->
+  <script src="../js/navbar.js"></script>
+
     <div class="news-container">
         <div class="news-item">
             <img src="https://i0.wp.com/www.directrelief.org/wp-content/uploads/2018/02/Japan-Earthquake-and-Tsunami-2011-68012881362.jpg?w=1323&ssl=1" alt="Aftermath of 2011 Tsunami">

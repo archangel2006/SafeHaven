@@ -106,7 +106,13 @@ cd SafeHaven
    │   ├── MaterialDonations.html
    │   ├── MonetaryDonations.html
    │   └── Volunteer.html
-   │
+   |
+   |__ Components ---navbar.html
+   |
+   |__css -- navbar.css
+   |
+   |__ js -- navbar.js
+   |
    └── .gitattributes
 ```
 

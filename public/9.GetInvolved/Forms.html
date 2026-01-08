@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Disaster Relief - SafeHaven</title>
+          <!-- === Navbar CSS and Fonts === -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -472,10 +476,15 @@
         }
     </style>
 </head>
-<body>
-    <div class="top-header" id="pageTitle">
-        Disaster in India
-    </div>
+<body data-nav="internal" data-title="Disaster Relief">
+    <nav class="navbar">
+        <div class="nav-left" id="nav-left"></div>
+        <div class="nav-center" id="nav-center"></div>
+        <div class="nav-right" id="nav-right"></div>
+    </nav>
+
+    <!-- ===navbar load script=== -->
+    <script src="../js/navbar.js"></script>
 
     <div class="main-container">
         <div class="form-header">
