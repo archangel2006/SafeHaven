@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Educated - Safe Heaven</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -53,7 +56,7 @@
         }
 
         .panel {
-            width: 22%;
+            width: 30%;
             background-color: #ffffff;
             padding: 20px;
             margin: 20px 0;
@@ -61,6 +64,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             cursor: pointer;
+            transition: transform 0.3s;
         }
 
         .panel img {
@@ -80,7 +84,6 @@
 
         .panel:hover {
             transform: scale(1.05);
-            transition: transform 0.3s;
         }
 
         .panel a {
@@ -116,18 +119,33 @@
     }
 
     .panel {
-        width: 90%;
+        width: 100%;
+        max-width: 400px;
     }
 
     .panel img {
         width: 100%;
     }
-}
+.panel:hover {
+                transform: none;   /* stop zoom effect */
+            }
 
+            h2 {
+                font-size: 20px;
+            }
+
+            .panel h3 {
+                font-size: 16px;
+            }
+            .panel p {
+                font-size: 14px;
+            }
+        }
+        
 /* ---------- SMALL MOBILE (≤ 480px) ---------- */
 @media (max-width: 480px) {
     .dashboard h2 {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .panel {
@@ -135,11 +153,11 @@
     }
 
     .panel h3 {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .panel p {
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
