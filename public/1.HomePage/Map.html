@@ -1,71 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map with Home Button</title>
-    
-    <!-- Leaflet.js CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Leaflet.js JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Leaflet Control Geocoder (for search functionality) -->
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #map { height: 500px; width: 100%; margin-top: 10px; }
-        #homeButton {
-            margin-top: 10px;
-            padding: 8px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        #homeButton:hover {
-            background-color: #0056b3;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SafeHaven | Home</title>
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Geocoder -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #f5f7fb;
+  color: #1e293b;
+}
+
+.map-section {
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.map-header h2 {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.map-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.map-actions button,
+.map-actions a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.home-btn {
+  background: #2563eb;
+  color: #fff;
+}
+
+.view-map {
+  background: #f1f5f9;
+  color: #2563eb;
+  border: 1px solid #e5e7eb;
+}
+
+.map-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.map-wrapper {
+  height: 320px;
+  margin: 1rem;
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.map-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.map-footer {
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-align: center;
+  padding: 0.6rem 0;
+  background: #f9fafb;
+}
+
+@media (max-width: 768px) {
+  .map-wrapper {
+    height: 260px;
+  }
+}
+</style>
 </head>
+
 <body>
-    <h3>Location</h3>
-    <button id="homeButton">🏠 Home</button>
-    <div id="map"></div>
 
-    <script>
-        // Home location coordinates (Shibuya, Tokyo)
-        var homeCoords = [35.661777, 139.704051];
+<section class="map-section" id="map-section">
 
-        // Initialize the map centered on home location
-        var map = L.map('map').setView(homeCoords, 15); 
+  <div class="map-header">
+    <h2>📍 Location Near You</h2>
 
-        // Load OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+    <div class="map-actions">
+      <!-- HOME = RESET MAP -->
+      <button id="homeButton" class="home-btn">🏠 Home</button>
 
-        // Fixed home marker at Shibuya, Tokyo
-        var homeMarker = L.marker(homeCoords).addTo(map)
-            .bindPopup("<b>Home Location</b><br>1-1 Udagawacho, Shibuya City, Tokyo, Japan")
-            .openPopup();
+      <a href="full-map.html" target="_blank" class="view-map">
+        View Full Map →
+      </a>
+    </div>
+  </div>
 
-        // Add a search control (map moves, home marker stays)
-        L.Control.geocoder({
-            defaultMarkGeocode: true
-        }).on('markgeocode', function(e) {
-            var latlng = e.geocode.center;
-            map.setView(latlng, 15); // Move map to searched location
-        }).addTo(map);
+  <div class="map-card">
+    <div class="map-wrapper" id="mapWrapper">
+      <div id="map"></div>
+    </div>
 
-        // Home button resets map to original home location
-        document.getElementById("homeButton").addEventListener("click", function() {
-            map.setView(homeCoords, 15); // Reset map to home
-        });
-    </script>
+    <div class="map-footer">
+      Location data is approximate. For full map features, click “View Full Map”.
+    </div>
+  </div>
+
+</section>
+
+<script>
+let mapLoaded = false;
+let map;
+let homeMarker;
+
+// Home location (India Gate, New Delhi)
+const homeCoords = [28.6129, 77.2295];
+const homeZoom = 15;
+
+function initMap() {
+  if (mapLoaded) return;
+
+  map = L.map("map").setView(homeCoords, homeZoom);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
+  }).addTo(map);
+
+  // Fixed Home Marker
+  homeMarker = L.marker(homeCoords)
+    .addTo(map)
+    .bindPopup(
+      "<b>Home Location</b><br>India Gate, New Delhi, India",
+      { autoClose: false, closeOnClick: false }
+    )
+    .openPopup();
+
+  // Search control (moves map, not home)
+  L.Control.geocoder({
+    collapsed: false,
+    placeholder: "Search location",
+    defaultMarkGeocode: true
+  })
+  .on("markgeocode", e => {
+    map.setView(e.geocode.center, homeZoom);
+  })
+  .addTo(map);
+
+  // Home button resets map
+  document.getElementById("homeButton").addEventListener("click", () => {
+    map.setView(homeCoords, homeZoom);
+    homeMarker.openPopup();
+  });
+
+  document.getElementById("mapWrapper").classList.add("visible");
+  mapLoaded = true;
+}
+
+// Lazy load
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    initMap();
+    observer.disconnect();
+  }
+});
+
+observer.observe(document.getElementById("map-section"));
+</script>
+
 </body>
 </html>
