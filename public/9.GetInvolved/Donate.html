@@ -36,7 +36,7 @@
         header {
             background-color: var(--main-theme);
             padding: 0 5%;
-            height: 50px; /* Reduced from 65px */
+            height: 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,7 +45,7 @@
         }
 
         .header-logo-box {
-            width: 38px; /* Reduced from 48px */
+            width: 38px;
             height: 38px;
             background: white;
             border-radius: 6px;
@@ -61,45 +61,53 @@
         }
 
         header h1 {
-            font-size: 1.2rem; /* Reduced from 1.5rem */
+            font-size: 1.2rem;
             font-weight: 500;
             margin: 0;
             flex-grow: 1;
             text-align: center;
         }
 
+        /* White Symbolic Person Icon */
+        .user-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            cursor: pointer;
+        }
+
         /* --- SCALED Page Layout --- */
         .page-wrapper {
             max-width: 900px;
-            margin: 15px auto; /* Reduced from 40px */
+            margin: 15px auto;
             padding: 0 20px;
         }
 
         .main-title-section {
             text-align: center;
-            margin-bottom: 15px; /* Reduced from 35px */
+            margin-bottom: 15px;
         }
 
         .main-title-section h2 {
             font-weight: 600;
-            font-size: 1.4rem; /* Reduced from 1.8rem */
+            font-size: 1.4rem;
             margin-bottom: 4px;
         }
 
         /* --- SCALED Donation Buttons --- */
         .donation-options {
             display: flex;
-            gap: 15px; /* Reduced from 25px */
+            gap: 15px;
             justify-content: center;
-            margin-bottom: 20px; /* Reduced from 40px */
+            margin-bottom: 20px;
         }
 
         .btn-glass {
             flex: 1;
-            padding: 12px; /* Reduced from 22px */
+            padding: 12px;
             border-radius: 10px;
             border: none;
-            font-size: 0.95rem; /* Reduced from 1.1rem */
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -130,19 +138,19 @@
             background: var(--glass-white);
             backdrop-filter: blur(12px);
             border-radius: 15px;
-            padding: 20px; /* Reduced from 35px */
+            padding: 20px;
             border: 1px solid var(--border-glass);
             box-shadow: var(--shadow-soft);
-            margin-bottom: 20px; /* Reduced from 35px */
+            margin-bottom: 20px;
             text-align: center;
         }
 
         .card-title {
-            font-size: 0.9rem; /* Reduced from 1.1rem */
+            font-size: 0.9rem;
             color: var(--main-theme);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px; /* Reduced from 25px */
+            margin-bottom: 15px;
             font-weight: 500;
         }
 
@@ -151,15 +159,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px; /* Reduced from 40px */
+            gap: 30px;
             flex-wrap: wrap;
         }
 
         .impact-big-text {
-            font-size: 2rem; /* Reduced from 2.8rem */
+            font-size: 2rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 15px; /* Reduced from 35px */
+            margin-bottom: 15px;
             display: flex;
             align-items: baseline;
             justify-content: center;
@@ -167,17 +175,17 @@
         }
 
         .impact-small-text {
-            font-size: 1rem; /* Reduced from 1.2rem */
+            font-size: 1rem;
             font-weight: 400;
             color: #636e72;
         }
 
         .chart-box {
-            width: 220px; /* Reduced from 300px */
-            height: 220px; /* Reduced from 300px */
+            width: 220px;
+            height: 220px;
             background: white;
             border-radius: 50%;
-            padding: 10px; /* Reduced from 15px */
+            padding: 15px; /* Added padding to prevent logic clipping */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             display: flex;
             align-items: center;
@@ -187,7 +195,7 @@
         .legend-grid {
             display: flex;
             flex-direction: column;
-            gap: 8px; /* Reduced from 12px */
+            gap: 8px;
             text-align: left;
         }
 
@@ -196,14 +204,14 @@
             align-items: center;
             gap: 10px;
             background: white;
-            padding: 8px 15px; /* Reduced from 10px 20px */
+            padding: 8px 15px;
             border-radius: 8px;
-            min-width: 180px; /* Reduced from 220px */
+            min-width: 180px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-            font-size: 0.8rem; /* Reduced from 0.9rem */
+            font-size: 0.8rem;
         }
 
-        /* --- Testimonials Section (Unchanged logic, scaled width) --- */
+        /* --- FIXED Testimonials Section --- */
         .testimonial-viewport {
             overflow-x: auto;
             width: 100%;
@@ -215,7 +223,12 @@
 
         .testimonial-viewport::-webkit-scrollbar { display: none; }
 
-        .testimonial-track { display: flex; gap: 20px; width: max-content; }
+        .testimonial-track { 
+            display: flex; 
+            gap: 20px; 
+            width: max-content;
+            padding: 5px 10px; /* Padding ensures card shadow isn't clipped */
+        }
 
         .test-card {
             background: white;
@@ -223,10 +236,10 @@
             border-radius: 15px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
-            width: 415px;
+            width: 380px; /* Reduced width slightly to prevent container cut-off */
             flex-shrink: 0;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            scroll-snap-align: center;
+            scroll-snap-align: start; /* Changed to start for better visibility alignment */
         }
 
         .test-card:hover {
@@ -296,9 +309,8 @@
             <img src="../../assets/9.getinvolved/logo.jpg" alt="Safe Haven Logo">
         </div>
         <h1>Donate</h1>
-        <div style="cursor: pointer; font-size: 1.2rem;">👤</div>
+        <svg class="user-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
     </header>
-
 
     <div class="page-wrapper">
 
@@ -371,7 +383,6 @@
 
         <div class="glass-card">
             <h3 class="card-title">Our NGO & Government Partners</h3>
-            <p style="font-size: 0.9rem; color: #666; margin-bottom: 25px;">We collaborate with trusted Indian NGOs and government bodies to ensure your donations reach the right people.</p>
             <div class="partner-white-box">
                 <div class="partner-col">
                     <img src="../../assets/9.GetInvolved/NDRF.png" alt="NDRF Logo">
@@ -398,7 +409,8 @@
             data: {
                 labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid'],
                 datasets: [{
-                    data: [10000000, 5000000, 3000000],
+                    // ₹ 1 CR (10,000,000) is exactly 40% of ₹ 2.5 CR (25,000,000)
+                    data: [10000000, 9000000, 6000000],
                     backgroundColor: ['#F36682', '#46A1FE', '#FEC467'],
                     borderWidth: 0,
                     hoverOffset: 15
@@ -407,6 +419,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: { padding: 10 }, /* Fixes edge clipping */
                 plugins: { legend: { display: false } }
             }
         });
@@ -415,13 +428,14 @@
         const dots = document.querySelectorAll('.dot');
 
         function moveCarousel(index) {
-            const scrollAmount = index * (415 * 2 + 40); 
+            // Updated move calculation based on new 380px card width + 20px gap
+            const scrollAmount = index * (380 * 2 + 40); 
             viewport.scrollTo({ left: scrollAmount, behavior: 'smooth' });
         }
 
         viewport.addEventListener('scroll', () => {
             const scrollLeft = viewport.scrollLeft;
-            const index = Math.round(scrollLeft / (435 * 2));
+            const index = Math.round(scrollLeft / (380 * 2 + 40));
             dots.forEach((dot, idx) => {
                 if (idx === index) dot.classList.add('active');
                 else dot.classList.remove('active');
