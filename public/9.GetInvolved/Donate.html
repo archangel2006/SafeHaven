@@ -1,152 +1,448 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donation Page</title>
+    <title>Donate | Safe Haven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Official Palette */
+            --main-theme: #3C5DA2;
+            --accent-pink: #F36682;
+            --accent-yellow: #FEC467;
+            --accent-blue-light: #46A1FE;
+            --button-base: #2776DE;
+
+            /* Visual Specs */
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+            --glass-white: rgba(255, 255, 255, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.4);
+            --shadow-soft: 0 8px 32px rgba(31, 38, 135, 0.08);
+            --text-dark: #1a2a44;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .panel {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .panel button {
-            padding: 15px 25px;
-            font-size: 18px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            border-radius: 8px;
-        }
-        .panel button:hover {
-            background-color: #0056b3;
-        }
-        .tracker, .ngo-section {
-            margin-top: 30px;
-        }
-        .cause {
-            padding: 10px;
-            background-color: #f9f9f9;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        .ngo-list {
-            list-style-type: none;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            margin: 0;
             padding: 0;
         }
-        .ngo-list li {
-            margin: 10px 0;
+
+        /* --- SCALED Navbar --- */
+        header {
+            background-color: var(--main-theme);
+            padding: 0 5%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        .ngo-list a {
-            color: #007bff;
-            text-decoration: none;
+
+        .header-logo-box {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
         }
-        .ngo-list a:hover {
-            text-decoration: underline;
+
+        .header-logo-box img {
+            height: 100%;
+            width: auto;
         }
-        /* Chart container */
-        .chart-container {
-            position: relative;
-            width: 30%;
-            margin: 0 auto;
+
+        header h1 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
         }
+
+        /* White Symbolic Person Icon */
+        .user-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            cursor: pointer;
+        }
+
+        /* --- SCALED Page Layout --- */
+        .page-wrapper {
+            max-width: 900px;
+            margin: 15px auto;
+            padding: 0 20px;
+        }
+
+        .main-title-section {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .main-title-section h2 {
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* --- SCALED Donation Buttons --- */
+        .donation-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-glass {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .monetary-btn {
+            background: linear-gradient(to right, var(--button-base), var(--accent-blue-light));
+            color: white;
+        }
+
+        .material-btn {
+            background: linear-gradient(to right, #f2d9c0, var(--accent-yellow));
+            color: rgb(63, 56, 56);
+        }
+
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- SCALED Glassmorphism Sections --- */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid var(--border-glass);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: var(--main-theme);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* --- SCALED Tracker Layout --- */
+        .impact-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .impact-big-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .impact-small-text {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #636e72;
+        }
+
+        .chart-box {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border-radius: 50%;
+            padding: 15px; /* Added padding to prevent logic clipping */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .legend-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .legend-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            min-width: 180px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            font-size: 0.8rem;
+        }
+
+        /* --- FIXED Testimonials Section --- */
+        .testimonial-viewport {
+            overflow-x: auto;
+            width: 100%;
+            margin-bottom: 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .testimonial-viewport::-webkit-scrollbar { display: none; }
+
+        .testimonial-track { 
+            display: flex; 
+            gap: 20px; 
+            width: max-content;
+            padding: 5px 10px; /* Padding ensures card shadow isn't clipped */
+        }
+
+        .test-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            width: 380px; /* Reduced width slightly to prevent container cut-off */
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-snap-align: start; /* Changed to start for better visibility alignment */
+        }
+
+        .test-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(60, 93, 162, 0.15);
+        }
+
+        .test-card p { font-size: 0.95rem; line-height: 1.6; color: #444; margin-bottom: 15px; }
+
+        .author-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .pagination { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #dfe6e9;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            padding: 0;
+        }
+
+        .dot.active { width: 28px; background: var(--main-theme); border-radius: 10px; }
+
+        /* --- Partners Section --- */
+        .partner-white-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #f1f1f1;
+        }
+
+        .partner-col {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .partner-col img { height: 60px; width: auto; object-fit: contain; }
+
+        .partner-col span { font-size: 0.85rem; font-weight: 500; text-align: left; line-height: 1.2; }
+
+        .v-divider { width: 1px; height: 60px; background-color: #e0e0e0; }
     </style>
-    <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <h2>Support Disaster Relief Efforts</h2>
-        <p>Select the type of donation you'd like to make:</p>
 
-        <!-- Donation Options Panel -->
-        <div class="panel">
-            <button onclick="window.location.href='MonetaryDonations.html'">💳 Monetary Donations</button>
-            <button onclick="window.location.href='MaterialDonations.html'">🎒 Material Donations</button>
+    <header>
+        <div class="header-logo-box">
+            <img src="../../assets/9.getinvolved/logo.jpg" alt="Safe Haven Logo">
+        </div>
+        <h1>Donate</h1>
+        <svg class="user-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+    </header>
+
+    <div class="page-wrapper">
+
+        <div class="main-title-section">
+            <h2>Support Disaster Relief Efforts</h2>
+            <p style="color: #636e72; font-size: 0.9rem;">Select the type of donation you'd like to make:</p>
         </div>
 
-        <!-- Real-Time Impact Tracker -->
-        <div class="tracker">
-            <h3>Real-Time Impact Tracker</h3>
-            
-            <!-- Pie Chart -->
-            <div class="chart-container">
-                <canvas id="donationChart"></canvas>
+        <div class="donation-options">
+            <button class="btn-glass monetary-btn" onclick="window.location.href='MonetaryDonations.html'">
+                💵 Monetary Donations
+            </button>
+            <button class="btn-glass material-btn" onclick="window.location.href='MaterialDonations.html'">
+                📦 Material Donations
+            </button>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="card-title">Real-Time Impact Tracker</h3>
+            <div class="impact-big-text">
+                ₹ 2.5 CR
+                <span class="impact-small-text">raised in total!</span>
             </div>
-
-            <h4>📝 Stories & Testimonials</h4>
-            <ul type="*">
-                <li>"Thanks to the donations, we were able to rebuild our house." – Affected Family in India</li>
-                <li>"The food aid arrived just in time for my family." – Flood Victim in Nepal</li>
-                <li>"Your generous donations helped save lives during the earthquake." – Rescue Team in Turkey</li>
-                <li>"I lost everything in the fire, but the community's support has helped me start over." – LA Wildfire Survivor</li>
-            </ul>
+            <div class="impact-content">
+                <div class="chart-box"><canvas id="donationChart"></canvas></div>
+                <div class="legend-grid">
+                    <div class="legend-pill"><span style="color: var(--accent-pink)">■</span> Disaster Relief Fund</div>
+                    <div class="legend-pill"><span style="color: var(--accent-yellow)">■</span> Food & Medical Aid</div>
+                    <div class="legend-pill"><span style="color: var(--accent-blue-light)">■</span> Rebuilding Communities</div>
+                </div>
+            </div>
         </div>
 
-        <!-- NGO Partnership Section -->
-        <div class="ngo-section">
-            <h3>Our NGO & Government Partners</h3>
-            <p>We collaborate with trusted NGOs and government programs to make sure your donations reach the right people.</p>
-            <ul class="ngo-list">
-                <li><a href="https://www.ifrc.org/" target="_blank">International Federation of Red Cross and Red Crescent Societies (IFRC)</a></li>
-                <li><a href="https://www.oxfam.org/" target="_blank">Oxfam International</a></li>
-                <li><a href="https://www.savethechildren.org/" target="_blank">Save the Children</a></li>
-                <li><a href="https://www.worldvision.org/" target="_blank">World Vision International</a></li>
-                <li><a href="https://www.doctorswithoutborders.org/" target="_blank">Doctors Without Borders (MSF)</a></li>
-                <li><a href="https://www.unicef.org/" target="_blank">UNICEF</a></li>
-                <li><a href="https://www.globalgiving.org/" target="_blank">GlobalGiving</a></li>
-            </ul>
+        <div class="glass-card">
+            <h3 class="card-title">📝 Stories & Testimonials</h3>
+            <div class="testimonial-viewport" id="testimonialViewport">
+                <div class="testimonial-track">
+                    <div class="test-card">
+                        <p>“Thanks to the donations, we were able to rebuild our house after the floods in Wayanad.”</p>
+                        <div class="author-box"><span style="color:var(--accent-pink)">📍</span> Rajesh Kumar, Kerala</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“The food aid arrived just in time for my family after the cyclone in Odisha.”</p>
+                        <div class="author-box"><span style="color:var(--main-theme)">📍</span> Sunita Devi, Odisha</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“Generous medical kits helped save lives during the flash floods in Himachal.”</p>
+                        <div class="author-box"><span style="color:#1a2a44">📍</span> Amit Sharma, Shimla</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“Support from Safe Haven helped me start over after the cyclone hits Gujarat coast.”</p>
+                        <div class="author-box"><span style="color:var(--accent-yellow)">📍</span> Meera Patel, Gujarat</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“The construction materials provided allowed us to reopen our village school in Bihar.”</p>
+                        <div class="author-box"><span style="color:var(--accent-pink)">📍</span> Suresh Singh, Patna</div>
+                    </div>
+                    <div class="test-card">
+                        <p>“Immediate clean water and sanitation supplies prevented diseases in our camp.”</p>
+                        <div class="author-box"><span style="color:var(--main-theme)">📍</span> Kavita Reddy, Andhra Pradesh</div>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination">
+                <button class="dot active" onclick="moveCarousel(0)"></button>
+                <button class="dot" onclick="moveCarousel(1)"></button>
+                <button class="dot" onclick="moveCarousel(2)"></button>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h3 class="card-title">Our NGO & Government Partners</h3>
+            <div class="partner-white-box">
+                <div class="partner-col">
+                    <img src="../../assets/9.GetInvolved/NDRF.png" alt="NDRF Logo">
+                    <span>National Disaster Response Force (NDRF)</span>
+                </div>
+                <div class="v-divider"></div>
+                <div class="partner-col">
+                    <img src="../../assets/9.GetInvolved/IRCS.png" alt="IRCS Logo">
+                    <span>Indian Red Cross Society (IRCS)</span>
+                </div>
+                <div class="v-divider"></div>
+                <div class="partner-col">
+                    <img src="../../assets/9.GetInvolved/UNICEF.png" alt="UNICEF India Logo">
+                    <span>UNICEF India</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Script for Pie Chart -->
     <script>
-        var ctx = document.getElementById('donationChart').getContext('2d');
-        var donationChart = new Chart(ctx, {
+        const ctx = document.getElementById('donationChart').getContext('2d');
+        new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: ['Disaster Relief Fund', 'Rebuilding Communities', 'Food & Medical Aid'],
                 datasets: [{
-                    label: 'Donation Distribution',
-                    data: [10000000, 5000000, 3000000],  // Example data
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    // ₹ 1 CR (10,000,000) is exactly 40% of ₹ 2.5 CR (25,000,000)
+                    data: [10000000, 9000000, 6000000],
+                    backgroundColor: ['#F36682', '#46A1FE', '#FEC467'],
+                    borderWidth: 0,
+                    hoverOffset: 15
                 }]
             },
             options: {
                 responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return tooltipItem.label + ': ₹ ' + tooltipItem.raw.toLocaleString();
-                            }
-                        }
-                    }
-                },
-                aspectRatio: 1,  // Ensure the chart has a square aspect ratio
-                height: 150  // Set chart size
+                maintainAspectRatio: false,
+                layout: { padding: 10 }, /* Fixes edge clipping */
+                plugins: { legend: { display: false } }
             }
+        });
+
+        const viewport = document.getElementById('testimonialViewport');
+        const dots = document.querySelectorAll('.dot');
+
+        function moveCarousel(index) {
+            // Updated move calculation based on new 380px card width + 20px gap
+            const scrollAmount = index * (380 * 2 + 40); 
+            viewport.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        }
+
+        viewport.addEventListener('scroll', () => {
+            const scrollLeft = viewport.scrollLeft;
+            const index = Math.round(scrollLeft / (380 * 2 + 40));
+            dots.forEach((dot, idx) => {
+                if (idx === index) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
         });
     </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
+
 </html>
