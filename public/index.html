@@ -129,46 +129,233 @@
             color: #333;
         }
 
+        /* Emergency Assistance Section - Redesigned */
         .get-involved {
-            background-color: #ffcc00;
-            padding: 20px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 32px 24px;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 16px;
             width: 100%;
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
         }
 
-        .buttons button {
-            padding: 12px 20px;
-            margin: 5px;
+        .get-involved::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .get-involved h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .get-involved p {
+            color: #34495e;
+            font-size: 15px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .emergency-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .emergency-btn {
+            padding: 16px 24px;
             border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
         }
 
-        .volunteer-btn,
-        .donate-btn {
-            background-color: #007bff;
-            color: white;
-            border-radius: 8px;
+        .emergency-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .emergency-btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .btn-icon {
+            font-size: 24px;
+        }
+
+        .btn-text {
+            text-align: left;
+        }
+
+        .btn-label {
+            display: block;
             font-size: 16px;
-            font-weight: bold;
-            width: 150px;
         }
 
-        .volunteer-btn:hover,
-        .donate-btn:hover {
-            background-color: #0056b3;
+        .btn-sublabel {
+            display: block;
+            font-size: 12px;
+            opacity: 0.9;
+            font-weight: 500;
         }
 
-        .volunteer-btn:active,
-        .donate-btn:active {
-            background-color: #003f7f;
+        .copy-icon {
+            font-size: 20px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
 
-        .volunteer-btn,
+        .emergency-btn:hover .copy-icon {
+            opacity: 1;
+        }
+
+        .safebot-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .safebot-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .safebot-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .volunteer-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .volunteer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .volunteer-btn:active {
+            transform: translateY(-1px);
+        }
+
         .donate-btn {
-            padding: 12px 20px;
-            margin: 10px 5px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .donate-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Copy notification */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+            font-weight: 600;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .get-involved {
+                padding: 24px 16px;
+            }
+
+            .get-involved h2 {
+                font-size: 22px;
+            }
+
+            .emergency-btn {
+                padding: 14px 18px;
+                font-size: 14px;
+            }
+
+            .btn-icon {
+                font-size: 20px;
+            }
+
+            .btn-label {
+                font-size: 14px;
+            }
+
+            .btn-sublabel {
+                font-size: 11px;
+            }
+        }
+
+        /* Accessibility improvements */
+        .emergency-btn:focus {
+            outline: 3px solid #2c3e50;
+            outline-offset: 2px;
+        }
+
+        .emergency-btn:focus-visible {
+            outline: 3px solid #2c3e50;
+            outline-offset: 2px;
         }
 
         .location {
@@ -345,11 +532,49 @@
         </div>
         <div class="sidebar">
            
-            <div class="get-involved">
-                <h2>GET INVOLVED!</h2>
-                <div class="buttons">
-                    <a href="../9.GetInvolved/Volunteer.html"><button class="volunteer-btn">Volunteer</button></a>
-                    <a href="../9.GetInvolved/Donate.html"><button class="donate-btn">Donate</button></a>
+            <div class="get-involved" role="region" aria-label="Emergency Assistance">
+                <h2>🚨 Emergency Assistance</h2>
+                <p>Get immediate help and support our community</p>
+                <div class="emergency-buttons">
+                    <button class="emergency-btn safebot-btn" onclick="askSafeBot()" 
+                            aria-label="Ask Safe Bot for help" title="Click to ask Safe Bot or copy link">
+                        <div class="btn-content">
+                            <span class="btn-icon">🤖</span>
+                            <div class="btn-text">
+                                <span class="btn-label">Ask Safe Bot</span>
+                                <span class="btn-sublabel">Get instant AI assistance</span>
+                            </div>
+                        </div>
+                        <span class="copy-icon" onclick="copyToClipboard(event, 'Safe Bot', './8.AIAssistant/MedicalHelp.html')">📋</span>
+                    </button>
+                    
+                    <a href="../9.GetInvolved/Volunteer.html" style="text-decoration: none;">
+                        <button class="emergency-btn volunteer-btn" 
+                                aria-label="Join as volunteer" title="Click to volunteer or copy link">
+                            <div class="btn-content">
+                                <span class="btn-icon">🙋</span>
+                                <div class="btn-text">
+                                    <span class="btn-label">Volunteer</span>
+                                    <span class="btn-sublabel">Join our rescue teams</span>
+                                </div>
+                            </div>
+                            <span class="copy-icon" onclick="copyToClipboard(event, 'Volunteer', '../9.GetInvolved/Volunteer.html')">📋</span>
+                        </button>
+                    </a>
+                    
+                    <a href="../9.GetInvolved/Donate.html" style="text-decoration: none;">
+                        <button class="emergency-btn donate-btn" 
+                                aria-label="Make a donation" title="Click to donate or copy link">
+                            <div class="btn-content">
+                                <span class="btn-icon">💝</span>
+                                <div class="btn-text">
+                                    <span class="btn-label">Donate</span>
+                                    <span class="btn-sublabel">Support relief efforts</span>
+                                </div>
+                            </div>
+                            <span class="copy-icon" onclick="copyToClipboard(event, 'Donate', '../9.GetInvolved/Donate.html')">📋</span>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -451,6 +676,66 @@
                 alert("SOS sent with your location and phone number successfully!");
                 clickCount = 0;
             }
+        }
+
+        // Emergency Assistance Functions
+        function askSafeBot() {
+            window.location.href = './8.AIAssistant/MedicalHelp.html';
+        }
+
+        function copyToClipboard(event, buttonName, link) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Get the full URL
+            const fullLink = window.location.origin + '/' + link.replace('../', '');
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(fullLink).then(() => {
+                showCopyNotification(buttonName);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = fullLink;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopyNotification(buttonName);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+
+        function showCopyNotification(buttonName) {
+            // Remove existing notification if any
+            const existingNotification = document.querySelector('.copy-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.innerHTML = `<span>✓</span> ${buttonName} link copied!`;
+            document.body.appendChild(notification);
+
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            // Hide and remove notification
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
         }
     </script>
    <script src="../public/8.AIAssistant/chatbot.js"></script>
