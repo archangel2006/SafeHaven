@@ -1,0 +1,52 @@
+.sh-navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#3f63a9;
+  padding:12px 18px;
+  border-bottom:4px solid white;
+  color:white;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+.sh-left,
+.sh-right{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.sh-left img{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  object-fit:cover;
+}
+
+.sh-title{
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:1px;
+}
+
+.sh-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:14px;
+}
+
+.material-symbols-outlined{
+  font-size:22px;
+  vertical-align:middle;
+}
+
+.sh-profile-link{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  text-decoration:none;
+  color:white;
+  font-weight:600;
+}

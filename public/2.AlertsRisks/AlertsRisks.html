@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+  
+   <!-- import the navbar component  -->
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="stylesheet" href="/public/11.NavBar/navbar.css">
+
   <!-- Removed Leaflet libraries as they're no longer needed -->
   <style>
     /* Global Reset */
@@ -177,6 +183,7 @@
   </style>
 </head>
 <body>
+  <div id="navbar"></div>
   <header>
     <i class="fas fa-exclamation-triangle"></i> Disaster Management Dashboard
   </header>
@@ -324,5 +331,7 @@
     });
     
   </script>
+  <script src="/public/11.NavBar/navbar.js"></script>
+
 </body>
 </html>
