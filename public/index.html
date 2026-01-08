@@ -347,6 +347,11 @@
             }
         }
 
+        /* Remove text-decoration from anchor tags */
+        .emergency-buttons a {
+            text-decoration: none;
+        }
+
         /* Accessibility improvements */
         .emergency-btn:focus {
             outline: 3px solid #2c3e50;
@@ -533,7 +538,7 @@
         <div class="sidebar">
            
             <div class="get-involved" role="region" aria-label="Emergency Assistance">
-                <h2>🚨 Emergency Assistance</h2>
+                <h2><span aria-hidden="true">🚨</span> Emergency Assistance</h2>
                 <p>Get immediate help and support our community</p>
                 <div class="emergency-buttons">
                     <button class="emergency-btn safebot-btn" onclick="askSafeBot()" 
@@ -545,10 +550,15 @@
                                 <span class="btn-sublabel">Get instant AI assistance</span>
                             </div>
                         </div>
-                        <span class="copy-icon" onclick="copyToClipboard(event, 'Safe Bot', './8.AIAssistant/MedicalHelp.html')">📋</span>
+                        <span class="copy-icon" 
+                              role="button" 
+                              tabindex="0" 
+                              aria-label="Copy Safe Bot link" 
+                              onclick="copyToClipboard(event, 'Safe Bot', '../public/8.AIAssistant/MedicalHelp.html')" 
+                              onkeydown="handleCopyKeyDown(event, 'Safe Bot', '../public/8.AIAssistant/MedicalHelp.html')">📋</span>
                     </button>
                     
-                    <a href="../9.GetInvolved/Volunteer.html" style="text-decoration: none;">
+                    <a href="../9.GetInvolved/Volunteer.html">
                         <button class="emergency-btn volunteer-btn" 
                                 aria-label="Join as volunteer" title="Click to volunteer or copy link">
                             <div class="btn-content">
@@ -558,11 +568,16 @@
                                     <span class="btn-sublabel">Join our rescue teams</span>
                                 </div>
                             </div>
-                            <span class="copy-icon" onclick="copyToClipboard(event, 'Volunteer', '../9.GetInvolved/Volunteer.html')">📋</span>
+                            <span class="copy-icon" 
+                                  role="button" 
+                                  tabindex="0" 
+                                  aria-label="Copy Volunteer link" 
+                                  onclick="copyToClipboard(event, 'Volunteer', '../9.GetInvolved/Volunteer.html')" 
+                                  onkeydown="handleCopyKeyDown(event, 'Volunteer', '../9.GetInvolved/Volunteer.html')">📋</span>
                         </button>
                     </a>
                     
-                    <a href="../9.GetInvolved/Donate.html" style="text-decoration: none;">
+                    <a href="../9.GetInvolved/Donate.html">
                         <button class="emergency-btn donate-btn" 
                                 aria-label="Make a donation" title="Click to donate or copy link">
                             <div class="btn-content">
@@ -572,7 +587,12 @@
                                     <span class="btn-sublabel">Support relief efforts</span>
                                 </div>
                             </div>
-                            <span class="copy-icon" onclick="copyToClipboard(event, 'Donate', '../9.GetInvolved/Donate.html')">📋</span>
+                            <span class="copy-icon" 
+                                  role="button" 
+                                  tabindex="0" 
+                                  aria-label="Copy Donate link" 
+                                  onclick="copyToClipboard(event, 'Donate', '../9.GetInvolved/Donate.html')" 
+                                  onkeydown="handleCopyKeyDown(event, 'Donate', '../9.GetInvolved/Donate.html')">📋</span>
                         </button>
                     </a>
                 </div>
@@ -678,17 +698,23 @@
             }
         }
 
+        // Notification timing constants
+        const NOTIFICATION_SHOW_DELAY = 10;
+        const NOTIFICATION_HIDE_TRANSITION = 300;
+        const NOTIFICATION_DISPLAY_DURATION = 3000;
+
         // Emergency Assistance Functions
         function askSafeBot() {
-            window.location.href = './8.AIAssistant/MedicalHelp.html';
+            window.location.href = '../public/8.AIAssistant/MedicalHelp.html';
         }
 
         function copyToClipboard(event, buttonName, link) {
             event.preventDefault();
             event.stopPropagation();
+            event.stopImmediatePropagation();
             
-            // Get the full URL
-            const fullLink = window.location.origin + '/' + link.replace('../', '');
+            // Normalize and get the full URL using URL constructor
+            const fullLink = new URL(link, window.location.href).href;
             
             // Copy to clipboard
             navigator.clipboard.writeText(fullLink).then(() => {
@@ -711,6 +737,12 @@
             });
         }
 
+        function handleCopyKeyDown(event, buttonName, link) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                copyToClipboard(event, buttonName, link);
+            }
+        }
+
         function showCopyNotification(buttonName) {
             // Remove existing notification if any
             const existingNotification = document.querySelector('.copy-notification');
@@ -727,15 +759,15 @@
             // Show notification
             setTimeout(() => {
                 notification.classList.add('show');
-            }, 10);
+            }, NOTIFICATION_SHOW_DELAY);
 
             // Hide and remove notification
             setTimeout(() => {
                 notification.classList.remove('show');
                 setTimeout(() => {
                     notification.remove();
-                }, 300);
-            }, 3000);
+                }, NOTIFICATION_HIDE_TRANSITION);
+            }, NOTIFICATION_DISPLAY_DURATION);
         }
     </script>
    <script src="../public/8.AIAssistant/chatbot.js"></script>
