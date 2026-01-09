@@ -13,9 +13,10 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 10px;
+            padding:0;
             background-color: #f4f4f4;
             text-align: center;
+            overflow-x: hidden;
         }
         .hero{
             background: linear-gradient(135deg,#1d5cff,#00b4d8);
@@ -36,16 +37,17 @@
         h2{
             margin-bottom: 15px;
             color:#333;
-            font-weight: 1.8rem;
+            padding: 0 10px;
+            font-size: 1.8rem;
+            font-weight: 600;
         }
         .donation-form {
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 1000px;
-            margin: auto;
+            width: min(90%,1100px);
+            margin: 8px auto 16px;
             text-align: left;
         }
         label{
@@ -71,7 +73,7 @@
         }
         .row{
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 15px;
             margin-bottom: 15px;
             max-width: 100%;
@@ -80,9 +82,6 @@
         .field{
             display:flex;
             flex-direction: column;
-        }
-        .full-width{
-            margin-bottom: 15px;
         }
         .submit-btn {
             width: 100%;
@@ -111,13 +110,13 @@
             font-size: 2rem;
             }
 
-        .hero p {
+            .hero p {
             font-size: 1rem;
             padding: 0 10px;
-        }
-        body {
-            padding: 10px;
-        }
+            }
+            .donation-form {
+            padding: 20px;
+            }
     }
     </style>
 </head>
@@ -132,6 +131,8 @@
             <div class="field">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" placeholder="Name" required oninput="validateForm()">
+            </div>
+            <div class="field">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" placeholder="Phone Number" required oninput="validateForm()">
             </div>
@@ -151,15 +152,17 @@
                 </select>
             </div>
         </div>
-        <div class="field full-width">
-            <label for="address">Home Address</label>
-            <input type="text" id="address" placeholder="Home Address" required oninput="validateForm()">
+        <div class="row">
+            <div class="field">
+                <label for="address">Home Address</label>
+                <input type="text" id="address" placeholder="Home Address" required oninput="validateForm()">
+            </div>
+            <div class="field">
+                <label for="police">Nearest Police Station</label>
+                <input type="text" id="police" placeholder="Nearest Police Station" required oninput="validateForm()">
+            </div>
         </div>
-        <div class="field full-width">
-            <label for="police">Nearest Police Station</label>
-            <input type="text" id="police" placeholder="Nearest Police Station" required oninput="validateForm()">
-        </div>
-        <button class="submit-btn" id="submitBtn" disabled onclick="showMessage()">Submit</button>
+        <button type="submit" class="submit-btn" id="submitBtn" disabled onclick="showMessage()">Submit</button>
     </form>
 <script>
     function validateForm() {
