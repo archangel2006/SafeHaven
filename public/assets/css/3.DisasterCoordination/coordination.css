@@ -1,0 +1,103 @@
+:root {
+    --primary-color: #ff416c;
+    --secondary-color: #ff4b2b;
+    --bg-color: #f6f9fc;
+    --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: #333;
+    padding: 1rem;
+}
+
+header {
+    background: var(--header-bg);
+    color: #fff;
+    padding: 1.5rem;
+    font-size: 2.5rem;
+    position: relative;
+    text-align: center;
+}
+
+header .back-btn {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: #fff;
+    transition: opacity 0.3s ease;
+}
+
+header .back-btn:hover {
+    opacity: 0.8;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.info {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.dashboard {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.dashboard h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.resource {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.2rem;
+}
+
+.resource:last-child {
+    border-bottom: none;
+}
+
+.refresh-btn {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background: var(--secondary-color);
+}
+
+footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+}

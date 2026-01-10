@@ -1,0 +1,118 @@
+:root {
+    --primary-color: #ff416c;
+    --secondary-color: #ff4b2b;
+    --bg-color: #f6f9fc;
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 1.5rem;
+    font-size: 2.5rem;
+    position: relative;
+}
+
+/* Back button in header */
+header .back-btn {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: #fff;
+    transition: opacity 0.3s ease;
+}
+
+header .back-btn:hover {
+    opacity: 0.8;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.info {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+}
+
+.sos-btn {
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.sos-btn:hover {
+    background: #e63946;
+}
+
+.instructions {
+    margin-top: 2rem;
+    text-align: left;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.instructions h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.instructions ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.instructions ul li {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.instructions ul li::before {
+    content: "\f00c";
+    /* Font Awesome check icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+}
+
+footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+    padding: 1rem;
+}
