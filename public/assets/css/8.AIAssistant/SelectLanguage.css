@@ -1,0 +1,74 @@
+:root {
+      --primary-color: #4a00e0;
+      --bg-gradient: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+    }
+    /* Global Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-gradient);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: #333;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    .language-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+    }
+    .language-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .language-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .language-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+    .language-name {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #333;
+    }
+    .back-button {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .back-button:hover {
+      background: #3d0099;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #333;
+      text-align: center;
+    }
