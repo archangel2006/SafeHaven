@@ -1,0 +1,291 @@
+:root {
+            /* Official Palette */
+            --main-theme: #3C5DA2;
+            --accent-pink: #F36682;
+            --accent-yellow: #FEC467;
+            --accent-blue-light: #46A1FE;
+            --button-base: #2776DE;
+
+            /* Visual Specs */
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+            --glass-white: rgba(255, 255, 255, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.4);
+            --shadow-soft: 0 8px 32px rgba(31, 38, 135, 0.08);
+            --text-dark: #1a2a44;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- SCALED Navbar --- */
+        header {
+            background-color: var(--main-theme);
+            padding: 0 5%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-logo-box {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .header-logo-box img {
+            height: 100%;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        /* White Symbolic Person Icon */
+        .user-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            cursor: pointer;
+        }
+
+        /* --- SCALED Page Layout --- */
+        .page-wrapper {
+            max-width: 900px;
+            margin: 15px auto;
+            padding: 0 20px;
+        }
+
+        .main-title-section {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .main-title-section h2 {
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* --- SCALED Donation Buttons --- */
+        .donation-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-glass {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .monetary-btn {
+            background: linear-gradient(to right, var(--button-base), var(--accent-blue-light));
+            color: white;
+        }
+
+        .material-btn {
+            background: linear-gradient(to right, #f2d9c0, var(--accent-yellow));
+            color: rgb(63, 56, 56);
+        }
+
+        .btn-glass:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- SCALED Glassmorphism Sections --- */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid var(--border-glass);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: var(--main-theme);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* --- SCALED Tracker Layout --- */
+        .impact-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .impact-big-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .impact-small-text {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #636e72;
+        }
+
+        .chart-box {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border-radius: 50%;
+            padding: 15px; /* Added padding to prevent logic clipping */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .legend-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .legend-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            min-width: 180px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            font-size: 0.8rem;
+        }
+
+        /* --- FIXED Testimonials Section --- */
+        .testimonial-viewport {
+            overflow-x: auto;
+            width: 100%;
+            margin-bottom: 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .testimonial-viewport::-webkit-scrollbar { display: none; }
+
+        .testimonial-track { 
+            display: flex; 
+            gap: 20px; 
+            width: max-content;
+            padding: 5px 10px; /* Padding ensures card shadow isn't clipped */
+        }
+
+        .test-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            width: 380px; /* Reduced width slightly to prevent container cut-off */
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-snap-align: start; /* Changed to start for better visibility alignment */
+        }
+
+        .test-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(60, 93, 162, 0.15);
+        }
+
+        .test-card p { font-size: 0.95rem; line-height: 1.6; color: #444; margin-bottom: 15px; }
+
+        .author-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .pagination { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #dfe6e9;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            padding: 0;
+        }
+
+        .dot.active { width: 28px; background: var(--main-theme); border-radius: 10px; }
+
+        /* --- Partners Section --- */
+        .partner-white-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #f1f1f1;
+        }
+
+        .partner-col {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .partner-col img { height: 60px; width: auto; object-fit: contain; }
+
+        .partner-col span { font-size: 0.85rem; font-weight: 500; text-align: left; line-height: 1.2; }
+
+        .v-divider { width: 1px; height: 60px; background-color: #e0e0e0; }
