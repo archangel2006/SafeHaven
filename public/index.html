@@ -128,33 +128,157 @@
             font-size: 18px;
             color: #333;
         }
+        /*EMERGENCY ASSISTANCE CARD */
+.combined-card	 {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    margin-bottom: 22px;
+    text-align: left;
+}
 
-        .get-involved {
-            background-color: #ffcc00;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            width: 100%;
-        }
+.ec-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+}
 
-        .buttons button {
-            padding: 12px 20px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+/* Tabs */
+.ec-tabs {
+    display: flex;
+    /*align-items: center;*/
+    gap: 8px;
+    margin-bottom: 14px;
+    /*flex-wrap: wrap;*/
+}
+.tab {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.tab-active {
+    background: #2776de;
+    color: #ffffff;
+    border-color: #2776de;
+}
+
+.icon-tab {
+    font-size: 14px;
+    /*margin-left: auto;*/
+}
+
+/* Emergency List */
+.ec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9fafb;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.copy-btn {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* SafeBot */
+.safebot {
+    margin-top: 14px;
+}
+
+.safebot-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #374151;
+}
+
+.safebot-box {
+    background: #f1f5f9;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    cursor: pointer;
+}
+.safebot-box p {
+    margin-top: 4px;
+    color: #6b7280;
+}
+
+.get-involved {
+            background-color: #ffffff;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    text-align: center;
         }
+        .gi-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.gi-desc {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 24px;
+}
+
+.gi-buttons {
+    display: flex;
+    gap: 14px;
+    flex-direction: column;
+}
+
+.gi-link {
+    flex: 1;
+    display: block;
+    text-decoration: none;
+}
+
 
         .volunteer-btn,
         .donate-btn {
-            background-color: #007bff;
-            color: white;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            width: 150px;
+    width: 100%;
+    /* flex: 1; */
+    height: 44px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    /*border: none;*/
         }
+        .volunteer-btn {
+    background: #ffffff;
+    color: #2776de;
+    border: 1.8px solid #e5e7eb;
+}
 
+.donate-btn {
+    background: #2776de;
+    color: #ffffff;
+    border: none;	
+}
+
+/* 
         .volunteer-btn:hover,
         .donate-btn:hover {
             background-color: #0056b3;
@@ -163,13 +287,13 @@
         .volunteer-btn:active,
         .donate-btn:active {
             background-color: #003f7f;
-        }
+        } */
 
-        .volunteer-btn,
+        /* .volunteer-btn,
         .donate-btn {
             padding: 12px 20px;
             margin: 10px 5px;
-        }
+        } */
 
         .location {
             background-color: #f4f4f4;
@@ -262,7 +386,12 @@
             padding: 0.6rem 0;
             background: #f9fafb;
         }
-       
+       @media (min-width: 600px) {
+    .gi-buttons {
+        flex-direction: row;
+    }
+}
+
 
     </style>
 </head>
@@ -344,12 +473,43 @@
             </div>
         </div>
         <div class="sidebar">
-           
+           <div class="emergency-card">
+            <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
+            <div class="ec-tabs">
+                <button class="tab active">India</button>
+                <button class="tab">Global</button>
+                <span class="tab-icon">🧡🕊️</span>
+            </div>
+            <div class="ec-list">
+                <div class="ec-item">
+                    <span>🇮🇳 Police: 100</span>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                <div class="ec-item">
+                    <span>🚑 Ambulance: 102</span>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                <div class="ec-item">
+                    <span>🧯 Fire: 101</span>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+            <div class="safebot">
+                <p class="safebot-title">Need Guidance Right Now?</p>
+                <div class="safebot-box">
+                    <strong>🤖 Ask SafeBot:</strong>
+                    <p>What should I do during an earthquake?</p>
+                </div>
+            </div>
+        </div>
+
             <div class="get-involved">
-                <h2>GET INVOLVED!</h2>
-                <div class="buttons">
-                    <a href="../9.GetInvolved/Volunteer.html"><button class="volunteer-btn">Volunteer</button></a>
-                    <a href="../9.GetInvolved/Donate.html"><button class="donate-btn">Donate</button></a>
+                <h3 class="gi-title">Help Others Stay Safe</h3>
+            <p class="gi-desc">Support our mission to assist in times of crisis.</p>
+
+                <div class="gi-buttons">
+                    <a href="../9.GetInvolved/Volunteer.html" class="gi-link"><button class="volunteer-btn">Volunteer</button></a>
+                    <a href="../9.GetInvolved/Donate.html" class="gi-link"><button class="donate-btn">Donate</button></a>
                 </div>
             </div>
         </div>
@@ -453,6 +613,17 @@
             }
         }
     </script>
+    <script>
+    function openSafeBot() {
+     if(window.openChatbot) {
+     window.openChatbot();
+     }
+     else {
+     alert("SafeBot is loading, please try again.");
+    }
+   }
+</script>
+
    <script src="../public/8.AIAssistant/chatbot.js"></script>
 
 </body>
