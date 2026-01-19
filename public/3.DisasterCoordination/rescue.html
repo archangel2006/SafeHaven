@@ -6,205 +6,62 @@
   <title>Rescue Communication</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    :root {
-      --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
-      --body-bg: linear-gradient(135deg, #be7f7f, #d685a8c4); /* Soft pastel blue gradient */
-      --chat-bg: #ffffff; /* White background for chat container */
-      --user-bg: #b8e1c2;      /* Soft green for user messages */
-      --user-text: #0b3d0b;
-      --rescuer-bg: #b5d0dd;   /* Soft blue for rescuer messages */
-      --rescuer-text: #0a2732;
-      --text-color: #333;
-    }
-    /* Global Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--body-bg);
-      color: var(--text-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-      min-height: 100vh;
-    }
-    header {
-      width: 100%;
-      background: var(--header-bg);
-      color: #fff;
-      padding: 1.5rem;
-      font-size: 2.5rem;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    /* Back Button in Header (arrow icon only) */
-    header .back-btn {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 1.8rem;
-      color: #fff;
-      transition: opacity 0.3s ease;
-    }
-    header .back-btn:hover {
-      opacity: 0.8;
-    }
-    .container {
-      width: 100%;
-      max-width: 600px;
-      background: var(--chat-bg);
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      margin: 2rem auto;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-box {
-      display: flex;
-      flex-direction: column;
-      height: 400px;
-    }
-    .chat-messages {
-      flex: 1;
-      padding: 1rem;
-      overflow-y: auto;
-      background: #f1f1f1;
-      display: flex;
-      flex-direction: column;
-    }
-    .message {
-      margin-bottom: 1rem;
-      padding: 10px 15px;
-      border-radius: 20px;
-      max-width: 75%;
-      word-wrap: break-word;
-      animation: fadeIn 0.4s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .message.user {
-      align-self: flex-end;
-      background: var(--user-bg);
-      color: var(--user-text);
-      text-align: right;
-    }
-    .message.rescuer {
-      align-self: flex-start;
-      background: var(--rescuer-bg);
-      color: var(--rescuer-text);
-      text-align: left;
-    }
-    .chat-input {
-      display: flex;
-      border-top: 1px solid #ddd;
-      background: #fff;
-    }
-    .chat-input input {
-      flex: 1;
-      padding: 1rem;
-      border: none;
-      font-size: 1rem;
-      outline: none;
-    }
-    .chat-input button {
-      padding: 1rem;
-      border: none;
-      background: var(--header-bg);
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-    .chat-input button:hover {
-      background: #e63946;
-      transform: translateY(-2px);
-    }
-    footer {
-      width: 100%;
-      text-align: center;
-      padding: 1rem;
-      background: var(--header-bg);
-      color: #fff;
-      font-size: 0.9rem;
-      margin-top: 2rem;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/coordination-styles.css" />
 </head>
 <body>
-  <header>
+  <header class="compact">
     <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
     Rescue Communication
   </header>
-  <div class="container">
-    <div class="chat-box" id="chatBox">
-      <div class="chat-messages" id="chatMessages">
-        <!-- Chat messages will appear here -->
+  <div style="max-width: 700px; margin: 0 auto; width: 100%; padding: 1rem;">
+    <p class="info center" style="margin: 1rem 0;">
+      <i class="fas fa-comments"></i> Exchange real-time messages with rescue teams. Your messages are monitored 24/7.
+    </p>
+    
+    <div class="container">
+      <div style="background: linear-gradient(135deg, #ff416c, #ff4b2b); padding: 1rem; color: white; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <strong><i class="fas fa-user-shield"></i> Rescue Team</strong>
+          <div style="font-size: 0.85rem;"><i class="fas fa-circle" style="color: #4ade80; font-size: 0.6rem;"></i> Online</div>
+        </div>
+        <button onclick="clearChat()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">
+          <i class="fas fa-trash"></i> Clear
+        </button>
       </div>
-      <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()">
-        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+      
+      <div class="chat-box" id="chatBox">
+        <div class="chat-messages" id="chatMessages">
+          <!-- Chat messages will appear here -->
+        </div>
+        <div class="chat-input">
+          <input 
+            type="text" 
+            id="chatInput" 
+            placeholder="Type your message..." 
+            onkeydown="if(event.key==='Enter') sendMessage()"
+          >
+          <button onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
       </div>
+    </div>
+    
+    <div style="background: #fff; padding: 1rem; border-radius: 10px; margin-top: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <h3 style="color: #ff416c; margin-bottom: 0.5rem;"><i class="fas fa-lightbulb"></i> Quick Tips</h3>
+      <ul style="font-size: 0.95rem; line-height: 1.8;">
+        <li>Use keywords like "help", "injured", "evacuate" for faster response</li>
+        <li>Share your exact location if possible</li>
+        <li>Describe the emergency clearly and concisely</li>
+        <li>Keep your phone charged and accessible</li>
+      </ul>
     </div>
   </div>
   <footer>
-    © 2025 AI Emergency Assistant. All rights reserved.
+    © 2026 SafeHaven - Disaster Coordination Platform. All rights reserved.
   </footer>
   
-  <script>
-    function goBack() {
-      window.location.href = "DisasterCoordination.html";
-    }
-    
-    // Generate a rescuer response based on keywords
-    function getResponderResponse(message) {
-      const msg = message.toLowerCase();
-      if (msg.includes("help")) {
-        return "We're here to assist you. Please remain calm.";
-      } else if (msg.includes("injured")) {
-        return "If you're injured, please follow first aid instructions and stay still.";
-      } else if (msg.includes("evacuate")) {
-        return "Please evacuate using the designated route immediately.";
-      } else if (msg.includes("thank")) {
-        return "You're welcome. Stay safe!";
-      } else {
-        return "Please remain calm, help is on the way.";
-      }
-    }
-    
-    function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const message = input.value.trim();
-      if (!message) return;
-      
-      const chatMessages = document.getElementById('chatMessages');
-      
-      // Append user's message (right-aligned)
-      const userMsg = document.createElement('div');
-      userMsg.className = 'message user';
-      userMsg.textContent = "You: " + message;
-      chatMessages.appendChild(userMsg);
-      
-      input.value = '';
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      
-      // Simulate rescuer response after 1.5 seconds
-      setTimeout(() => {
-        const response = getResponderResponse(message);
-        const rescuerMsg = document.createElement('div');
-        rescuerMsg.className = 'message rescuer';
-        rescuerMsg.textContent = "Rescuer: " + response;
-        chatMessages.appendChild(rescuerMsg);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }, 1500);
-    }
-  </script>
+  <script src="scripts/coordination.js"></script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>

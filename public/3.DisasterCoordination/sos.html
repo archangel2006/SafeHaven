@@ -6,147 +6,81 @@
   <title>SOS Emergency Reporting</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    :root {
-      --primary-color: #ff416c;
-      --secondary-color: #ff4b2b;
-      --bg-color: #f6f9fc;
-    }
-    /* Global Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-color);
-      color: #333;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: #fff;
-      padding: 1.5rem;
-      font-size: 2.5rem;
-      position: relative;
-    }
-    /* Back button in header */
-    header .back-btn {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 1.8rem;
-      color: #fff;
-      transition: opacity 0.3s ease;
-    }
-    header .back-btn:hover {
-      opacity: 0.8;
-    }
-    .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-    .info {
-      font-size: 1.2rem;
-      margin: 1.5rem 0;
-    }
-    .sos-btn {
-      background: var(--secondary-color);
-      color: #fff;
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .sos-btn:hover {
-      background: #e63946;
-    }
-    .instructions {
-      margin-top: 2rem;
-      text-align: left;
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      display: none;
-    }
-    .instructions h2 {
-      font-size: 1.8rem;
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-    .instructions ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .instructions ul li {
-      margin-bottom: 0.8rem;
-      font-size: 1.1rem;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-    .instructions ul li::before {
-      content: "\f00c"; /* Font Awesome check icon */
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--primary-color);
-    }
-    footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #333;
-      text-align: center;
-      padding: 1rem;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/coordination-styles.css" />
 </head>
 <body>
-  <header>
+  <header class="compact">
     <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
     SOS Emergency Reporting
   </header>
-  <div class="container">
+  <div class="container center">
     <p class="info">
-      Report an emergency with a single tap. Your alert is sent immediately to local responders.
+      <i class="fas fa-exclamation-circle"></i> Report an emergency with a single tap. Your alert is sent immediately to local responders.
     </p>
-    <!-- Single SOS Button -->
-    <button class="sos-btn" onclick="activateSOS()">Activate SOS</button>
+    
+    <!-- Emergency Type Selection -->
+    <div class="emergency-form">
+      <div class="form-group">
+        <label for="emergencyType">
+          <i class="fas fa-clipboard-list"></i> Select Emergency Type:
+        </label>
+        <select id="emergencyType">
+          <option value="">-- Select Type --</option>
+          <option value="medical">Medical Emergency</option>
+          <option value="fire">Fire</option>
+          <option value="earthquake">Earthquake</option>
+          <option value="flood">Flood</option>
+          <option value="accident">Accident</option>
+          <option value="violence">Violence/Crime</option>
+          <option value="trapped">Trapped/Rescue Needed</option>
+          <option value="other">Other Emergency</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="additionalInfo">
+          <i class="fas fa-comment-medical"></i> Additional Information (Optional):
+        </label>
+        <textarea id="additionalInfo" placeholder="Describe the situation, number of people affected, injuries, etc."></textarea>
+      </div>
+    </div>
+    
+    <!-- SOS Button -->
+    <button class="sos-btn pulse-animation" onclick="handleEmergencyType()">
+      <i class="fas fa-bullhorn"></i> ACTIVATE SOS
+    </button>
+    
+    <!-- Location Display -->
+    <div class="location-display" id="locationDisplay" style="display:none;">
+      <i class="fas fa-map-marker-alt"></i>
+      <strong>Your Location:</strong><br>
+      <span id="locationText">Acquiring location...</span>
+    </div>
+    
     <p class="info" style="margin-top:2rem;">
-      Once activated, follow the instructions below for evacuation and first-aid.
+      <i class="fas fa-info-circle"></i> Once activated, follow the instructions below for evacuation and first-aid.
     </p>
+    
+    <!-- Instructions -->
     <div class="instructions" id="instructions">
-      <h2>Evacuation & First-Aid Instructions</h2>
+      <h2><i class="fas fa-list-check"></i> Evacuation & First-Aid Instructions</h2>
       <ul>
         <li>Remain calm and assess your surroundings.</li>
         <li>Secure your essential belongings if time permits.</li>
         <li>Follow the designated evacuation route on your device.</li>
         <li>If injured, administer basic first aid using on-screen guidelines.</li>
         <li>Stay connected for further instructions from emergency services.</li>
+        <li>Do not use elevators during evacuations.</li>
+        <li>Keep your phone charged and accessible.</li>
+        <li>Move to a safe location and await further instructions.</li>
       </ul>
     </div>
   </div>
   <footer>
-    © 2025 AI Emergency Assistant. All rights reserved.
+    © 2026 SafeHaven - Disaster Coordination Platform. All rights reserved.
   </footer>
   
-  <script>
-    function activateSOS() {
-      alert('Please wait, emergency services have been notified. We will connect you shortly.');
-      document.getElementById('instructions').style.display = 'block';
-    }
-    
-    function goBack() {
-      // Redirect to the AIassistant page (change the URL as needed)
-      window.location.href = "DisasterCoordination.html";
-    }
-  </script>
+  <script src="scripts/coordination.js"></script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>

@@ -6,146 +6,75 @@
   <title>Emergency Coordination System</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    :root {
-      --primary-color: #ff416c;
-      --secondary-color: #ff4b2b;
-      --bg-color: #f6f9fc;
-      --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-color);
-      color: #333;
-      padding: 1rem;
-    }
-    header {
-      background: var(--header-bg);
-      color: #fff;
-      padding: 1.5rem;
-      font-size: 2.5rem;
-      position: relative;
-      text-align: center;
-    }
-    header .back-btn {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 1.8rem;
-      color: #fff;
-      transition: opacity 0.3s ease;
-    }
-    header .back-btn:hover {
-      opacity: 0.8;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem;
-      text-align: center;
-    }
-    .info {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-    .dashboard {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      margin-top: 2rem;
-      text-align: left;
-    }
-    .dashboard h2 {
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-      font-size: 1.8rem;
-    }
-    .resource {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #eee;
-      font-size: 1.2rem;
-    }
-    .resource:last-child {
-      border-bottom: none;
-    }
-    .refresh-btn {
-      margin-top: 1.5rem;
-      padding: 0.8rem 1.5rem;
-      background: var(--primary-color);
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition:0.3s ease;
-    }
-    .refresh-btn:hover {
-      background: var(--secondary-color);
-    }
-    footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #333;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/coordination-styles.css" />
 </head>
 <body>
-  <header>
+  <header class="compact">
     <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
     Emergency Coordination System
   </header>
-  <div class="container">
+  <div class="container center">
     <p class="info">
       Monitor and manage real-time resource allocation and communication among responders.
     </p>
+    
+    <!-- Resource Dashboard -->
     <div class="dashboard" id="dashboard">
-      <h2>Resource Dashboard</h2>
+      <h2><i class="fas fa-tachometer-alt"></i> Resource Dashboard</h2>
       <div class="resource">
-        <strong>Ambulances:</strong> <span id="ambulanceCount">5</span> available
+        <strong><i class="fas fa-ambulance"></i> Ambulances:</strong> 
+        <span>
+          <span id="ambulanceCount">5</span> available
+          <span class="resource-status available">Available</span>
+        </span>
       </div>
       <div class="resource">
-        <strong>Fire Trucks:</strong> <span id="fireTruckCount">3</span> available
+        <strong><i class="fas fa-fire-extinguisher"></i> Fire Trucks:</strong> 
+        <span>
+          <span id="fireTruckCount">3</span> available
+          <span class="resource-status available">Available</span>
+        </span>
       </div>
       <div class="resource">
-        <strong>Rescue Teams:</strong> <span id="rescueTeamCount">7</span> on standby
+        <strong><i class="fas fa-users"></i> Rescue Teams:</strong> 
+        <span>
+          <span id="rescueTeamCount">7</span> on standby
+          <span class="resource-status available">Available</span>
+        </span>
       </div>
       <div class="resource">
-        <strong>Communication Channels:</strong> Operational
+        <strong><i class="fas fa-helicopter"></i> Helicopters:</strong> 
+        <span>
+          <span id="helicopterCount">2</span> available
+          <span class="resource-status limited">Limited</span>
+        </span>
       </div>
-      <button class="refresh-btn" onclick="updateResources()">Refresh Resources</button>
+      <div class="resource">
+        <strong><i class="fas fa-broadcast-tower"></i> Communication Channels:</strong> 
+        <span class="resource-status available">Operational</span>
+      </div>
+      <button class="btn refresh-btn" onclick="updateResources()">
+        <i class="fas fa-sync-alt"></i> Refresh Resources
+      </button>
     </div>
+    
+    <!-- Active Incidents Tracker -->
+    <div class="incident-tracker">
+      <h2><i class="fas fa-exclamation-triangle"></i> Active Incidents</h2>
+      <div id="incidentTracker">
+        <p class="info">No active incidents</p>
+      </div>
+    </div>
+    
     <p class="info" style="margin-top:2rem;">
       Use this system to coordinate rapid deployment and ensure efficient response.
     </p>
   </div>
   <footer>
-    © 2025 AI Emergency Assistant. All rights reserved.
+    © 2026 SafeHaven - Disaster Coordination Platform. All rights reserved.
   </footer>
   
-  <script>
-    // Back button - redirect to index.html
-    function goBack() {
-      window.location.href = "DisasterCoordination.html";
-    }
-    
-    // Update resource counts randomly (simulating real-time updates)
-    function updateResources() {
-      // Generate random counts within desired ranges
-      const ambulanceCount = Math.floor(Math.random() * 6) + 3; // 3 to 8
-      const fireTruckCount = Math.floor(Math.random() * 3) + 2; // 2 to 4
-      const rescueTeamCount = Math.floor(Math.random() * 8) + 5;  // 5 to 12
-      
-      // Update the DOM with new counts
-      document.getElementById("ambulanceCount").textContent = ambulanceCount;
-      document.getElementById("fireTruckCount").textContent = fireTruckCount;
-      document.getElementById("rescueTeamCount").textContent = rescueTeamCount;
-    }
-  </script>
+  <script src="scripts/coordination.js"></script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>
