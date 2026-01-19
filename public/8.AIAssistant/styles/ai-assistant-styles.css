@@ -1,0 +1,372 @@
+/* ========================================
+   AI Assistant Platform Styles
+   ======================================== */
+
+:root {
+  --primary-color: #4a00e0;
+  --secondary-color: #8e2de2;
+  --accent-color: #3d0099;
+  --bg-color: #f0f4f8;
+  --bg-gradient: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+  --card-bg: #ffffff;
+  --header-gradient: linear-gradient(135deg, #8e2de2, #4a00e0);
+  --text-primary: #333;
+  --text-secondary: #666;
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Global Reset & Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+body.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+  text-align: center;
+}
+
+body.gradient {
+  background: var(--bg-gradient);
+}
+
+/* Header Styles */
+header {
+  background: var(--header-gradient);
+  color: #fff;
+  padding: 1.5rem;
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: var(--shadow-md);
+}
+
+header.simple {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  background: none;
+  box-shadow: none;
+}
+
+/* Container Styles */
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.container.centered {
+  text-align: center;
+}
+
+/* Instructions Section */
+.instructions {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.instructions h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.instructions h3 {
+  font-size: 1.4rem;
+  color: var(--secondary-color);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.instructions ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.instructions ul li {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.instructions p {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Action Buttons */
+.action-buttons {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.action-buttons button,
+.back-button {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.action-buttons button:hover,
+.back-button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.action-buttons button:active,
+.back-button:active {
+  transform: translateY(0);
+}
+
+.back-button {
+  margin-top: 2rem;
+}
+
+/* Language Selection Grid */
+.language-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.language-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.language-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.language-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.language-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Voice Control Demo */
+.voice-demo {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px dashed var(--primary-color);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  background: rgba(74, 0, 224, 0.05);
+}
+
+#voiceOutput {
+  font-weight: 500;
+  min-height: 1.5rem;
+}
+
+/* Medical Help Specific */
+.emergency-banner {
+  background: #ff4444;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.emergency-banner i {
+  margin-right: 0.5rem;
+}
+
+/* Info Cards */
+.info-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.5rem;
+}
+
+.info-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+footer.simple {
+  background: none;
+  color: var(--text-primary);
+  margin-top: 2rem;
+}
+
+/* Status Indicators */
+.status-indicator {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0.25rem;
+}
+
+.status-indicator.active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-indicator.listening {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-indicator.processing {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* Loading Animation */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(74, 0, 224, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    font-size: 2rem;
+    padding: 1.2rem;
+  }
+
+  .container {
+    padding: 0.5rem;
+  }
+
+  .instructions h2 {
+    font-size: 1.5rem;
+  }
+
+  .language-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .language-card {
+    padding: 1rem 0.8rem;
+  }
+
+  .language-icon {
+    font-size: 2rem;
+  }
+
+  .language-name {
+    font-size: 1rem;
+  }
+
+  .action-buttons button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    font-size: 1.8rem;
+  }
+
+  .language-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .instructions ul li {
+    font-size: 1rem;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.hidden {
+  display: none;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
