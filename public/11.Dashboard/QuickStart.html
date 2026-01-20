@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Quick Start - SafeHaven</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 40px 0 20px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #f8f9ff;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        .steps {
+            margin: 30px 0;
+        }
+        .step {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .info-box {
+            background: #fff9e6;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .info-box h4 {
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .tech-badge {
+            background: #e8ebff;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Dashboard Quick Start</h1>
+        <p class="subtitle">Get up and running with SafeHaven's Dashboard & Analytics in minutes</p>
+
+        <div class="cta-buttons">
+            <a href="Dashboard.html" class="btn btn-primary">🎯 Launch Dashboard</a>
+            <a href="../../index.html" class="btn btn-secondary">🏠 Back to Home</a>
+        </div>
+
+        <h2 style="color: #667eea; margin: 40px 0 20px;">✨ What You'll Get</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🛡️ Safety Score</h3>
+                <p>Real-time assessment of your location's safety based on multiple risk factors</p>
+            </div>
+            <div class="feature-card">
+                <h3>📈 Disaster Data</h3>
+                <p>Interactive charts showing historical patterns and trends of natural disasters</p>
+            </div>
+            <div class="feature-card">
+                <h3>📦 Resources</h3>
+                <p>Track availability of shelters, medical facilities, food, and water supplies</p>
+            </div>
+        </div>
+
+        <h2 style="color: #667eea; margin: 40px 0 20px;">🎯 How to Use</h2>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Open the Dashboard</h4>
+                    <p>Click the "Launch Dashboard" button above or navigate from the SafeHaven homepage</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Allow Location Access</h4>
+                    <p>When prompted, allow location access for personalized safety scores. Don't worry - your location is never stored permanently</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Check Your Safety Score</h4>
+                    <p>View your personal safety score (0-100) with detailed breakdowns of risk factors. Green is safe, orange is moderate, red is high risk</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Explore Historical Data</h4>
+                    <p>Use filters to view specific disaster types. Hover over the chart for detailed monthly statistics</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>Find Resources</h4>
+                    <p>Browse emergency resources near you. Filter by type (shelters, medical, food, water) and check availability status</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h4>💡 Pro Tips</h4>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li>Data auto-refreshes every 5 minutes, or click refresh buttons for instant updates</li>
+                <li>Filter buttons let you focus on specific disasters or resources</li>
+                <li>Status colors: Green (abundant), Orange (moderate), Red (low), Dark Red (critical)</li>
+                <li>Works on mobile, tablet, and desktop - try it on all your devices!</li>
+            </ul>
+        </div>
+
+        <h2 style="color: #667eea; margin: 40px 0 20px;">🛠️ Technical Details</h2>
+        
+        <p style="margin-bottom: 15px;"><strong>Built with modern web technologies:</strong></p>
+        <div class="tech-stack">
+            <span class="tech-badge">HTML5</span>
+            <span class="tech-badge">CSS3</span>
+            <span class="tech-badge">JavaScript ES6+</span>
+            <span class="tech-badge">Chart.js</span>
+            <span class="tech-badge">Leaflet.js Ready</span>
+            <span class="tech-badge">Geolocation API</span>
+        </div>
+
+        <h2 style="color: #667eea; margin: 40px 0 20px;">📁 File Structure</h2>
+        
+        <pre style="background: #f4f4f4; padding: 20px; border-radius: 10px; overflow-x: auto; line-height: 1.6;">
+11.Dashboard/
+├── Dashboard.html          # Main dashboard interface
+├── QuickStart.html        # This guide
+├── preview.html           # Preview thumbnail
+└── scripts/
+    └── dashboard.js       # Core functionality & data
+        </pre>
+
+        <h2 style="color: #667eea; margin: 40px 0 20px;">🔮 Coming Soon</h2>
+        
+        <ul style="margin-left: 20px; line-height: 1.8; color: #666;">
+            <li>✨ Real disaster API integration (FEMA, USGS, Weather)</li>
+            <li>🤖 AI-powered disaster predictions</li>
+            <li>📱 Push notifications for critical alerts</li>
+            <li>📊 Export reports as PDF/CSV</li>
+            <li>🌍 Multi-location tracking</li>
+            <li>💾 Offline mode with cached data</li>
+        </ul>
+
+        <div class="info-box" style="background: #e8f5e9; border-color: #4caf50;">
+            <h4 style="color: #4caf50;">✅ Ready to Start?</h4>
+            <p style="color: #666;">Click the "Launch Dashboard" button at the top to begin monitoring your safety!</p>
+        </div>
+
+        <div class="footer">
+            <p>📚 <strong>Need Help?</strong> Check out the full documentation in <code>docs/dashboard-feature.md</code></p>
+            <p style="margin-top: 10px;">Built with ❤️ for SafeHaven | Dashboard v1.0 | January 2026</p>
+        </div>
+    </div>
+</body>
+</html>

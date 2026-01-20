@@ -27,6 +27,7 @@ The project is built as a **social good initiative** and maintained as an **open
 - **Educational Resources** for disaster preparedness
 - **AI-powered Assistant** for emergency and medical queries
 - **Volunteer & Donation Engagement**
+- **📊 Dashboard & Analytics** with personal safety scores, historical disaster data visualization, and resource availability tracking
 
 ---
 
@@ -106,6 +107,15 @@ cd SafeHaven
    │   ├── MaterialDonations.html
    │   ├── MonetaryDonations.html
    │   └── Volunteer.html
+   │
+   ├── 10. Auth/
+   │   ├── Login.html
+   │   └── SignUp.html
+   │
+   ├── 11. Dashboard/
+   │   ├── Dashboard.html
+   │   └── scripts/
+   │       └── dashboard.js
    │
    └── .gitattributes
 ```
