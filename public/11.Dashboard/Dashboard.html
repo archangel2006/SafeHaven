@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard & Analytics - SafeHaven</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .back-button {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .safety-score-container {
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-label {
+            font-size: 1rem;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        .score-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .score-item {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .score-item h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .score-item p {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .location-info {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .location-info h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .location-info p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .resource-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .resource-item {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .resource-item:hover {
+            background: #e8ebff;
+        }
+
+        .resource-info h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .resource-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .resource-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .status-high {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-medium {
+            background: #ff9800;
+            color: white;
+        }
+
+        .status-low {
+            background: #f44336;
+            color: white;
+        }
+
+        .status-critical {
+            background: #b71c1c;
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .filter-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .alert-banner {
+            background: #ff5252;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-banner.show {
+            display: flex;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .refresh-btn {
+            background: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .score-circle {
+                width: 150px;
+                height: 150px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-button" onclick="window.location.href='../index.html'">← Back to Home</button>
+        <h1>📊 Dashboard & Analytics</h1>
+        <p>Monitor your safety, track disasters, and view resource availability in real-time</p>
+    </div>
+
+    <div class="alert-banner" id="alertBanner">
+        <span class="alert-icon">⚠️</span>
+        <div>
+            <strong>High Risk Alert!</strong> Severe weather warning in your area. Check evacuation routes.
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Personal Safety Score Card -->
+        <div class="card">
+            <h2>🛡️ Personal Safety Score</h2>
+            <div class="location-info">
+                <h4>📍 Current Location</h4>
+                <p id="userLocation">Detecting location...</p>
+                <p id="userCoordinates" style="font-size: 0.85rem; color: #999;"></p>
+            </div>
+            <div class="safety-score-container">
+                <div class="score-circle" id="scoreCircle">
+                    <div>
+                        <div id="safetyScore">--</div>
+                        <div class="score-label">Safety Score</div>
+                    </div>
+                </div>
+                <div class="score-details">
+                    <div class="score-item">
+                        <h4>Disaster Risk</h4>
+                        <p id="disasterRisk">--</p>
+                    </div>
+                    <div class="score-item">
+                        <h4>Weather Severity</h4>
+                        <p id="weatherSeverity">--</p>
+                    </div>
+                    <div class="score-item">
+                        <h4>Infrastructure</h4>
+                        <p id="infrastructure">--</p>
+                    </div>
+                    <div class="score-item">
+                        <h4>Response Time</h4>
+                        <p id="responseTime">--</p>
+                    </div>
+                </div>
+                <button class="refresh-btn" onclick="updateSafetyScore()">🔄 Refresh Score</button>
+            </div>
+        </div>
+
+        <!-- Historical Disaster Data -->
+        <div class="card">
+            <h2>📈 Historical Disaster Data</h2>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterDisasterData('all')">All</button>
+                <button class="filter-btn" onclick="filterDisasterData('earthquake')">Earthquakes</button>
+                <button class="filter-btn" onclick="filterDisasterData('flood')">Floods</button>
+                <button class="filter-btn" onclick="filterDisasterData('hurricane')">Hurricanes</button>
+                <button class="filter-btn" onclick="filterDisasterData('wildfire')">Wildfires</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3 id="totalDisasters">0</h3>
+                    <p>Total Events</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="activeAlerts">0</h3>
+                    <p>Active Alerts</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="affectedAreas">0</h3>
+                    <p>Affected Areas</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="disasterChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Resource Availability Tracker -->
+        <div class="card">
+            <h2>📦 Resource Availability</h2>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterResources('all')">All</button>
+                <button class="filter-btn" onclick="filterResources('shelter')">Shelters</button>
+                <button class="filter-btn" onclick="filterResources('medical')">Medical</button>
+                <button class="filter-btn" onclick="filterResources('food')">Food</button>
+                <button class="filter-btn" onclick="filterResources('water')">Water</button>
+            </div>
+            <div class="resource-list" id="resourceList">
+                <!-- Resources will be dynamically added here -->
+            </div>
+            <button class="refresh-btn" onclick="updateResources()">🔄 Refresh Resources</button>
+        </div>
+    </div>
+
+    <div class="last-updated" id="lastUpdated">
+        Last updated: --
+    </div>
+
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>
