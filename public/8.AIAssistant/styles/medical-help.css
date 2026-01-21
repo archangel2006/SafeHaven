@@ -1,0 +1,82 @@
+:root {
+  --primary-color: #4a00e0;
+  --secondary-color: #8e2de2;
+  --bg-color: #f0f4f8;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-color);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  color: #fff;
+  padding: 1.5rem;
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.instructions {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.instructions h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.instructions ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.instructions ul li {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.action-buttons {
+  text-align: center;
+}
+
+.action-buttons button {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.action-buttons button:hover {
+  background: var(--secondary-color);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.9rem;
+}
