@@ -43,17 +43,17 @@
         }
         .donation-form {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            padding: 32px;
+            border-radius: 14px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
             width: 100%;
-            max-width: 420px;
-            margin: 16px auto 16px;
+            max-width: 620px;
+            margin: 24px auto;
             text-align: left;
         }
         .row{
             display: flex;
-            gap: 10px;
+            gap: 18px;
             margin-bottom: 10px;
             max-width: 100%;
             flex-direction: column;
@@ -74,7 +74,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
         }
         .quantity-wrapper{
             position: relative;
@@ -99,11 +99,12 @@
         .radio-option{
            display:inline-flex; 
             align-items:center;
-            gap: 6px;
+            gap: 8px;
             cursor: pointer; 
-            font-size: 14px;
+            font-size: 16px;
         }
         .radio-option input{
+            transform:scale(1.2);
             width: auto;
             margin :0;
         }
@@ -111,15 +112,18 @@
         .location-row{
             flex-direction: row;
         }
+        input[type="radio"] {
+            accent-color:green;
+        }
         .location-row input{
             flex: 1;
         }
         input, select {
            width: 100%;
-            padding: 12px;
+            padding: 16px;
             border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 18px;
         }
         input:focus,select:focus{
             outline: none;
@@ -128,11 +132,11 @@
         }
         .submit-btn {
             width: 100%;
-            padding: 14px;
+            padding: 18px;
             margin-top: 10px;
             border: none;
-            border-radius: 6px;
-            font-size: 17px;
+            border-radius: 8px;
+            font-size: 19px;
             color: white;
             background-color: gray;
             cursor: not-allowed;
@@ -141,6 +145,10 @@
         .submit-btn.active {
             background-color: #28a745;
             cursor: pointer;
+        }
+        .last-line{
+            margin-top: 20px;
+            font-weight:600;
         }
         @media (min-width:600px) {
             .row{
@@ -186,7 +194,7 @@
     <form class="donation-form" onsubmit="handleSubmit(event)">
         <div class="row">
             <div class="field">
-                <label for="donationType">1.What are you donating?</label>
+                <label for="donationType">What are you donating?</label>
                 <select id="donationType" required onchange="validateForm()">
                 <option value="" disabled selected>Select Donation Type</option>
                 <option>Food</option>
@@ -195,7 +203,7 @@
                 </select>
             </div>
             <div class="field">
-                <label>2.Quantity</label>
+                <label>Quantity</label>
                 <div class="quantity-wrapper">
                     <input type="text" id="Quantity" placeholder="Enter Quantity" required oninput="validateForm()">
                     <span>kg</span>
@@ -204,7 +212,7 @@
         </div>
         <div class="row">
             <div class="field">
-                <label class="field-label">3.Condition</label>
+                <label class="field-label">Condition</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="Condition" value="New" oninput="validateForm()">
@@ -222,7 +230,7 @@
             </div>
         </div>
         <div class="row">
-            <label>4.Location</label>
+            <label>Location</label>
         </div>
         <div class="row location-row">
             <input type="text" placeholder="City" id="city" oninput="validateForm()">
@@ -245,6 +253,9 @@
             </div>
         </div>
         <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit</button>
+        <div class="last-line">
+            <p>We accept unopened,quality items only. we'll contact you for pickup/drop details.</p>
+        </div>
     </form>
 <script>
     function validateForm() {
