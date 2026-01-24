@@ -1,174 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Evacuation & Safety Dashboard</title>
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(90deg, #d32f2f, #b71c1c);
-      padding: 1.5rem;
-      color: #fff;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-    }
-    .alert-banner {
-      background: #ff5252;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .datetime {
-      text-align: center;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-    /* Map container with embedded map and overlay */
-    .map-container {
-      width: 90%;
-      height: 400px;
-      margin: 1rem auto;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      position: relative;
-    }
-    /* Map Heading */
-    .map-heading {
-      text-align: center;
-      font-size: 1.8rem;
-      margin: 1rem auto 0;
-      color: #d32f2f;
-    }
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      transition: transform 0.3s ease;
-    }
-    .map-container iframe:hover {
-      transform: scale(1.02);
-    }
-    /* Transparent overlay to capture clicks */
-    .map-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-      background: transparent;
-      z-index: 2;
-    }
-    /* Safe zones list */
-    .safe-zones {
-      width: 90%;
-      margin: 1rem auto;
-    }
-    .safe-zones h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #d32f2f;
-    }
-    .safe-zone-item {
-      background: #fff;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .safe-zone-details {
-      display: flex;
-      flex-direction: column;
-    }
-    .safe-zone-details span {
-      margin-bottom: 0.3rem;
-    }
-    .go-button {
-      background: #43a047;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .go-button:hover {
-      background: #388e3c;
-    }
-    /* Evacuation note */
-    .evacuation-note {
-      width: 90%;
-      margin: 1rem auto;
-      padding: 1rem;
-      background: #fff3e0;
-      border-left: 5px solid #ff6f00;
-      border-radius: 4px;
-      font-size: 1.1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    /* Custom alert box */
-    .custom-alert {
-      background: #ff5252;
-      color: white;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 20px auto;
-      width: 80%;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-  <header>Evacuation & Safety Dashboard</header>
-  
+
+<body class="safety-body">
+  <header class="safety-header">Evacuation & Safety Dashboard</header>
+
   <div class="alert-banner">
     FLOOD ALERT: EVACUATE IMMEDIATELY!
   </div>
-  
+
   <div class="datetime">
     <span id="date"></span> | <span id="time"></span>
   </div>
-  
+
   <!-- Map Heading -->
   <h2 class="map-heading">Evacuation Route</h2>
-  
+
   <!-- Map Container with Embedded Map and Clickable Overlay -->
-  <div class="map-container">
+  <div class="safety-map-container">
     <iframe id="mapFrame" src=""></iframe>
     <div class="map-overlay" id="mapOverlay"></div>
   </div>
-  
+
   <!-- Nearest Safe Zones List -->
   <div class="safe-zones">
     <h2>Nearest Safe Zones</h2>
-    
+
     <!-- Safe Zone 1 -->
-    <div class="safe-zone-item" onclick="updateMap('35.6895,139.6917', '1.2 km', '1-1 Udagawacho, Shibuya City, Tokyo, Japan')">
+    <div class="safe-zone-item"
+      onclick="updateMap('35.6895,139.6917', '1.2 km', '1-1 Udagawacho, Shibuya City, Tokyo, Japan')">
       <div class="safe-zone-details">
         <span><strong>Distance:</strong> 1.2 km</span>
         <span><strong>Address:</strong> 1-1 Udagawacho, Shibuya City, Tokyo, Japan</span>
@@ -177,7 +45,8 @@
     </div>
 
     <!-- Safe Zone 2 -->
-    <div class="safe-zone-item" onclick="updateMap('35.6762,139.6503', '2.5 km', '3-2 Aoyama, Minato City, Tokyo, Japan')">
+    <div class="safe-zone-item"
+      onclick="updateMap('35.6762,139.6503', '2.5 km', '3-2 Aoyama, Minato City, Tokyo, Japan')">
       <div class="safe-zone-details">
         <span><strong>Distance:</strong> 2.5 km</span>
         <span><strong>Address:</strong> 3-2 Aoyama, Minato City, Tokyo, Japan</span>
@@ -186,7 +55,8 @@
     </div>
 
     <!-- Safe Zone 3 -->
-    <div class="safe-zone-item" onclick="updateMap('35.6696,139.7312', '3.0 km', '5-4 Roppongi, Minato City, Tokyo, Japan')">
+    <div class="safe-zone-item"
+      onclick="updateMap('35.6696,139.7312', '3.0 km', '5-4 Roppongi, Minato City, Tokyo, Japan')">
       <div class="safe-zone-details">
         <span><strong>Distance:</strong> 3.0 km</span>
         <span><strong>Address:</strong> 5-4 Roppongi, Minato City, Tokyo, Japan</span>
@@ -195,7 +65,8 @@
     </div>
 
     <!-- Safe Zone 4 -->
-    <div class="safe-zone-item" onclick="updateMap('35.6197,139.7817', '4.0 km', '6-1 Odaiba, Koto City, Tokyo, Japan')">
+    <div class="safe-zone-item"
+      onclick="updateMap('35.6197,139.7817', '4.0 km', '6-1 Odaiba, Koto City, Tokyo, Japan')">
       <div class="safe-zone-details">
         <span><strong>Distance:</strong> 4.0 km</span>
         <span><strong>Address:</strong> 6-1 Odaiba, Koto City, Tokyo, Japan</span>
@@ -204,7 +75,8 @@
     </div>
 
     <!-- Safe Zone 5 -->
-    <div class="safe-zone-item" onclick="updateMap('35.6727,139.7401', '5.2 km', '7-2 Akasaka, Minato City, Tokyo, Japan')">
+    <div class="safe-zone-item"
+      onclick="updateMap('35.6727,139.7401', '5.2 km', '7-2 Akasaka, Minato City, Tokyo, Japan')">
       <div class="safe-zone-details">
         <span><strong>Distance:</strong> 5.2 km</span>
         <span><strong>Address:</strong> 7-2 Akasaka, Minato City, Tokyo, Japan</span>
@@ -215,12 +87,13 @@
 
   <!-- Evacuation Note -->
   <div class="evacuation-note">
-    <strong>Evacuation Notice:</strong> Please evacuate your area within the next 30 minutes. Follow the highlighted evacuation route to reach the nearest safe zone. Stay calm and proceed immediately.
+    <strong>Evacuation Notice:</strong> Please evacuate your area within the next 30 minutes. Follow the highlighted
+    evacuation route to reach the nearest safe zone. Stay calm and proceed immediately.
   </div>
-  
+
   <!-- Custom Alert Box -->
   <div id="customAlert" class="custom-alert" style="display: none;"></div>
-  
+
   <script>
     // Display current date and time in JST (Japan Standard Time)
     function updateDateTime() {
@@ -232,12 +105,12 @@
     }
     setInterval(updateDateTime, 1000);
     updateDateTime();
-    
+
     // Function to update the map and details for each safe zone
     function updateMap(coordinates, distance, address) {
       const baseUrl = "https://maps.google.com/maps?f=d&hl=en&geocode=&saddr=35.6895,139.6917&daddr=" + coordinates + "&dirflg=d&output=embed";
       document.getElementById("mapFrame").src = baseUrl;
-      
+
       const safeZoneDetails = `
         <strong>Distance:</strong> ${distance}<br>
         <strong>Address:</strong> ${address}
@@ -248,4 +121,5 @@
   </script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
+
 </html>
