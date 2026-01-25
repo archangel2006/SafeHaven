@@ -57,6 +57,9 @@
             align-items: flex-start;
             gap: 30px;
             margin: 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .iframe-container {
@@ -128,172 +131,182 @@
             font-size: 18px;
             color: #333;
         }
-        /*EMERGENCY ASSISTANCE CARD */
-.combined-card	 {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 18px;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-    margin-bottom: 22px;
-    text-align: left;
-}
 
-.ec-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 12px;
-}
-
-/* Tabs */
-.ec-tabs {
-    display: flex;
-    /*align-items: center;*/
-    gap: 8px;
-    margin-bottom: 14px;
-    /*flex-wrap: wrap;*/
-}
-.tab {
-    padding: 6px 14px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-.tab-active {
-    background: #2776de;
-    color: #ffffff;
-    border-color: #2776de;
-}
-
-.icon-tab {
-    font-size: 14px;
-    /*margin-left: auto;*/
-}
-
-/* Emergency List */
-.ec-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.ec-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f9fafb;
-    padding: 10px 12px;
-    border-radius: 10px;
-    font-size: 14px;
-}
-
-.copy-btn {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-/* SafeBot */
-.safebot {
-    margin-top: 14px;
-}
-
-.safebot-title {
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #374151;
-}
-
-.safebot-box {
-    background: #f1f5f9;
-    padding: 12px;
-    border-radius: 12px;
-    font-size: 13px;
-    cursor: pointer;
-}
-.safebot-box p {
-    margin-top: 4px;
-    color: #6b7280;
-}
-
-.get-involved {
-            background-color: #ffffff;
-    border-radius: 20px;
-    padding: 22px;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-    text-align: center;
+        /* EMERGENCY ASSISTANCE CARD - UPDATED */
+        .combined-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            margin-bottom: 22px;
+            text-align: left;
         }
+
+        .ec-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        /* Tabs - UPDATED */
+        .ec-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .tab {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .tab:hover {
+            background: #e5e7eb;
+        }
+
+        .tab.active {
+            background: #2776de;
+            color: #ffffff;
+            border-color: #2776de;
+        }
+
+        .icon-tab {
+            font-size: 14px;
+            margin-left: auto;
+        }
+
+        /* Emergency List - UPDATED */
+        .ec-list {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ec-list.active {
+            display: flex;
+        }
+
+        .ec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafb;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #f3f4f6;
+            border-color: #2776de;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        /* SafeBot */
+        .safebot {
+            margin-top: 14px;
+        }
+
+        .safebot-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        .safebot-box {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .safebot-box p {
+            margin-top: 4px;
+            color: #6b7280;
+        }
+
+        .get-involved {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
         .gi-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 8px;
-}
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
 
-.gi-desc {
-    font-size: 15px;
-    color: #6b7280;
-    margin-bottom: 24px;
-}
+        .gi-desc {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
 
-.gi-buttons {
-    display: flex;
-    gap: 14px;
-    flex-direction: column;
-}
+        .gi-buttons {
+            display: flex;
+            gap: 14px;
+            flex-direction: column;
+        }
 
-.gi-link {
-    flex: 1;
-    display: block;
-    text-decoration: none;
-}
-
+        .gi-link {
+            flex: 1;
+            display: block;
+            text-decoration: none;
+        }
 
         .volunteer-btn,
         .donate-btn {
-    width: 100%;
-    /* flex: 1; */
-    height: 44px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    /*border: none;*/
+            width: 100%;
+            height: 44px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
         }
+
         .volunteer-btn {
-    background: #ffffff;
-    color: #2776de;
-    border: 1.8px solid #e5e7eb;
-}
-
-.donate-btn {
-    background: #2776de;
-    color: #ffffff;
-    border: none;	
-}
-
-/* 
-        .volunteer-btn:hover,
-        .donate-btn:hover {
-            background-color: #0056b3;
+            background: #ffffff;
+            color: #2776de;
+            border: 1.8px solid #e5e7eb;
         }
 
-        .volunteer-btn:active,
-        .donate-btn:active {
-            background-color: #003f7f;
-        } */
-
-        /* .volunteer-btn,
         .donate-btn {
-            padding: 12px 20px;
-            margin: 10px 5px;
-        } */
+            background: #2776de;
+            color: #ffffff;
+            border: none;	
+        }
 
         .location {
             background-color: #f4f4f4;
@@ -310,9 +323,7 @@
             margin-right: 10px;
         }
 
-        
-            .map-section {
-                padding-top: 6rem; 
+        .map-section {
             padding: 4rem 1.5rem;
             max-width: 1200px;
             margin: auto;
@@ -386,19 +397,17 @@
             padding: 0.6rem 0;
             background: #f9fafb;
         }
-       @media (min-width: 600px) {
-    .gi-buttons {
-        flex-direction: row;
-    }
-}
 
-
+        @media (min-width: 600px) {
+            .gi-buttons {
+                flex-direction: row;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="top-panel">
-
         <a href="index.html">
             <img style="border-radius: 20px;"
                 src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Logo">
@@ -407,6 +416,7 @@
     </div>
     <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
     <button class="sos-button" onclick="sendSOS()">Emergency! SOS!</button>
+    
     <div class="container">
         <div class="iframe-container">
             <iframe srcdoc="
@@ -472,59 +482,82 @@
                 </a>
             </div>
         </div>
+
         <div class="sidebar">
-           <div class="emergency-card">
-            <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
-            <div class="ec-tabs">
-                <button class="tab active">India</button>
-                <button class="tab">Global</button>
-                <span class="tab-icon">🧡🕊️</span>
-            </div>
-            <div class="ec-list">
-                <div class="ec-item">
-                    <span>🇮🇳 Police: 100</span>
-                    <button class="copy-btn">Copy</button>
-                </div>
-                <div class="ec-item">
-                    <span>🚑 Ambulance: 102</span>
-                    <button class="copy-btn">Copy</button>
-                </div>
-                <div class="ec-item">
-                    <span>🧯 Fire: 101</span>
-                    <button class="copy-btn">Copy</button>
-                </div>
-            </div>
-            <div class="safebot">
-                <p class="safebot-title">Need Guidance Right Now?</p>
-                <div class="safebot-box">
-                    <strong>🤖 Ask SafeBot:</strong>
-                    <p>What should I do during an earthquake?</p>
-                </div>
-            </div>
-        </div>
+            <div class="side-cards-container">
+                <!-- EMERGENCY ASSISTANCE CARD - UPDATED -->
+                <div class="combined-card emergency-card">
+                    <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
 
-            <div class="get-involved">
-                <h3 class="gi-title">Help Others Stay Safe</h3>
-            <p class="gi-desc">Support our mission to assist in times of crisis.</p>
+                    <!-- TAB UI -->
+                    <div class="ec-tabs">
+                        <div class="tab active" data-tab="india">India</div>
+                        <div class="tab" data-tab="global">Global</div>
+                        <span class="icon-tab">🧡🕊️</span>
+                    </div>
 
-                <div class="gi-buttons">
-                    <a href="../9.GetInvolved/Volunteer.html" class="gi-link"><button class="volunteer-btn">Volunteer</button></a>
-                    <a href="../9.GetInvolved/Donate.html" class="gi-link"><button class="donate-btn">Donate</button></a>
+                    <!-- INDIA LIST -->
+                    <div class="ec-list active" id="india-list">
+                        <div class="ec-item">
+                            <span>🇮🇳 Police: <strong>100</strong></span>
+                            <button class="copy-btn" data-copy="100">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🚑 Ambulance: <strong>102</strong></span>
+                            <button class="copy-btn" data-copy="102">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🧯 Fire: <strong>101</strong></span>
+                            <button class="copy-btn" data-copy="101">Copy</button>
+                        </div>
+                    </div>
+
+                    <!-- GLOBAL LIST -->
+                    <div class="ec-list" id="global-list">
+                        <div class="ec-item">
+                            <span>🌍 Emergency: <strong>112</strong></span>
+                            <button class="copy-btn" data-copy="112">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🚑 Ambulance: <strong>911</strong></span>
+                            <button class="copy-btn" data-copy="911">Copy</button>
+                        </div>
+                    </div>
+
+                    <!-- SAFE BOT -->
+                    <div class="safebot">
+                        <p class="safebot-title">Need Guidance Right Now?</p>
+                        <div class="safebot-box" onclick="openSafeBot()">
+                            <strong>🤖 Ask SafeBot:</strong>
+                            <p>What should I do during an earthquake?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GET INVOLVED CARD -->
+                <div class="get-involved">
+                    <h3 class="gi-title">Help Others Stay Safe</h3>
+                    <p class="gi-desc">Support our mission to assist in times of crisis.</p>
+
+                    <div class="gi-buttons">
+                        <a href="../9.GetInvolved/Volunteer.html" class="gi-link">
+                            <button class="volunteer-btn">Volunteer</button>
+                        </a>
+                        <a href="../9.GetInvolved/Donate.html" class="gi-link">
+                            <button class="donate-btn">Donate</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-   
-    <section class="map-section" id="map-section">
 
+    <section class="map-section" id="map-section">
         <div class="map-header">
             <h2>📍 Location Near You</h2>
 
             <div class="map-actions">
-                <!-- MAP HOME BUTTON -->
                 <button id="homeButton" class="home-btn">🏠 Home</button>
-
-                <!-- FULL MAP PAGE -->
                 <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
                     View Full Map →
                 </a>
@@ -537,18 +570,78 @@
             </div>
 
             <div class="map-footer">
-                Location data is approximate. For full map features, click “View Full Map”.
+                Location data is approximate. For full map features, click "View Full Map".
             </div>
         </div>
-
     </section>
 
     <script>
+        // TAB SWITCHING FUNCTIONALITY
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all lists
+                document.querySelectorAll('.ec-list').forEach(list => list.classList.remove('active'));
+                
+                // Show target list
+                document.getElementById(targetTab + '-list').classList.add('active');
+            });
+        });
+
+        // COPY FUNCTIONALITY
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-copy');
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Change button text temporarily
+                    const originalText = this.textContent;
+                    this.textContent = 'Copied!';
+                    this.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy. Please try again.');
+                });
+            });
+        });
+
+        // SOS FUNCTIONALITY
+        let clickCount = 0;
+        function sendSOS() {
+            clickCount++;
+            if (clickCount === 3) {
+                alert("SOS sent with your location and phone number successfully!");
+                clickCount = 0;
+            }
+        }
+
+        // SAFEBOT FUNCTION
+        function openSafeBot() {
+            if(window.openChatbot) {
+                window.openChatbot();
+            } else {
+                alert("SafeBot is loading, please try again.");
+            }
+        }
+
+        // MAP INITIALIZATION
         let mapLoaded = false;
         let map;
         let homeMarker;
 
-        // Home location: India Gate, New Delhi
         const homeCoords = [28.6129, 77.2295];
         const homeZoom = 15;
 
@@ -561,7 +654,6 @@
                 attribution: "© OpenStreetMap contributors"
             }).addTo(map);
 
-            // Fixed Home Marker
             homeMarker = L.marker(homeCoords)
                 .addTo(map)
                 .bindPopup(
@@ -570,7 +662,6 @@
                 )
                 .openPopup();
 
-            // Search (moves map only)
             L.Control.geocoder({
                 collapsed: false,
                 placeholder: "Search location",
@@ -581,7 +672,6 @@
                 })
                 .addTo(map);
 
-            // Home button = reset map view
             document.getElementById("homeButton").addEventListener("click", () => {
                 map.setView(homeCoords, homeZoom);
                 homeMarker.openPopup();
@@ -591,7 +681,6 @@
             mapLoaded = true;
         }
 
-        // Lazy load when section visible
         const observer = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting) {
                 initMap();
@@ -601,31 +690,6 @@
 
         observer.observe(document.getElementById("map-section"));
     </script>
-
-
-    <script>
-        let clickCount = 0;
-        function sendSOS() {
-            clickCount++;
-            if (clickCount === 3) {
-                alert("SOS sent with your location and phone number successfully!");
-                clickCount = 0;
-            }
-        }
-    </script>
-    <script>
-    function openSafeBot() {
-     if(window.openChatbot) {
-     window.openChatbot();
-     }
-     else {
-     alert("SafeBot is loading, please try again.");
-    }
-   }
-</script>
-
-   <script src="../public/8.AIAssistant/chatbot.js"></script>
-
 </body>
 
 </html>
