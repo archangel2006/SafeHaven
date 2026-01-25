@@ -5,37 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Material Donations</title>
     <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding:0;
             background-color: #f4f4f4;
             text-align: center;
+            overflow-x: hidden;
+        }
+        h2{
+            margin-top: 24px;
         }
         .donation-form {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            margin: auto;
+            padding: 32px;
+            border-radius: 14px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
+            width: 100%;
+            max-width: 620px;
+            margin: 24px auto;
             text-align: left;
         }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .row{
+            display: flex;
+            gap: 18px;
+            margin-bottom: 10px;
+            max-width: 100%;
+            flex-direction: column;
+            
+        } 
+        .field{
+            display:flex;
+            flex-direction: column;
+        } 
+        .field-label{
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        label,.field-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
             font-size: 16px;
+        }
+        .quantity-wrapper{
+            position: relative;
+        }
+        .quantity-wrapper input{
+            width: 100%;
+            padding-right: 40px;
+        }
+        .quantity-wrapper span{
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #555;
+        }
+        .radio-group{
+            display: flex;
+            gap: 20px;
+           justify-content: space-between;
+        }
+        .radio-option{
+           display:inline-flex; 
+            align-items:center;
+            gap: 8px;
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        .radio-option input{
+            transform:scale(1.2);
+            width: auto;
+            margin :0;
+        }
+
+        .location-row{
+            flex-direction: row;
+        }
+        input[type="radio"] {
+            accent-color:green;
+        }
+        .location-row input{
+            flex: 1;
+        }
+        input, select {
+           width: 100%;
+            padding: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+        input:focus,select:focus{
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 0 2px rgba(40,167,69,0.2)
         }
         .submit-btn {
             width: 100%;
-            padding: 12px;
-            margin-top: 15px;
+            padding: 18px;
+            margin-top: 10px;
             border: none;
-            border-radius: 5px;
-            font-size: 18px;
+            border-radius: 8px;
+            font-size: 19px;
             color: white;
             background-color: gray;
             cursor: not-allowed;
@@ -45,42 +126,125 @@
             background-color: #28a745;
             cursor: pointer;
         }
-        .submit-btn.active:hover {
-            background-color: #218838;
+        .last-line{
+            margin-top: 20px;
+            line-height: 1.4;
+            text-align:center;
+            color: #777;
         }
+        @media (min-width:600px) {
+            .row{
+                flex-direction: column;
+                gap: 14px;
+            }
+            .hero h1 {
+            font-size: 2rem;
+            }
+
+            .hero p {
+            font-size: 1rem;
+            padding: 0 10px;
+            }
+            .donation-form {
+            max-width: 520px;
+            padding: 24px;
+            }
+        }
+        @media (min-width:1440px){
+            .hero h1 {
+            font-size: 2.5rem;
+            }
+
+            .hero p {
+            font-size: 1.1rem;
+            }
+
+            .donation-form {
+            max-width: 640px;
+            padding: 30px;
+            }
+        }
+
     </style>
 </head>
 <body>
+    <h2>Material Donation Form</h2>    
+    <form class="donation-form" onsubmit="handleSubmit(event)">
+        <div class="row">
+            <div class="field">
+                <label for="donationType">What are you donating?</label>
+                <select id="donationType" required onchange="validateForm()">
+                <option value="" disabled selected>Select Donation Type</option>
+                <option>Food</option>
+                <option>Clothes</option>
+                <option>Medical Kits</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Quantity</label>
+                <div class="quantity-wrapper">
+                    <input type="text" id="Quantity" placeholder="Enter Quantity" required oninput="validateForm()">
+                    <span>kg</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field">
+                <label class="field-label">Condition</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="Condition" value="New" oninput="validateForm()">
+                        New
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="Condition" value="Gently Used" oninput="validateForm()">
+                        Gently Used
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="Condition" value="Expiry Date" oninput="validateForm()">
+                        Expiry Date
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label>Location</label>
+        </div>
+        <div class="row location-row">
+            <input type="text" placeholder="City" id="city" oninput="validateForm()">
+            <input type="text" placeholder="Pincode" id="pincode" oninput="validateForm()">
+        </div>
+        <div class="row">
+            <div class="field-full-width">
+                <label class="field-label">Pickup or Drop-off</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                         <input type="radio" name="Delivery" value="Drop" required oninput="validateForm()">
+                             I can drop it off
+                    </label>
 
-<h2>Material Donation Form</h2>
-<div class="donation-form">
-    <input type="text" id="name" placeholder="Name" required oninput="validateForm()">
-    <input type="tel" id="phone" placeholder="Phone Number" required oninput="validateForm()">
-    <input type="email" id="email" placeholder="Email" required oninput="validateForm()">
-    <input type="text" id="address" placeholder="Home Address" required oninput="validateForm()">
-    <input type="text" id="police" placeholder="Nearest Police Station" required oninput="validateForm()">
-
-    <select id="donationType" required onchange="validateForm()">
-        <option value="" disabled selected>Select Donation Type</option>
-        <option>Food</option>
-        <option>Clothes</option>
-        <option>Medical Kits</option>
-    </select>
-
-    <button class="submit-btn" id="submitBtn" disabled onclick="showMessage()">Submit</button>
-</div>
-
+                    <label class="radio-option">
+                        <input type="radio" name="Delivery" value="Pickup" oninput="validateForm()">
+                        Pickup required
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit</button>
+        <div class="last-line">
+            <p>We accept unopened,quality items only. we'll contact you for pickup/drop details.</p>
+        </div>
+    </form>
 <script>
     function validateForm() {
-        const name = document.getElementById("name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const address = document.getElementById("address").value.trim();
-        const police = document.getElementById("police").value.trim();
         const donationType = document.getElementById("donationType").value;
-        const submitBtn = document.getElementById("submitBtn");
-
-        if (name && phone && email && address && police && donationType) {
+        const Quantity = document.getElementById("Quantity").value.trim();
+        const City = document.getElementById("city").value.trim();
+        const Pincode = document.getElementById("pincode").value.trim();
+        const condition = document.querySelector('input[name="Condition"]:checked');
+        const Delivery = document.querySelector('input[name="Delivery"]:checked');
+        const submitBtn=document.getElementById("submitBtn");
+        if (donationType && Quantity && City && Pincode && condition && Delivery) {
             submitBtn.classList.add("active");
             submitBtn.disabled = false;
         } else {
@@ -89,9 +253,13 @@
         }
     }
 
-    function showMessage() {
-        alert("You'll receive an SMS regarding the details of donation. Thank you for your contribution! 🤗💐");
-    }
+    function handleSubmit(event) {
+    event.preventDefault();
+    alert("You'll receive an SMS regarding the details of donation. Thank you for your contribution! 🤗💐");
+    event.target.reset();
+    document.getElementById("submitBtn").disabled = true;
+    document.getElementById("submitBtn").classList.remove("active");
+}
 </script>
 <script src="../8.AIAssistant/chatbot.js"></script>
 
