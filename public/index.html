@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe Haven - Redesigned Emergency Cards</title>
+    <title>Safe Haven - Emergency Response Platform</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
@@ -99,7 +99,7 @@
             overflow: hidden;
         }
 
-        /* ====== EMERGENCY ACTION CARDS - REDESIGNED ====== */
+        /* ====== EMERGENCY ACTION CARDS - ENHANCED ====== */
         .cards-section {
             flex: 1;
             max-width: 800px;
@@ -112,30 +112,44 @@
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: #6c757d;
             margin-bottom: 16px;
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, #52caec, #3ba8cc);
+            border-radius: 2px;
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
 
         .grid-item {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 16px;
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
             position: relative;
-            height: 180px;
+            height: 190px;
             display: flex;
             flex-direction: column;
         }
@@ -146,7 +160,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 5px;
             transition: height 0.3s ease;
         }
 
@@ -176,13 +190,13 @@
         }
 
         .grid-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-color: rgba(0, 0, 0, 0.05);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+            border-color: rgba(82, 202, 236, 0.3);
         }
 
         .grid-item:hover::before {
-            height: 6px;
+            height: 8px;
         }
 
         .grid-item:focus-within {
@@ -196,29 +210,25 @@
             height: 100%;
             text-decoration: none;
             color: inherit;
-            padding: 20px;
+            padding: 24px;
         }
 
         .card-icon-wrapper {
-            width: 64px;
-            height: 64px;
+            font-size: 48px;
+            width: 72px;
+            height: 72px;
             margin: 0 auto 16px;
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .grid-item:hover .card-icon-wrapper {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .card-icon-wrapper img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            transform: scale(1.15) rotate(8deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .card-content {
@@ -230,22 +240,22 @@
         }
 
         .card-title {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 17px;
+            font-weight: 700;
             color: #212529;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             line-height: 1.3;
         }
 
         .card-description {
             font-size: 13px;
             color: #6c757d;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         /* Specific icon background colors */
         .grid-item:nth-child(1) .card-icon-wrapper {
-            background: linear-gradient(135deg, #ffe5e9, #ffd4da);
+            background: linear-gradient(135deg, #ffe5e9, #ffccd5);
         }
 
         .grid-item:nth-child(2) .card-icon-wrapper {
@@ -532,9 +542,7 @@
             <div class="grid-container">
                 <div class="grid-item">
                     <a href="../2.AlertsRisks/AlertsRisks.html">
-                        <div class="card-icon-wrapper">
-                            <img src="https://i.pinimg.com/736x/b6/54/cc/b654cc705dc20add9ad6867d3776bb72.jpg" alt="Alert Icon">
-                        </div>
+                        <div class="card-icon-wrapper">🚨</div>
                         <div class="card-content">
                             <div class="card-title">Alerts & Risks</div>
                             <div class="card-description">Hazard warnings & current risks</div>
@@ -543,9 +551,7 @@
                 </div>
                 <div class="grid-item">
                     <a href="../3.DisasterCoordination/DisasterCoordination.html">
-                        <div class="card-icon-wrapper">
-                            <img src="https://i.pinimg.com/736x/57/ca/93/57ca93f3d564cba443222c53b83d1791.jpg" alt="Coordination Icon">
-                        </div>
+                        <div class="card-icon-wrapper">🛟</div>
                         <div class="card-content">
                             <div class="card-title">Disaster Updates</div>
                             <div class="card-description">Live updates in your area</div>
@@ -554,9 +560,7 @@
                 </div>
                 <div class="grid-item">
                     <a href="../4.EvacuationSafety/EvacuationSafety.html">
-                        <div class="card-icon-wrapper">
-                            <img src="https://i.pinimg.com/474x/a7/38/fc/a738fcde7c17ac8673f39634c46dacfa.jpg" alt="Evacuation Icon">
-                        </div>
+                        <div class="card-icon-wrapper">⚠️</div>
                         <div class="card-content">
                             <div class="card-title">Evacuation Safety</div>
                             <div class="card-description">Safe routes & tips</div>
@@ -571,9 +575,7 @@
             <div class="grid-container">
                 <div class="grid-item">
                     <a href="../7.GetEducated/GetEducated.html">
-                        <div class="card-icon-wrapper">
-                            <img src="https://i.pinimg.com/736x/81/67/12/8167129b1e32014d2a97d96a1f8990ec.jpg" alt="Education Icon">
-                        </div>
+                        <div class="card-icon-wrapper">📚</div>
                         <div class="card-content">
                             <div class="card-title">Get Educated</div>
                             <div class="card-description">Learn to stay safe</div>
@@ -582,9 +584,7 @@
                 </div>
                 <div class="grid-item">
                     <a href="../5.Community/Community.html">
-                        <div class="card-icon-wrapper">
-                            <img src="https://i.pinimg.com/474x/21/fa/ca/21faca127887fac9576846e69fa0eb09.jpg" alt="Community Icon">
-                        </div>
+                        <div class="card-icon-wrapper">👥</div>
                         <div class="card-content">
                             <div class="card-title">Community</div>
                             <div class="card-description">Help & connect locally</div>
@@ -593,9 +593,7 @@
                 </div>
                 <div class="grid-item">
                     <a href="../6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html">
-                        <div class="card-icon-wrapper">
-                            <img src="https://i.pinimg.com/474x/92/07/39/9207390a16f27561b5d105d0957ac4b9.jpg" alt="Updates Icon">
-                        </div>
+                        <div class="card-icon-wrapper">💬</div>
                         <div class="card-content">
                             <div class="card-title">Connect With Others</div>
                             <div class="card-description">Share tips & experiences</div>
@@ -650,7 +648,9 @@
 
         function initMap() {
             if (mapLoaded) return;
+            
             map = L.map("map").setView(homeCoords, homeZoom);
+            
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 attribution: "© OpenStreetMap contributors"
             }).addTo(map);
@@ -660,11 +660,17 @@
                 .bindPopup("<b>Home Location</b><br>India Gate, New Delhi, India", { autoClose: false, closeOnClick: false })
                 .openPopup();
 
-            L.Control.geocoder({ collapsed: false, placeholder: "Search location", defaultMarkGeocode: true })
-                .on("markgeocode", e => { map.setView(e.geocode.center, homeZoom); })
-                .addTo(map);
+            L.Control.geocoder({ 
+                collapsed: false, 
+                placeholder: "Search location", 
+                defaultMarkGeocode: true 
+            })
+            .on("markgeocode", function(e) { 
+                map.setView(e.geocode.center, homeZoom); 
+            })
+            .addTo(map);
 
-            document.getElementById("homeButton").addEventListener("click", () => {
+            document.getElementById("homeButton").addEventListener("click", function() {
                 map.setView(homeCoords, homeZoom);
                 homeMarker.openPopup();
             });
@@ -673,7 +679,7 @@
             mapLoaded = true;
         }
 
-        const observer = new IntersectionObserver(entries => {
+        const observer = new IntersectionObserver(function(entries) {
             if (entries[0].isIntersecting) {
                 initMap();
                 observer.disconnect();
