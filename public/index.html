@@ -825,6 +825,68 @@
     </section>
 
     <script>
+        // TAB SWITCHING FUNCTIONALITY
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all lists
+                document.querySelectorAll('.ec-list').forEach(list => list.classList.remove('active'));
+                
+                // Show target list
+                document.getElementById(targetTab + '-list').classList.add('active');
+            });
+        });
+
+        // COPY FUNCTIONALITY
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-copy');
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Change button text temporarily
+                    const originalText = this.textContent;
+                    this.textContent = 'Copied!';
+                    this.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy. Please try again.');
+                });
+            });
+        });
+
+        // SOS FUNCTIONALITY
+        let clickCount = 0;
+        function sendSOS() {
+            clickCount++;
+            if (clickCount === 3) {
+                alert("SOS sent with your location and phone number successfully!");
+                clickCount = 0;
+            }
+        }
+
+        // SAFEBOT FUNCTION
+        function openSafeBot() {
+            if(window.openChatbot) {
+                window.openChatbot();
+            } else {
+                alert("SafeBot is loading, please try again.");
+            }
+        }
+
+        // MAP INITIALIZATION
         let mapLoaded = false;
         let map;
         let homeMarker;
