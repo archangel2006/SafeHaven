@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe Haven - Emergency Response Platform</title>
+    <title>Safe Heaven</title>
+    <link rel="icon" href="../assets/1.HomePage/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/1.HomePage/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/1.HomePage/favicon-16x16.png">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
@@ -285,62 +289,184 @@
             min-width: 340px;
         }
 
-        .get-involved {
-            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
-            padding: 28px;
-            text-align: center;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        /* EMERGENCY ASSISTANCE CARD - UPDATED */
+        .combined-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            margin-bottom: 22px;
+            text-align: left;
         }
 
-        .get-involved h2 {
-            color: #212529;
-            font-size: 20px;
+        .ec-title {
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 20px;
+            color: #111827;
+            margin-bottom: 12px;
         }
 
-        .buttons {
+        /* Tabs - UPDATED */
+        .ec-tabs {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            gap: 8px;
+            margin-bottom: 14px;
         }
 
-        .buttons a {
+        .tab {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .tab:hover {
+            background: #e5e7eb;
+        }
+
+        .tab.active {
+            background: #2776de;
+            color: #ffffff;
+            border-color: #2776de;
+        }
+
+        .icon-tab {
+            font-size: 14px;
+            margin-left: auto;
+        }
+
+        /* Emergency List - UPDATED */
+        .ec-list {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ec-list.active {
+            display: flex;
+        }
+
+        .ec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9fafb;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #f3f4f6;
+            border-color: #2776de;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        /* SafeBot */
+        .safebot {
+            margin-top: 14px;
+        }
+
+        .safebot-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        .safebot-box {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .safebot-box p {
+            margin-top: 4px;
+            color: #6b7280;
+        }
+
+        .get-involved {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        .gi-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .gi-desc {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .gi-buttons {
+            display: flex;
+            gap: 14px;
+            flex-direction: column;
+        }
+
+        .gi-link {
+            flex: 1;
+            display: block;
             text-decoration: none;
         }
 
         .volunteer-btn,
         .donate-btn {
-            background: white;
-            color: #212529;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
             width: 100%;
-            padding: 14px 20px;
-            border: none;
+            height: 44px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .volunteer-btn:hover,
-        .donate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            background: #f8f9fa;
+        .volunteer-btn {
+            background: #ffffff;
+            color: #2776de;
+            border: 1.8px solid #e5e7eb;
         }
 
-        .volunteer-btn:active,
-        .donate-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        .donate-btn {
+            background: #2776de;
+            color: #ffffff;
+            border: none;	
         }
 
-        /* Map Section Styles */
         .map-section {
-            padding: 3rem 1.5rem;
+            padding: 4rem 1.5rem;
             max-width: 1200px;
             margin: auto;
         }
@@ -494,6 +620,12 @@
                 font-size: 22px;
             }
         }
+
+        @media (min-width: 600px) {
+            .gi-buttons {
+                flex-direction: row;
+            }
+        }
     </style>
 </head>
 
@@ -603,23 +735,76 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="sidebar">
-            <div class="get-involved">
-                <h2>🤝 GET INVOLVED!</h2>
-                <div class="buttons">
-                    <a href="../9.GetInvolved/Volunteer.html">
-                        <button class="volunteer-btn">👥 Volunteer</button>
-                    </a>
-                    <a href="../9.GetInvolved/Donate.html">
-                        <button class="donate-btn">💝 Donate</button>
-                    </a>
+            <div class="side-cards-container">
+                <!-- EMERGENCY ASSISTANCE CARD - UPDATED -->
+                <div class="combined-card emergency-card">
+                    <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
+
+                    <!-- TAB UI -->
+                    <div class="ec-tabs">
+                        <div class="tab active" data-tab="india">India</div>
+                        <div class="tab" data-tab="global">Global</div>
+                        <span class="icon-tab">🧡🕊️</span>
+                    </div>
+
+                    <!-- INDIA LIST -->
+                    <div class="ec-list active" id="india-list">
+                        <div class="ec-item">
+                            <span>🇮🇳 Police: <strong>100</strong></span>
+                            <button class="copy-btn" data-copy="100">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🚑 Ambulance: <strong>102</strong></span>
+                            <button class="copy-btn" data-copy="102">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🧯 Fire: <strong>101</strong></span>
+                            <button class="copy-btn" data-copy="101">Copy</button>
+                        </div>
+                    </div>
+
+                    <!-- GLOBAL LIST -->
+                    <div class="ec-list" id="global-list">
+                        <div class="ec-item">
+                            <span>🌍 Emergency: <strong>112</strong></span>
+                            <button class="copy-btn" data-copy="112">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🚑 Ambulance: <strong>911</strong></span>
+                            <button class="copy-btn" data-copy="911">Copy</button>
+                        </div>
+                    </div>
+
+                    <!-- SAFE BOT -->
+                    <div class="safebot">
+                        <p class="safebot-title">Need Guidance Right Now?</p>
+                        <div class="safebot-box" onclick="openSafeBot()">
+                            <strong>🤖 Ask SafeBot:</strong>
+                            <p>What should I do during an earthquake?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GET INVOLVED CARD -->
+                <div class="get-involved">
+                    <h3 class="gi-title">Help Others Stay Safe</h3>
+                    <p class="gi-desc">Support our mission to assist in times of crisis.</p>
+
+                    <div class="gi-buttons">
+                        <a href="../9.GetInvolved/Volunteer.html" class="gi-link">
+                            <button class="volunteer-btn">Volunteer</button>
+                        </a>
+                        <a href="../9.GetInvolved/Donate.html" class="gi-link">
+                            <button class="donate-btn">Donate</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Map Section -->
+   <!-- Map Section -->
     <section class="map-section" id="map-section">
         <div class="map-header">
             <h2>📍 Location Near You</h2>
@@ -697,6 +882,4 @@
             }
         }
     </script>
-</body>
-
-</html>
+    
