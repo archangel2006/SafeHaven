@@ -7,17 +7,54 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
+            background: #f7f9fc;
+
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
             text-align: center;
         }
+        /* NAVBAR */
+
+.navbar {
+    background: #3f5fa3;
+    color: white;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    width: 35px;
+    height: 35px;
+}
+
+.nav-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-right i {
+    font-size: 28px;
+    cursor: pointer;
+}
+
 
         .container {
-            width: 80%;
+            width: 1200px;
             margin: auto;
-            padding: 20px;
+            padding: 30px 20px;
         }
         .risk-dashboard .panel-container {
   display: flex;
@@ -73,23 +110,337 @@
 }
 
 /* GRAPH */
+
 .risk-dashboard .graph-container {
-  margin-top: 40px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 80%;
-  margin-inline: auto;
+    margin: 40px auto 20px;
+    background: white;
+    padding: 25px 25px 35px; /* ⭐ extra bottom padding */
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+
+    width: 100%;
+    max-width: 900px;
+
+    height: 500px;   
+    box-sizing: border-box;
 }
 
-       
+
+/* FORM WRAPPER */
+#volunteerForm {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px 40px;   /* Equal left-right padding */
+    background: #f0ffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* INPUTS & SELECT */
+#volunteerForm input,
+#volunteerForm select {
+    width: 100%;
+    padding: 12px 15px;   /* Equal inner padding */
+    margin-bottom: 15px; /* Equal spacing between fields */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box; /* VERY IMPORTANT */
+}
+
+
+
+
+/* BLOCKS */
+.form-block {
+    background: #f8fcff;
+    border: 1px solid #dbe7f3;
+    border-radius: 10px;
+    padding: 15px 18px;
+    margin-bottom: 20px;
+}
+
+
+/* HEADINGS */
+.form-block h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: #3f5fa3;
+    border-bottom: 1px solid #e3ecf5;
+    padding-bottom: 5px;
+}
+
+
+
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* TWO COLUMN GRID */
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* SINGLE OPTION */
+.form-option {
+    display: grid;
+    grid-template-columns: 20px auto; /* checkbox + text */
+    align-items: center;
+
+    gap: 10px;
+
+    background: #f9fcff;
+    border: 1px solid #dbe7f3;
+    border-radius: 8px;
+
+    padding: 10px 12px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* TEXT */
+.form-option span {
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+/* INPUT */
+.form-option input {
+    margin: 0;
+    cursor: pointer;
+}
+
+/* HOVER */
+.form-option:hover {
+    background: #edf5ff;
+    border-color: #3f5fa3;
+}
+
+
+/* TWO COLUMN */
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+/* AVAILABILITY */
+.form-block label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+
+/* NOTE */
+.note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 8px;
+}
+
+
+/* AGREEMENT */
+.agreement {
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+
+/* BUTTON */
+#volunteerForm button {
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#volunteerForm button:hover {
+    background: #218838;
+}
+
+
+/* ===== FIX AREA OF INTEREST PROPERLY ===== */
+
+.area-interest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/* Card */
+.area-item {
+    display: flex;
+    align-items: center;
+
+    padding: 10px 14px;
+
+    background: #f9fcff;
+    border: 1px solid #dbe7f3;
+    border-radius: 8px;
+
+    height: 48px;
+
+    cursor: pointer;
+}
+
+/* OVERRIDE GLOBAL INPUT WIDTH */
+.area-item input {
+    width: auto !important;   /* THIS FIXES IT */
+    margin: 0;
+    margin-right: 8px;
+    margin-left: 2px;
+
+    transform: scale(1.1);
+    flex-shrink: 0;
+}
+
+/* Text in one line */
+.area-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 14px;
+    color: #222;
+}
+/* ===== PERFECT CHECKBOX ALIGNMENT ===== */
+
+/* Grid layout */
+.area-interest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/* Each box */
+.area-item {
+    display: grid;
+    grid-template-columns: 22px 1fr; /* checkbox + text */
+    align-items: center;
+
+    padding: 10px 14px;
+
+    background: #f9fcff;
+    border: 1px solid #dbe7f3;
+    border-radius: 8px;
+
+    height: 48px;
+
+    cursor: pointer;
+}
+
+/* Checkbox reset */
+.area-item input {
+    width: auto !important;
+    margin: 0 !important;
+
+    justify-self: start;   /* lock to left */
+    align-self: center;
+
+    transform: scale(1.1);
+}
+
+/* Text formatting */
+.area-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 14px;
+    color: #222;
+}
+/* ===== UNIFY ALL CHECKBOX / RADIO ALIGNMENT ===== */
+
+.form-option,
+.area-item,
+.agreement label {
+
+    display: grid !important;
+    grid-template-columns: 24px 1fr !important;
+
+    align-items: center !important;
+    column-gap: 10px !important;
+
+    text-align: left !important;
+}
+
+/* Reset inputs everywhere */
+.form-option input,
+.area-item input,
+.agreement input {
+
+    width: auto !important;
+    margin: 0 !important;
+
+    justify-self: start !important;
+    align-self: center !important;
+
+    transform: scale(1.1);
+}
+/* Validation Error Style */
+
+/* Validation */
+
+.input-error {
+    border: 2px solid #e63946 !important;
+    background: #fff5f5;
+}
+
+.error-text {
+    color: #e63946;
+    font-size: 12px;
+    display: block;
+    min-height: 16px;
+    margin-bottom: 10px;
+}
+.section-error {
+    display: block;
+    margin-bottom: 8px;
+}
+.graph-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+.graph-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100%;
+}
+
+
 
     </style>
 </head>
 <body>
-    <div class="risk-dashboard">
+    <!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-left">
+        <img src="C:\Users\DELL\Desktop\SSN\OpenSource\SafeHaven\assets\9.GetInvolved\LOGO.jpg" class="nav-logo">
+        <span class="nav-title">Volunteer</span>
+    </div>
+
+    <div class="nav-right">
+        <i class="fas fa-user-circle"></i>
+    </div>
+</div>
+
+<div class="risk-dashboard">
     <div class="container">
+
         <h2>Volunteer Roles</h2>
         <div class="panel-container">
             <div class="panel" style="background-color:#c5e1f3;">
@@ -115,62 +466,387 @@
         </div>
 
         <h2>Volunteer Registration Form</h2>
-        <form id="volunteerForm" style="background-color:azure" >
-            <input type="text" placeholder="Name" id="name" required>
-            <input type="number" placeholder="Age" id="age" required>
-            <input type="text" placeholder="Location" id="location" required>
-            <input type="tel" placeholder="Contact Info" id="contact" required>
-            <select id="skill">
-                <option value="Medical">Medical</option>
-                <option value="Rescue">Rescue</option>
-                <option value="Logistics">Logistics</option>
-                <option value="Awareness & Education">Awareness & Education</option>
-            </select>
-            <select id="availability">
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Remote Help">Remote Help</option>
-            </select>
-            <button type="submit">Register</button>
-        </form>
+       
+    <form id="volunteerForm">
 
-        <div class="graph-container">
+    <!-- BASIC INFO -->
+   <div class="form-block">
+
+    <input type="text" id="name" placeholder="Name" required>
+    <small class="error-text"></small>
+
+    <input type="number" id="age" placeholder="Age" min="18" max="60" step="1" required>
+    <small class="error-text"></small>
+
+    <input type="text" id="location" placeholder="Location" required>
+    <small class="error-text"></small>
+
+    <input type="tel" id="contact" placeholder="Phone Number (with country code)" required>
+    <small class="error-text"></small>
+
+    <select>
+        <option>Medical</option>
+        <option>Rescue</option>
+        <option>Supply Distribution</option>
+        <option>Awareness & Education</option>
+    </select>
+
+</div>
+
+
+
+    <div class="form-block">
+
+    <h3>Area of Interest</h3>
+    <small class="error-text section-error" id="areaError"></small>
+
+    <div class="area-interest-grid">
+
+        <label class="area-item">
+            <input type="checkbox">
+            <span>Medical Assistance</span>
+        </label>
+
+        <label class="area-item">
+            <input type="checkbox">
+            <span>Rescue Operations</span>
+        </label>
+
+        <label class="area-item">
+            <input type="checkbox">
+            <span>Supply Distribution</span>
+        </label>
+
+        <label class="area-item">
+            <input type="checkbox">
+            <span>Awareness & Education</span>
+        </label>
+
+        <label class="area-item">
+            <input type="checkbox">
+            <span>Phone Helpline Support</span>
+        </label>
+
+        <label class="area-item">
+            <input type="checkbox">
+            <span>Data Entry</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+
+
+    <!-- TWO COLUMN -->
+    <div class="two-column">
+
+
+        <!-- AVAILABILITY -->
+        <div class="form-block">
+
+            <h3>Availability</h3>
+            <small class="error-text section-error" id="availError"></small>
+
+            <label class="form-option">
+    <input type="radio" name="avail">
+    <span>Part-Time (On-Ground)</span>
+</label>
+            <label class="form-option">
+    <input type="radio" name="avail">
+    <span>Full-Time</span>
+</label>
+            <label class="form-option">
+    <input type="radio" name="avail">
+    <span>Remote Volunteer</span>
+</label>
+            <label class="form-option">
+    <input type="radio" name="avail">
+    <span>Emergency Only</span>
+</label>
+
+            <p class="note">1–4 hours/day • Flexible schedules supported</p>
+
+        </div>
+
+
+        <!-- PREFERRED TIME -->
+        <div class="form-block">
+
+            <h3>Preferred Time</h3>
+            <small class="error-text section-error" id="timeError"></small>
+
+            <label class="form-option">
+    <input type="checkbox">
+    <span>Morning</span>
+</label>
+
+            <label class="form-option">
+    <input type="checkbox">
+    <span>Afternoon</span>
+</label>
+            <label class="form-option">
+    <input type="checkbox">
+    <span>Evening</span>
+</label>
+            <label class="form-option">
+    <input type="checkbox">
+    <span>Flexible</span>
+</label>
+
+        </div>
+
+    </div>
+
+
+    <!-- AGREEMENT -->
+    <div class="agreement">
+
+        <label>
+            <input type="checkbox" required>
+            I understand the risks and agree to volunteer responsibly.
+        </label>
+
+    </div>
+
+
+    <!-- SUBMIT -->
+    <button type="submit">Register</button>
+
+</form>
+
+<!-- VOLUNTEER IMPACT -->
+<div class="graph-container">
+
             <h2>📊 Volunteer Impact</h2>
             <canvas id="volunteerChart"></canvas>
         </div>
     </div>
 </div>
 
-    <script>
-        // Handle form submission
-        document.getElementById("volunteerForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            alert("Registered Successfully! You will be receiving our call in about 60 seconds.");
-            document.getElementById("volunteerForm").reset();
-        });
+   <script>
+const form = document.getElementById("volunteerForm");
 
-        // Chart.js Graph
-        const ctx = document.getElementById('volunteerChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Medical Assistance', 'Rescue Operations', 'Supply Distribution', 'Awareness & Education'],
-                datasets: [{
-                    label: 'Lives Impacted',
-                    data: [5000, 8000, 6000, 7000],
-                    backgroundColor: ['#ff5733', '#33ff57', '#3377ff', '#ff33a6']
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+const fields = [
+    {
+        el: document.getElementById("name"),
+        check: v => v.trim().length >= 3,
+        msg: "Name must be at least 3 characters"
+    },
+    {
+        el: document.getElementById("age"),
+        check: v => v >= 18 && v <= 70,
+        msg: "Age must be between 18 and 70"
+    },
+    {
+        el: document.getElementById("location"),
+        check: v => v.trim().length >= 3,
+        msg: "Enter a valid location"
+    },
+    {
+        el: document.getElementById("contact"),
+        check: v => /^[+]?[\d\s\-]{7,15}$/.test(v),
+        msg: "Enter a valid phone number"
+    }
+];
+
+
+function showError(field, message) {
+
+    field.el.classList.add("input-error");
+    field.el.nextElementSibling.innerText = message;
+}
+
+function clearError(field) {
+
+    field.el.classList.remove("input-error");
+    field.el.nextElementSibling.innerText = "";
+}
+
+
+/* LIVE VALIDATION */
+fields.forEach(field => {
+
+    field.el.addEventListener("input", () => {
+
+        if (!field.check(field.el.value)) {
+            showError(field, field.msg);
+        } else {
+            clearError(field);
+        }
+
+    });
+
+});
+
+
+/* SUBMIT CHECK */
+form.addEventListener("submit", e => {
+
+    e.preventDefault();
+
+    let valid = true;
+
+    fields.forEach(field => {
+
+        if (!field.check(field.el.value)) {
+            showError(field, field.msg);
+            valid = false;
+        }
+
+    });
+
+    const areaValid = checkArea();
+const availValid = checkAvailability();
+const timeValid = checkTime();
+
+if (!valid || !areaValid || !availValid || !timeValid) {
+    return;
+}
+
+
+    alert("✅ Registered Successfully!");
+
+    form.reset();
+
+    document.querySelectorAll(".error-text").forEach(e => e.innerText = "");
+});
+
+/* GROUP VALIDATION */
+
+const areaBoxes = document.querySelectorAll(".area-item input");
+const availRadios = document.querySelectorAll('input[name="avail"]');
+const timeBoxes = document.querySelectorAll('.form-block:nth-child(2) input[type="checkbox"]');
+
+const areaError = document.getElementById("areaError");
+const availError = document.getElementById("availError");
+const timeError = document.getElementById("timeError");
+
+
+function checkArea() {
+
+    const checked = [...areaBoxes].some(b => b.checked);
+
+    if (!checked) {
+        areaError.innerText = "Select at least one area of interest";
+        return false;
+    }
+
+    areaError.innerText = "";
+    return true;
+}
+
+
+function checkAvailability() {
+
+    const checked = [...availRadios].some(r => r.checked);
+
+    if (!checked) {
+        availError.innerText = "Select your availability";
+        return false;
+    }
+
+    availError.innerText = "";
+    return true;
+}
+
+
+function checkTime() {
+
+    const checked = [...timeBoxes].some(b => b.checked);
+
+    if (!checked) {
+        timeError.innerText = "Select at least one preferred time";
+        return false;
+    }
+
+    timeError.innerText = "";
+    return true;
+}
+
+
+/* LIVE CHECK */
+
+areaBoxes.forEach(b =>
+    b.addEventListener("change", checkArea)
+);
+
+availRadios.forEach(r =>
+    r.addEventListener("change", checkAvailability)
+);
+
+timeBoxes.forEach(b =>
+    b.addEventListener("change", checkTime)
+);
+/* ================= CHART ================= */
+/* ================== CHART.JS ================== */
+
+window.addEventListener("load", function () {
+
+    const canvas = document.getElementById("volunteerChart");
+
+    if (!canvas) {
+        console.error("Volunteer chart not found");
+        return;
+    }
+
+    const ctx = canvas.getContext("2d");
+
+    new Chart(ctx, {
+        type: 'bar',
+
+        data: {
+            labels: [
+                'Medical Assistance',
+                'Rescue Operations',
+                'Supply Distribution',
+                'Awareness & Education'
+            ],
+
+            datasets: [{
+                label: 'Lives Impacted',
+                data: [5000, 8000, 6000, 7000],
+
+                backgroundColor: [
+                    '#ff5733',
+                    '#33ff57',
+                    '#3377ff',
+                    '#ff33a6'
+                ]
+            }]
+        },
+
+        options: {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    layout: {
+        padding: {
+            bottom: 40   // ⭐ more space for labels
+        }
+    },
+
+    scales: {
+        x: {
+            ticks: {
+                padding: 10
             }
-        });
-    </script>
+        },
+        y: {
+            beginAtZero: true
+        }
+    }
+}
+
+
+
+    });
+
+});
+
+</script>
+
     <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>
