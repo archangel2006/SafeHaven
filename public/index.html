@@ -29,7 +29,7 @@
 
         .top-panel {
             display: flex;
-            align-items: left;
+            align-items: center;
             padding: 30px;
             background-color: #52caec;
             justify-content: left;
@@ -43,17 +43,26 @@
         .main-tagline {
             margin: 20px 0 10px;
             font-size: 20px;
+            font-weight: bold;
         }
 
         .sos-button {
-            background-color: red;
-            color: white;
-            padding: 15px 30px;
+            background-color: #d32f2f;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
             border: none;
-            font-size: 18px;
             cursor: pointer;
             margin-bottom: 20px;
         }
+
+        sos-button:hover {
+            background-color: #b71c1c;
+        }
+
+
 
         .container {
             display: flex;
@@ -64,12 +73,14 @@
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
+            border-radius: 20px;
         }
 
         .iframe-container {
-            width: 300px;
-            height: 300px;
+            width: 380px;          /* slightly wider */
+            height: 650px;         /* 🔥 increased height */
             background-color: #adeaf9;
+            border-radius: 20px;
         }
 
         .grid-container {
@@ -402,6 +413,53 @@
             background: #f9fafb;
         }
 
+        /* ---------- SOS MODAL ---------- */
+    .sos-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sos-modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 14px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .sos-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .confirm-sos {
+      background: #d32f2f;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cancel-sos {
+      background: #e5e7eb;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+
+
         @media (min-width: 600px) {
             .gi-buttons {
                 flex-direction: row;
@@ -419,69 +477,165 @@
         <h1>Safe Haven</h1>
     </div>
     <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
-    <button class="sos-button" onclick="sendSOS()">Emergency! SOS!</button>
+    <button class="sos-button" onclick="openSOSModal()">Emergency! SOS!</button>
     
     <div class="container">
         <div class="iframe-container">
-            <iframe srcdoc="
-                <style>
-                    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; text-align: center; }
-                    h2 { font-size: 18px; margin-bottom: 10px; }
-                    img { width: 150px; border-radius: 10px; margin-bottom: 10px; }
-                    ul { list-style: none; padding: 0; }
-                    li { font-size: 12px; margin-bottom: 8px; font-weight: bold; color: #333; }
-                    a { display: block; margin-top: 8px; color: #007bff; text-decoration: none; font-size: 14px; }
-                    a:hover { text-decoration: underline; }
-                </style>
-                <h2>Japan Emergency Contacts</h2>
+           <iframe 
+           srcdoc="
+           <style>
+            * {
+                box-sizing: border-box;
+                font-family: 'Inter', Arial, sans-serif;
+            }
+            body { margin: 0; padding: 20px; background: #eef2f7; color: #1f2937;
+            }
+            
+            .card {
+                background: #ffffff;
+                border-radius: 12px; padding: 20px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+                text-align: center;
+                max-width: 380px;
+                margin: auto;
+            }
+
+            .header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                margin-bottom: 14px;
+            }
+            
+            .header img {
+                width: 50px;
+                border-radius: 6px;
+            }
+            
+            h2 {
+                font-size: 20px;
+                font-weight: 700;
+                margin: 0;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #111827;
+            }
+            
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 16px 0;
+                text-align: left;
+            }
+            
+            li {
+                background: #f9fafb;
+                margin-bottom: 10px;
+                padding: 12px 14px;
+                border-radius: 8px;
+                font-size: 14px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: 600;
+                color: #111827;
+            }
+
+            li span {
+                font-weight: 500;
+                color: #374151;
+            }
+            
+            .links a {
+                display: block;
+                margin-top: 10px;
+                padding: 10px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 700;
+                transition: background 0.2s ease;
+            }
+
+            .primary {
+                background: #2563eb;
+                color: #fff;
+            }
+
+            .secondary {
+                background: #e5e7eb;
+                color: #1f2937;
+                margin-top: 8px;
+            }
+            
+            .links a:hover {
+                opacity: 0.88;
+            }
+        </style>
+        
+        <div class='card'>
+            <div class='header'>
                 <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/800px-Flag_of_Japan.svg.png' alt='Japan Flag'>
-                <ul>
-                    <li>🇯🇵 <strong>Police:</strong> 110</li>
-                    <li>🚑 <strong>Ambulance & Fire:</strong> 119</li>
-                    <li>📞 <strong>Disaster Emergency Message Dial:</strong> 171</li>
-                    <li>⚓ <strong>Coast Guard:</strong> 118</li>
-                    <li>🧠 <strong>Mental Health Helpline:</strong> 0570-064-556</li>
-                    <li>🏥 <strong>Disaster Relief (JDR):</strong> 03-5215-0693</li>
-                    <li>🛂 <strong>Foreign Residents Hotline:</strong> 0570-013-130</li>
-                    <li>🏛️ <strong>Japan Embassy:</strong> +81-3-3580-3311</li>
-                </ul>
-                <a href='https://www.japan.travel/en/' target='_blank'>🌐 Japan Travel Website</a>
-                <a href='https://www.japanembassy.org/' target='_blank'>🏛️ Japanese Embassy</a>
-            " width="100%" height="300px" frameborder="0" scrolling="yes"></iframe>
+                <h2>Japan Emergency Contacts</h2>
+            </div>
+            
+            <ul>
+                <li>🚓 Police <span>110</span></li>
+                <li>🚑 Ambulance & Fire <span>119</span></li>
+                <li>📞 Disaster Message <span>171</span></li>
+                <li>⚓ Coast Guard <span>118</span></li>
+                <li>🧠 Mental Health <span>0570-064-556</span></li>
+                <li>🏥 Disaster Relief <span>03-5215-0693</span></li>
+                <li>🛂 Foreign Hotline <span>0570-013-130</span></li>
+                <li>🏛️ Embassy <span>+81-3-3580-3311</span></li>
+            </ul>
+            
+            <div class='links'>
+                <a href='https://www.japan.travel/en/' target='_blank' class='primary'>🌐 Visit Japan Travel</a>
+                <a href='https://www.japanembassy.org/' target='_blank' class='secondary'>🏛️ Japan Embassy Info</a>
+            </div>
+        </div>"
+        width="100%"
+        height="650px"
+        frameborder="0"
+        scrolling="no">
+    </iframe>
+
         </div>
 
         <div class="grid-container">
             <div class="grid-item">
-                <a href="../2.AlertsRisks/AlertsRisks.html">
+                <a href="../public/2.AlertsRisks/AlertsRisks.html">
                     <img src="https://i.pinimg.com/736x/b6/54/cc/b654cc705dc20add9ad6867d3776bb72.jpg"
                         alt="Disaster Alerts">
                 </a>
             </div>
             <div class="grid-item">
-                <a href="../3.DisasterCoordination/DisasterCoordination.html">
+                <a href="../public/3.DisasterCoordination/DisasterCoordination.html">
                     <img src="https://i.pinimg.com/736x/57/ca/93/57ca93f3d564cba443222c53b83d1791.jpg"
                         alt="Disaster Coordination">
                 </a>
             </div>
             <div class="grid-item">
-                <a href="../4.EvacuationSafety/EvacuationSafety.html">
+                <a href="../public/4.EvacuationSafety/EvacuationSafety.html">
                     <img src="https://i.pinimg.com/474x/a7/38/fc/a738fcde7c17ac8673f39634c46dacfa.jpg"
                         alt="Evacuation Safety">
                 </a>
             </div>
             <div class="grid-item">
-                <a href="../5.Community/Community.html">
+                <a href="../public/5.Community/Community.html">
                     <img src="https://i.pinimg.com/474x/21/fa/ca/21faca127887fac9576846e69fa0eb09.jpg" alt="Community">
                 </a>
             </div>
             <div class="grid-item">
-                <a href="../6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html">
+                <a href="../public/6.KnowWhat'sHappeningAround/KnowWhat'sHappeningAround.html">
                     <img src="https://i.pinimg.com/474x/92/07/39/9207390a16f27561b5d105d0957ac4b9.jpg"
                         alt="What's Happening?">
                 </a>
             </div>
             <div class="grid-item">
-                <a href="../7.GetEducated/GetEducated.html">
+                <a href="../public/7.GetEducated/GetEducated.html">
                     <img src="https://i.pinimg.com/736x/81/67/12/8167129b1e32014d2a97d96a1f8990ec.jpg" alt="Education">
                 </a>
             </div>
@@ -579,7 +733,51 @@
         </div>
     </section>
 
+    <!-- SOS MODAL -->
+     <div id="sosModal" class="sos-modal">
+        <div class="sos-modal-content">
+            <h2>⚠️ Emergency Alert</h2>
+            <p style="padding-top: 3%;">Send SOS with your current location?</p>
+            <div class="sos-actions">
+                <button class="confirm-sos" onclick="sendSOS()">Yes</button>
+                <button class="cancel-sos" onclick="closeSOSModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
     <script>
+        function openSOSModal() {
+      document.getElementById("sosModal").style.display = "flex";
+    }
+
+    function closeSOSModal() {
+      document.getElementById("sosModal").style.display = "none";
+    }
+
+    function sendSOS() {
+      alert("✅ SOS sent successfully with your location!");
+      closeSOSModal();
+    }
+
+     document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all lists
+                document.querySelectorAll('.ec-list').forEach(list => list.classList.remove('active'));
+                
+                // Show target list
+                document.getElementById(targetTab + '-list').classList.add('active');
+            });
+        });
+
         // TAB SWITCHING FUNCTIONALITY
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
