@@ -45,7 +45,9 @@ The project is built as a **social good initiative** and maintained as an **open
 ```bash
 # Clone the repository
 git clone https://github.com/archangel2006/SafeHaven.git
+
 cd SafeHaven
+cd public
 
 # Run index.html Locally
 ```
@@ -81,8 +83,8 @@ cd SafeHaven
    │   ├── MissingPerson.html
    │   └── chatroom.html
    │
-   ├── 6. KnowWhat'sHappeningAround/
-   │   └── KnowWhat'sHappeningAround.html
+   ├── 6. DisasterUpdates/
+   │   └── DisasterUpdates.html
    │
    ├── 7. GetEducated/
    │   ├── GetEducated.html
