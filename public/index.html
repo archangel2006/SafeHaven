@@ -53,6 +53,7 @@
             font-size: 18px;
             cursor: pointer;
             margin-bottom: 20px;
+            border-radius: 14px;
         }
 
         .container {
@@ -402,6 +403,59 @@
             background: #f9fafb;
         }
 
+        .sos-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.sos-card {
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.sos-warning {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 18px;
+}
+
+.sos-main-btn {
+    width: 100%;
+    background: red;
+    color: white;
+    border: none;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.sos-secondary-btn {
+    width: 100%;
+    background: #f1f5f9;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sos-card.success h3 {
+    color: #16a34a;
+    margin-bottom: 10px;
+}
+
         @media (min-width: 600px) {
             .gi-buttons {
                 flex-direction: row;
@@ -409,6 +463,28 @@
         }
     </style>
 </head>
+
+<div id="sosModal" class="sos-modal">
+  <div class="sos-card">
+    <p class="sos-warning">Use only in life-threatening situations</p>
+
+    <button class="sos-main-btn" onclick="confirmSOS()">
+      🚨 EMERGENCY SOS
+    </button>
+
+    <button class="sos-secondary-btn" onclick="closeSOS()">
+      Cancel
+    </button>
+  </div>
+</div>
+
+<!-- SUCCESS POPUP -->
+<div id="sosSuccess" class="sos-modal">
+  <div class="sos-card success">
+    <h3>✅ SOS Sent</h3>
+    <p>Your location & phone number were shared.</p>
+  </div>
+</div>
 
 <body>
     <div class="top-panel">
@@ -623,14 +699,39 @@
         });
 
         // SOS FUNCTIONALITY
-        let clickCount = 0;
-        function sendSOS() {
-            clickCount++;
-            if (clickCount === 3) {
-                alert("SOS sent with your location and phone number successfully!");
-                clickCount = 0;
-            }
-        }
+       function sendSOS() {
+    document.getElementById("sosModal").style.display = "flex";
+       }
+       function closeSOS() {
+        document.getElementById("sosModal").style.display = "none";
+    }
+    
+    function confirmSOS() {
+    // Close confirmation popup
+    document.getElementById("sosModal").style.display = "none";
+
+    // Show success popup
+    const successPopup = document.getElementById("sosSuccess");
+    successPopup.style.display = "flex";
+
+    console.log("SOS sent with location & phone number");
+
+    // ⏱ Auto-close after 3 seconds
+    setTimeout(() => {
+        successPopup.style.display = "none";
+    }, 1000);
+}
+
+    // 🔔 Here you can trigger:
+    // API call
+    // SMS
+    // WhatsApp
+    // Email
+    console.log("SOS sent with location & phone number");
+    
+    function closeSuccess() {
+        document.getElementById("sosSuccess").style.display = "none";
+    }
 
         // SAFEBOT FUNCTION
         function openSafeBot() {
