@@ -780,12 +780,15 @@
     </div>
 
    <!-- Map Section -->
-    <section class="map-section" id="map-section">
+  <section class="map-section" id="map-section">
         <div class="map-header">
             <h2>📍 Location Near You</h2>
+
             <div class="map-actions">
                 <button id="homeButton" class="home-btn">🏠 Home</button>
-                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">View Full Map →</a>
+                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
+                    View Full Map →
+                </a>
             </div>
         </div>
 
@@ -793,6 +796,7 @@
             <div class="map-wrapper" id="mapWrapper">
                 <div id="map"></div>
             </div>
+
             <div class="map-footer">
                 Location data is approximate. For full map features, click "View Full Map".
             </div>
@@ -865,34 +869,38 @@
         let mapLoaded = false;
         let map;
         let homeMarker;
+
         const homeCoords = [28.6129, 77.2295];
         const homeZoom = 15;
 
         function initMap() {
             if (mapLoaded) return;
-            
+
             map = L.map("map").setView(homeCoords, homeZoom);
-            
+
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 attribution: "© OpenStreetMap contributors"
             }).addTo(map);
 
             homeMarker = L.marker(homeCoords)
                 .addTo(map)
-                .bindPopup("<b>Home Location</b><br>India Gate, New Delhi, India", { autoClose: false, closeOnClick: false })
+                .bindPopup(
+                    "<b>Home Location</b><br>India Gate, New Delhi, India",
+                    { autoClose: false, closeOnClick: false }
+                )
                 .openPopup();
 
-            L.Control.geocoder({ 
-                collapsed: false, 
-                placeholder: "Search location", 
-                defaultMarkGeocode: true 
+            L.Control.geocoder({
+                collapsed: false,
+                placeholder: "Search location",
+                defaultMarkGeocode: true
             })
-            .on("markgeocode", function(e) { 
-                map.setView(e.geocode.center, homeZoom); 
-            })
-            .addTo(map);
+                .on("markgeocode", e => {
+                    map.setView(e.geocode.center, homeZoom);
+                })
+                .addTo(map);
 
-            document.getElementById("homeButton").addEventListener("click", function() {
+            document.getElementById("homeButton").addEventListener("click", () => {
                 map.setView(homeCoords, homeZoom);
                 homeMarker.openPopup();
             });
@@ -901,7 +909,7 @@
             mapLoaded = true;
         }
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting) {
                 initMap();
                 observer.disconnect();
@@ -909,14 +917,6 @@
         });
 
         observer.observe(document.getElementById("map-section"));
-
-        let clickCount = 0;
-        function sendSOS() {
-            clickCount++;
-            if (clickCount === 3) {
-                alert("SOS sent with your location and phone number successfully!");
-                clickCount = 0;
-            }
-        }
     </script>
+
     
