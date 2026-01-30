@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Disaster Management Dashboard</title>
   <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
@@ -11,323 +12,764 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_GOOGLE_MAPS_API_KEY&callback=initMap" async
+    defer></script>
   <!-- Removed Leaflet libraries as they're no longer needed -->
   <style>
     /* Global Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Poppins', sans-serif; 
-      background: #333; 
-      color: #fff; 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    header { 
-      background: linear-gradient(135deg, #1e3c72, #2a5298); 
-      padding: 2rem; 
-      text-align: center; 
-      font-size: 2rem; 
-      font-weight: bold; 
-      text-transform: uppercase; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 12px; 
-      letter-spacing: 1px;
-      position: relative;
+
+    body {
+      text-align: center;
+      background-color: #f8f9fa;
     }
-    /* Tabs */
-    .tab-bar {
-      display: flex; 
-      justify-content: center; 
-      gap: 1rem; 
-      background: #222; 
-      padding: 1rem;
-    }
-    .tab { 
-      padding: 0.75rem 1.5rem; 
-      background: #1e3c72; 
-      border-radius: 25px; 
-      cursor: pointer; 
-      transition: 0.3s; 
-    }
-    .tab:hover, .tab.active { background: #2a5298; }
-    
-    .content-container {
-      position: relative;
-      width: 100%;
-      min-height: 80vh;
-      overflow: hidden;
-    }
-    .tab-content {
-      position: absolute;
-      top: 0;
-      left: 100%;
-      width: 100%;
-      padding: 2rem;
-      opacity: 0;
-      transition: 0.6s;
-      overflow-y: auto;
-      max-height: 75vh;
-    }
-    .tab-content.active { left: 0; opacity: 1; }
-    .tab-content h2 { font-size: 2rem; margin-bottom: 1rem; color: #333; }
-    
-    /* Alerts List */
-    ul { list-style-type: none; padding: 0; }
-    ul li {
-      background: #f9f9f9;
-      margin: 10px 0;
-      padding: 14px;
-      border-radius: 10px;
-      box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
-      font-size: 1.1rem;
+
+    header.dashboard-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      color: #333;
+      justify-content: space-between;
+      /* left, center, right */
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      color: #fff;
     }
-    
-    /* Map Container - now used for static image */
-    .map-container { 
-      width: 90%; 
-      height: 350px; 
-      margin: 1rem auto; 
-      border-radius: 10px; 
-      overflow: hidden;
+
+    .header-left img {
+      height: 60px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
-    .map-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 2rem;
+      font-weight: 600;
+      text-transform: uppercase;
     }
-    
-    /* Chart Container - Enlarged */
-    .chart-container { 
-      width: 90%; 
-      max-width: 800px; 
-      background: #fff; 
-      padding: 2rem; 
-      border-radius: 15px; 
-      margin: 1rem auto; 
-      color: #333; 
+
+    .header-right {
+      width: 60px;
+      /* same as logo width, keeps center perfectly centered */
     }
-    
-    /* Risk Meter Grid - one row */
-    .risk-meter-grid { 
-      display: flex; 
-      flex-wrap: nowrap; 
-      gap: 0.5rem; 
-      justify-content: center; 
-      margin-top: 1rem; 
-      overflow-x: auto;
+
+    .emergency-banner {
+      background: linear-gradient(135deg, #b71c1c, #e53935);
+      color: #fff;
+      padding: 1rem;
+      margin: 1rem auto;
+      /* auto to center */
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      animation: pulse 2s infinite;
+      max-width: 800px;
+      /* controls the banner width */
     }
-    .single-risk-meter {
-      text-align: center;
+
+    .banner-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .banner-content i {
+      font-size: 2rem;
+    }
+
+    .banner-text h3 {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .banner-text p {
+      font-size: 0.95rem;
+      margin-top: 0.2rem;
+    }
+
+    .banner-text span {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .banner-btn {
+      margin-left: auto;
+      background: #fff;
+      color: #b71c1c;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .emergency-banner {
+        margin: 1rem;
+        padding: 0.8rem;
+      }
+
+      .banner-content i {
+        font-size: 1.5rem;
+      }
+
+      .banner-text h3 {
+        font-size: 0.95rem;
+      }
+
+      .banner-text p,
+      .banner-text span {
+        font-size: 0.85rem;
+      }
+
+      .banner-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    .alerts-section {
+      padding: 1.5rem;
+    }
+
+    .alerts-section h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .alerts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Card Base */
+    .alert-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       background: #fff;
       color: #333;
-      border-radius: 10px;
-      padding: 0.5rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      min-width: 130px;
-      flex: 0 0 auto;
-    }
-    .single-risk-meter h3 {
-      color: #333;
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-    .single-risk-meter .disaster-name {
-      color: #333;
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
-    }
-    .risk-meter {
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       position: relative;
+    }
+
+    /* Icon */
+    .alert-icon {
+      font-size: 1.8rem;
+    }
+
+    /* Info */
+    .alert-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .alert-info p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .alert-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      color: #777;
+    }
+
+    /* Severity Badge */
+    .severity-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 0.25rem 0.7rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* Severity Colors */
+    .alert-card.critical {
+      border-left: 6px solid #d32f2f;
+    }
+
+    .alert-card.critical .severity-badge {
+      background: #d32f2f;
+      color: #fff;
+    }
+
+    .alert-card.high {
+      border-left: 6px solid #f57c00;
+    }
+
+    .alert-card.high .severity-badge {
+      background: #f57c00;
+      color: #fff;
+    }
+
+    .alert-card.moderate {
+      border-left: 6px solid #fbc02d;
+    }
+
+    .alert-card.moderate .severity-badge {
+      background: #fbc02d;
+      color: #333;
+    }
+
+    .risk-overview {
+      padding: 2rem 1rem;
+      background: #f4f6f8;
+      border-radius: 16px;
+      margin: 1rem auto;
+    }
+
+    .risk-overview h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #1e3c72;
+      text-align: center;
+    }
+
+    .section-subtext {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Horizontal scroll row */
+    .risk-meter-row {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scroll-behavior: smooth;
+      justify-content: flex-start;
+      /* aligns left properly */
+    }
+
+    /* Cards */
+    .risk-card {
+      background: #fff;
+      color: #333;
+      min-width: 180px;
+      padding: 1.5rem 1rem;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+      /* prevents cards from shrinking */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .risk-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Donut Meter */
+    .risk-meter {
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      margin: 0 auto 0.3rem;
-      background: conic-gradient(red 0deg, #eee 0deg);
-      transition: background 0.6s ease;
+      margin: 0 auto 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      position: relative;
+      background: conic-gradient(#ddd 0deg, #ddd 360deg);
     }
-    .risk-meter .center-label {
+
+    /* Animated Donut Meter using JS */
+    .risk-meter span {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1rem;
       color: #333;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Color Themes with better visibility */
+    .risk-meter.flood {
+      background: conic-gradient(#1e88e5 0deg, #1e88e5 288deg, #eee 0deg);
+    }
+
+    .risk-meter.cyclone {
+      background: conic-gradient(#5e35b1 0deg, #5e35b1 234deg, #eee 0deg);
+    }
+
+    .risk-meter.heatwave {
+      background: conic-gradient(#fb8c00 0deg, #fb8c00 324deg, #eee 0deg);
+    }
+
+    .risk-meter.earthquake {
+      background: conic-gradient(#e53935 0deg, #e53935 144deg, #eee 0deg);
+    }
+
+    .risk-card h4 {
+      margin-top: 0.6rem;
+      font-size: 1.1rem;
+      color: #1e3c72;
+    }
+
+    .risk-card p {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 0.2rem;
+    }
+
+    /* Scrollbar styling (optional) */
+    .risk-meter-row::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .risk-meter-row::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    .risk-meter-row::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .risk-meter-row::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .risk-meter-row {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scroll-behavior: smooth;
+
+
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .risk-meter-row::before,
+    .risk-meter-row::after {
+      content: "";
+      flex: 0 0 1rem;
+    }
+
+
+    /* Responsive */
+    @media(max-width:768px) {
+      .risk-meter-row {
+        gap: 1rem;
+      }
+
+      .risk-card {
+        min-width: 150px;
+        padding: 1rem;
+      }
+
+      .risk-meter {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    .analytics-section {
+      padding: 2rem 1rem;
+      background: #f9fafb;
+      border-radius: 16px;
+      margin: 1rem auto;
+      max-width: 1200px;
+      /* limits full width on large screens */
+    }
+
+    .analytics-section h2 {
+      font-size: 1.8rem;
+      text-align: center;
+      color: #1e3c72;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtext {
+      font-size: 0.9rem;
+      color: #555;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .analytics-card {
+      background: #fff;
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      margin: 0 auto;
+      max-width: 800px;
+      /* keeps chart readable */
+    }
+
+    .analytics-card .chart-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1e3c72;
       text-align: center;
     }
-    .risk-address {
-      color: #333;
-      margin-top: 0.3rem;
+
+    .analytics-card canvas {
+      width: 100% !important;
+      height: 350px !important;
+      /* fixed height for consistency */
+    }
+
+    .chart-note {
       font-size: 0.8rem;
-    }
-    
-    /* Heatmap Details */
-    .heatmap-details {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: #ccc;
+      color: #777;
       text-align: center;
+      margin-top: 0.8rem;
     }
-    .heatmap-details p {
-      margin: 0.5rem 0;
+
+    .heatmap-section {
+      padding: 1.5rem;
+      max-width: 500px;
+    
+      margin: 0 auto;
+    }
+
+    .heatmap-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      margin-top: 1rem;
+    }
+
+    .heatmap-content {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .heatmap-image {
+      flex: 1 1 300px;
+      /* image will take at least 300px */
+      max-width: 400px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .heatmap-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .critical::before {
+      background: #e57373;
+    }
+
+    .heatmap-note {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 1rem;
+    }
+
+    /* Hover effect on card */
+    .heatmap-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      .heatmap-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .heatmap-image {
+        max-width: 100%;
+      }
+
+      .heatmap-info {
+        text-align: center;
+      }
+
+      .heatmap-legend {
+        flex-direction: row;
+        justify-content: space-around;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <i class="fas fa-exclamation-triangle"></i> Disaster Management Dashboard
+  <header class="dashboard-header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
+      </a>
+    </div>
+
+    <div class="header-center">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span>Alerts & Risks</span>
+    </div>
+
+    <div class="header-right">
+
+    </div>
   </header>
-  
-  <!-- Tabs -->
-  <div class="tab-bar">
-    <div class="tab active" data-target="alerts"><i class="fas fa-bell"></i> Alerts</div>
-    <div class="tab" data-target="risk"><i class="fas fa-chart-line"></i> Predictive Analytics</div>
-    <div class="tab" data-target="map"><i class="fas fa-globe-asia"></i> Live Heatmap</div>
-  </div>
-  
-  <!-- Tab Contents -->
-  <div class="content-container">
-    <!-- Alerts Tab -->
-    <div class="tab-content active" id="alerts">
-      <h2><i class="fas fa-bell"></i> Disaster Alerts</h2>
-      <ul>
-        <li><i class="fas fa-water"></i> <strong>Flood:</strong> Heavy rainfall causing flooding in Osaka.</li>
-        <li><i class="fas fa-earthquake"></i> <strong>Earthquake:</strong> 6.2 magnitude earthquake detected near Tokyo.</li>
-        <li><i class="fas fa-wind"></i> <strong>Typhoon:</strong> Typhoon approaching Okinawa, expected landfall in 24 hours.</li>
-        <li><i class="fas fa-fire"></i> <strong>Wildfire:</strong> Forest fire spreading in Hokkaido due to dry conditions.</li>
-        <li><i class="fas fa-mountain"></i> <strong>Volcanic Eruption:</strong> Increased activity detected at Mount Sakurajima.</li>
-        <li><i class="fas fa-cloud"></i> <strong>Landslide:</strong> Heavy rains triggering landslides in Nagano.</li>
-        <li><i class="fas fa-radiation"></i> <strong>Tsunami Warning:</strong> Tsunami alert issued along the Fukushima coast after undersea tremor.</li>
-      </ul>
+
+  <section class="emergency-banner">
+    <div class="banner-content">
+      <i class="fas fa-broadcast-tower"></i>
+
+      <div class="banner-text">
+        <h3>CRITICAL ALERT</h3>
+        <p>
+          Cyclone Warning – Odisha Coast<br />
+          <span>Very strong winds & heavy rainfall expected within 12 hours.</span>
+        </p>
+      </div>
+
+      <button class="banner-btn">View Safety Instructions</button>
     </div>
-    
-    <!-- Predictive Analytics Tab -->
-    <div class="tab-content" id="risk">
-      <h2><i class="fas fa-chart-line"></i> Predictive Analytics</h2>
-      
-      <!-- Enlarged Chart.js Container -->
-      <div class="chart-container">
-        <canvas id="riskChart"></canvas>
+  </section>
+  <section class="alerts-section">
+    <h2><i class="fas fa-bell"></i> Latest Alerts</h2>
+
+    <div class="alerts-list">
+
+      <!-- CRITICAL -->
+      <article class="alert-card critical">
+        <div class="alert-icon">
+          <i class="fas fa-water"></i>
+        </div>
+
+        <div class="alert-info">
+          <h3>Flood Warning</h3>
+          <p>Heavy rainfall causing severe flooding.</p>
+
+          <div class="alert-meta">
+            <span><i class="fas fa-map-marker-alt"></i> Assam, Guwahati</span>
+            <span><i class="far fa-clock"></i> 5 minutes ago</span>
+          </div>
+        </div>
+
+        <span class="severity-badge">Critical</span>
+      </article>
+
+      <!-- HIGH -->
+      <article class="alert-card high">
+        <div class="alert-icon">
+          <i class="fas fa-wind"></i>
+        </div>
+
+        <div class="alert-info">
+          <h3>Cyclone Alert</h3>
+          <p>Strong winds expected along the eastern coast.</p>
+
+          <div class="alert-meta">
+            <span><i class="fas fa-map-marker-alt"></i> Odisha Coast</span>
+            <span><i class="far fa-clock"></i> 20 minutes ago</span>
+          </div>
+        </div>
+
+        <span class="severity-badge">High</span>
+      </article>
+
+      <!-- MODERATE -->
+      <article class="alert-card moderate">
+        <div class="alert-icon">
+          <i class="fas fa-mountain"></i>
+        </div>
+
+        <div class="alert-info">
+          <h3>Landslide Risk</h3>
+          <p>Continuous rainfall increasing landslide probability.</p>
+
+          <div class="alert-meta">
+            <span><i class="fas fa-map-marker-alt"></i> Uttarakhand</span>
+            <span><i class="far fa-clock"></i> 1 hour ago</span>
+          </div>
+        </div>
+
+        <span class="severity-badge">Moderate</span>
+      </article>
+
+    </div>
+  </section>
+  <section class="risk-overview">
+    <h2><i class="fas fa-chart-pie"></i> Current Risk Overview (India)</h2>
+    <p class="section-subtext">
+      Estimated risk levels based on recent data and weather patterns.
+    </p>
+
+    <div class="risk-meter-row">
+      <!-- Flood -->
+      <div class="risk-card">
+        <div class="risk-meter flood" data-value="80">
+          <span>80%</span>
+        </div>
+        <h4>Flood</h4>
+        <p>High risk: Assam & Bihar</p>
       </div>
-      
-      <!-- Multiple Donut-Style Risk Meters in one row -->
-      <div class="risk-meter-grid" id="riskMeterGrid">
-        <!-- Meters will be appended here by JavaScript -->
+
+      <!-- Cyclone -->
+      <div class="risk-card">
+        <div class="risk-meter cyclone" data-value="65">
+          <span>65%</span>
+        </div>
+        <h4>Cyclone</h4>
+        <p>Odisha & WB coast</p>
+      </div>
+
+      <!-- Heatwave -->
+      <div class="risk-card">
+        <div class="risk-meter heatwave" data-value="90">
+          <span>90%</span>
+        </div>
+        <h4>Heatwave</h4>
+        <p>Rajasthan & MP</p>
+      </div>
+
+      <!-- Earthquake -->
+      <div class="risk-card">
+        <div class="risk-meter earthquake" data-value="40">
+          <span>40%</span>
+        </div>
+        <h4>Earthquake</h4>
+        <p>Himalayan belt</p>
       </div>
     </div>
-    
-    <!-- Live Heatmap Tab -->
-    <div class="tab-content" id="map">
-      <h2><i class="fas fa-globe-asia"></i> Live Disaster Heatmap</h2>
-      <div class="map-container">
-        <!-- Static heatmap image -->
-        <img src="https://i.pinimg.com/736x/78/b9/aa/78b9aad2fd385126e7fa116ad5a33bd1.jpg" alt="Static Disaster Heatmap" width="600">
-      </div>
-      <div class="heatmap-details">
-        <p>This static heatmap represents the current distribution of Flood risks.</p>
-        <p>Data is updated periodically to reflect real-time conditions.</p>
+  </section>
+  <section class="analytics-section">
+    <h2><i class="fas fa-chart-line"></i> Predictive Analytics</h2>
+
+    <p class="section-subtext">
+      Forecasted disaster risk trends based on historical patterns and seasonal indicators.
+      <span>(Demo data)</span>
+    </p>
+
+    <div class="analytics-card">
+      <h3 class="chart-title">Disaster Risk Trends (%)</h3>
+      <canvas id="riskTrendChart"></canvas>
+      <p class="chart-note">The chart shows predicted risks for Flood, Cyclone, Heatwave, and Earthquake across India.
+      </p>
+    </div>
+  </section>
+  <section class="heatmap-section">
+    <h2><i class="fas fa-map-marked-alt"></i> Live Disaster Heatmap</h2>
+    <p class="section-subtext">
+      Visual representation of current flood and weather-related risks across India.
+    </p>
+
+    <div class="heatmap-card">
+      <div class="heatmap-content">
+        <div class="heatmap-image">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/India_climatic_disaster_risk_map_en.svg/960px-India_climatic_disaster_risk_map_en.svg.png"
+            alt="India climatic disaster risk heatmap" />
+        </div>
+        </div>
       </div>
     </div>
-  </div>
-  
+  </section>
+
   <script>
-    // JavaScript for interactive tabs and dynamic data insertion
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const riskMeterGrid = document.getElementById('riskMeterGrid');
-    
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        const target = tab.getAttribute('data-target');
-        tabContents.forEach(content => {
-          content.classList.remove('active');
-          if (content.id === target) {
-            content.classList.add('active');
-          }
-        });
-      });
-    });
-  
-    // Function to dynamically insert disaster information into risk meters
-    function createRiskMeter(disasterName, riskValue, color) {
-      const meterContainer = document.createElement('div');
-      meterContainer.classList.add('single-risk-meter');
-  
-      const meter = document.createElement('div');
-      meter.classList.add('risk-meter');
-      meter.style.background = `conic-gradient(${color} ${riskValue * 3.6}deg, #eee 0deg)`;
-  
-      const meterLabel = document.createElement('div');
-      meterLabel.classList.add('center-label');
-      meterLabel.innerHTML = `${riskValue}%`;
-  
-      const meterDetails = document.createElement('p');
-      meterDetails.classList.add('disaster-name');
-      meterDetails.innerHTML = disasterName;
-  
-      meterContainer.append(meter, meterLabel, meterDetails);
-      riskMeterGrid.appendChild(meterContainer);
-    }
-  
-    // Simulate Risk Meter Data
-    createRiskMeter('Flood', 80, 'red');
-    createRiskMeter('Earthquake', 40, 'yellow');
-    createRiskMeter('Wildfire', 90, 'orange');
-    createRiskMeter('Typhoon', 75, 'blue');
-    
-    // Initialize Chart.js (line chart)
-    const ctx = document.getElementById('riskChart').getContext('2d');
-    const riskChart = new Chart(ctx, {
+    const ctx = document.getElementById('riskTrendChart').getContext('2d');
+
+    new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-        datasets: [{
-          label: 'Flood Risk (%)',
-          data: [80, 85, 78, 90, 75, 80],
-          borderColor: 'red',
-          backgroundColor: 'rgba(255, 0, 0, 0.2)',
-          fill: true
-        }, {
-          label: 'Earthquake Risk (%)',
-          data: [40, 45, 50, 48, 40, 42],
-          borderColor: 'yellow',
-          backgroundColor: 'rgba(255, 255, 0, 0.2)',
-          fill: true
-        }, {
-          label: 'Typhoon Risk (%)',
-          data: [75, 70, 80, 85, 72, 75],
-          borderColor: 'blue',
-          backgroundColor: 'rgba(0, 0, 255, 0.2)',
-          fill: true
-        }]
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [
+          {
+            label: 'Flood Risk',
+            data: [70, 75, 85, 90, 80, 78],
+            borderColor: '#1e88e5',
+            backgroundColor: 'rgba(30,136,229,0.2)',
+            fill: true,
+            tension: 0.4
+          },
+          {
+            label: 'Heatwave Risk',
+            data: [60, 65, 75, 85, 92, 95],
+            borderColor: '#fb8c00',
+            backgroundColor: 'rgba(251,140,0,0.2)',
+            fill: true,
+            tension: 0.4
+          },
+          {
+            label: 'Cyclone Risk',
+            data: [40, 45, 50, 70, 65, 60],
+            borderColor: '#5e35b1',
+            backgroundColor: 'rgba(94,53,177,0.2)',
+            fill: true,
+            tension: 0.4
+          }
+        ]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
-            position: 'top'
+            position: 'top',
+            labels: {
+              boxWidth: 12,
+              font: { size: 12 }
+            }
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
           }
         },
         scales: {
           y: {
             beginAtZero: true,
-            max: 100
+            max: 100,
+            title: {
+              display: true,
+              text: 'Risk Percentage'
+            }
           }
         }
       }
     });
-    
+
   </script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
+
 </html>
