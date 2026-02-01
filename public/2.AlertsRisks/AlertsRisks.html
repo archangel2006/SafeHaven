@@ -8,12 +8,16 @@
   <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_GOOGLE_MAPS_API_KEY&callback=initMap" async
-    defer></script>
+
   <!-- Removed Leaflet libraries as they're no longer needed -->
   <style>
     /* Global Reset */
@@ -70,7 +74,7 @@
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
       animation: pulse 2s infinite;
-      max-width: 800px;
+      max-width: 1100px;
       /* controls the banner width */
     }
 
@@ -152,10 +156,10 @@
 
     .alerts-section {
       padding: 1.5rem;
-      max-width: 850px;
-      /* control width */
+      max-width: 1150px;
+
       margin: 0 auto;
-      /* center section */
+
     }
 
 
@@ -173,7 +177,7 @@
     /* Card Base */
     .alert-card {
       display: flex;
-      align-items: center;
+      align-items;
       gap: 1rem;
       background: #fff;
       color: #333;
@@ -186,12 +190,12 @@
     .alert-icon {
       font-size: 1.8rem;
       width: 40px;
-    
+
       flex-shrink: 0;
       /* prevent squeezing */
     }
 
-   
+
 
     .alert-info h3 {
       margin: 0;
@@ -292,7 +296,7 @@
     .risk-card {
       background: #fff;
       color: #333;
-      min-width: 180px;
+      min-width: 250px;
       padding: 1.5rem 1rem;
       border-radius: 16px;
       text-align: center;
@@ -421,7 +425,7 @@
       border-radius: 16px;
       margin: 1rem auto;
       max-width: 1200px;
-      /* limits full width on large screens */
+
     }
 
     .analytics-section h2 {
@@ -444,8 +448,7 @@
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
       margin: 0 auto;
-      max-width: 800px;
-      /* keeps chart readable */
+      max-width: 1000px;
     }
 
     .analytics-card .chart-title {
@@ -469,73 +472,152 @@
       margin-top: 0.8rem;
     }
 
-    .heatmap-section {
-      padding: 1.5rem;
-      max-width: 500px;
+    /* ===== Disaster Heatmap Section ===== */
 
+    .dh-heatmap-section {
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 2.5rem 1.5rem;
     }
 
-    .heatmap-card {
-      background: #fff;
-      padding: 1rem;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      margin-top: 1rem;
+    /* Header */
+    .dh-heatmap-header {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #1e3c72;
+      text-align: center;
     }
 
-   
-
-    .heatmap-image {
-      flex: 1 1 300px;
-     
-      overflow: hidden;
-      border-radius: 10px;
+    .dh-heatmap-header h2 {
+      font-size: 1.6rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
     }
 
-    .heatmap-image img {
-      width: 100%;
-      height: auto;
+    .dh-heatmap-header p {
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+      color: #555;
+      max-width: 520px;
+      /* keeps text readable */
+      margin: 0.5rem auto 0;
+    }
+
+
+    .dh-heatmap-header span {
       display: block;
-      object-fit: cover;
+      font-size: 0.85rem;
+      color: #888;
     }
 
-    .critical::before {
+    /* Card */
+    .dh-heatmap-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1rem;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .dh-heatmap-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Map container */
+    .dh-map-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    /* Map */
+    #dhDisasterMap {
+      width: 100%;
+      height: 320px;
+      border-radius: 18px;
+    }
+
+    /* Hint */
+    .dh-map-hint {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Legend */
+    .dh-map-legend {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      font-size: 0.75rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .dh-map-legend span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+    }
+
+    .dh-map-legend,
+    .dh-map-hint {
+      z-index: 1000;
+      pointer-events: auto;
+    }
+
+    .dh-map-container {
+      position: relative;
+    }
+
+
+    .dh-map-legend i {
+      width: 11px;
+      height: 11px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* Legend colors */
+    .dh-low {
+      background: #81c784;
+    }
+
+    .dh-moderate {
+      background: #fff176;
+    }
+
+    .dh-high {
+      background: #ffb74d;
+    }
+
+    .dh-critical {
       background: #e57373;
     }
 
-    .heatmap-note {
-      font-size: 0.8rem;
-      color: #555;
-      margin-top: 1rem;
-    }
-
-    /* Hover effect on card */
-    .heatmap-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s ease;
-    }
-
-    /* Mobile responsiveness */
+    /* Mobile */
     @media (max-width: 600px) {
-      .heatmap-content {
-        flex-direction: column;
-        align-items: center;
+      #dhDisasterMap {
+        height: 240px;
       }
+    }
 
-      .heatmap-image {
-        max-width: 100%;
-      }
 
-      .heatmap-info {
-        text-align: center;
-      }
-
-      .heatmap-legend {
-        flex-direction: row;
-        justify-content: space-around;
-      }
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
   </style>
 </head>
@@ -557,160 +639,178 @@
 
     </div>
   </header>
+  <div class="page-container">
 
-  <section class="emergency-banner">
-    <div class="banner-content">
-      <i class="fas fa-broadcast-tower"></i>
+    <section class="emergency-banner">
+      <div class="banner-content">
+        <i class="fas fa-broadcast-tower"></i>
 
-      <div class="banner-text">
-        <h3>CRITICAL ALERT</h3>
+        <div class="banner-text">
+          <h3>CRITICAL ALERT</h3>
+          <p>
+            Cyclone Warning – Odisha Coast<br />
+            <span>Very strong winds & heavy rainfall expected within 12 hours.</span>
+          </p>
+        </div>
+
+        <button class="banner-btn">View Safety Instructions</button>
+      </div>
+    </section>
+    <section class="alerts-section">
+      <h2><i class="fas fa-bell"></i> Latest Alerts</h2>
+
+      <div class="alerts-list">
+
+        <!-- CRITICAL -->
+        <article class="alert-card critical">
+          <div class="alert-icon">
+            <i class="fas fa-water"></i>
+          </div>
+
+          <div class="alert-info">
+            <h3>Flood Warning</h3>
+            <p>Heavy rainfall causing severe flooding.</p>
+
+            <div class="alert-meta">
+              <span><i class="fas fa-map-marker-alt"></i> Assam, Guwahati</span>
+              <span><i class="far fa-clock"></i> 5 minutes ago</span>
+            </div>
+          </div>
+
+          <span class="severity-badge">Critical</span>
+        </article>
+
+        <!-- HIGH -->
+        <article class="alert-card high">
+          <div class="alert-icon">
+            <i class="fas fa-wind"></i>
+          </div>
+
+          <div class="alert-info">
+            <h3>Cyclone Alert</h3>
+            <p>Strong winds expected along the eastern coast.</p>
+
+            <div class="alert-meta">
+              <span><i class="fas fa-map-marker-alt"></i> Odisha Coast</span>
+              <span><i class="far fa-clock"></i> 20 minutes ago</span>
+            </div>
+          </div>
+
+          <span class="severity-badge">High</span>
+        </article>
+
+        <!-- MODERATE -->
+        <article class="alert-card moderate">
+          <div class="alert-icon">
+            <i class="fas fa-mountain"></i>
+          </div>
+
+          <div class="alert-info">
+            <h3>Landslide Risk</h3>
+            <p>Continuous rainfall increasing landslide probability.</p>
+
+            <div class="alert-meta">
+              <span><i class="fas fa-map-marker-alt"></i> Uttarakhand</span>
+              <span><i class="far fa-clock"></i> 1 hour ago</span>
+            </div>
+          </div>
+
+          <span class="severity-badge">Moderate</span>
+        </article>
+
+      </div>
+    </section>
+    <section class="risk-overview">
+      <h2><i class="fas fa-chart-pie"></i> Current Risk Overview (India)</h2>
+      <p class="section-subtext">
+        Estimated risk levels based on recent data and weather patterns.
+      </p>
+
+      <div class="risk-meter-row">
+        <!-- Flood -->
+        <div class="risk-card">
+          <div class="risk-meter flood" data-value="80">
+            <span>80%</span>
+          </div>
+          <h4>Flood</h4>
+          <p>High risk: Assam & Bihar</p>
+        </div>
+
+        <!-- Cyclone -->
+        <div class="risk-card">
+          <div class="risk-meter cyclone" data-value="65">
+            <span>65%</span>
+          </div>
+          <h4>Cyclone</h4>
+          <p>Odisha & WB coast</p>
+        </div>
+
+        <!-- Heatwave -->
+        <div class="risk-card">
+          <div class="risk-meter heatwave" data-value="90">
+            <span>90%</span>
+          </div>
+          <h4>Heatwave</h4>
+          <p>Rajasthan & MP</p>
+        </div>
+
+        <!-- Earthquake -->
+        <div class="risk-card">
+          <div class="risk-meter earthquake" data-value="40">
+            <span>40%</span>
+          </div>
+          <h4>Earthquake</h4>
+          <p>Himalayan belt</p>
+        </div>
+      </div>
+    </section>
+    <section class="analytics-section">
+      <h2><i class="fas fa-chart-line"></i> Predictive Analytics</h2>
+
+      <p class="section-subtext">
+        Forecasted disaster risk trends based on historical patterns and seasonal indicators.
+        <span>(Demo data)</span>
+      </p>
+
+      <div class="analytics-card">
+        <h3 class="chart-title">Disaster Risk Trends (%)</h3>
+        <canvas id="riskTrendChart"></canvas>
+        <p class="chart-note">The chart shows predicted risks for Flood, Cyclone, Heatwave, and Earthquake across India.
+        </p>
+      </div>
+    </section>
+    <section class="dh-heatmap-section">
+      <div class="dh-heatmap-header">
+        <h2>
+          <i class="fas fa-map-marked-alt"></i>
+          Disaster Risk Heatmap
+        </h2>
         <p>
-          Cyclone Warning – Odisha Coast<br />
-          <span>Very strong winds & heavy rainfall expected within 12 hours.</span>
+          Live visualization of disaster-prone zones near you.
+          <span>Darker areas indicate higher risk intensity.</span>
         </p>
       </div>
 
-      <button class="banner-btn">View Safety Instructions</button>
-    </div>
-  </section>
-  <section class="alerts-section">
-    <h2><i class="fas fa-bell"></i> Latest Alerts</h2>
+      <div class="dh-heatmap-card">
+        <div class="dh-map-container">
+          <div id="dhDisasterMap"></div>
 
-    <div class="alerts-list">
+          <div class="dh-map-hint">Drag • Zoom • Hover</div>
 
-      <!-- CRITICAL -->
-      <article class="alert-card critical">
-        <div class="alert-icon">
-          <i class="fas fa-water"></i>
-        </div>
-
-        <div class="alert-info">
-          <h3>Flood Warning</h3>
-          <p>Heavy rainfall causing severe flooding.</p>
-
-          <div class="alert-meta">
-            <span><i class="fas fa-map-marker-alt"></i> Assam, Guwahati</span>
-            <span><i class="far fa-clock"></i> 5 minutes ago</span>
+          <div class="dh-map-legend">
+            <strong>Risk Level</strong>
+            <span><i class="dh-low"></i> Low</span>
+            <span><i class="dh-moderate"></i> Moderate</span>
+            <span><i class="dh-high"></i> High</span>
+            <span><i class="dh-critical"></i> Critical</span>
           </div>
         </div>
-
-        <span class="severity-badge">Critical</span>
-      </article>
-
-      <!-- HIGH -->
-      <article class="alert-card high">
-        <div class="alert-icon">
-          <i class="fas fa-wind"></i>
-        </div>
-
-        <div class="alert-info">
-          <h3>Cyclone Alert</h3>
-          <p>Strong winds expected along the eastern coast.</p>
-
-          <div class="alert-meta">
-            <span><i class="fas fa-map-marker-alt"></i> Odisha Coast</span>
-            <span><i class="far fa-clock"></i> 20 minutes ago</span>
-          </div>
-        </div>
-
-        <span class="severity-badge">High</span>
-      </article>
-
-      <!-- MODERATE -->
-      <article class="alert-card moderate">
-        <div class="alert-icon">
-          <i class="fas fa-mountain"></i>
-        </div>
-
-        <div class="alert-info">
-          <h3>Landslide Risk</h3>
-          <p>Continuous rainfall increasing landslide probability.</p>
-
-          <div class="alert-meta">
-            <span><i class="fas fa-map-marker-alt"></i> Uttarakhand</span>
-            <span><i class="far fa-clock"></i> 1 hour ago</span>
-          </div>
-        </div>
-
-        <span class="severity-badge">Moderate</span>
-      </article>
-
-    </div>
-  </section>
-  <section class="risk-overview">
-    <h2><i class="fas fa-chart-pie"></i> Current Risk Overview (India)</h2>
-    <p class="section-subtext">
-      Estimated risk levels based on recent data and weather patterns.
-    </p>
-
-    <div class="risk-meter-row">
-      <!-- Flood -->
-      <div class="risk-card">
-        <div class="risk-meter flood" data-value="80">
-          <span>80%</span>
-        </div>
-        <h4>Flood</h4>
-        <p>High risk: Assam & Bihar</p>
       </div>
+    </section>
 
-      <!-- Cyclone -->
-      <div class="risk-card">
-        <div class="risk-meter cyclone" data-value="65">
-          <span>65%</span>
-        </div>
-        <h4>Cyclone</h4>
-        <p>Odisha & WB coast</p>
-      </div>
+  </div>
 
-      <!-- Heatwave -->
-      <div class="risk-card">
-        <div class="risk-meter heatwave" data-value="90">
-          <span>90%</span>
-        </div>
-        <h4>Heatwave</h4>
-        <p>Rajasthan & MP</p>
-      </div>
 
-      <!-- Earthquake -->
-      <div class="risk-card">
-        <div class="risk-meter earthquake" data-value="40">
-          <span>40%</span>
-        </div>
-        <h4>Earthquake</h4>
-        <p>Himalayan belt</p>
-      </div>
-    </div>
-  </section>
-  <section class="analytics-section">
-    <h2><i class="fas fa-chart-line"></i> Predictive Analytics</h2>
-
-    <p class="section-subtext">
-      Forecasted disaster risk trends based on historical patterns and seasonal indicators.
-      <span>(Demo data)</span>
-    </p>
-
-    <div class="analytics-card">
-      <h3 class="chart-title">Disaster Risk Trends (%)</h3>
-      <canvas id="riskTrendChart"></canvas>
-      <p class="chart-note">The chart shows predicted risks for Flood, Cyclone, Heatwave, and Earthquake across India.
-      </p>
-    </div>
-  </section>
-  <section class="heatmap-section">
-    <h2><i class="fas fa-map-marked-alt"></i> Live Disaster Heatmap</h2>
-    <p class="section-subtext">
-      Visual representation of current flood and weather-related risks across India.
-    </p>
-
-    <div class="heatmap-card">
-        <div class="heatmap-image">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/India_climatic_disaster_risk_map_en.svg/960px-India_climatic_disaster_risk_map_en.svg.png"
-            alt="India climatic disaster risk heatmap" />
-        </div>
-    </div>
-    </div>
-  </section>
 
   <script>
     const ctx = document.getElementById('riskTrendChart').getContext('2d');
@@ -776,6 +876,43 @@
     });
 
   </script>
+  <script>
+    const dhMap = L.map("dhDisasterMap", {
+      zoomControl: true,
+      scrollWheelZoom: false
+    }).setView([28.6139, 77.209], 10); // Delhi default
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap"
+    }).addTo(dhMap);
+
+    const dhHeatPoints = [
+      [28.7041, 77.1025, 0.9],
+      [28.5355, 77.3910, 0.7],
+      [28.4595, 77.0266, 0.85],
+      [28.4089, 77.3178, 0.6],
+      [28.7499, 77.0565, 0.5]
+    ];
+
+    const dhHeatLayer = L.heatLayer(dhHeatPoints, {
+      radius: 30,
+      blur: 22,
+      maxZoom: 13,
+      gradient: {
+        0.2: "#81c784",
+        0.5: "#fff176",
+        0.7: "#ffb74d",
+        1.0: "#e57373"
+      }
+    }).addTo(dhMap);
+
+    /* Smooth entrance animation */
+    setTimeout(() => {
+      dhHeatLayer.setOptions({ radius: 42 });
+    }, 350);
+  </script>
+
+
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 
