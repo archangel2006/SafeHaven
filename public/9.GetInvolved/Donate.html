@@ -302,6 +302,26 @@
         .partner-col span { font-size: 0.85rem; font-weight: 500; text-align: left; line-height: 1.2; }
 
         .v-divider { width: 1px; height: 60px; background-color: #e0e0e0; }
+               .back-btn {
+  margin: 16px;
+  padding: 8px 14px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #2c4fa3;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.back-btn:hover {
+  background: #f0f4ff;
+}
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -405,7 +425,9 @@
             </div>
         </div>
     </div>
-
+   <button class="back-btn" onclick="history.back()">
+  ← Back
+</button>
     <script>
         const ctx = document.getElementById('donationChart').getContext('2d');
         new Chart(ctx, {
@@ -446,7 +468,15 @@
             });
         });
     </script>
-    <script src="../8.AIAssistant/chatbot.js"></script>
+    <script src="../8.AIAssistant/chatbot.js">
+            function goBack() {
+    if (document.referrer !== "") {
+      window.history.back();
+    } else {
+      window.location.href = "../index.html";
+    }
+  }
+    </script>
 </body>
 
 </html>

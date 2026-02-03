@@ -7,9 +7,51 @@
     <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* ===== PAGE HEADER ===== */
+.page-header {
+  height: 60px;
+  background-color: #3f5fa6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  color: white;
+  position: relative;
+}
+
+.page-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  background: white;
+  padding: 3px;
+}
+
+.header-profile {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -92,6 +134,20 @@
     </style>
 </head>
 <body>
+    <header class="page-header">
+  <img
+    src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg"
+    alt="Safe Haven Logo"
+    class="header-logo"
+  />
+
+  <h1>Volunteer</h1>
+
+  <div class="header-profile">
+    <i class="fa-regular fa-user"></i>
+  </div>
+</header>
+
     <div class="risk-dashboard">
     <div class="container">
         <h2>Volunteer Roles</h2>

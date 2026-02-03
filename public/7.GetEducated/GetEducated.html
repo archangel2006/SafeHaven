@@ -7,7 +7,7 @@
     <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
-
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <style>
         * {
             box-sizing: border-box;
@@ -19,15 +19,43 @@
             padding: 0;
         }
 
-        .dashboard {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #007bff;
-            padding: 15px;
-            color: white;
-            font-size: 20px;
-        }
+       .dashboard {
+  height: 60px;
+  background-color: #3f5fa6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  color: white;
+}
+
+.dashboard h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: white;
+}
+
+.nav-profile {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 
         .dashboard a {
             color: white;
@@ -170,9 +198,19 @@
 <body>
 
     <div class="dashboard">
-        <a href="HomePage.html">🏠</a>
-        <h2>Get Educated</h2>
-    </div>
+  <img
+    src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg"
+    alt="Safe Haven Logo"
+    class="nav-logo"
+  />
+
+  <h2>Get Educated</h2>
+
+  <div class="nav-profile">
+    <i class="fa-regular fa-user"></i>
+  </div>
+</div>
+
 
     <div class="container">
         <h2>Disaster Awareness and Preparedness</h2>

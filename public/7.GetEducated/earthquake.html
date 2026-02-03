@@ -9,8 +9,36 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
     <link rel="stylesheet" href="style.css">
+    <style>
+        .back-btn {
+  margin: 16px;
+  padding: 8px 14px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #2c4fa3;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.back-btn:hover {
+  background: #f0f4ff;
+}
+    </style>
+    
+
 </head>
 <body>
+    <button class="back-btn" onclick="history.back()">
+  ← Back
+</button>
+
     <div class="container">
         <header>
             <h1>Earthquake Safety</h1>
@@ -42,6 +70,15 @@
             <p>For more earthquake safety tips, visit <a href="https://www.fema.gov/earthquake-safety-home">FEMA Earthquake Safety</a></p>
         </footer>
     </div>
-    <script src="../8.AIAssistant/chatbot.js"></script>
+    <script src="../8.AIAssistant/chatbot.js">
+        
+  function goBack() {
+    if (document.referrer !== "") {
+      window.history.back();
+    } else {
+      window.location.href = "../index.html";
+    }
+  }
+    </script>
 </body>
 </html>
