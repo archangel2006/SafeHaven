@@ -192,24 +192,66 @@
         font-size: 13px;
     }
 }
+header {
+            background-color: #3C5DA2;
+            padding: 0 5%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-logo-box {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .header-logo-box img {
+            height: 100%;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
 
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
-  <img
-    src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg"
-    alt="Safe Haven Logo"
-    class="nav-logo"
-  />
-
-  <h2>Get Educated</h2>
-
-  <div class="nav-profile">
-    <i class="fa-regular fa-user"></i>
-  </div>
-</div>
+     <header>
+        <div class="header-logo-box">
+            <img src="../../assets/9.getinvolved/logo.jpg" alt="Safe Haven Logo">
+        </div>
+        <h1>Get  Educated </h1>
+    <button class="icon-btn" onclick="goToAuth()" aria-label="Profile">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"></circle>
+      <circle cx="12" cy="10" r="3"></circle>
+      <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+    </svg>
+</button>
+    </header>
 
 
     <div class="container">
@@ -268,6 +310,10 @@
 
         </div>
     </div>
+    <script> 
+        function goToAuth() {
+  window.location.href = "../10.Auth/Login.html";}
+    </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
 
 </body>

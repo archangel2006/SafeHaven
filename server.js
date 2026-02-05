@@ -5,8 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const app = express();
-
+const app = express();  
 // Middleware
 app.use(cors({
   origin: '*', 
