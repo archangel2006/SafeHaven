@@ -114,12 +114,23 @@
         .file-input {
             margin-left: 10px;
         }
+        .icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
     </style>
 </head>
 <body>
 
     <!-- Header with Profile & Clear Button -->
     <div class="chat-header">
+           <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button> 
         <div class="profile-container">
             <img src="default-avatar.png" class="profile-img" id="profilePic">
             <input type="text" id="username" placeholder="Enter your name" required>
@@ -213,6 +224,26 @@
         function clearChat() {
             document.getElementById("chatContainer").innerHTML = "";
         }
+         document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
     </script>
     
 </body>

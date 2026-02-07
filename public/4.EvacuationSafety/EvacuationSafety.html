@@ -145,10 +145,27 @@
       font-weight: bold;
       text-align: center;
     }
+    .icon-btn {
+  position: absolute;
+  left: 16px;              
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
   </style>
 </head>
 <body>
-  <header>Evacuation & Safety Dashboard</header>
+  <header class="page-header">
+  <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button>
+
+  <h1 id="pageTitle"> Evacuation & Safety Dashboard</h1>
+ </header>
+ 
   
   <div class="alert-banner">
     FLOOD ALERT: EVACUATE IMMEDIATELY!
@@ -249,6 +266,26 @@
       document.getElementById("customAlert").innerHTML = "Evacuation Route to Safe Zone:<br>" + safeZoneDetails;
       document.getElementById("customAlert").style.display = "block";
     }
+                 document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
   </script>
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>

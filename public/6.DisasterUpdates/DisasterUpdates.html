@@ -81,13 +81,23 @@
         a:hover {
             color: #007BFF;
         }
+    .icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
     </style>
 </head>
 <body>
 
     <!-- Dashboard -->
     <div class="dashboard">
-        <a href="HomePage.html" class="home-icon">🏠</a> 
+        <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button> 
         <p class="weather">Fetching weather...</p>
         <p class="time">Fetching Japan time...</p>
     </div>
@@ -154,6 +164,26 @@
         fetchWeather();
         updateJapanTime();
         setInterval(updateJapanTime, 1000); // Update time every second
+       document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
     </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
