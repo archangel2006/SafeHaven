@@ -23,8 +23,7 @@
         }
 
         body {
-            text-align: center;
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
         }
 
         .top-panel {
@@ -48,265 +47,219 @@
             font-weight: 600;
         }
 
-        .main-tagline {
-            margin: 24px 0 16px;
-            font-size: 18px;
-            color: #495057;
-            font-weight: 500;
+        /* MAIN CONTENT WRAPPER */
+        .main-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* TWO COLUMN LAYOUT */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* LEFT COLUMN */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* SOS CARD */
+        .sos-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px 40px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .sos-warning {
+            font-size: 15px;
+            color: #6c757d;
+            margin-bottom: 20px;
         }
 
         .sos-button {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            background: linear-gradient(135deg, #ff3b3b 0%, #e62e2e 100%);
             color: white;
-            padding: 16px 40px;
+            padding: 18px 60px;
             border: none;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             cursor: pointer;
-            margin-bottom: 32px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+            box-shadow: 0 4px 16px rgba(255, 59, 59, 0.3);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0 auto 16px;
+        }
+
+        .sos-button::before {
+            content: '🚨';
+            font-size: 24px;
+        }
+
+        .sos-button::after {
+            content: '🚨';
+            font-size: 24px;
         }
 
         .sos-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 59, 59, 0.4);
         }
 
-        .sos-button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 32px;
-            margin: 20px;
-            padding: 0 20px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .iframe-container {
-            width: 320px;
-            min-width: 320px;
-            height: 320px;
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-
-        /* ====== EMERGENCY ACTION CARDS - ENHANCED ====== */
-        .cards-section {
-            flex: 1;
-            max-width: 800px;
-        }
-
-        .section-header {
-            text-align: left;
-            margin-bottom: 24px;
-            padding: 0 8px;
-        }
-
-        .section-title {
+        .emergency-call-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #dc3545;
+            text-decoration: none;
             font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #6c757d;
-            margin-bottom: 16px;
-            position: relative;
-            padding-left: 16px;
+            font-weight: 500;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
         }
 
-        .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 20px;
-            background: linear-gradient(180deg, #52caec, #3ba8cc);
-            border-radius: 2px;
+        .emergency-call-link:hover {
+            background: #fff5f5;
         }
 
-        .grid-container {
+        /* FEATURE CARDS SECTION */
+        .feature-cards-wrapper {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 40px;
         }
 
-        .grid-item {
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #5a6c7d;
+            margin-bottom: 16px;
+        }
+
+        .feature-card {
             background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            position: relative;
-            height: 190px;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .grid-item::before {
+        .feature-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             transition: height 0.3s ease;
         }
 
-        /* Color coding for different card types */
-        .grid-item:nth-child(1)::before {
-            background: linear-gradient(90deg, #dc3545, #e74c3c);
+        .feature-card:nth-child(1)::before { background: #dc3545; }
+        .feature-card:nth-child(2)::before { background: #fd7e14; }
+        .feature-card:nth-child(3)::before { background: #0dcaf0; }
+        .feature-card:nth-child(4)::before { background: #ffc107; }
+        .feature-card:nth-child(5)::before { background: #20c997; }
+        .feature-card:nth-child(6)::before { background: #6f42c1; }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .grid-item:nth-child(2)::before {
-            background: linear-gradient(90deg, #fd7e14, #ff9933);
+        .feature-card:hover::before {
+            height: 6px;
         }
 
-        .grid-item:nth-child(3)::before {
-            background: linear-gradient(90deg, #0dcaf0, #3ba8cc);
-        }
-
-        .grid-item:nth-child(4)::before {
-            background: linear-gradient(90deg, #ffc107, #ffb300);
-        }
-
-        .grid-item:nth-child(5)::before {
-            background: linear-gradient(90deg, #20c997, #17a589);
-        }
-
-        .grid-item:nth-child(6)::before {
-            background: linear-gradient(90deg, #6f42c1, #5a32a3);
-        }
-
-        .grid-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
-            border-color: rgba(82, 202, 236, 0.3);
-        }
-
-        .grid-item:hover::before {
-            height: 8px;
-        }
-
-        .grid-item:focus-within {
-            outline: 3px solid #52caec;
-            outline-offset: 3px;
-        }
-
-        .grid-item a {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            text-decoration: none;
-            color: inherit;
-            padding: 24px;
-        }
-
-        .card-icon-wrapper {
+        .feature-icon {
             font-size: 48px;
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 16px;
-            border-radius: 16px;
+            min-width: 64px;
+            width: 64px;
+            height: 64px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
         }
 
-        .grid-item:hover .card-icon-wrapper {
-            transform: scale(1.15) rotate(8deg);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .card-content {
+        .feature-card:nth-child(1) .feature-icon { background: linear-gradient(135deg, #ffe5e9, #ffccd5); }
+        .feature-card:nth-child(2) .feature-icon { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+        .feature-card:nth-child(3) .feature-icon { background: linear-gradient(135deg, #e0f7ff, #b3ecff); }
+        .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, #fff8e1, #ffecb3); }
+        .feature-card:nth-child(5) .feature-icon { background: linear-gradient(135deg, #d4f4e8, #b2e8d6); }
+        .feature-card:nth-child(6) .feature-icon { background: linear-gradient(135deg, #ede7f6, #d1c4e9); }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 4px;
+            text-align: left;
+        }
+
+        .feature-description {
+            font-size: 13px;
+            color: #6c757d;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .feature-text {
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            justify-content: center;
         }
 
-        .card-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: #212529;
-            margin-bottom: 8px;
-            line-height: 1.3;
+        /* RIGHT SIDEBAR */
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
-        .card-description {
-            font-size: 13px;
-            color: #6c757d;
-            line-height: 1.5;
-        }
-
-        /* Specific icon background colors */
-        .grid-item:nth-child(1) .card-icon-wrapper {
-            background: linear-gradient(135deg, #ffe5e9, #ffccd5);
-        }
-
-        .grid-item:nth-child(2) .card-icon-wrapper {
-            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-        }
-
-        .grid-item:nth-child(3) .card-icon-wrapper {
-            background: linear-gradient(135deg, #e0f7ff, #b3ecff);
-        }
-
-        .grid-item:nth-child(4) .card-icon-wrapper {
-            background: linear-gradient(135deg, #fff8e1, #ffecb3);
-        }
-
-        .grid-item:nth-child(5) .card-icon-wrapper {
-            background: linear-gradient(135deg, #d4f4e8, #b2e8d6);
-        }
-
-        .grid-item:nth-child(6) .card-icon-wrapper {
-            background: linear-gradient(135deg, #ede7f6, #d1c4e9);
-        }
-
-        /* ====== END CARDS REDESIGN ====== */
-
-        .sidebar {
-            width: 340px;
-            min-width: 340px;
-        }
-
-        /* EMERGENCY ASSISTANCE CARD - UPDATED */
-        .combined-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 18px;
-            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-            margin-bottom: 22px;
-            text-align: left;
+        /* EMERGENCY ASSISTANCE CARD */
+        .emergency-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
         }
 
         .ec-title {
             font-size: 14px;
             font-weight: 700;
             color: #111827;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
-        /* Tabs - UPDATED */
         .ec-tabs {
             display: flex;
             gap: 8px;
@@ -330,7 +283,7 @@
 
         .tab.active {
             background: #2776de;
-            color: #ffffff;
+            color: white;
             border-color: #2776de;
         }
 
@@ -339,7 +292,6 @@
             margin-left: auto;
         }
 
-        /* Emergency List - UPDATED */
         .ec-list {
             display: none;
             flex-direction: column;
@@ -361,10 +313,10 @@
         }
 
         .copy-btn {
-            background: #ffffff;
+            background: white;
             border: 1px solid #e5e7eb;
-            padding: 4px 10px;
-            border-radius: 8px;
+            padding: 4px 12px;
+            border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -375,17 +327,12 @@
             border-color: #2776de;
         }
 
-        .copy-btn:active {
-            transform: scale(0.95);
-        }
-
         .copy-btn.copied {
             background: #10b981;
             color: white;
             border-color: #10b981;
         }
 
-        /* SafeBot */
         .safebot {
             margin-top: 14px;
         }
@@ -393,16 +340,21 @@
         .safebot-title {
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: #374151;
         }
 
         .safebot-box {
             background: #f1f5f9;
             padding: 12px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 13px;
             cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .safebot-box:hover {
+            background: #e2e8f0;
         }
 
         .safebot-box p {
@@ -410,61 +362,70 @@
             color: #6b7280;
         }
 
+        /* GET INVOLVED CARD */
         .get-involved {
-            background-color: #ffffff;
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
             text-align: center;
         }
 
         .gi-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: #111827;
             margin-bottom: 8px;
         }
 
         .gi-desc {
-            font-size: 15px;
+            font-size: 14px;
             color: #6b7280;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .gi-buttons {
             display: flex;
-            gap: 14px;
-            flex-direction: column;
+            gap: 12px;
         }
 
         .gi-link {
             flex: 1;
-            display: block;
             text-decoration: none;
         }
 
         .volunteer-btn,
         .donate-btn {
             width: 100%;
-            height: 44px;
+            padding: 12px;
             border-radius: 10px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .volunteer-btn {
-            background: #ffffff;
+            background: white;
             color: #2776de;
-            border: 1.8px solid #e5e7eb;
+            border: 2px solid #e5e7eb;
+        }
+
+        .volunteer-btn:hover {
+            border-color: #2776de;
         }
 
         .donate-btn {
             background: #2776de;
-            color: #ffffff;
-            border: none;	
+            color: white;
+            border: none;
         }
 
+        .donate-btn:hover {
+            background: #1e5bb8;
+        }
+
+        /* MAP SECTION */
         .map-section {
             padding: 4rem 1.5rem;
             max-width: 1200px;
@@ -510,7 +471,6 @@
         .home-btn:hover {
             background: #3ba8cc;
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(82, 202, 236, 0.4);
         }
 
         .view-map {
@@ -522,7 +482,6 @@
         .view-map:hover {
             background: #52caec;
             color: white;
-            transform: translateY(-2px);
         }
 
         .map-card {
@@ -560,70 +519,265 @@
             background: #f8f9fa;
         }
 
-        /* Responsive Design */
+        /* SOS POPUP MODAL */
+        .sos-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .sos-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .sos-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .sos-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f3f4f6;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sos-modal-close:hover {
+            background: #e5e7eb;
+            transform: rotate(90deg);
+        }
+
+        .sos-modal-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .sos-modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #dc3545;
+            margin-bottom: 16px;
+        }
+
+        .sos-modal-text {
+            font-size: 16px;
+            color: #6c757d;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .sos-modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .sos-confirm-btn,
+        .sos-cancel-btn {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .sos-confirm-btn {
+            background: linear-gradient(135deg, #ff3b3b 0%, #e62e2e 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(255, 59, 59, 0.3);
+        }
+
+        .sos-confirm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 59, 59, 0.4);
+        }
+
+        .sos-cancel-btn {
+            background: #f3f4f6;
+            color: #6c757d;
+        }
+
+        .sos-cancel-btn:hover {
+            background: #e5e7eb;
+        }
+
+        /* SOS SUCCESS POPUP */
+        .sos-success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .sos-success-modal.active {
+            display: flex;
+        }
+
+        .sos-success-content {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 24px 72px rgba(0, 0, 0, 0.3);
+            animation: successPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes successPop {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .sos-success-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+            animation: successBounce 0.6s ease;
+        }
+
+        @keyframes successBounce {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-20px); }
+            50% { transform: translateY(-10px); }
+            75% { transform: translateY(-5px); }
+        }
+
+        .sos-success-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 16px;
+        }
+
+        .sos-success-text {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .sos-success-subtext {
+            font-size: 14px;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Progress bar for auto-close */
+        .sos-success-progress {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 24px;
+            overflow: hidden;
+        }
+
+        .sos-success-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 2px;
+            animation: progressBar 2s linear forwards;
+        }
+
+        @keyframes progressBar {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
+            .content-grid {
+                grid-template-columns: 1fr;
             }
 
-            .iframe-container,
-            .sidebar {
-                width: 100%;
+            .feature-cards-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .right-sidebar {
                 max-width: 600px;
-            }
-
-            .cards-section {
-                width: 100%;
+                margin: 0 auto;
             }
         }
 
         @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-
-            .grid-item {
-                height: 160px;
-            }
-
-            .card-title {
-                font-size: 14px;
-            }
-
-            .card-description {
-                font-size: 12px;
-            }
-
-            .map-actions {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .grid-container {
+            .feature-cards-wrapper {
                 grid-template-columns: 1fr;
             }
 
-            .container {
-                padding: 0 12px;
-                gap: 20px;
-            }
-
-            .top-panel {
-                padding: 16px 20px;
-            }
-
-            .top-panel h1 {
-                font-size: 22px;
-            }
-        }
-
-        @media (min-width: 600px) {
             .gi-buttons {
-                flex-direction: row;
+                flex-direction: column;
+            }
+
+            .sos-button {
+                font-size: 18px;
+                padding: 16px 40px;
             }
         }
     </style>
@@ -637,86 +791,83 @@
         <h1>Safe Haven</h1>
     </div>
 
-    <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
-    <button class="sos-button" onclick="sendSOS()">🚨 Emergency! SOS!</button>
+    <div class="main-wrapper">
+        <div class="content-grid">
+            <!-- LEFT COLUMN -->
+            <div class="left-column">
+                <!-- SOS CARD -->
+                <div class="sos-card">
+                    <p class="sos-warning">Use only in life–threatening situations</p>
+                    <button class="sos-button" onclick="sendSOS()">EMERGENCY SOS</button>
+                    <a href="#" class="emergency-call-link" onclick="callEmergency(); return false;">
+                        <span>📞</span>
+                        <span>Call Emergency Services</span>
+                    </a>
+                </div>
 
-    <div class="container">
-        <!-- Emergency Action Cards -->
-        <div class="cards-section">
-            <div class="section-header">
-                <h3 class="section-title">🚨 Critical Emergency Actions</h3>
-            </div>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <a href="../2.AlertsRisks/AlertsRisks.html">
-                        <div class="card-icon-wrapper">⚠️</div>
-                        <div class="card-content">
-                            <div class="card-title">Alerts & Risks</div>
-                            <div class="card-description">Hazard warnings & current risks</div>
-                        </div>
-                    </a>
+                <!-- CRITICAL EMERGENCY ACTIONS -->
+                <div>
+                    <h3 class="section-title">CRITICAL EMERGENCY ACTIONS</h3>
+                    <div class="feature-cards-wrapper">
+                        <a href="../2.AlertsRisks/AlertsRisks.html" class="feature-card">
+                            <div class="feature-icon">🚨</div>
+                            <div class="feature-text">
+                                <div class="feature-title">Disaster Updates</div>
+                                <div class="feature-description">Live updates in your area</div>
+                            </div>
+                        </a>
+                        <a href="../3.DisasterCoordination/DisasterCoordination.html" class="feature-card">
+                            <div class="feature-icon">🛟</div>
+                            <div class="feature-text">
+                                <div class="feature-title">Evacuation Safety</div>
+                                <div class="feature-description">Safe evacuation routes & tips</div>
+                            </div>
+                        </a>
+                        <a href="../4.EvacuationSafety/EvacuationSafety.html" class="feature-card">
+                            <div class="feature-icon">⚠️</div>
+                            <div class="feature-text">
+                                <div class="feature-title">Alerts & Risks</div>
+                                <div class="feature-description">Hazard warnings & current risks</div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="grid-item">
-                    <a href="../3.DisasterCoordination/DisasterCoordination.html">
-                        <div class="card-icon-wrapper">🚨</div>
-                        <div class="card-content">
-                            <div class="card-title">Disaster Coordination</div>
-                            <div class="card-description">Connect responders, resources and aid</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid-item">
-                    <a href="../4.EvacuationSafety/EvacuationSafety.html">
-                        <div class="card-icon-wrapper">🛟</div>
-                        <div class="card-content">
-                            <div class="card-title">Evacuation Safety</div>
-                            <div class="card-description">Safe routes & tips</div>
-                        </div>
-                    </a>
+
+                <!-- SUPPORT & LEARNING -->
+                <div>
+                    <h3 class="section-title">SUPPORT & LEARNING</h3>
+                    <div class="feature-cards-wrapper">
+                        <a href="../5.Community/Community.html" class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <div class="feature-text">
+                                <div class="feature-title">Get Educated</div>
+                                <div class="feature-description">Learn to stay safe</div>
+                            </div>
+                        </a>
+                        <a href="../6.DisasterUpdates/DisasterUpdates.html" class="feature-card">
+                            <div class="feature-icon">👥</div>
+                            <div class="feature-text">
+                                <div class="feature-title">Community</div>
+                                <div class="feature-description">Help and connect locally</div>
+                            </div>
+                        </a>
+                        <a href="../7.GetEducated/GetEducated.html" class="feature-card">
+                            <div class="feature-icon">💬</div>
+                            <div class="feature-text">
+                                <div class="feature-title">Connect With Others</div>
+                                <div class="feature-description">Share tips & experiences</div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-header">
-                <h3 class="section-title">📚 Support & Learning</h3>
-            </div>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <a href="../5.Community/Community.html">
-                        <div class="card-icon-wrapper">👥</div>
-                        <div class="card-content">
-                            <div class="card-title">Community</div>
-                            <div class="card-description">Help & connect locally</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid-item">
-                    <a href="../6.DisasterUpdates/DisasterUpdates.html">
-                        <div class="card-icon-wrapper">📰</div>
-                        <div class="card-content">
-                            <div class="card-title">Disaster Updates</div>
-                            <div class="card-description">Live updates in your area</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid-item">
-                    <a href="../7.GetEducated/GetEducated.html">
-                        <div class="card-icon-wrapper">📚</div>
-                        <div class="card-content">
-                            <div class="card-title">Get Educated</div>
-                            <div class="card-description">Learn to stay safe</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="sidebar">
-            <div class="side-cards-container">
-                <!-- EMERGENCY ASSISTANCE CARD - UPDATED -->
-                <div class="combined-card emergency-card">
+            <!-- RIGHT SIDEBAR -->
+            <div class="right-sidebar">
+                <!-- EMERGENCY ASSISTANCE CARD -->
+                <div class="emergency-card">
                     <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
 
-                    <!-- TAB UI -->
                     <div class="ec-tabs">
                         <div class="tab active" data-tab="india">India</div>
                         <div class="tab" data-tab="global">Global</div>
@@ -779,16 +930,13 @@
         </div>
     </div>
 
-   <!-- Map Section -->
-  <section class="map-section" id="map-section">
+    <!-- MAP SECTION -->
+    <section class="map-section" id="map-section">
         <div class="map-header">
             <h2>📍 Location Near You</h2>
-
             <div class="map-actions">
                 <button id="homeButton" class="home-btn">🏠 Home</button>
-                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
-                    View Full Map →
-                </a>
+                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">View Full Map →</a>
             </div>
         </div>
 
@@ -796,29 +944,52 @@
             <div class="map-wrapper" id="mapWrapper">
                 <div id="map"></div>
             </div>
-
             <div class="map-footer">
                 Location data is approximate. For full map features, click "View Full Map".
             </div>
         </div>
     </section>
 
+    <!-- SOS MODAL POPUP -->
+    <div class="sos-modal" id="sosModal">
+        <div class="sos-modal-content">
+            <button class="sos-modal-close" onclick="closeSosModal()">×</button>
+            <div class="sos-modal-icon">🚨</div>
+            <h2 class="sos-modal-title">Emergency SOS Alert</h2>
+            <p class="sos-modal-text">
+                Are you sure you want to send an emergency SOS alert?<br>
+                <strong>Your location and contact information will be shared with emergency services.</strong>
+            </p>
+            <div class="sos-modal-buttons">
+                <button class="sos-cancel-btn" onclick="closeSosModal()">Cancel</button>
+                <button class="sos-confirm-btn" onclick="confirmSOS()">Send SOS Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOS SUCCESS POPUP -->
+    <div class="sos-success-modal" id="sosSuccessModal">
+        <div class="sos-success-content">
+            <div class="sos-success-icon">✅</div>
+            <h2 class="sos-success-title">SOS Alert Sent!</h2>
+            <p class="sos-success-text">
+                Your location and contact information have been shared with emergency services.
+            </p>
+            <p class="sos-success-subtext">🚑 Help is on the way!</p>
+            <div class="sos-success-progress">
+                <div class="sos-success-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // TAB SWITCHING FUNCTIONALITY
+        // TAB SWITCHING
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const targetTab = this.getAttribute('data-tab');
-                
-                // Remove active class from all tabs
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                
-                // Add active class to clicked tab
                 this.classList.add('active');
-                
-                // Hide all lists
                 document.querySelectorAll('.ec-list').forEach(list => list.classList.remove('active'));
-                
-                // Show target list
                 document.getElementById(targetTab + '-list').classList.add('active');
             });
         });
@@ -827,36 +998,70 @@
         document.querySelectorAll('.copy-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const textToCopy = this.getAttribute('data-copy');
-                
-                // Copy to clipboard
                 navigator.clipboard.writeText(textToCopy).then(() => {
-                    // Change button text temporarily
                     const originalText = this.textContent;
                     this.textContent = 'Copied!';
                     this.classList.add('copied');
-                    
                     setTimeout(() => {
                         this.textContent = originalText;
                         this.classList.remove('copied');
                     }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy:', err);
-                    alert('Failed to copy. Please try again.');
                 });
             });
         });
 
-        // SOS FUNCTIONALITY
-        let clickCount = 0;
+        // SOS MODAL FUNCTIONS
         function sendSOS() {
-            clickCount++;
-            if (clickCount === 3) {
-                alert("SOS sent with your location and phone number successfully!");
-                clickCount = 0;
-            }
+            document.getElementById('sosModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
-        // SAFEBOT FUNCTION
+        function closeSosModal() {
+            document.getElementById('sosModal').classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        function confirmSOS() {
+            // Close the confirmation modal
+            closeSosModal();
+            
+            // Show success modal
+            setTimeout(() => {
+                document.getElementById('sosSuccessModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Auto-close after 2 seconds
+                setTimeout(() => {
+                    closeSosSuccessModal();
+                }, 2000);
+            }, 300);
+        }
+
+        function closeSosSuccessModal() {
+            document.getElementById('sosSuccessModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('sosModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSosModal();
+            }
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSosModal();
+            }
+        });
+
+        function callEmergency() {
+            const activeTab = document.querySelector('.tab.active').getAttribute('data-tab');
+            let emergencyNumber = activeTab === 'india' ? '100' : '112';
+            window.location.href = `tel:${emergencyNumber}`;
+        }
+
         function openSafeBot() {
             if(window.openChatbot) {
                 window.openChatbot();
@@ -865,46 +1070,29 @@
             }
         }
 
-        // MAP INITIALIZATION
+        // MAP
         let mapLoaded = false;
-        let map;
-        let homeMarker;
-
+        let map, homeMarker;
         const homeCoords = [28.6129, 77.2295];
         const homeZoom = 15;
 
         function initMap() {
             if (mapLoaded) return;
-
             map = L.map("map").setView(homeCoords, homeZoom);
-
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 attribution: "© OpenStreetMap contributors"
             }).addTo(map);
-
             homeMarker = L.marker(homeCoords)
                 .addTo(map)
-                .bindPopup(
-                    "<b>Home Location</b><br>India Gate, New Delhi, India",
-                    { autoClose: false, closeOnClick: false }
-                )
+                .bindPopup("<b>Home Location</b><br>India Gate, New Delhi, India", { autoClose: false, closeOnClick: false })
                 .openPopup();
-
-            L.Control.geocoder({
-                collapsed: false,
-                placeholder: "Search location",
-                defaultMarkGeocode: true
-            })
-                .on("markgeocode", e => {
-                    map.setView(e.geocode.center, homeZoom);
-                })
+            L.Control.geocoder({ collapsed: false, placeholder: "Search location", defaultMarkGeocode: true })
+                .on("markgeocode", e => { map.setView(e.geocode.center, homeZoom); })
                 .addTo(map);
-
             document.getElementById("homeButton").addEventListener("click", () => {
                 map.setView(homeCoords, homeZoom);
                 homeMarker.openPopup();
             });
-
             document.getElementById("mapWrapper").classList.add("visible");
             mapLoaded = true;
         }
@@ -915,8 +1103,7 @@
                 observer.disconnect();
             }
         });
-
         observer.observe(document.getElementById("map-section"));
     </script>
-
-    
+</body>
+</html>
