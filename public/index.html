@@ -8,6 +8,10 @@
     <link rel="icon" href="../assets/1.HomePage/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/1.HomePage/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/1.HomePage/favicon-16x16.png">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -15,6 +19,15 @@
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
     <style>
+        :root {
+  --color-bg-main: #3f5fa8;       
+  --color-primary: #ffffff;        
+  --color-border: rgba(255,255,255,0.15);
+  --color-text-main: #ffffff;
+
+  --radius-lg: 12px;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -626,16 +639,342 @@
                 flex-direction: row;
             }
         }
+ /* Navbar */
+
+ *, *::before, *::after {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+ 
+  :root {
+    --nav-bg: #3f5fa6;
+    --nav-text: #ffffff;
+    --nav-radius: 8px;
+    --nav-h: 60px;            
+    --mobile-item-h: 52px;    
+    --back-bar-h: 44px;       
+  }
+
+  
+  .navbar {
+    width: 100%;
+    height: var(--nav-h);
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+ 
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .nav-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 7px;
+    object-fit: cover;
+    background: #fff;           
+  }
+
+  .nav-brand {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--nav-text);
+  }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
+  border-radius: 22px;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 14px;
+
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+ .profile-btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+}
+
+.profile-btn svg {
+  pointer-events: none;
+}
+.nav-profile:hover { border-color: #fff; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: var(--nav-text);
+    border-radius: 2px;
+    transition: all .3s;
+  }
+
+
+  .mobile-nav {
+    display: none;                
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #f0f2f5;
+  }
+
+  .mobile-item {
+    width: 100%;
+    height: var(--mobile-item-h);
+    min-height: var(--mobile-item-h);
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    border-radius: var(--nav-radius);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 14px;
+    gap: 12px;
+    transition: filter .2s;
+  }
+  .mobile-item:hover { filter: brightness(1.1); }
+
+  .mobile-item .mi-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #fff;
+  }
+
+  .mobile-item .mi-title {
+    flex: 1;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .mobile-item .mi-profile {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .back-bar {
+    width: 100%;
+    height: var(--back-bar-h);
+    min-height: var(--back-bar-h);
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    border-radius: var(--nav-radius);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 10px;
+    text-decoration: none;
+    transition: filter .2s;
+  }
+  .back-bar:hover { filter: brightness(1.1); }
+
+  .back-bar .bb-arrow {
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .back-bar .bb-title {
+    flex: 1;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+
+  .back-bar .bb-profile {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .demo-section {
+    max-width: 720px;
+    margin: 32px auto;
+    padding: 0 16px;
+  }
+  .demo-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .demo-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .demo-row .back-bar {
+    flex: 1;
+    min-width: 240px;
+  }
+  @media (max-width: 768px) {
+    .nav-right .nav-chip { display: none; }
+    .hamburger            { display: flex; }
+    .mobile-nav { display: flex; }
+  }
+
+  @media (min-width: 769px) {
+    .mobile-nav   { display: none; }
+    .hamburger    { display: none; }
+  }
+
     </style>
 </head>
 
 <body>
-    <div class="top-panel">
-        <a href="index.html">
-            <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
-        </a>
-        <h1>Safe Haven</h1>
-    </div>
+
+   <!-- NAVBAR -->
+
+<header class="navbar">
+  <div class="nav-left">
+   
+    <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg"
+         alt="Safe Haven Logo" class="nav-logo" />
+    <span class="nav-brand">SAFE HAVEN</span>
+  </div>
+  <div class="nav-right">
+  <button class="nav-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 5-9 13-9 13S3 15 3 10a9 9 0 1 1 18 0Z"></path>
+      <circle cx="12" cy="10" r="3"></circle>
+    </svg>
+    <span>Delhi, IN</span>
+  </button>
+
+ <button class="nav-btn">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2">
+    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+  </svg>
+  <span>Alerts On</span>
+</button>
+
+<a href="/10.Auth/SignUp.html" class="profile-btn">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="10"></circle>
+    <circle cx="12" cy="10" r="3"></circle>
+    <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+  </svg>
+</a>
+
+
+
+</div>
+ <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html" class="mobile-item">
+    <span class="mi-title">Home</span>
+  </a>
+
+  <a href="GetEducated.html" class="mobile-item">
+    <span class="mi-title">Get Educated</span>
+  </a>
+
+  <a href="Volunteer.html" class="mobile-item">
+    <span class="mi-title">Volunteer</span>
+  </a>
+</nav>
+
+
+    <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
+    <button class="sos-button" onclick="sendSOS()">Emergency! SOS!</button>
+    
+    <div class="container">
+        <div class="iframe-container">
+            <iframe srcdoc="
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; text-align: center; }
+                    h2 { font-size: 18px; margin-bottom: 10px; }
+                    img { width: 150px; border-radius: 10px; margin-bottom: 10px; }
+                    ul { list-style: none; padding: 0; }
+                    li { font-size: 12px; margin-bottom: 8px; font-weight: bold; color: #333; }
+                    a { display: block; margin-top: 8px; color: #007bff; text-decoration: none; font-size: 14px; }
+                    a:hover { text-decoration: underline; }
+                </style>
+                <h2>Japan Emergency Contacts</h2>
+                <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/800px-Flag_of_Japan.svg.png' alt='Japan Flag'>
+                <ul>
+                    <li>🇯🇵 <strong>Police:</strong> 110</li>
+                    <li>🚑 <strong>Ambulance & Fire:</strong> 119</li>
+                    <li>📞 <strong>Disaster Emergency Message Dial:</strong> 171</li>
+                    <li>⚓ <strong>Coast Guard:</strong> 118</li>
+                    <li>🧠 <strong>Mental Health Helpline:</strong> 0570-064-556</li>
+                    <li>🏥 <strong>Disaster Relief (JDR):</strong> 03-5215-0693</li>
+                    <li>🛂 <strong>Foreign Residents Hotline:</strong> 0570-013-130</li>
+                    <li>🏛️ <strong>Japan Embassy:</strong> +81-3-3580-3311</li>
+                </ul>
+                <a href='https://www.japan.travel/en/' target='_blank'>🌐 Japan Travel Website</a>
+                <a href='https://www.japanembassy.org/' target='_blank'>🏛️ Japanese Embassy</a>
+            " width="100%" height="300px" frameborder="0" scrolling="yes"></iframe>
+        </div>
+
 
     <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
     <button class="sos-button" onclick="sendSOS()">🚨 Emergency! SOS!</button>
@@ -802,9 +1141,12 @@
             </div>
         </div>
     </section>
-
-    <script>
-        // TAB SWITCHING FUNCTIONALITY
+      <script>
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            nav.style.display = nav.style.display === 'none' ? 'flex' : 'none';
+        }
+       // TAB SWITCHING FUNCTIONALITY
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const targetTab = this.getAttribute('data-tab');
@@ -917,6 +1259,17 @@
         });
 
         observer.observe(document.getElementById("map-section"));
-    </script>
+        function toggleMobileNav() {
+    document.getElementById('mobileNav').style.display =
+      document.getElementById('mobileNav').style.display === 'none' ? 'flex' : 'none';
+  }
+
+  document.querySelectorAll('.mobile-item').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileNav').style.display = 'none';
+    });
+  });
+
+</script>
 
     

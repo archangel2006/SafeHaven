@@ -9,12 +9,52 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
     <link rel="stylesheet" href="style.css">
+        <style>
+        .page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #3f5fa8;
+  color: white;
+
+  padding: 12px 16px;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
+ </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Terrorism & Chemical Attack Safety</h1>
-        </header>
+                      <header class="page-header">
+  <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button>
+
+  <h1 id="pageTitle"> Terrorism </h1>
+
+  <button class="icon-btn" onclick="goToAuth()" aria-label="Profile">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"></circle>
+      <circle cx="12" cy="10" r="3"></circle>
+      <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+    </svg>
+  </button>
+</header>
 
         <section class="disaster-info">
             <h2>What is a Chemical or Terrorist Attack?</h2>
@@ -42,6 +82,39 @@
             <p>For more terrorism safety tips, visit <a href="https://www.cdc.gov/niosh/topics/chemical-emergencies/default.html">CDC Chemical Emergencies</a></p>
         </footer>
     </div>
+     <script> 
+                
+   document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const title = document.getElementById("pageTitle");
+
+ 
+
+  
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
+
+
+function goToAuth() {
+  window.location.href = "../10.Auth/login.html";
+}
+    </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>

@@ -9,18 +9,40 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
     <style>
+        .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;   
+  background: #3f5fa8;
+  color: white;
+  padding: 12px 16px;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.icon-btn {
+  position: absolute;
+  left: 16px;              
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f4f4f4;
         }
-
-        h2 {
-            text-align: center;
-        }
-
-        /* Search Bar */
+    /* Search Bar */
         .search-container {
             text-align: center;
             margin-bottom: 20px;
@@ -102,8 +124,14 @@
     </style>
 </head>
 <body>
+ <header class="page-header">
+  <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button>
 
-    <h2>Search for Missing Persons</h2>
+  <h1 id="pageTitle"> Search for Missing Persons </h1>
+ </header>
+
     <div class="search-container">
         <input type="text" id="searchInput" placeholder="Search by name or location..." onkeyup="searchMissing()">
     </div>
@@ -196,6 +224,26 @@
             document.getElementById("location").value = "";
             document.getElementById("imageUpload").value = "";
         }
+                 document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
     </script>
    
 

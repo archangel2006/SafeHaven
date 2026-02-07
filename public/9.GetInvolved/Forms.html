@@ -9,6 +9,28 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
     <style>
+        
+    .back-btn {
+  margin: 16px;
+  padding: 8px 14px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #2c4fa3;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.back-btn:hover {
+  background: #f0f4ff;
+}
+    
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -474,13 +496,52 @@
             .qr-body { grid-template-columns: 1fr; text-align: center; }
             .qr-text { text-align: left; }
         }
+
+        .page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #3f5fa8;
+  color: white;
+
+  padding: 12px 16px;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
+
     </style>
 </head>
 <body>
-    <div class="top-header" id="pageTitle">
-        Disaster in India
-    </div>
+   <header class="page-header">
+  <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button>
 
+  <h1 id="pageTitle"> Disaster in India</h1>
+
+  <button class="icon-btn" onclick="goToAuth()" aria-label="Profile">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"></circle>
+      <circle cx="12" cy="10" r="3"></circle>
+      <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+    </svg>
+  </button>
+</header>
     <div class="main-container">
         <div class="form-header">
             <div class="form-header-top">
@@ -720,6 +781,22 @@
                 return true;
             }
         }
+      
+    function goBack() {
+    if (document.referrer !== "") {
+      window.history.back();
+    } else {
+      window.location.href = "../index.html";
+    }
+  } 
+ 
+  function goBack() {
+    if (document.referrer !== "") {
+      window.history.back();
+    } else {
+      window.location.href = "../index.html";
+    }
+  }
 
         function hasAmount() {
             const selected = document.querySelector('input[name="amount"]:checked');
@@ -759,6 +836,37 @@
             thankToast.style.display = "block";
             setTimeout(() => { thankToast.style.display = "none"; }, 4000);
         });
+        document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const title = document.getElementById("pageTitle");
+
+
+
+ 
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
+
+
+function goToAuth() {
+  window.location.href = "../10.Auth/login.html";
+}
+
     </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
 </body>

@@ -7,7 +7,7 @@
     <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
-
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <style>
         * {
             box-sizing: border-box;
@@ -19,15 +19,43 @@
             padding: 0;
         }
 
-        .dashboard {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #007bff;
-            padding: 15px;
-            color: white;
-            font-size: 20px;
-        }
+       .dashboard {
+  height: 60px;
+  background-color: #3f5fa6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  color: white;
+}
+
+.dashboard h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: white;
+}
+
+.nav-profile {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 
         .dashboard a {
             color: white;
@@ -164,15 +192,67 @@
         font-size: 13px;
     }
 }
+header {
+            background-color: #3C5DA2;
+            padding: 0 5%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-logo-box {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .header-logo-box img {
+            height: 100%;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
 
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
-        <a href="HomePage.html">🏠</a>
-        <h2>Get Educated</h2>
-    </div>
+     <header>
+        <div class="header-logo-box">
+            <img src="../../assets/9.getinvolved/logo.jpg" alt="Safe Haven Logo">
+        </div>
+        <h1>Get  Educated </h1>
+    <button class="icon-btn" onclick="goToAuth()" aria-label="Profile">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"></circle>
+      <circle cx="12" cy="10" r="3"></circle>
+      <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+    </svg>
+</button>
+    </header>
+
 
     <div class="container">
         <h2>Disaster Awareness and Preparedness</h2>
@@ -230,6 +310,10 @@
 
         </div>
     </div>
+    <script> 
+        function goToAuth() {
+  window.location.href = "../10.Auth/Login.html";}
+    </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
 
 </body>

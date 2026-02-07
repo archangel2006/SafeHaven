@@ -17,12 +17,7 @@
             text-align: center;
         }
         
-        h2 {
-            background-color: #007BFF;
-            color: white;
-            padding: 15px;
-            margin: 0;
-        }
+    
 
         .news-container {
             display: flex;
@@ -67,13 +62,47 @@
         .news-item a:hover {
             text-decoration: underline;
         }
+.page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;   
+  background: #3f5fa8;
+  color: white;
+  padding: 12px 16px;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.icon-btn {
+  position: absolute;
+  left: 16px;              
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
+
     </style>
 </head>
 <body>
+ <header class="page-header">
+  <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button>
 
-    <h2>Live Updates</h2>
+  <h1 id="pageTitle"> Live Updates </h1>
+ </header>
     
     <div class="news-container">
+            
         <div class="news-item">
             <img src="https://i0.wp.com/www.directrelief.org/wp-content/uploads/2018/02/Japan-Earthquake-and-Tsunami-2011-68012881362.jpg?w=1323&ssl=1" alt="Aftermath of 2011 Tsunami">
             <p><a href="https://www.directrelief.org/emergency/japan-earthquake-and-tsunami-2011/" target="_blank">Japan Earthquake and Tsunami Relief 2011</a></p>
@@ -105,7 +134,28 @@
 
         </div>
     </div>
-    
+<script> 
+             document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
+</script>
 
 </body>
 </html>

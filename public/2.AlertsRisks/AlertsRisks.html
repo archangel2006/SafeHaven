@@ -619,11 +619,20 @@
       margin: 0 auto;
       padding: 0 1.5rem;
     }
+  .icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px;
+}
   </style>
 </head>
 
 <body>
   <header class="dashboard-header">
+
     <div class="header-left">
       <a href="index.html">
         <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
@@ -636,7 +645,9 @@
     </div>
 
     <div class="header-right">
-
+        <button id="backBtn" class="icon-btn" aria-label="Go back">
+    ←
+  </button>
     </div>
   </header>
   <div class="page-container">
@@ -910,6 +921,27 @@
     setTimeout(() => {
       dhHeatLayer.setOptions({ radius: 42 });
     }, 350);
+
+      document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.getElementById("backBtn");
+  const isHome =
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "/" ||
+    location.pathname === "";
+
+  if (isHome) {
+    backBtn.style.display = "none";
+  } else {
+    backBtn.style.display = "inline-flex";
+    backBtn.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "../index.html"; 
+      }
+    });
+  }
+});
   </script>
 
 
