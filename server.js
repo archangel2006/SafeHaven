@@ -13,14 +13,30 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Serve static files from public directory
+app.use(express.static('public'));
+
 // OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai;
+try {
+  if (process.env.OPENAI_API_KEY) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+} catch (error) {
+  console.log('OpenAI not configured, chatbot API will be unavailable');
+}
 
 // Chatbot endpoint
 app.post('/chatbot', async (req, res) => {
   try {
+    if (!openai) {
+      return res.status(503).json({
+        text: 'Chatbot service is currently unavailable.'
+      });
+    }
+
     const { conversation } = req.body;
 
     // Validate conversation
