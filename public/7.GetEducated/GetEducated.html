@@ -1,236 +1,468 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Get Educated - Safe Haven</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+    <link
+      rel="icon"
+      href="../../assets/1.HomePage/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/1.HomePage/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../assets/1.HomePage/favicon-16x16.png"
+    />
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
 
-        .dashboard {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #007bff;
-            padding: 15px;
-            color: white;
-            font-size: 20px;
-        }
+      .dashboard {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #007bff;
+        padding: 15px;
+        color: white;
+        font-size: 20px;
+      }
 
-        .dashboard a {
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-        }
+      .dashboard a {
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+      }
 
-        .dashboard h2 {
-            margin: 0;
-            flex-grow: 1;
-            text-align: center;
-        }
+      .dashboard h2 {
+        margin: 0;
+        flex-grow: 1;
+        text-align: center;
+      }
 
+      .container {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .panel-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+
+      .panel {
+        width: 30%;
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .panel img {
+        width: 80%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .panel h3 {
+        color: #333;
+        margin-top: 15px;
+      }
+
+      .panel p {
+        color: #555;
+      }
+
+      .panel:hover {
+        transform: scale(1.05);
+      }
+
+      .panel a {
+        display: inline-block;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .panel a:hover {
+        text-decoration: underline;
+      }
+      /* ---------- TABLET (≤ 1024px) ---------- */
+      @media (max-width: 1024px) {
         .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .panel-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+          width: 90%;
         }
 
         .panel {
-            width: 30%;
-            background-color: #ffffff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s;
+          width: 45%;
+        }
+      }
+
+      /* ---------- MOBILE (≤ 768px) ---------- */
+      @media (max-width: 768px) {
+        .container {
+          width: 95%;
+        }
+
+        .panel-container {
+          justify-content: center;
+        }
+
+        .panel {
+          width: 100%;
+          max-width: 400px;
         }
 
         .panel img {
-            width: 80%;
-            height: auto;
-            border-radius: 10px;
+          width: 100%;
+        }
+        .panel:hover {
+          transform: none; /* stop zoom effect */
+        }
+
+        h2 {
+          font-size: 20px;
         }
 
         .panel h3 {
-            color: #333;
-            margin-top: 15px;
+          font-size: 16px;
+        }
+        .panel p {
+          font-size: 14px;
+        }
+      }
+
+      /* ---------- SMALL MOBILE (≤ 480px) ---------- */
+      @media (max-width: 480px) {
+        .dashboard h2 {
+          font-size: 16px;
+        }
+
+        .panel {
+          padding: 15px;
+        }
+
+        .panel h3 {
+          font-size: 15px;
         }
 
         .panel p {
-            color: #555;
+          font-size: 13px;
+        }
+      }
+
+      /* css for footer */
+      .footer {
+        background: #3b5fa3;
+        color: #ffffff;
+        font-family: inherit;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px;
+        display: flex;
+        gap: 48px;
+      }
+
+      .footer-brand {
+        flex: 1;
+      }
+
+      .brand-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 5px;
+      }
+
+      .brand-logo {
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        object-fit: cover;
+        background: white;
+        padding: 2px;
+      }
+
+      .brand-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+      }
+
+      .barnd-tagline {
+        margin-top: 8px;
+        opacity: 0.85;
+      }
+
+      .brand-mission {
+        opacity: 0.85;
+      }
+
+      .footer-links {
+        flex: 1.2;
+      }
+
+      .links-title {
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        border-bottom: 1.5px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 8px;
+        text-align: left;
+      }
+
+      .links-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        text-align: left;
+        text-decoration: none;
+      }
+
+      .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-links li {
+        margin-bottom: 14px;
+        position: relative;
+        padding-left: 18px;
+      }
+
+      .footer-links li::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 7px;
+      }
+
+      .footer-links a {
+        color: #ffffff;
+        font-size: 0.95rem;
+        opacity: 0.9;
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+        padding: 14px 16px;
+        font-size: 0.85rem;
+        opacity: 0.85;
+      }
+
+      .links-grid ul li:nth-child(1)::after,
+      .links-grid ul li:nth-child(2)::after,
+      .links-grid ul li:nth-child(3)::after {
+        content: "";
+        position: absolute;
+        left: 0%;
+        bottom: 0;
+        width: 320px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.5);
+        margin-bottom: -10px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .footer-container {
+          flex-direction: column;
         }
 
-        .panel:hover {
-            transform: scale(1.05);
+        .links-grid {
+          grid-template-columns: 1fr;
         }
-
-        .panel a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .panel a:hover {
-            text-decoration: underline;
-        }
-/* ---------- TABLET (≤ 1024px) ---------- */
-@media (max-width: 1024px) {
-    .container {
-        width: 90%;
-    }
-
-    .panel {
-        width: 45%;
-    }
-}
-
-/* ---------- MOBILE (≤ 768px) ---------- */
-@media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
-
-    .panel-container {
-        justify-content: center;
-    }
-
-    .panel {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .panel img {
-        width: 100%;
-    }
-.panel:hover {
-                transform: none;   /* stop zoom effect */
-            }
-
-            h2 {
-                font-size: 20px;
-            }
-
-            .panel h3 {
-                font-size: 16px;
-            }
-            .panel p {
-                font-size: 14px;
-            }
-        }
-        
-/* ---------- SMALL MOBILE (≤ 480px) ---------- */
-@media (max-width: 480px) {
-    .dashboard h2 {
-        font-size: 16px;
-    }
-
-    .panel {
-        padding: 15px;
-    }
-
-    .panel h3 {
-        font-size: 15px;
-    }
-
-    .panel p {
-        font-size: 13px;
-    }
-}
-
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="dashboard">
-        <a href="HomePage.html">🏠</a>
-        <h2>Get Educated</h2>
+      <a href="HomePage.html">🏠</a>
+      <h2>Get Educated</h2>
     </div>
 
     <div class="container">
-        <h2>Disaster Awareness and Preparedness</h2>
+      <h2>Disaster Awareness and Preparedness</h2>
 
-        <!-- Disaster Panels -->
-        <div class="panel-container">
-
-            <!-- Earthquakes -->
-            <div class="panel">
-                <img src="assets/earthquake.jpg" alt="Earthquake">
-                <h3>🌪 Earthquakes</h3>
-                <p>Learn about the causes, safety measures, and preparedness tips for earthquakes.</p>
-                <a href="pages/earthquake.html">Learn More</a>
-            </div>
-
-            <!-- Floods -->
-            <div class="panel">
-                <img src="assets/flood.jpg" alt="Flood">
-                <h3>🌊 Floods</h3>
-                <p>Understand flood risks, evacuation strategies, and how to protect your community.</p>
-                <a href="flood.html">Learn More</a>
-            </div>
-
-            <!-- Wildfires -->
-            <div class="panel">
-                <img src="assets/wildfire.jpg" alt="Wildfire">
-                <h3>🔥 Wildfires</h3>
-                <p>Get information on fire safety, preparation tips, and property protection during wildfires.</p>
-                <a href="wildfire.html">Learn More</a>
-            </div>
-
-            <!-- Hurricanes/Typhoons -->
-            <div class="panel">
-                <img src="assets/hurricane.jpg" alt="Hurricane">
-                <h3>🌀 Hurricanes/Typhoons</h3>
-                <p>Learn how to prepare, recognize warning signs, and evacuate during a hurricane or typhoon.</p>
-                <a href="hurricane.html">Learn More</a>
-            </div>
-
-            <!-- Volcanic Eruptions -->
-            <div class="panel">
-                <img src="assets/volcano.jpg" alt="Volcano">
-                <h3>🌋 Volcanic Eruptions</h3>
-                <p>Understand volcanic eruption risks, safety measures, and how to stay safe.</p>
-                <a href="volcano.html">Learn More</a>
-            </div>
-
-            <!-- Terrorism/Chemical Attacks -->
-            <div class="panel">
-                <img src="assets/terrorism.jpg" alt="Terrorism">
-                <h3>🧯 Terrorism/Chemical Attacks</h3>
-                <p>Learn how to respond to terrorism or chemical attack situations and stay safe.</p>
-                <a href="terrorism.html">Learn More</a>
-            </div>
-
+      <!-- Disaster Panels -->
+      <div class="panel-container">
+        <!-- Earthquakes -->
+        <div class="panel">
+          <img src="assets/earthquake.jpg" alt="Earthquake" />
+          <h3>🌪 Earthquakes</h3>
+          <p>
+            Learn about the causes, safety measures, and preparedness tips for
+            earthquakes.
+          </p>
+          <a href="pages/earthquake.html">Learn More</a>
         </div>
-    </div>
-    <script src="../8.AIAssistant/chatbot.js"></script>
 
-</body>
+        <!-- Floods -->
+        <div class="panel">
+          <img src="assets/flood.jpg" alt="Flood" />
+          <h3>🌊 Floods</h3>
+          <p>
+            Understand flood risks, evacuation strategies, and how to protect
+            your community.
+          </p>
+          <a href="flood.html">Learn More</a>
+        </div>
+
+        <!-- Wildfires -->
+        <div class="panel">
+          <img src="assets/wildfire.jpg" alt="Wildfire" />
+          <h3>🔥 Wildfires</h3>
+          <p>
+            Get information on fire safety, preparation tips, and property
+            protection during wildfires.
+          </p>
+          <a href="wildfire.html">Learn More</a>
+        </div>
+
+        <!-- Hurricanes/Typhoons -->
+        <div class="panel">
+          <img src="assets/hurricane.jpg" alt="Hurricane" />
+          <h3>🌀 Hurricanes/Typhoons</h3>
+          <p>
+            Learn how to prepare, recognize warning signs, and evacuate during a
+            hurricane or typhoon.
+          </p>
+          <a href="hurricane.html">Learn More</a>
+        </div>
+
+        <!-- Volcanic Eruptions -->
+        <div class="panel">
+          <img src="assets/volcano.jpg" alt="Volcano" />
+          <h3>🌋 Volcanic Eruptions</h3>
+          <p>
+            Understand volcanic eruption risks, safety measures, and how to stay
+            safe.
+          </p>
+          <a href="volcano.html">Learn More</a>
+        </div>
+
+        <!-- Terrorism/Chemical Attacks -->
+        <div class="panel">
+          <img src="assets/terrorism.jpg" alt="Terrorism" />
+          <h3>🧯 Terrorism/Chemical Attacks</h3>
+          <p>
+            Learn how to respond to terrorism or chemical attack situations and
+            stay safe.
+          </p>
+          <a href="terrorism.html">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Left section -->
+        <div class="footer-brand">
+          <div class="brand-header">
+            <img
+              src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg"
+              alt="Safe Heaven logo"
+              class="brand-logo"
+            />
+            <h3 class="brand-name">SAFE HEAVEN</h3>
+          </div>
+          <p style="text-align: left; opacity: 0.6">
+            Staying informed, prepared and
+          </p>
+          <p style="text-align: left; opacity: 0.6">
+            connected when it matters the most.
+          </p>
+          <p style="text-align: left; opacity: 0.6">
+            Turning information into action during
+          </p>
+          <p style="text-align: left; opacity: 0.6">emergencies.</p>
+        </div>
+
+        <!-- Right section -->
+        <div class="footer-links">
+          <h4 class="links-title">QUICK LINKS</h4>
+          <div class="links-grid">
+            <ul>
+              <li>
+                <a href="2.AlertsRisks/AlertsRisks.html">ALERTS AND RISKS</a>
+              </li>
+              <li><a href="5.Community/Community.html">COMMUNITY</a></li>
+              <li><a href="7.GetEducated/GetEducated.html">GET EDUCATED</a></li>
+            </ul>
+            <ul>
+              <li>
+                <a href="3.DisasterCoordination/DisasterCoordination.html"
+                  >DISASTER COORDINATION</a
+                >
+              </li>
+              <li>
+                <a href="4.EvacuationSafety/EvacuationSafety.html"
+                  >EVACUATION AND SAFETY</a
+                >
+              </li>
+              <li>
+                <a href="6.DisasterUpdates/DisasterUpdates.html"
+                  >DISASTER UPDATES</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © <span id="year"></span> SAFE HEAVEN. BUILT FOR COMMUNITY
+      </div>
+    </footer>
+    <script src="../8.AIAssistant/chatbot.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
