@@ -619,6 +619,189 @@
       margin: 0 auto;
       padding: 0 1.5rem;
     }
+
+    /* Safety Instructions Modal */
+    .safety-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { 
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .safety-modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 0;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+      animation: slideDown 0.4s ease;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 16px 16px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .modal-header i {
+      font-size: 1.75rem;
+    }
+
+    .modal-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-size: 1.75rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 2rem;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .safety-section {
+      margin-bottom: 2rem;
+    }
+
+    .safety-section h3 {
+      color: #d32f2f;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .safety-section h3 i {
+      font-size: 1.4rem;
+    }
+
+    .safety-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .safety-list li {
+      background: #f5f5f5;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 8px;
+      border-left: 4px solid #ff9800;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .safety-list li:hover {
+      background: #eeeeee;
+      transform: translateX(5px);
+    }
+
+    .safety-list li i {
+      color: #ff9800;
+      margin-top: 0.2rem;
+      font-size: 1.1rem;
+    }
+
+    .emergency-contacts {
+      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 2px dashed #ff9800;
+    }
+
+    .emergency-contacts h4 {
+      color: #e65100;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .contact-item i {
+      color: #ff5722;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .safety-modal-content {
+        width: 95%;
+        margin: 10% auto;
+      }
+
+      .modal-header {
+        padding: 1rem 1.5rem;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .modal-header h2 {
+        font-size: 1.25rem;
+      }
+    }
   </style>
 </head>
 
@@ -653,7 +836,7 @@
           </p>
         </div>
 
-        <button class="banner-btn">View Safety Instructions</button>
+        <button class="banner-btn" id="viewSafetyBtn" onclick="openSafetyModal()">View Safety Instructions</button>
       </div>
     </section>
     <section class="alerts-section">
@@ -912,6 +1095,93 @@
     }, 350);
   </script>
 
+  <!-- Safety Instructions Modal -->
+  <div id="safetyModal" class="safety-modal">
+    <div class="safety-modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-shield-alt"></i> Cyclone Safety Instructions</h2>
+        <button class="modal-close" onclick="closeSafetyModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="safety-section">
+          <h3><i class="fas fa-home"></i> Before the Cyclone</h3>
+          <ul class="safety-list">
+            <li><i class="fas fa-check-circle"></i> <span>Secure loose outdoor items such as furniture, tools, and toys</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Stock up on emergency supplies: water, non-perishable food, flashlights, and batteries</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Keep important documents in waterproof containers</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Charge all mobile devices and power banks</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Fill bathtubs and containers with clean water</span></li>
+          </ul>
+        </div>
+
+        <div class="safety-section">
+          <h3><i class="fas fa-wind"></i> During the Cyclone</h3>
+          <ul class="safety-list">
+            <li><i class="fas fa-check-circle"></i> <span>Stay indoors and away from windows and glass doors</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Move to the strongest part of your house or a designated safe room</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Keep listening to local radio or TV for updates</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Do not go outside even if conditions appear calm - the eye of the storm may be passing</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Avoid using electrical appliances and landline phones</span></li>
+          </ul>
+        </div>
+
+        <div class="safety-section">
+          <h3><i class="fas fa-exclamation-triangle"></i> After the Cyclone</h3>
+          <ul class="safety-list">
+            <li><i class="fas fa-check-circle"></i> <span>Wait for official all-clear signals before going outside</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Watch out for fallen power lines, broken glass, and debris</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Avoid floodwater - it may be contaminated or electrically charged</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Check for injuries and provide first aid if needed</span></li>
+            <li><i class="fas fa-check-circle"></i> <span>Document any property damage with photos for insurance claims</span></li>
+          </ul>
+        </div>
+
+        <div class="emergency-contacts">
+          <h4><i class="fas fa-phone-alt"></i> Emergency Contact Numbers</h4>
+          <div class="contact-item">
+            <i class="fas fa-ambulance"></i>
+            <span>Emergency Services: <strong>108 / 112</strong></span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-life-ring"></i>
+            <span>National Disaster Response Force: <strong>011-26105763</strong></span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-headset"></i>
+            <span>State Disaster Control Room: <strong>1070</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Safety Modal Functions
+    function openSafetyModal() {
+      document.getElementById('safetyModal').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeSafetyModal() {
+      document.getElementById('safetyModal').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById('safetyModal');
+      if (event.target === modal) {
+        closeSafetyModal();
+      }
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeSafetyModal();
+      }
+    });
+  </script>
 
   <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
