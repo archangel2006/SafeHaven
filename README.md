@@ -118,8 +118,85 @@ cd public
 
 Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting issues or pull requests.
 
-**Use colors:** 
+**Use colors:** <br>
 <img width="964" height="313" alt="Section 1" src="https://github.com/user-attachments/assets/bd7649a2-ea88-4054-923d-dbbd8377fca7" />
+
+## Contributors
+
+<p style="font-size:16px; font-weight:600;">Thanks to all contributors and community members for supporting and improving SafeHaven. 🙌</p><br>
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/archangel2006">
+        <img src="https://github.com/archangel2006.png" width="90" style="border-radius:50%"><br>
+        <b>Vaibhavi</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Khushi5155">
+        <img src="https://github.com/Khushi5155.png" width="90" style="border-radius:50%"><br>
+        <b>Khushi Kumari</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/reezmahanan">
+        <img src="https://github.com/reezmahanan.png" width="90" style="border-radius:50%"><br>
+        <b>Reezma Hanan</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/anushreebhargava14">
+        <img src="https://github.com/anushreebhargava14.png" width="90" style="border-radius:50%"><br>
+        <b>Anushree Bhargava</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/shatrughantwt">
+        <img src="https://github.com/shatrughantwt.png" width="90" style="border-radius:50%"><br>
+        <b>Shatrughan</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/pratyushjha06">
+        <img src="https://github.com/pratyushjha06.png" width="90" style="border-radius:50%"><br>
+        <b>Pratyush Jha</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Krishna-Sri-Charan">
+        <img src="https://github.com/Krishna-Sri-Charan.png" width="90" style="border-radius:50%"><br>
+        <b>Krishna Sri Charan</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Sunidhi037">
+        <img src="https://github.com/Sunidhi037.png" width="90" style="border-radius:50%"><br>
+        <b>Sunidhi Singh</b>
+      </a>
+    </td>
+   </tr>
+   <tr>
+    <td align="center">
+      <a href="https://github.com/inshaRoobab">
+        <img src="https://github.com/inshaRoobab.png" width="90" style="border-radius:50%"><br>
+        <b>Insha Roobab</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Atharvverma1234">
+        <img src="https://github.com/Atharvverma1234.png" width="90" style="border-radius:50%"><br>
+        <b>Atharv Verma</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/k4rth1k-h3gd3">
+        <img src="https://github.com/k4rth1k-h3gd3.png" width="90" style="border-radius:50%"><br>
+        <b>Karthik Hegde</b>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## 📜 Code of Conduct
 
@@ -129,10 +206,4 @@ Read more in [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 ## 📄 License
 
 This project is licensed under the MIT License.  
-See [LICENSE.md](./LICENSE.md) for details.
-
-## 🙌 Acknowledgements
-
-Thanks to all contributors and community members who help improve SafeHaven.  
-
-
+See [LICENSE.md](./LICENSE.md) for details. 
