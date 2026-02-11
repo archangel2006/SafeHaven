@@ -1,219 +1,607 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Chatroom</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+    <title>Discussion Board | Coordination Center</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background: #f5f5f5;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: #eef2f7;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
         }
 
-        .chat-header {
-            background: #0073e6;
+        /* ================= HEADER ================= */
+        .top-header {
+            background: linear-gradient(135deg, #0052cc, #003d99);
             color: white;
-            padding: 15px;
+            padding: 15px 25px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-        }
-
-        .profile-container {
-            display: flex;
             align-items: center;
         }
 
-        .profile-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-            background-color: white;
-            object-fit: cover;
+        .top-header h2 {
+            font-size: 20px;
+            font-weight: 600;
         }
 
-        .clear-btn {
+        .status {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ================= MAIN LAYOUT ================= */
+        .main-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ================= SIDEBAR ================= */
+        .sidebar {
+            width: 260px;
             background: white;
-            border: none;
-            padding: 5px 10px;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #444;
+        }
+
+        .group {
+            padding: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            border-radius: 5px;
+            margin-bottom: 8px;
+            transition: 0.2s;
             font-size: 14px;
         }
 
-        .clear-btn:hover {
-            background: #ddd;
+        .group:hover {
+            background: #f0f4ff;
         }
 
-        .chat-container {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 15px;
+        .group.active {
+            background: #dbe7ff;
+            font-weight: 600;
+            color: #003d99;
+        }
+
+        /* ================= CHAT SECTION ================= */
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f9fbff;
+        }
+
+        /* Chat Header */
+        .chat-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
             background: white;
-            border-bottom: 2px solid #ccc;
-        }
-
-        .chat-message {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 8px;
-            background: #e6f7ff;
         }
 
-        .chat-message img {
-            max-width: 150px;
-            border-radius: 5px;
-            margin-left: 10px;
-        }
-
-        .chat-message strong {
-            color: #0073e6;
-        }
-
-        .chat-form {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background: #0073e6;
-        }
-
-        .chat-form input, .chat-form button {
-            padding: 10px;
-            border: none;
+        .chat-header h4 {
             font-size: 16px;
+            font-weight: 600;
         }
 
-        .chat-form input {
-            flex-grow: 1;
-            border-radius: 5px;
+        /* Chat Messages */
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
-        .chat-form button {
+        /* Message */
+        .message {
+            display: flex;
+            gap: 10px;
+        }
+
+        .message img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+        }
+
+        .message-content {
             background: white;
+            padding: 10px 14px;
+            border-radius: 10px;
+            max-width: 70%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .message-content strong {
+            font-size: 13px;
+            color: #0052cc;
+        }
+
+        .timestamp {
+            font-size: 11px;
+            color: gray;
+            margin-top: 4px;
+        }
+
+        /* Input Section */
+        .chat-input {
+            padding: 12px 15px;
+            border-top: 1px solid #ddd;
+            background: white;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input input[type="text"] {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: #0052cc;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
             cursor: pointer;
-            border-radius: 5px;
-            margin-left: 5px;
+            transition: 0.2s;
         }
 
-        .chat-form button:hover {
-            background: #ddd;
+        .chat-input button:hover {
+            background: #003d99;
         }
 
-        .file-input {
-            margin-left: 10px;
+        /* Profile Section */
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: white;
+            border-bottom: 1px solid #ddd;
         }
-    </style>
-</head>
-<body>
 
-    <!-- Header with Profile & Clear Button -->
-    <div class="chat-header">
-        <div class="profile-container">
-            <img src="default-avatar.png" class="profile-img" id="profilePic">
-            <input type="text" id="username" placeholder="Enter your name" required>
-            <input type="file" id="profileInput" accept="image/*" onchange="updateProfile()">
-        </div>
-        <button class="clear-btn" onclick="clearChat()">Clear History</button>
-    </div>
+        .profile-box img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
 
-    <!-- Chat Messages -->
-    <div class="chat-container" id="chatContainer"></div>
+        .profile-box input {
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
 
-    <!-- Chat Input Box -->
-    <form class="chat-form" onsubmit="sendMessage(event)">
-        <input type="text" id="messageInput" placeholder="Type a message...">
-        <input type="file" id="imageInput" class="file-input" accept="image/*">
-        <button type="submit">Send</button>
-    </form>
-
-    <script>
-        function updateProfile() {
-            let profileInput = document.getElementById("profileInput");
-            let profilePic = document.getElementById("profilePic");
-
-            if (profileInput.files.length > 0) {
-                let file = profileInput.files[0];
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    profilePic.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
             }
         }
 
-        function sendMessage(event) {
+        .message-type {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .type-question {
+            background: #ff9800;
+        }
+
+        .type-volunteer {
+            background: #28a745;
+        }
+
+        .reply-btn {
+            font-size: 11px;
+            color: #0052cc;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .replies {
+            margin-top: 8px;
+            margin-left: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Profile Circle */
+        .profile-menu {
+            position: relative;
+        }
+
+        .profile-menu img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            object-fit: cover;
+        }
+
+        /* Dropdown Panel */
+        .profile-dropdown {
+            position: absolute;
+            right: 0;
+            top: 55px;
+            width: 220px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .profile-dropdown.active {
+            display: flex;
+        }
+
+        .profile-preview {
+            text-align: center;
+        }
+
+        .profile-preview img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid #0052cc;
+            object-fit: cover;
+        }
+
+        .profile-preview input {
+            display: none;
+        }
+
+        .change-photo {
+            font-size: 12px;
+            color: #0052cc;
+            cursor: pointer;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .profile-edit label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .profile-edit input {
+            width: 100%;
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 4px;
+        }
+
+        .dropdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 18px;
+            color: #999;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-header">
+        <h2> Discussion Board (Group Chart)</h2>
+
+        <div class="header-right">
+
+            <div class="status">🟢 24 Active Participants</div>
+
+            <div class="profile-menu">
+                <img src="https://ui-avatars.com/api/?name=User&background=0052cc&color=fff" id="profilePicTop"
+                    onclick="toggleProfileMenu()">
+
+                <div class="profile-dropdown" id="profileDropdown">
+
+                    <div class="dropdown-header">
+                        <span>Profile Settings</span>
+                        <span class="close-btn" onclick="toggleProfileMenu()">×</span>
+                    </div>
+
+                    <div class="profile-preview">
+                        <img src="https://ui-avatars.com/api/?name=User&background=0052cc&color=fff" id="profilePic">
+                        <label for="profileInput" class="change-photo">Change Photo</label>
+                        <input type="file" id="profileInput" accept="image/*" onchange="updateProfile()">
+                    </div>
+
+                    <div class="profile-edit">
+                        <label>Your Name</label>
+                        <input type="text" id="username" placeholder="Enter your name">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="main-container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Discussion Groups</h3>
+            <div class="group active" onclick="switchGroup('general', this)">📍 General - City</div>
+            <div class="group" onclick="switchGroup('shelter', this)">🏠 Shelter Updates</div>
+            <div class="group" onclick="switchGroup('volunteer', this)">🤝 Volunteer Coordination</div>
+            <div class="group" onclick="switchGroup('medical', this)">🚑 Medical Assistance</div>
+
+        </div>
+
+        <!-- Chat Section -->
+        <div class="chat-section">
+
+
+            <div class="chat-header">
+                <h4>General - City</h4>
+            </div>
+
+            <div class="chat-container" id="chatContainer">
+                <div style="text-align:center; font-size:13px; color:gray;">
+                    Welcome. Share verified updates only.
+                </div>
+            </div>
+
+            <form class="chat-input" onsubmit="sendMessage(event)">
+                <select id="messageType">
+                    <option value="normal">Normal</option>
+                    <option value="question">Question ❓</option>
+                    <option value="volunteer">Volunteer 🤝</option>
+                </select>
+
+                <input type="text" id="messageInput" placeholder="Type your message...">
+                <input type="file" id="imageInput" accept="image/*">
+                <button type="submit">Send</button>
+            </form>
+
+
+        </div>
+    </div>
+
+    <script>
+
+
+
+        let currentGroup = "general";
+
+        let groupMessages = {
+            general: [],
+            shelter: [],
+            volunteer: [],
+            medical: []
+        };
+
+        /* ================= GROUP SWITCH ================= */
+
+        window.switchGroup = function (group, element) {
+            currentGroup = group;
+
+            document.querySelectorAll(".group").forEach(g => g.classList.remove("active"));
+            element.classList.add("active");
+            document.querySelector(".chat-header h4").innerText = getGroupTitle(group);
+
+            renderMessages();
+        };
+
+        /* ================= SEND MESSAGE ================= */
+
+        window.sendMessage = function (event, parentId = null) {
             event.preventDefault();
 
             let username = document.getElementById("username").value.trim();
             let message = document.getElementById("messageInput").value.trim();
-            let imageInput = document.getElementById("imageInput");
-            let chatContainer = document.getElementById("chatContainer");
+            let type = document.getElementById("messageType").value;
 
-            if (!username) return;
-
-            let messageElement = document.createElement("div");
-            messageElement.classList.add("chat-message");
-
-            // User Image Preview
-            let profilePic = document.getElementById("profilePic").src;
-            let userImage = document.createElement("img");
-            userImage.src = profilePic;
-            userImage.style.width = "40px";
-            userImage.style.height = "40px";
-            userImage.style.borderRadius = "50%";
-            userImage.style.marginRight = "10px";
-
-            messageElement.appendChild(userImage);
-
-            // If text is provided, add it
-            if (message) {
-                let messageText = document.createElement("span");
-                messageText.innerHTML = `<strong>${username}:</strong> ${message}`;
-                messageElement.appendChild(messageText);
+            if (!username) {
+                alert("Please enter your name in profile settings.");
+                return;
             }
 
-            // If an image is uploaded, add it
-            if (imageInput.files.length > 0) {
-                let file = imageInput.files[0];
-                let reader = new FileReader();
-
-                reader.onload = function (e) {
-                    let imgPreview = document.createElement("img");
-                    imgPreview.src = e.target.result;
-                    imgPreview.style.maxWidth = "150px";
-                    imgPreview.style.borderRadius = "5px";
-                    imgPreview.style.marginLeft = "10px";
-
-                    messageElement.appendChild(imgPreview);
-                };
-                reader.readAsDataURL(file);
+            if (!message) {
+                alert("Please type a message.");
+                return;
             }
 
-            if (message || imageInput.files.length > 0) {
-                chatContainer.appendChild(messageElement);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            let msgObj = {
+                id: Date.now(),
+                username,
+                message,
+                type,
+                replies: []
+            };
+
+            if (parentId) {
+                let parent = findMessageById(groupMessages[currentGroup], parentId);
+                if (parent) parent.replies.push(msgObj);
+            } else {
+                groupMessages[currentGroup].push(msgObj);
             }
 
             document.getElementById("messageInput").value = "";
-            imageInput.value = "";
+            renderMessages();
+        };
+
+        /* ================= FIND MESSAGE ================= */
+
+        function findMessageById(messages, id) {
+            for (let msg of messages) {
+                if (msg.id === id) return msg;
+                let found = findMessageById(msg.replies, id);
+                if (found) return found;
+            }
         }
 
-        function clearChat() {
-            document.getElementById("chatContainer").innerHTML = "";
+        function getGroupTitle(group) {
+            switch (group) {
+                case "general": return "📍 General - City";
+                case "shelter": return "🏠 Shelter Updates";
+                case "volunteer": return "🤝 Volunteer Coordination";
+                case "medical": return "🚑 Medical Assistance";
+                default: return "Chat";
+            }
         }
+
+
+        /* ================= RENDER ================= */
+
+        function renderMessages() {
+            let chatContainer = document.getElementById("chatContainer");
+            chatContainer.innerHTML = "";
+
+            groupMessages[currentGroup].forEach(msg => {
+                chatContainer.appendChild(createMessageElement(msg));
+            });
+        }
+
+        function createMessageElement(msg) {
+            let msgDiv = document.createElement("div");
+            msgDiv.classList.add("message");
+
+            let avatar = document.createElement("img");
+            avatar.src = document.getElementById("profilePicTop").src;
+
+            let content = document.createElement("div");
+            content.classList.add("message-content");
+
+            let typeLabel = "";
+            if (msg.type === "question")
+                typeLabel = `<div class="message-type type-question">Question</div>`;
+            if (msg.type === "volunteer")
+                typeLabel = `<div class="message-type type-volunteer">Volunteer</div>`;
+
+            content.innerHTML = `
+            ${typeLabel}
+            <strong>${msg.username}</strong><br>
+            ${msg.message}
+            <div class="reply-btn" onclick="prepareReply(${msg.id})">Reply</div>
+        `;
+
+            msgDiv.appendChild(avatar);
+            msgDiv.appendChild(content);
+
+            if (msg.replies.length > 0) {
+                let repliesDiv = document.createElement("div");
+                repliesDiv.classList.add("replies");
+
+                msg.replies.forEach(reply => {
+                    repliesDiv.appendChild(createMessageElement(reply));
+                });
+
+                content.appendChild(repliesDiv);
+            }
+
+            return msgDiv;
+        }
+
+        /* ================= REPLY ================= */
+
+        window.prepareReply = function (parentId) {
+            let input = document.getElementById("messageInput");
+            input.focus();
+
+            let form = document.querySelector(".chat-input");
+
+            form.onsubmit = function (e) {
+                sendMessage(e, parentId);
+
+                form.onsubmit = function (ev) {
+                    sendMessage(ev);
+                };
+            };
+        };
+
+        /* ================= PROFILE MENU ================= */
+
+        window.toggleProfileMenu = function () {
+            document.getElementById("profileDropdown")
+                .classList.toggle("active");
+        };
+
+        window.updateProfile = function () {
+            let file = document.getElementById("profileInput").files[0];
+            if (!file) return;
+
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("profilePic").src = e.target.result;
+                document.getElementById("profilePicTop").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        };
+
+        /* Close dropdown */
+        window.addEventListener("click", function (e) {
+            const menu = document.getElementById("profileDropdown");
+            const avatar = document.getElementById("profilePicTop");
+
+            if (menu && !menu.contains(e.target) && e.target !== avatar) {
+                menu.classList.remove("active");
+            }
+        });
+
+
     </script>
-    
+
+
+
 </body>
+
 </html>

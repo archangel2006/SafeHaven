@@ -1,203 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing Persons</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safe Haven - Missing Persons</title>
+<link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
+<style>
+    /* ====== RESET & BODY ====== */
+    * { box-sizing: border-box; margin:0; padding:0; font-family: 'Arial', sans-serif; }
+    body { background: #f4f6f9; color: #333; }
 
-        h2 {
-            text-align: center;
-        }
+    /* ====== HEADER ====== */
+    header {
+        background: linear-gradient(135deg, #0052cc, #003d99);
+        color: #fff;
+        padding: 30px 20px;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    header p {
+        font-size: 16px;
+        font-weight: normal;
+        margin-top: 5px;
+    }
 
-        /* Search Bar */
-        .search-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    /* ====== SEARCH & FILTER ====== */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .search-container input {
+        padding: 12px 15px;
+        width: 300px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+    .search-container input:focus {
+        outline: none;
+        border-color: #007BFF;
+        box-shadow: 0 0 5px rgba(0,123,255,0.4);
+    }
 
-        .search-container input {
-            padding: 10px;
-            width: 60%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    /* ====== MISSING PERSONS GRID ====== */
+    .missing-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto 40px;
+    }
 
-        /* Missing Persons List */
-        .missing-container {
-            display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            scroll-behavior: smooth;
-            padding: 10px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
+    .missing-item {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .missing-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .missing-item img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+    .missing-content {
+        padding: 15px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .missing-content p {
+        font-size: 14px;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+    .status {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        display: inline-block;
+        color: #fff;
+    }
+    .status.missing { background-color: #dc3545; }
+    .status.found { background-color: #28a745; }
+    .mark-found-btn {
+        background-color: #0052cc;
+        color: #fff;
+        border: none;
+        padding: 7px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: 0.2s;
+    }
+    .mark-found-btn:hover { background-color: #0056b3; }
 
-        .missing-item {
-            display: inline-block;
-            width: 250px;
-            margin-right: 15px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            background: white;
-            text-align: center;
-            padding-bottom: 10px;
-        }
+    /* ====== FORM ====== */
+    .form-container {
+        background: #fff;
+        max-width: 500px;
+        margin: 0 auto 40px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+    .form-container h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #0052cc;
+    }
+    .form-container input,
+    .form-container select,
+    .form-container button {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        font-size: 15px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+    }
+    .form-container button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .form-container button:hover {
+        background-color: #218838;
+    }
 
-        .missing-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .missing-item p {
-            padding: 10px;
-            font-size: 14px;
-            margin: 0;
-        }
-
-        /* Form Styling */
-        .form-container {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .form-container input,
-        .form-container button {
-            width: 80%;
-            padding: 10px;
-            margin: 5px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-container button {
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #575757;
-        }
-    </style>
+    /* ====== RESPONSIVE ====== */
+    @media(max-width:600px){
+        .search-container input { width: 90%; }
+    }
+</style>
 </head>
 <body>
 
-    <h2>Search for Missing Persons</h2>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search by name or location..." onkeyup="searchMissing()">
-    </div>
+<header>
+     Missing Persons
+    <p>Locate and report missing people during disasters. Mark someone as found or search by name/location.</p>
+</header>
 
-    <div class="missing-container" id="missing-list">
-        <!-- Pre-listed Missing Persons -->
-        <div class="missing-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyDwZ_83LeTxSrvzluSEeZLHrTjT2TfDalBA&s" alt="Missing Person 1">
-            <p><strong>Yuki Tanaka</strong><br>Age: 6, Last Seen: Sendai</p>
-        </div>
+<!-- SEARCH -->
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by name, location or age..." oninput="searchMissing()">
+</div>
 
-        <div class="missing-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4qkmuz1xIG1GVAYXRIY45Hpmai2h-wsN3uqWqRwK0hyPKriDwTdXBe2lpLw7kPhO94_4&usqp=CAU" alt="Missing Person 2">
-            <p><strong>Aiko Nakamura</strong><br>Age: 34, Last Seen: Ishinomaki</p>
-        </div>
+<!-- MISSING PERSONS GRID -->
+<div class="missing-container" id="missing-list">
+    <!-- Example card -->
+</div>
 
-        <div class="missing-item">
-            <img src="https://thumbs.dreamstime.com/b/creative-b-w-899300.jpg" alt="Missing Person 3">
-            <p><strong>Hiroshi Saito</strong><br>Age: 35, Last Seen: Fukushima</p>
-        </div>
+<!-- REPORT FORM -->
+<div class="form-container">
+    <h3>Report a Missing Person</h3>
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="number" id="age" placeholder="Age">
+    <input type="text" id="location" placeholder="Last Seen Location">
+    <select id="status">
+        <option value="missing">Missing</option>
+        <option value="found">Found</option>
+    </select>
+    <input type="file" id="imageUpload">
+    <button onclick="addMissingPerson()">Submit Report</button>
+</div>
 
-        <div class="missing-item">
-            <img src="https://live-production.wcms.abc-cdn.net.au/d94c2840169da1703b7c92df022c0f75?impolicy=wcms_crop_resize&cropH=1491&cropW=2237&xPos=411&yPos=214&width=862&height=575" alt="Missing Person 4">
-            <p><strong>Mai Suzuki</strong><br>Age: 9, Last Seen: Rikuzentakata</p>
-        </div>
-
-        <div class="missing-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi4oL5AAeKEZAQEBCzG_ZG0z0VqU1zZrVQVg&s" alt="Missing Person 5">
-            <p><strong>Kenji Yumai</strong><br>Age: 50, Last Seen: Minamisanriku</p>
-        </div>
-        <div class="missing-item">
-            <img src="https://media.gettyimages.com/id/1079791920/photo/copy-of-missing-japanese-tourist-a-young-woman-tourist-in-australia-vanished-amid-fears.jpg?s=612x612&w=gi&k=20&c=XAAWISmnRCciPHBoByNCFIBmbbK-24DsvGGznOxo4vA=" alt="Missing Person 6">
-            <p><strong>Naoko Ishida</strong><br>Age: 29, Last Seen: Miyagi</p>
-        </div>
-    </div>
-
-    <h2>Report a Missing Person</h2>
-    <div class="form-container">
-        <input type="text" id="name" placeholder="Full Name">
-        <input type="number" id="age" placeholder="Age">
-        <input type="text" id="location" placeholder="Last Seen Location">
-        <input type="file" id="imageUpload">
-        <button onclick="addMissingPerson()">Submit</button>
-    </div>
-
-    <script>
-        function searchMissing() {
-            let input = document.getElementById("searchInput").value.toLowerCase();
-            let items = document.getElementsByClassName("missing-item");
-
-            for (let i = 0; i < items.length; i++) {
-                let name = items[i].getElementsByTagName("p")[0].innerText.toLowerCase();
-                if (name.includes(input)) {
-                    items[i].style.display = "inline-block";
-                } else {
-                    items[i].style.display = "none";
-                }
-            }
-        }
-
-        function addMissingPerson() {
-            let name = document.getElementById("name").value;
-            let age = document.getElementById("age").value;
-            let location = document.getElementById("location").value;
-            let imageUpload = document.getElementById("imageUpload").files[0];
-
-            if (!name || !age || !location || !imageUpload) {
-                alert("Please fill out all fields and upload an image!");
-                return;
-            }
-
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                let container = document.getElementById("missing-list");
-                let newPerson = document.createElement("div");
-                newPerson.classList.add("missing-item");
-
-                newPerson.innerHTML = `
-                    <img src="${e.target.result}" alt="Missing Person">
-                    <p><strong>${name}</strong><br>Age: ${age}, Last Seen: ${location}</p>
-                `;
-
-                container.appendChild(newPerson);
-            };
-            reader.readAsDataURL(imageUpload);
-
-            // Clear form fields
-            document.getElementById("name").value = "";
-            document.getElementById("age").value = "";
-            document.getElementById("location").value = "";
-            document.getElementById("imageUpload").value = "";
-        }
-    </script>
+<script>
+let missingPeople = [
+    {
+        name: "Rahul Sharma",
+        age: 28,
+        location: "Uttarakhand, India",
+        img: "https://randomuser.me/api/portraits/men/32.jpg",
+        status: "missing",
+        lastSeen: "Rishikesh Riverbank"
+    },
+    {
+        name: "Aisha Khan",
+        age: 35,
+        location: "Kerala, India",
+        img: "https://randomuser.me/api/portraits/women/45.jpg",
+        status: "missing",
+        lastSeen: "Kochi Beach"
+    },
    
+    {
+        name: "Meera Patel",
+        age: 22,
+        location: "Gujarat, India",
+        img: "https://randomuser.me/api/portraits/women/68.jpg",
+        status: "missing",
+        lastSeen: "Ahmedabad City Center"
+    },
+    {
+        name: "Rohit Verma",
+        age: 40,
+        location: "Maharashtra, India",
+        img: "https://randomuser.me/api/portraits/men/77.jpg",
+        status: "missing",
+        lastSeen: "Pune Bus Station"
+    },
+    {
+        name: "Sneha Reddy",
+        age: 30,
+        location: "Telangana, India",
+        img: "https://randomuser.me/api/portraits/women/12.jpg",
+        status: "missing",
+        lastSeen: "Hyderabad Market"
+    },
+    {
+        name: "Arjun Kumar",
+        age: 17,
+        location: "Bihar, India",
+        img: "https://randomuser.me/api/portraits/men/23.jpg",
+        status: "missing",
+        lastSeen: "Patna Railway Station"
+    },
+    
+    {
+        name: "Anil Mehta",
+        age: 50,
+        location: "Delhi, India",
+        img: "https://randomuser.me/api/portraits/men/55.jpg",
+        status: "missing",
+        lastSeen: "Connaught Place"
+    },
+    {
+        name: "Divya Sharma",
+        age: 27,
+        location: "Karnataka, India",
+        img: "https://randomuser.me/api/portraits/women/22.jpg",
+        status: "missing",
+        lastSeen: "Bangalore City Metro"
+    }
+];
+
+
+// ====== RENDER GRID ======
+function renderMissing() {
+    const container = document.getElementById("missing-list");
+    container.innerHTML = "";
+    missingPeople.forEach((person, index) => {
+        const card = document.createElement("div");
+        card.classList.add("missing-item");
+        card.innerHTML = `
+            <img src="${person.img}" alt="${person.name}">
+            <div class="missing-content">
+                <p><strong>${person.name}</strong><br>Age: ${person.age}, Location: ${person.location}</p>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span class="status ${person.status}">${person.status.toUpperCase()}</span>
+                    ${person.status === "missing" ? `<button class="mark-found-btn" onclick="markFound(${index})">Mark as Found</button>` : ""}
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// ====== SEARCH ======
+function searchMissing() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const container = document.getElementById("missing-list");
+    container.innerHTML = "";
+    missingPeople.forEach((person, index) => {
+        if(person.name.toLowerCase().includes(query) || person.location.toLowerCase().includes(query) || person.age.toString() === query){
+            const card = document.createElement("div");
+            card.classList.add("missing-item");
+            card.innerHTML = `
+                <img src="${person.img}" alt="${person.name}">
+                <div class="missing-content">
+                    <p><strong>${person.name}</strong><br>Age: ${person.age}, Location: ${person.location}</p>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="status ${person.status}">${person.status.toUpperCase()}</span>
+                        ${person.status === "missing" ? `<button class="mark-found-btn" onclick="markFound(${index})">Mark as Found</button>` : ""}
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        }
+    });
+}
+
+// ====== MARK AS FOUND ======
+function markFound(index){
+    missingPeople[index].status = "found";
+    renderMissing();
+}
+
+// ====== ADD NEW MISSING PERSON ======
+function addMissingPerson() {
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+    const location = document.getElementById("location").value;
+    const status = document.getElementById("status").value;
+    const imageUpload = document.getElementById("imageUpload").files[0];
+
+    if(!name || !age || !location || !imageUpload){
+        alert("Please fill all fields and upload an image!");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e){
+        missingPeople.push({
+            name: name,
+            age: age,
+            location: location,
+            img: e.target.result,
+            status: status
+        });
+        renderMissing();
+    }
+    reader.readAsDataURL(imageUpload);
+
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("imageUpload").value = "";
+}
+
+// Initial render
+renderMissing();
+</script>
 
 </body>
 </html>
