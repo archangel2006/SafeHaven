@@ -1,78 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe Haven</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safe Haven Hub</title>
+<link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-            background-color: #f4f4f4;
-        }
-        
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-        }
+<style>
+    /* ====== RESET ====== */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
 
-        .navbar a:hover {
-            background-color: #575757;
-        }
+    body {
+        background: #f4f6f9;
+        color: #333;
+        scroll-behavior: smooth;
+    }
+    
+    header.dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* left, center, right */
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      color: #fff;
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 80px 20px 20px;
-        }
+    .header-left img {
+      height: 60px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
 
-        iframe {
-            width: 80%;
-            height: 400px;
-            border: none;
-        }
-    </style>
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      width: 60px;
+      /* same as logo width, keeps center perfectly centered */
+    }
+
+    .emergency-banner {
+      background: linear-gradient(135deg, #b71c1c, #e53935);
+      color: #fff;
+      padding: 1rem;
+      margin: 1rem auto;
+      /* auto to center */
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      animation: pulse 2s infinite;
+      max-width: 1100px;
+      /* controls the banner width */
+    }
+
+    .banner-content {
+      display: flex;
+      align-items: center;
+
+      flex-wrap: wrap;
+    }
+
+    .banner-content i {
+      font-size: 2rem;
+    }
+
+    .banner-text h3 {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .banner-text p {
+      font-size: 0.95rem;
+      margin-top: 0.2rem;
+    }
+
+    .banner-text span {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+
+   
+
+    /* ====== CONTAINER ====== */
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #007BFF;
+        margin-bottom: 15px;
+        font-size: 28px;
+        position: relative;
+    }
+
+    h2::after {
+        content: '';
+        width: 60px;
+        height: 3px;
+        background: #007BFF;
+        display: block;
+        margin: 10px auto 0;
+        border-radius: 2px;
+    }
+
+    /* ====== SECTION WRAPPERS ====== */
+    .section {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .section:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    iframe {
+        width: 100%;
+        height: 500px;
+        border: none;
+        border-radius: 10px;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media(max-width: 768px){
+        h2 { font-size: 24px; }
+        iframe { height: 400px; }
+        .navbar { flex-direction: column; gap: 10px; }
+    }
+
+    @media(max-width: 480px){
+        iframe { height: 300px; }
+        h2 { font-size: 20px; }
+    }
+
+</style>
 </head>
 <body>
-
-    <div class="navbar">
-        <a href="#discussion">Discussion Board</a>
-        <a href="#live-updates">Live Updates</a>
-        <a href="#missing">Missing Persons</a>
+    <header class="dashboard-header">
+    <div class="header-left">
+      <a href="index.html">
+        <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
+      </a>
     </div>
 
+    <div class="header-center">
+      
+      <span>Community</span>
+    </div>
+
+    <div class="header-right">
+
+    </div>
+  </header>
+
+    <!-- MAIN CONTAINER -->
     <div class="container">
-        <h2 id="discussion">Community Discussion Board</h2>
-        <iframe src="chatroom.html"></iframe>
 
-        <h2 id="live-updates">Live Updates</h2>
-        <iframe src="LiveUpdates.html"></iframe>
+        <!-- DISCUSSION BOARD -->
+        <div class="section" id="discussion">
+            <h2>Community Discussion Board</h2>
+            <iframe src="chatroom.html"></iframe>
+        </div>
 
-        <h2 id="missing">Missing Persons</h2>
-        <iframe src="MissingPerson.html"></iframe>
+        <!-- LIVE UPDATES -->
+        <div class="section" id="live-updates">
+            <h2>Verified Live Updates</h2>
+            <iframe src="LiveUpdates.html"></iframe>
+        </div>
+
+        <!-- MISSING PERSONS -->
+        <div class="section" id="missing">
+            <h2>Missing Persons Reports</h2>
+            <iframe src="MissingPerson.html"></iframe>
+        </div>
+
     </div>
-    <script src="../8.AIAssistant/chatbot.js"></script>
-
 
 </body>
 </html>
