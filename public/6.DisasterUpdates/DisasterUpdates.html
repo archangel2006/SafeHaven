@@ -1,160 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Know What's Happening Around?</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+    <link
+      rel="icon"
+      href="../../assets/1.HomePage/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/1.HomePage/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../assets/1.HomePage/favicon-16x16.png"
+    />
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .dashboard {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: rgb(57, 98, 113);
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .home-icon {
-            font-size: 24px;
-            text-decoration: none;
-            color: black;
-            margin-right: 15px;
-        }
-        .home-icon:hover {
-            color: #007BFF;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .weather {
-            color: #fafafa;
-        }
-        .time {
-            color: #fafafa;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .box {
-            border: 2px solid #000;
-            background: #fff;
-            padding: 15px;
-            text-align: center;
-            border-radius: 10px;
-            transition: transform 0.3s ease-in-out;
-        }
-        .box:hover {
-            transform: scale(1.05);
-            background-color: #e0e0e0;
-        }
-        .image {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .image img {
-            max-height: 100%;
-        }
-        a {
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-        }
-        a:hover {
-            color: #007BFF;
-        }
-    </style>
-</head>
-<body>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      .dashboard {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: rgb(57, 98, 113);
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .home-icon {
+        font-size: 24px;
+        text-decoration: none;
+        color: black;
+        margin-right: 15px;
+      }
+      .home-icon:hover {
+        color: #007bff;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .weather {
+        color: #fafafa;
+      }
+      .time {
+        color: #fafafa;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .box {
+        border: 2px solid #000;
+        background: #fff;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+      }
+      .box:hover {
+        transform: scale(1.05);
+        background-color: #e0e0e0;
+      }
+      .image {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .image img {
+        max-height: 100%;
+      }
+      a {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+      }
+      a:hover {
+        color: #007bff;
+      }
 
+    </style>
+  </head>
+  <body>
     <!-- Dashboard -->
     <div class="dashboard">
-        <a href="HomePage.html" class="home-icon">🏠</a> 
-        <p class="weather">Fetching weather...</p>
-        <p class="time">Fetching Japan time...</p>
+      <a href="HomePage.html" class="home-icon">🏠</a>
+      <p class="weather">Fetching weather...</p>
+      <p class="time">Fetching Japan time...</p>
     </div>
 
     <h1>Know What's Happening Around?</h1>
 
     <div class="container">
-        <div class="box">
-            <div class="image"><img src="https://www.aljazeera.com/wp-content/uploads/2025/02/12799153-1738821025.jpg?resize=1170%2C780&quality=80" alt="Snow"></div>
-            <p><strong><a href="https://www.aljazeera.com/gallery/2025/2/6/japans-hokkaido-faces-record-snowfall-disrupting-travel-and-deliveries" target="_blank">Recent Snow</a></strong></p>
-            <p>Heavy snowfall in Hokkaido. Cause of snowstorm?</p>
+      <div class="box">
+        <div class="image">
+          <img
+            src="https://www.aljazeera.com/wp-content/uploads/2025/02/12799153-1738821025.jpg?resize=1170%2C780&quality=80"
+            alt="Snow"
+          />
         </div>
-        <div class="box">
-            <div class="image"><img src="https://dims.apnews.com/dims4/default/c97b1b7/2147483647/strip/true/crop/3000x2108+0+0/resize/1440x1012!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F56%2F8c%2F7bcc8791feb5685299adcb12123e%2Fcc0909f2c6d24fee93791b801b3441ce" alt="Waves"></div>
-            <p><strong><a href="https://apnews.com/article/japan-earthquake-tsunami-warning-c9f7ee7959770dbc4ea12debfe68fd4c" target="_blank">Water Level Rising</a></strong></p>
-            <p>Near the coast of Japan.</p>
+        <p>
+          <strong
+            ><a
+              href="https://www.aljazeera.com/gallery/2025/2/6/japans-hokkaido-faces-record-snowfall-disrupting-travel-and-deliveries"
+              target="_blank"
+              >Recent Snow</a
+            ></strong
+          >
+        </p>
+        <p>Heavy snowfall in Hokkaido. Cause of snowstorm?</p>
+      </div>
+      <div class="box">
+        <div class="image">
+          <img
+            src="https://dims.apnews.com/dims4/default/c97b1b7/2147483647/strip/true/crop/3000x2108+0+0/resize/1440x1012!/format/webp/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F56%2F8c%2F7bcc8791feb5685299adcb12123e%2Fcc0909f2c6d24fee93791b801b3441ce"
+            alt="Waves"
+          />
         </div>
-        <div class="box">
-            <div class="image"><img src="https://vid.alarabiya.net/images/2024/01/16/d1de48d4-2917-41dd-a7ac-34cb18a52fd3/d1de48d4-2917-41dd-a7ac-34cb18a52fd3_16x9_1200x676.JPG?width=801&format=jpg" alt="Ship"></div>
-            <p><strong><a href="https://english.alarabiya.net/News/middle-east/2024/01/16/Japan-s-biggest-shipping-company-suspends-vessel-transits-in-Red-Sea-" target="_blank">Ship Routes Closed</a></strong></p>
-            <p>Closed due to uneven ocean water patterns.</p>
+        <p>
+          <strong
+            ><a
+              href="https://apnews.com/article/japan-earthquake-tsunami-warning-c9f7ee7959770dbc4ea12debfe68fd4c"
+              target="_blank"
+              >Water Level Rising</a
+            ></strong
+          >
+        </p>
+        <p>Near the coast of Japan.</p>
+      </div>
+      <div class="box">
+        <div class="image">
+          <img
+            src="https://vid.alarabiya.net/images/2024/01/16/d1de48d4-2917-41dd-a7ac-34cb18a52fd3/d1de48d4-2917-41dd-a7ac-34cb18a52fd3_16x9_1200x676.JPG?width=801&format=jpg"
+            alt="Ship"
+          />
         </div>
-        <div class="box">
-            <div class="image"><img src="https://cdn4.premiumread.com/?url=https://www.japantimes.co.jp/japantimes/uploads/images/2024/11/28/436926.jpg?v=3.1&w=1000&q=100&f=jpg&t=1.52" alt="Fire"></div>
-            <p><strong><a href="https://www.japantimes.co.jp/news/2024/11/28/japan/politics/kuniko-inoguchi-fire/" target="_blank">Building Burst into Flames</a></strong></p>
-            <p>Area in Tokyo.</p>
+        <p>
+          <strong
+            ><a
+              href="https://english.alarabiya.net/News/middle-east/2024/01/16/Japan-s-biggest-shipping-company-suspends-vessel-transits-in-Red-Sea-"
+              target="_blank"
+              >Ship Routes Closed</a
+            ></strong
+          >
+        </p>
+        <p>Closed due to uneven ocean water patterns.</p>
+      </div>
+      <div class="box">
+        <div class="image">
+          <img
+            src="https://cdn4.premiumread.com/?url=https://www.japantimes.co.jp/japantimes/uploads/images/2024/11/28/436926.jpg?v=3.1&w=1000&q=100&f=jpg&t=1.52"
+            alt="Fire"
+          />
         </div>
-        <div class="box">
-            <div class="image"><img src="https://gdb.voanews.com/e697f033-b835-4550-b7af-b4d022fed44e_cx4_cy0_cw95_w1023_r1_s.jpg" alt="Earthquake"></div>
-            <p><strong><a href="https://www.voanews.com/a/earthquake-rattles-southwestern-japan-followed-by-tsunami-warning/7934799.html" target="_blank">Earthquake Alert</a></strong></p>
-            <p>Magnitude 6.2 tremor near Osaka.</p>
+        <p>
+          <strong
+            ><a
+              href="https://www.japantimes.co.jp/news/2024/11/28/japan/politics/kuniko-inoguchi-fire/"
+              target="_blank"
+              >Building Burst into Flames</a
+            ></strong
+          >
+        </p>
+        <p>Area in Tokyo.</p>
+      </div>
+      <div class="box">
+        <div class="image">
+          <img
+            src="https://gdb.voanews.com/e697f033-b835-4550-b7af-b4d022fed44e_cx4_cy0_cw95_w1023_r1_s.jpg"
+            alt="Earthquake"
+          />
         </div>
-        <div class="box">
-            <div class="image"><img src="https://www.ntv.co.jp/englishnews/images_cms/qzubiy4esp59f8o4ay2vowoz31mwjs.jpg" alt="Typhoon"></div>
-            <p><strong><a href="https://www.ntv.co.jp/englishnews/articles/20214pjzgtycxjly79t1.html" target="_blank">Typhoon Approaching</a></strong></p>
-            <p>Expected to hit Okinawa by weekend.</p>
+        <p>
+          <strong
+            ><a
+              href="https://www.voanews.com/a/earthquake-rattles-southwestern-japan-followed-by-tsunami-warning/7934799.html"
+              target="_blank"
+              >Earthquake Alert</a
+            ></strong
+          >
+        </p>
+        <p>Magnitude 6.2 tremor near Osaka.</p>
+      </div>
+      <div class="box">
+        <div class="image">
+          <img
+            src="https://www.ntv.co.jp/englishnews/images_cms/qzubiy4esp59f8o4ay2vowoz31mwjs.jpg"
+            alt="Typhoon"
+          />
         </div>
+        <p>
+          <strong
+            ><a
+              href="https://www.ntv.co.jp/englishnews/articles/20214pjzgtycxjly79t1.html"
+              target="_blank"
+              >Typhoon Approaching</a
+            ></strong
+          >
+        </p>
+        <p>Expected to hit Okinawa by weekend.</p>
+      </div>
     </div>
-
+    <br>
+    <br>
     <script>
-        async function fetchWeather() {
-            const apiKey = "dfe237a4e8c943519ac100729252202"; 
-            const city = "Tokyo"; 
-            const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+      async function fetchWeather() {
+        const apiKey = "dfe237a4e8c943519ac100729252202";
+        const city = "Tokyo";
+        const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                const temperature = data.current.temp_c;
-                const weatherDescription = data.current.condition.text;
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          const temperature = data.current.temp_c;
+          const weatherDescription = data.current.condition.text;
 
-                document.querySelector(".weather").innerText = `🌤 ${weatherDescription}, ${temperature}°C in ${city}`;
-            } catch (error) {
-                document.querySelector(".weather").innerText = "Failed to load weather data.";
-            }
+          document.querySelector(".weather").innerText =
+            `🌤 ${weatherDescription}, ${temperature}°C in ${city}`;
+        } catch (error) {
+          document.querySelector(".weather").innerText =
+            "Failed to load weather data.";
         }
+      }
 
-        function updateJapanTime() {
-            const now = new Date();
-            const options = { timeZone: "Asia/Tokyo", hour12: true, weekday: "short", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" };
-            document.querySelector(".time").innerText = `🕒 ${new Intl.DateTimeFormat("en-US", options).format(now)}`;
-        }
+      function updateJapanTime() {
+        const now = new Date();
+        const options = {
+          timeZone: "Asia/Tokyo",
+          hour12: true,
+          weekday: "short",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        document.querySelector(".time").innerText =
+          `🕒 ${new Intl.DateTimeFormat("en-US", options).format(now)}`;
+      }
 
-        fetchWeather();
-        updateJapanTime();
-        setInterval(updateJapanTime, 1000); // Update time every second
+      fetchWeather();
+      updateJapanTime();
+      setInterval(updateJapanTime, 1000); // Update time every second
     </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
-</body>
+  </body>
 </html>

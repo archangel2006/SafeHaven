@@ -1,922 +1,1112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Safe Haven</title>
-    <link rel="icon" href="../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/1.HomePage/favicon-16x16.png">
+    <link
+      rel="icon"
+      href="../assets/1.HomePage/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/1.HomePage/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/1.HomePage/favicon-16x16.png"
+    />
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+    />
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-        body {
-            text-align: center;
-            background-color: #f8f9fa;
-        }
+      body {
+        text-align: center;
+        background-color: #f8f9fa;
+      }
 
-        .top-panel {
-            display: flex;
-            align-items: center;
-            padding: 24px 30px;
-            background: linear-gradient(135deg, #52caec 0%, #3ba8cc 100%);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+      .top-panel {
+        display: flex;
+        align-items: center;
+        padding: 24px 30px;
+        background: linear-gradient(135deg, #52caec 0%, #3ba8cc 100%);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
 
-        .top-panel img {
-            height: 60px;
-            margin-right: 16px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        }
+      .top-panel img {
+        height: 60px;
+        margin-right: 16px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
 
-        .top-panel h1 {
-            color: white;
-            font-size: 28px;
-            font-weight: 600;
-        }
+      .top-panel h1 {
+        color: white;
+        font-size: 28px;
+        font-weight: 600;
+      }
 
-        .main-tagline {
-            margin: 24px 0 16px;
-            font-size: 18px;
-            color: #495057;
-            font-weight: 500;
-        }
+      .main-tagline {
+        margin: 24px 0 16px;
+        font-size: 18px;
+        color: #495057;
+        font-weight: 500;
+      }
 
-        .sos-button {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            padding: 16px 40px;
-            border: none;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 32px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+      .sos-button {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        color: white;
+        padding: 16px 40px;
+        border: none;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 32px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
 
-        .sos-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
-        }
+      .sos-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+      }
 
-        .sos-button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
-        }
+      .sos-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+      }
 
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 32px;
+        margin: 20px;
+        padding: 0 20px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .iframe-container {
+        width: 320px;
+        min-width: 320px;
+        height: 320px;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+      }
+
+      /* ====== EMERGENCY ACTION CARDS - ENHANCED ====== */
+      .cards-section {
+        flex: 1;
+        max-width: 800px;
+      }
+
+      .section-header {
+        text-align: left;
+        margin-bottom: 24px;
+        padding: 0 8px;
+      }
+
+      .section-title {
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #6c757d;
+        margin-bottom: 16px;
+        position: relative;
+        padding-left: 16px;
+      }
+
+      .section-title::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(180deg, #52caec, #3ba8cc);
+        border-radius: 2px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .grid-item {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid transparent;
+        position: relative;
+        height: 190px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .grid-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        transition: height 0.3s ease;
+      }
+
+      /* Color coding for different card types */
+      .grid-item:nth-child(1)::before {
+        background: linear-gradient(90deg, #dc3545, #e74c3c);
+      }
+
+      .grid-item:nth-child(2)::before {
+        background: linear-gradient(90deg, #fd7e14, #ff9933);
+      }
+
+      .grid-item:nth-child(3)::before {
+        background: linear-gradient(90deg, #0dcaf0, #3ba8cc);
+      }
+
+      .grid-item:nth-child(4)::before {
+        background: linear-gradient(90deg, #ffc107, #ffb300);
+      }
+
+      .grid-item:nth-child(5)::before {
+        background: linear-gradient(90deg, #20c997, #17a589);
+      }
+
+      .grid-item:nth-child(6)::before {
+        background: linear-gradient(90deg, #6f42c1, #5a32a3);
+      }
+
+      .grid-item:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+        border-color: rgba(82, 202, 236, 0.3);
+      }
+
+      .grid-item:hover::before {
+        height: 8px;
+      }
+
+      .grid-item:focus-within {
+        outline: 3px solid #52caec;
+        outline-offset: 3px;
+      }
+
+      .grid-item a {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+        padding: 24px;
+      }
+
+      .card-icon-wrapper {
+        font-size: 48px;
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 16px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .grid-item:hover .card-icon-wrapper {
+        transform: scale(1.15) rotate(8deg);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .card-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .card-description {
+        font-size: 13px;
+        color: #6c757d;
+        line-height: 1.5;
+      }
+
+      /* Specific icon background colors */
+      .grid-item:nth-child(1) .card-icon-wrapper {
+        background: linear-gradient(135deg, #ffe5e9, #ffccd5);
+      }
+
+      .grid-item:nth-child(2) .card-icon-wrapper {
+        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      }
+
+      .grid-item:nth-child(3) .card-icon-wrapper {
+        background: linear-gradient(135deg, #e0f7ff, #b3ecff);
+      }
+
+      .grid-item:nth-child(4) .card-icon-wrapper {
+        background: linear-gradient(135deg, #fff8e1, #ffecb3);
+      }
+
+      .grid-item:nth-child(5) .card-icon-wrapper {
+        background: linear-gradient(135deg, #d4f4e8, #b2e8d6);
+      }
+
+      .grid-item:nth-child(6) .card-icon-wrapper {
+        background: linear-gradient(135deg, #ede7f6, #d1c4e9);
+      }
+
+      /* ====== END CARDS REDESIGN ====== */
+
+      .sidebar {
+        width: 340px;
+        min-width: 340px;
+      }
+
+      /* EMERGENCY ASSISTANCE CARD - UPDATED */
+      .combined-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+        margin-bottom: 22px;
+        text-align: left;
+      }
+
+      .ec-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 12px;
+      }
+
+      /* Tabs - UPDATED */
+      .ec-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .tab {
+        padding: 6px 14px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        background: #f9fafb;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        user-select: none;
+      }
+
+      .tab:hover {
+        background: #e5e7eb;
+      }
+
+      .tab.active {
+        background: #2776de;
+        color: #ffffff;
+        border-color: #2776de;
+      }
+
+      .icon-tab {
+        font-size: 14px;
+        margin-left: auto;
+      }
+
+      /* Emergency List - UPDATED */
+      .ec-list {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .ec-list.active {
+        display: flex;
+      }
+
+      .ec-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f9fafb;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+
+      .copy-btn {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .copy-btn:hover {
+        background: #f3f4f6;
+        border-color: #2776de;
+      }
+
+      .copy-btn:active {
+        transform: scale(0.95);
+      }
+
+      .copy-btn.copied {
+        background: #10b981;
+        color: white;
+        border-color: #10b981;
+      }
+
+      /* SafeBot */
+      .safebot {
+        margin-top: 14px;
+      }
+
+      .safebot-title {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #374151;
+      }
+
+      .safebot-box {
+        background: #f1f5f9;
+        padding: 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .safebot-box p {
+        margin-top: 4px;
+        color: #6b7280;
+      }
+
+      .get-involved {
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 22px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+        text-align: center;
+      }
+
+      .gi-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 8px;
+      }
+
+      .gi-desc {
+        font-size: 15px;
+        color: #6b7280;
+        margin-bottom: 24px;
+      }
+
+      .gi-buttons {
+        display: flex;
+        gap: 14px;
+        flex-direction: column;
+      }
+
+      .gi-link {
+        flex: 1;
+        display: block;
+        text-decoration: none;
+      }
+
+      .volunteer-btn,
+      .donate-btn {
+        width: 100%;
+        height: 44px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .volunteer-btn {
+        background: #ffffff;
+        color: #2776de;
+        border: 1.8px solid #e5e7eb;
+      }
+
+      .donate-btn {
+        background: #2776de;
+        color: #ffffff;
+        border: none;
+      }
+
+      .map-section {
+        padding: 4rem 1.5rem;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .map-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .map-header h2 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #212529;
+      }
+
+      .map-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      .map-actions button,
+      .map-actions a {
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .home-btn {
+        background: #52caec;
+        color: white;
+        box-shadow: 0 2px 6px rgba(82, 202, 236, 0.3);
+      }
+
+      .home-btn:hover {
+        background: #3ba8cc;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(82, 202, 236, 0.4);
+      }
+
+      .view-map {
+        background: white;
+        color: #52caec;
+        border: 2px solid #52caec;
+      }
+
+      .view-map:hover {
+        background: #52caec;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .map-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .map-wrapper {
+        height: 380px;
+        margin: 16px;
+        border-radius: 12px;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+      }
+
+      .map-wrapper.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+
+      .map-footer {
+        font-size: 13px;
+        color: #6c757d;
+        text-align: center;
+        padding: 16px;
+        background: #f8f9fa;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 32px;
-            margin: 20px;
-            padding: 0 20px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
+          flex-direction: column;
+          align-items: center;
         }
 
-        .iframe-container {
-            width: 320px;
-            min-width: 320px;
-            height: 320px;
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
+        .iframe-container,
+        .sidebar {
+          width: 100%;
+          max-width: 600px;
         }
 
-        /* ====== EMERGENCY ACTION CARDS - ENHANCED ====== */
         .cards-section {
-            flex: 1;
-            max-width: 800px;
+          width: 100%;
         }
+      }
 
-        .section-header {
-            text-align: left;
-            margin-bottom: 24px;
-            padding: 0 8px;
-        }
-
-        .section-title {
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #6c757d;
-            margin-bottom: 16px;
-            position: relative;
-            padding-left: 16px;
-        }
-
-        .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 20px;
-            background: linear-gradient(180deg, #52caec, #3ba8cc);
-            border-radius: 2px;
-        }
-
+      @media (max-width: 768px) {
         .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
         }
 
         .grid-item {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            position: relative;
-            height: 190px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .grid-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            transition: height 0.3s ease;
-        }
-
-        /* Color coding for different card types */
-        .grid-item:nth-child(1)::before {
-            background: linear-gradient(90deg, #dc3545, #e74c3c);
-        }
-
-        .grid-item:nth-child(2)::before {
-            background: linear-gradient(90deg, #fd7e14, #ff9933);
-        }
-
-        .grid-item:nth-child(3)::before {
-            background: linear-gradient(90deg, #0dcaf0, #3ba8cc);
-        }
-
-        .grid-item:nth-child(4)::before {
-            background: linear-gradient(90deg, #ffc107, #ffb300);
-        }
-
-        .grid-item:nth-child(5)::before {
-            background: linear-gradient(90deg, #20c997, #17a589);
-        }
-
-        .grid-item:nth-child(6)::before {
-            background: linear-gradient(90deg, #6f42c1, #5a32a3);
-        }
-
-        .grid-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
-            border-color: rgba(82, 202, 236, 0.3);
-        }
-
-        .grid-item:hover::before {
-            height: 8px;
-        }
-
-        .grid-item:focus-within {
-            outline: 3px solid #52caec;
-            outline-offset: 3px;
-        }
-
-        .grid-item a {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            text-decoration: none;
-            color: inherit;
-            padding: 24px;
-        }
-
-        .card-icon-wrapper {
-            font-size: 48px;
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 16px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .grid-item:hover .card-icon-wrapper {
-            transform: scale(1.15) rotate(8deg);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+          height: 160px;
         }
 
         .card-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: #212529;
-            margin-bottom: 8px;
-            line-height: 1.3;
+          font-size: 14px;
         }
 
         .card-description {
-            font-size: 13px;
-            color: #6c757d;
-            line-height: 1.5;
-        }
-
-        /* Specific icon background colors */
-        .grid-item:nth-child(1) .card-icon-wrapper {
-            background: linear-gradient(135deg, #ffe5e9, #ffccd5);
-        }
-
-        .grid-item:nth-child(2) .card-icon-wrapper {
-            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-        }
-
-        .grid-item:nth-child(3) .card-icon-wrapper {
-            background: linear-gradient(135deg, #e0f7ff, #b3ecff);
-        }
-
-        .grid-item:nth-child(4) .card-icon-wrapper {
-            background: linear-gradient(135deg, #fff8e1, #ffecb3);
-        }
-
-        .grid-item:nth-child(5) .card-icon-wrapper {
-            background: linear-gradient(135deg, #d4f4e8, #b2e8d6);
-        }
-
-        .grid-item:nth-child(6) .card-icon-wrapper {
-            background: linear-gradient(135deg, #ede7f6, #d1c4e9);
-        }
-
-        /* ====== END CARDS REDESIGN ====== */
-
-        .sidebar {
-            width: 340px;
-            min-width: 340px;
-        }
-
-        /* EMERGENCY ASSISTANCE CARD - UPDATED */
-        .combined-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 18px;
-            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-            margin-bottom: 22px;
-            text-align: left;
-        }
-
-        .ec-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 12px;
-        }
-
-        /* Tabs - UPDATED */
-        .ec-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .tab {
-            padding: 6px 14px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            background: #f9fafb;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-
-        .tab:hover {
-            background: #e5e7eb;
-        }
-
-        .tab.active {
-            background: #2776de;
-            color: #ffffff;
-            border-color: #2776de;
-        }
-
-        .icon-tab {
-            font-size: 14px;
-            margin-left: auto;
-        }
-
-        /* Emergency List - UPDATED */
-        .ec-list {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .ec-list.active {
-            display: flex;
-        }
-
-        .ec-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f9fafb;
-            padding: 10px 12px;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-
-        .copy-btn {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .copy-btn:hover {
-            background: #f3f4f6;
-            border-color: #2776de;
-        }
-
-        .copy-btn:active {
-            transform: scale(0.95);
-        }
-
-        .copy-btn.copied {
-            background: #10b981;
-            color: white;
-            border-color: #10b981;
-        }
-
-        /* SafeBot */
-        .safebot {
-            margin-top: 14px;
-        }
-
-        .safebot-title {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #374151;
-        }
-
-        .safebot-box {
-            background: #f1f5f9;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .safebot-box p {
-            margin-top: 4px;
-            color: #6b7280;
-        }
-
-        .get-involved {
-            background-color: #ffffff;
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-            text-align: center;
-        }
-
-        .gi-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 8px;
-        }
-
-        .gi-desc {
-            font-size: 15px;
-            color: #6b7280;
-            margin-bottom: 24px;
-        }
-
-        .gi-buttons {
-            display: flex;
-            gap: 14px;
-            flex-direction: column;
-        }
-
-        .gi-link {
-            flex: 1;
-            display: block;
-            text-decoration: none;
-        }
-
-        .volunteer-btn,
-        .donate-btn {
-            width: 100%;
-            height: 44px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .volunteer-btn {
-            background: #ffffff;
-            color: #2776de;
-            border: 1.8px solid #e5e7eb;
-        }
-
-        .donate-btn {
-            background: #2776de;
-            color: #ffffff;
-            border: none;	
-        }
-
-        .map-section {
-            padding: 4rem 1.5rem;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .map-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .map-header h2 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #212529;
+          font-size: 12px;
         }
 
         .map-actions {
-            display: flex;
-            gap: 12px;
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .grid-container {
+          grid-template-columns: 1fr;
         }
 
-        .map-actions button,
-        .map-actions a {
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .container {
+          padding: 0 12px;
+          gap: 20px;
         }
 
-        .home-btn {
-            background: #52caec;
-            color: white;
-            box-shadow: 0 2px 6px rgba(82, 202, 236, 0.3);
+        .top-panel {
+          padding: 16px 20px;
         }
 
-        .home-btn:hover {
-            background: #3ba8cc;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(82, 202, 236, 0.4);
+        .top-panel h1 {
+          font-size: 22px;
         }
+      }
 
-        .view-map {
-            background: white;
-            color: #52caec;
-            border: 2px solid #52caec;
+      @media (min-width: 600px) {
+        .gi-buttons {
+          flex-direction: row;
         }
+      }
 
-        .view-map:hover {
-            background: #52caec;
-            color: white;
-            transform: translateY(-2px);
+      /* css for footer */
+      .footer {
+        background: #3b5fa3;
+        color: #ffffff;
+        font-family: inherit;
+      }
+      .footer-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        padding: 4px 45px;
+        /* max-width: 1200px; */
+        min-width: 300px;
+        margin: -25px;
+        gap: 40px;
+      }
+
+      .footer-brand {
+        flex: 1;
+      }
+
+      .brand-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 5px;
+      }
+
+      .brand-logo {
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        object-fit: cover;
+        background: white;
+        padding: 2px;
+      }
+
+      .brand-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+      }
+
+      .barnd-tagline {
+        margin-top: 8px;
+        opacity: 0.85;
+      }
+
+      .brand-mission {
+        opacity: 0.85;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 1);
+        text-align: center;
+        padding: 8px;
+        font-size: 0.85rem;
+        opacity: 0.85;
+      }
+
+      .link-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 30px 40px;
+        max-width: 1200px;
+        margin: 14px;
+        gap: 40px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .footer-container {
+          flex-direction: column;
         }
-
-        .map-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .map-wrapper {
-            height: 380px;
-            margin: 16px;
-            border-radius: 12px;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .map-wrapper.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #map {
-            height: 100%;
-            width: 100%;
-        }
-
-        .map-footer {
-            font-size: 13px;
-            color: #6c757d;
-            text-align: center;
-            padding: 16px;
-            background: #f8f9fa;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .iframe-container,
-            .sidebar {
-                width: 100%;
-                max-width: 600px;
-            }
-
-            .cards-section {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-
-            .grid-item {
-                height: 160px;
-            }
-
-            .card-title {
-                font-size: 14px;
-            }
-
-            .card-description {
-                font-size: 12px;
-            }
-
-            .map-actions {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 0 12px;
-                gap: 20px;
-            }
-
-            .top-panel {
-                padding: 16px 20px;
-            }
-
-            .top-panel h1 {
-                font-size: 22px;
-            }
-        }
-
-        @media (min-width: 600px) {
-            .gi-buttons {
-                flex-direction: row;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="top-panel">
-        <a href="index.html">
-            <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
-        </a>
-        <h1>Safe Haven</h1>
+      <a href="index.html">
+        <img
+          src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg"
+          alt="Safe Haven Logo"
+        />
+      </a>
+      <h1>Safe Haven</h1>
     </div>
 
     <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
     <button class="sos-button" onclick="sendSOS()">🚨 Emergency! SOS!</button>
 
     <div class="container">
-        <!-- Emergency Action Cards -->
-        <div class="cards-section">
-            <div class="section-header">
-                <h3 class="section-title">🚨 Critical Emergency Actions</h3>
-            </div>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <a href="../2.AlertsRisks/AlertsRisks.html">
-                        <div class="card-icon-wrapper">⚠️</div>
-                        <div class="card-content">
-                            <div class="card-title">Alerts & Risks</div>
-                            <div class="card-description">Hazard warnings & current risks</div>
-                        </div>
-                    </a>
+      <!-- Emergency Action Cards -->
+      <div class="cards-section">
+        <div class="section-header">
+          <h3 class="section-title">🚨 Critical Emergency Actions</h3>
+        </div>
+        <div class="grid-container">
+          <div class="grid-item">
+            <a href="../2.AlertsRisks/AlertsRisks.html">
+              <div class="card-icon-wrapper">⚠️</div>
+              <div class="card-content">
+                <div class="card-title">Alerts & Risks</div>
+                <div class="card-description">
+                  Hazard warnings & current risks
                 </div>
-                <div class="grid-item">
-                    <a href="../3.DisasterCoordination/DisasterCoordination.html">
-                        <div class="card-icon-wrapper">🚨</div>
-                        <div class="card-content">
-                            <div class="card-title">Disaster Coordination</div>
-                            <div class="card-description">Connect responders, resources and aid</div>
-                        </div>
-                    </a>
+              </div>
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="../3.DisasterCoordination/DisasterCoordination.html">
+              <div class="card-icon-wrapper">🚨</div>
+              <div class="card-content">
+                <div class="card-title">Disaster Coordination</div>
+                <div class="card-description">
+                  Connect responders, resources and aid
                 </div>
-                <div class="grid-item">
-                    <a href="../4.EvacuationSafety/EvacuationSafety.html">
-                        <div class="card-icon-wrapper">🛟</div>
-                        <div class="card-content">
-                            <div class="card-title">Evacuation Safety</div>
-                            <div class="card-description">Safe routes & tips</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="section-header">
-                <h3 class="section-title">📚 Support & Learning</h3>
-            </div>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <a href="../5.Community/Community.html">
-                        <div class="card-icon-wrapper">👥</div>
-                        <div class="card-content">
-                            <div class="card-title">Community</div>
-                            <div class="card-description">Help & connect locally</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid-item">
-                    <a href="../6.DisasterUpdates/DisasterUpdates.html">
-                        <div class="card-icon-wrapper">📰</div>
-                        <div class="card-content">
-                            <div class="card-title">Disaster Updates</div>
-                            <div class="card-description">Live updates in your area</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid-item">
-                    <a href="../7.GetEducated/GetEducated.html">
-                        <div class="card-icon-wrapper">📚</div>
-                        <div class="card-content">
-                            <div class="card-title">Get Educated</div>
-                            <div class="card-description">Learn to stay safe</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+              </div>
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="../4.EvacuationSafety/EvacuationSafety.html">
+              <div class="card-icon-wrapper">🛟</div>
+              <div class="card-content">
+                <div class="card-title">Evacuation Safety</div>
+                <div class="card-description">Safe routes & tips</div>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <div class="sidebar">
-            <div class="side-cards-container">
-                <!-- EMERGENCY ASSISTANCE CARD - UPDATED -->
-                <div class="combined-card emergency-card">
-                    <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
-
-                    <!-- TAB UI -->
-                    <div class="ec-tabs">
-                        <div class="tab active" data-tab="india">India</div>
-                        <div class="tab" data-tab="global">Global</div>
-                        <span class="icon-tab">🧡🕊️</span>
-                    </div>
-
-                    <!-- INDIA LIST -->
-                    <div class="ec-list active" id="india-list">
-                        <div class="ec-item">
-                            <span>🇮🇳 Police: <strong>100</strong></span>
-                            <button class="copy-btn" data-copy="100">Copy</button>
-                        </div>
-                        <div class="ec-item">
-                            <span>🚑 Ambulance: <strong>102</strong></span>
-                            <button class="copy-btn" data-copy="102">Copy</button>
-                        </div>
-                        <div class="ec-item">
-                            <span>🧯 Fire: <strong>101</strong></span>
-                            <button class="copy-btn" data-copy="101">Copy</button>
-                        </div>
-                    </div>
-
-                    <!-- GLOBAL LIST -->
-                    <div class="ec-list" id="global-list">
-                        <div class="ec-item">
-                            <span>🌍 Emergency: <strong>112</strong></span>
-                            <button class="copy-btn" data-copy="112">Copy</button>
-                        </div>
-                        <div class="ec-item">
-                            <span>🚑 Ambulance: <strong>911</strong></span>
-                            <button class="copy-btn" data-copy="911">Copy</button>
-                        </div>
-                    </div>
-
-                    <!-- SAFE BOT -->
-                    <div class="safebot">
-                        <p class="safebot-title">Need Guidance Right Now?</p>
-                        <div class="safebot-box" onclick="openSafeBot()">
-                            <strong>🤖 Ask SafeBot:</strong>
-                            <p>What should I do during an earthquake?</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GET INVOLVED CARD -->
-                <div class="get-involved">
-                    <h3 class="gi-title">Help Others Stay Safe</h3>
-                    <p class="gi-desc">Support our mission to assist in times of crisis.</p>
-
-                    <div class="gi-buttons">
-                        <a href="../9.GetInvolved/Volunteer.html" class="gi-link">
-                            <button class="volunteer-btn">Volunteer</button>
-                        </a>
-                        <a href="../9.GetInvolved/Donate.html" class="gi-link">
-                            <button class="donate-btn">Donate</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="section-header">
+          <h3 class="section-title">📚 Support & Learning</h3>
         </div>
+        <div class="grid-container">
+          <div class="grid-item">
+            <a href="../5.Community/Community.html">
+              <div class="card-icon-wrapper">👥</div>
+              <div class="card-content">
+                <div class="card-title">Community</div>
+                <div class="card-description">Help & connect locally</div>
+              </div>
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="../6.DisasterUpdates/DisasterUpdates.html">
+              <div class="card-icon-wrapper">📰</div>
+              <div class="card-content">
+                <div class="card-title">Disaster Updates</div>
+                <div class="card-description">Live updates in your area</div>
+              </div>
+            </a>
+          </div>
+          <div class="grid-item">
+            <a href="../7.GetEducated/GetEducated.html">
+              <div class="card-icon-wrapper">📚</div>
+              <div class="card-content">
+                <div class="card-title">Get Educated</div>
+                <div class="card-description">Learn to stay safe</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="side-cards-container">
+          <!-- EMERGENCY ASSISTANCE CARD - UPDATED -->
+          <div class="combined-card emergency-card">
+            <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
+
+            <!-- TAB UI -->
+            <div class="ec-tabs">
+              <div class="tab active" data-tab="india">India</div>
+              <div class="tab" data-tab="global">Global</div>
+              <span class="icon-tab">🧡🕊️</span>
+            </div>
+
+            <!-- INDIA LIST -->
+            <div class="ec-list active" id="india-list">
+              <div class="ec-item">
+                <span>🇮🇳 Police: <strong>100</strong></span>
+                <button class="copy-btn" data-copy="100">Copy</button>
+              </div>
+              <div class="ec-item">
+                <span>🚑 Ambulance: <strong>102</strong></span>
+                <button class="copy-btn" data-copy="102">Copy</button>
+              </div>
+              <div class="ec-item">
+                <span>🧯 Fire: <strong>101</strong></span>
+                <button class="copy-btn" data-copy="101">Copy</button>
+              </div>
+            </div>
+
+            <!-- GLOBAL LIST -->
+            <div class="ec-list" id="global-list">
+              <div class="ec-item">
+                <span>🌍 Emergency: <strong>112</strong></span>
+                <button class="copy-btn" data-copy="112">Copy</button>
+              </div>
+              <div class="ec-item">
+                <span>🚑 Ambulance: <strong>911</strong></span>
+                <button class="copy-btn" data-copy="911">Copy</button>
+              </div>
+            </div>
+
+            <!-- SAFE BOT -->
+            <div class="safebot">
+              <p class="safebot-title">Need Guidance Right Now?</p>
+              <div class="safebot-box" onclick="openSafeBot()">
+                <strong>🤖 Ask SafeBot:</strong>
+                <p>What should I do during an earthquake?</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- GET INVOLVED CARD -->
+          <div class="get-involved">
+            <h3 class="gi-title">Help Others Stay Safe</h3>
+            <p class="gi-desc">
+              Support our mission to assist in times of crisis.
+            </p>
+
+            <div class="gi-buttons">
+              <a href="../9.GetInvolved/Volunteer.html" class="gi-link">
+                <button class="volunteer-btn">Volunteer</button>
+              </a>
+              <a href="../9.GetInvolved/Donate.html" class="gi-link">
+                <button class="donate-btn">Donate</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-   <!-- Map Section -->
-  <section class="map-section" id="map-section">
-        <div class="map-header">
-            <h2>📍 Location Near You</h2>
+    <!-- Map Section -->
+    <section class="map-section" id="map-section">
+      <div class="map-header">
+        <h2>📍 Location Near You</h2>
 
-            <div class="map-actions">
-                <button id="homeButton" class="home-btn">🏠 Home</button>
-                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
-                    View Full Map →
-                </a>
-            </div>
+        <div class="map-actions">
+          <button id="homeButton" class="home-btn">🏠 Home</button>
+          <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
+            View Full Map →
+          </a>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div class="map-wrapper" id="mapWrapper">
+          <div id="map"></div>
         </div>
 
-        <div class="map-card">
-            <div class="map-wrapper" id="mapWrapper">
-                <div id="map"></div>
-            </div>
-
-            <div class="map-footer">
-                Location data is approximate. For full map features, click "View Full Map".
-            </div>
+        <div class="map-footer">
+          Location data is approximate. For full map features, click "View Full
+          Map".
         </div>
+      </div>
     </section>
 
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Left section -->
+        <div class="footer-brand">
+          <div class="brand-header">
+            <img
+              src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg"
+              alt="Safe Heaven logo"
+              class="brand-logo"
+            />
+            <h3 class="brand-name">SAFE HEAVEN</h3>
+          </div>
+          <p style="text-align: left; opacity: 1; margin-top: 6px">
+            Staying informed, prepared and connected when it matters the most.
+            Turning information into action during emergencies.
+          </p>
+        </div>
+
+        <!-- Right section -->
+        <div class="link-container">
+          <ul>
+            <li>
+              <a
+                href="2.AlertsRisks/AlertsRisks.html"
+                style="color: white; text-decoration: none"
+                >Alerts & Risks</a
+              >
+            </li>
+            <li style="text-align: left; margin-top: 10px">
+              <a
+                href="5.Community/Community.html"
+                style="color: white; text-decoration: none"
+                >Community</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a
+                href="3.DisasterCoordination/DisasterCoordination.html"
+                style="color: white; text-decoration: none"
+                >Disaster Coordination</a
+              >
+            </li>
+
+            <li style="text-align: left; margin-top: 10px">
+              <a
+                href="6.DisasterUpdates/DisasterUpdates.html"
+                style="color: white; text-decoration: none"
+                >Disaster Updates</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a
+                href="4.EvacuationSafety/EvacuationSafety.html"
+                style="color: white; text-decoration: none"
+                >Evacuation Safety</a
+              >
+            </li>
+            <li style="text-align: left; margin-top: 10px">
+              <a
+                href="7.GetEducated/GetEducated.html"
+                style="color: white; text-decoration: none"
+                >Get Educated</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © <span id="year"></span> Safe Haven. Built For Community
+      </div>
+    </footer>
+
     <script>
-        // TAB SWITCHING FUNCTIONALITY
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const targetTab = this.getAttribute('data-tab');
-                
-                // Remove active class from all tabs
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // Hide all lists
-                document.querySelectorAll('.ec-list').forEach(list => list.classList.remove('active'));
-                
-                // Show target list
-                document.getElementById(targetTab + '-list').classList.add('active');
-            });
+      // TAB SWITCHING FUNCTIONALITY
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", function () {
+          const targetTab = this.getAttribute("data-tab");
+
+          // Remove active class from all tabs
+          document
+            .querySelectorAll(".tab")
+            .forEach((t) => t.classList.remove("active"));
+
+          // Add active class to clicked tab
+          this.classList.add("active");
+
+          // Hide all lists
+          document
+            .querySelectorAll(".ec-list")
+            .forEach((list) => list.classList.remove("active"));
+
+          // Show target list
+          document.getElementById(targetTab + "-list").classList.add("active");
         });
+      });
 
-        // COPY FUNCTIONALITY
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const textToCopy = this.getAttribute('data-copy');
-                
-                // Copy to clipboard
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    // Change button text temporarily
-                    const originalText = this.textContent;
-                    this.textContent = 'Copied!';
-                    this.classList.add('copied');
-                    
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                        this.classList.remove('copied');
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy:', err);
-                    alert('Failed to copy. Please try again.');
-                });
-            });
-        });
+      // COPY FUNCTIONALITY
+      document.querySelectorAll(".copy-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const textToCopy = this.getAttribute("data-copy");
 
-        // SOS FUNCTIONALITY
-        let clickCount = 0;
-        function sendSOS() {
-            clickCount++;
-            if (clickCount === 3) {
-                alert("SOS sent with your location and phone number successfully!");
-                clickCount = 0;
-            }
-        }
+          // Copy to clipboard
+          navigator.clipboard
+            .writeText(textToCopy)
+            .then(() => {
+              // Change button text temporarily
+              const originalText = this.textContent;
+              this.textContent = "Copied!";
+              this.classList.add("copied");
 
-        // SAFEBOT FUNCTION
-        function openSafeBot() {
-            if(window.openChatbot) {
-                window.openChatbot();
-            } else {
-                alert("SafeBot is loading, please try again.");
-            }
-        }
-
-        // MAP INITIALIZATION
-        let mapLoaded = false;
-        let map;
-        let homeMarker;
-
-        const homeCoords = [28.6129, 77.2295];
-        const homeZoom = 15;
-
-        function initMap() {
-            if (mapLoaded) return;
-
-            map = L.map("map").setView(homeCoords, homeZoom);
-
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution: "© OpenStreetMap contributors"
-            }).addTo(map);
-
-            homeMarker = L.marker(homeCoords)
-                .addTo(map)
-                .bindPopup(
-                    "<b>Home Location</b><br>India Gate, New Delhi, India",
-                    { autoClose: false, closeOnClick: false }
-                )
-                .openPopup();
-
-            L.Control.geocoder({
-                collapsed: false,
-                placeholder: "Search location",
-                defaultMarkGeocode: true
+              setTimeout(() => {
+                this.textContent = originalText;
+                this.classList.remove("copied");
+              }, 2000);
             })
-                .on("markgeocode", e => {
-                    map.setView(e.geocode.center, homeZoom);
-                })
-                .addTo(map);
-
-            document.getElementById("homeButton").addEventListener("click", () => {
-                map.setView(homeCoords, homeZoom);
-                homeMarker.openPopup();
+            .catch((err) => {
+              console.error("Failed to copy:", err);
+              alert("Failed to copy. Please try again.");
             });
+        });
+      });
 
-            document.getElementById("mapWrapper").classList.add("visible");
-            mapLoaded = true;
+      // SOS FUNCTIONALITY
+      let clickCount = 0;
+      function sendSOS() {
+        clickCount++;
+        if (clickCount === 3) {
+          alert("SOS sent with your location and phone number successfully!");
+          clickCount = 0;
         }
+      }
 
-        const observer = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting) {
-                initMap();
-                observer.disconnect();
-            }
+      // SAFEBOT FUNCTION
+      function openSafeBot() {
+        if (window.openChatbot) {
+          window.openChatbot();
+        } else {
+          alert("SafeBot is loading, please try again.");
+        }
+      }
+
+      // MAP INITIALIZATION
+      let mapLoaded = false;
+      let map;
+      let homeMarker;
+
+      const homeCoords = [28.6129, 77.2295];
+      const homeZoom = 15;
+
+      function initMap() {
+        if (mapLoaded) return;
+
+        map = L.map("map").setView(homeCoords, homeZoom);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "© OpenStreetMap contributors",
+        }).addTo(map);
+
+        homeMarker = L.marker(homeCoords)
+          .addTo(map)
+          .bindPopup("<b>Home Location</b><br>India Gate, New Delhi, India", {
+            autoClose: false,
+            closeOnClick: false,
+          })
+          .openPopup();
+
+        L.Control.geocoder({
+          collapsed: false,
+          placeholder: "Search location",
+          defaultMarkGeocode: true,
+        })
+          .on("markgeocode", (e) => {
+            map.setView(e.geocode.center, homeZoom);
+          })
+          .addTo(map);
+
+        document.getElementById("homeButton").addEventListener("click", () => {
+          map.setView(homeCoords, homeZoom);
+          homeMarker.openPopup();
         });
 
-        observer.observe(document.getElementById("map-section"));
+        document.getElementById("mapWrapper").classList.add("visible");
+        mapLoaded = true;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          initMap();
+          observer.disconnect();
+        }
+      });
+
+      observer.observe(document.getElementById("map-section"));
     </script>
     <script src="./8.AIAssistant/chatbot.js"></script>
 </body>

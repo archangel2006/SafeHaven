@@ -1,78 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Safe Haven</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+    <link
+      rel="icon"
+      href="../../assets/1.HomePage/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/1.HomePage/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../assets/1.HomePage/favicon-16x16.png"
+    />
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-            background-color: #f4f4f4;
-        }
-        
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+        background-color: #f4f4f4;
+      }
 
-        .navbar a:hover {
-            background-color: #575757;
-        }
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 80px 20px 20px;
-        }
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+      }
 
-        iframe {
-            width: 80%;
-            height: 400px;
-            border: none;
-        }
+      .navbar a:hover {
+        background-color: #575757;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 80px 20px 20px;
+      }
+
+      iframe {
+        width: 80%;
+        height: 400px;
+        border: none;
+      }
+
+     
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="navbar">
-        <a href="#discussion">Discussion Board</a>
-        <a href="#live-updates">Live Updates</a>
-        <a href="#missing">Missing Persons</a>
+      <a href="#discussion">Discussion Board</a>
+      <a href="#live-updates">Live Updates</a>
+      <a href="#missing">Missing Persons</a>
     </div>
 
     <div class="container">
-        <h2 id="discussion">Community Discussion Board</h2>
-        <iframe src="chatroom.html"></iframe>
+      <h2 id="discussion">Community Discussion Board</h2>
+      <iframe src="chatroom.html"></iframe>
 
-        <h2 id="live-updates">Live Updates</h2>
-        <iframe src="LiveUpdates.html"></iframe>
+      <h2 id="live-updates">Live Updates</h2>
+      <iframe src="LiveUpdates.html"></iframe>
 
-        <h2 id="missing">Missing Persons</h2>
-        <iframe src="MissingPerson.html"></iframe>
+      <h2 id="missing">Missing Persons</h2>
+      <iframe src="MissingPerson.html"></iframe>
     </div>
+
     <script src="../8.AIAssistant/chatbot.js"></script>
 
-
-</body>
+  </body>
 </html>
