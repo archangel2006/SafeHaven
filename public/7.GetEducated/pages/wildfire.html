@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wildfire Safety Tips | Safe Haven</title>
+    <link
+      rel="icon"
+      href="../../assets/1.HomePage/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <style>
+      /* Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f6fb;
+        color: #333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Navbar */
+      .navbar {
+        background-color: #3c5da2;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .navbar .brand {
+        font-weight: bold;
+        font-size: 22px;
+        text-transform: lowercase;
+      }
+      .navbar i {
+        cursor: pointer;
+      }
+
+      /* Layout */
+      .container {
+        display: flex;
+        max-width: 1100px;
+        margin: 20px auto;
+        gap: 25px;
+        padding: 0 20px;
+      }
+      .main-content {
+        flex: 2.5;
+      }
+      .sidebar {
+        flex: 1;
+      }
+
+      h1.page-title {
+        font-size: 26px;
+        margin-bottom: 20px;
+        color: #1a365d;
+        font-weight: 700;
+      }
+      h1.page-title span {
+        color: #5a7184;
+        font-weight: 400;
+      }
+
+      /* Video Container */
+      .video-box {
+        position: relative;
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #000;
+        aspect-ratio: 16 / 9;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .video-box iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Accordions */
+      .info-card {
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #e1e8f0;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+      .card-header {
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background 0.2s;
+        position: relative;
+      }
+      /* Border Logic exactly like Earthquake template */
+      .info-card.what {
+        border-left: 5px solid #3c5da2;
+      }
+      .info-card.warning {
+        border-left: 5px solid #3182ce;
+      }
+      .info-card.before {
+        border-left: 5px solid #f6ad55;
+      }
+      .info-card.during {
+        border-left: 5px solid #e53e3e;
+      }
+      .info-card.resources {
+        border-left: 5px solid #3182ce;
+      }
+
+      .card-header i:first-child {
+        margin-right: 15px;
+        font-size: 20px;
+        width: 25px;
+        text-align: center;
+      }
+      .card-header h3 {
+        font-size: 17px;
+        flex-grow: 1;
+        font-weight: 600;
+        color: #2d3748;
+      }
+      .card-header .chevron {
+        color: #cbd5e0;
+        font-size: 14px;
+        transition: transform 0.3s;
+      }
+
+      .card-content {
+        padding: 20px;
+        border-top: 1px solid #f0f4f8;
+        font-size: 15px;
+        color: #4a5568;
+        display: none;
+      }
+      .card-content.active {
+        display: block;
+      }
+
+      /* Safety Lists */
+      .safety-list {
+        list-style: none;
+        padding-left: 5px;
+      }
+      .safety-list li {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .safety-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 15px;
+      }
+
+      /* Resource Grid */
+      .resource-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid #edf2f7;
+      }
+      .res-btn {
+        background: white;
+        padding: 15px;
+        text-decoration: none;
+        color: #4a5568;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+        border: 0.5px solid #edf2f7;
+        transition: background 0.2s;
+      }
+      .res-btn:hover {
+        background: #f7fafc;
+      }
+      .res-btn i {
+        color: #3c5da2;
+        font-size: 16px;
+        width: 20px;
+      }
+
+      /* Sidebar */
+      .sidebar-title {
+        margin-bottom: 15px;
+        font-size: 19px;
+        color: #1a365d;
+        font-weight: 700;
+      }
+      .read-next-card {
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+        text-decoration: none;
+        display: block;
+        color: inherit;
+      }
+      .read-next-card:hover {
+        transform: translateY(-3px);
+      }
+      .thumb-box {
+        height: 130px;
+        position: relative;
+      }
+      .thumb-box iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .read-next-card p {
+        padding: 12px 15px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #2d3748;
+      }
+
+      /* Toast Notifications */
+      #toast-container {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        width: 90%;
+        max-width: 400px;
+      }
+      .toast {
+        background: #333;
+        color: white;
+        padding: 16px 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 10px;
+        animation: slideUp 0.4s ease forwards;
+        border-left: 5px solid #3c5da2;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 850px) {
+        .container {
+          flex-direction: column;
+        }
+        .safety-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <i class="fas fa-arrow-left" onclick="history.back()"></i>
+      <div class="brand">wildfires</div>
+      <i class="far fa-user-circle fa-lg"></i>
+    </nav>
+
+    <div id="toast-container"></div>
+
+    <div class="container">
+      <main class="main-content">
+        <h1 class="page-title">Wildfire <span>Safety Tips</span></h1>
+
+        <div class="video-box">
+          <iframe
+            src="https://www.youtube.com/embed/2SCg1x8sHng"
+            title="Wildfire Safety Tips"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="info-card what">
+          <div class="card-header" onclick="toggleAccordion(this)">
+            <i class="fas fa-check-circle" style="color: #3182ce"></i>
+            <h3>What Is a Wildfire?</h3>
+            <i class="fas fa-chevron-right chevron"></i>
+          </div>
+          <div class="card-content">
+            A wildfire is an unplanned, unwanted, and uncontrolled fire that
+            burns in a natural area such as a forest, grassland, or prairie.
+            These fires can start from natural causes like lightning or human
+            activities and spread rapidly in dry conditions.
+          </div>
+        </div>
+
+        <div class="info-card warning">
+          <div class="card-header" onclick="toggleAccordion(this)">
+            <i class="fas fa-bell" style="color: #3182ce"></i>
+            <h3>Early Warning Signs</h3>
+            <i class="fas fa-chevron-right chevron"></i>
+          </div>
+          <div class="card-content">
+            <ul class="safety-list">
+              <li>
+                <i
+                  class="fas fa-circle"
+                  style="font-size: 6px; color: #3182ce; margin-top: 8px"
+                ></i>
+                Smell of smoke or hazy sky
+              </li>
+              <li>
+                <i
+                  class="fas fa-circle"
+                  style="font-size: 6px; color: #3182ce; margin-top: 8px"
+                ></i>
+                "Red Flag" weather warnings (low humidity, high winds)
+              </li>
+              <li>
+                <i
+                  class="fas fa-circle"
+                  style="font-size: 6px; color: #3182ce; margin-top: 8px"
+                ></i>
+                Sight of ash falling from the sky
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-card before">
+          <div class="card-header" onclick="toggleAccordion(this)">
+            <i class="fas fa-clipboard-list" style="color: #ed8936"></i>
+            <h3>Before a Wildfire (Prepare)</h3>
+            <i class="fas fa-chevron-right chevron"></i>
+          </div>
+          <div class="card-content">
+            <ul class="safety-list">
+              <li>
+                <i class="fas fa-tree" style="color: #ed8936"></i> Create 5 feet
+                of defensible space around your home
+              </li>
+              <li>
+                <i class="fas fa-briefcase" style="color: #3182ce"></i> Pack an
+                emergency "Go Bag" (masks, water, docs)
+              </li>
+              <li>
+                <i class="fas fa-phone" style="color: #f6ad55"></i> Sign up for
+                local community alerts
+              </li>
+              <li>
+                <i class="fas fa-route" style="color: #4299e1"></i> Map out at
+                least two evacuation routes
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-card during">
+          <div class="card-header" onclick="toggleAccordion(this)">
+            <i class="fas fa-house-crack" style="color: #e53e3e"></i>
+            <h3>During a Wildfire (Stay Safe)</h3>
+            <i class="fas fa-chevron-right chevron"></i>
+          </div>
+          <div class="card-content">
+            <div class="safety-grid">
+              <ul class="safety-list">
+                <li>
+                  <i class="fas fa-check-circle" style="color: #48bb78"></i>
+                  Evacuate immediately if ordered
+                </li>
+                <li>
+                  <i class="fas fa-mask" style="color: #48bb78"></i> Wear N95
+                  masks for smoke
+                </li>
+                <li>
+                  <i class="fas fa-door-closed" style="color: #4299e1"></i>
+                  Close all windows and doors
+                </li>
+              </ul>
+              <ul class="safety-list">
+                <li>
+                  <i class="fas fa-times" style="color: #e53e3e"></i> Don't
+                  leave house lights off
+                </li>
+                <li>
+                  <i class="fas fa-times" style="color: #e53e3e"></i> Don't wait
+                  until you see fire
+                </li>
+                <li>
+                  <i class="fas fa-car" style="color: #ed8936"></i> Don't block
+                  evacuation lanes
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card resources">
+          <div class="card-header" onclick="toggleAccordion(this)">
+            <i class="fas fa-globe" style="color: #3182ce"></i>
+            <h3>Additional Resources</h3>
+            <i class="fas fa-chevron-right chevron"></i>
+          </div>
+          <div class="card-content" style="padding: 0">
+            <div class="resource-grid">
+              <a href="#" class="res-btn" onclick="findSafeZones()"
+                ><i class="fas fa-location-dot"></i> View Fire Shelters</a
+              >
+              <a href="#" class="res-btn" onclick="window.print()"
+                ><i class="fas fa-download"></i> Home Preparation List</a
+              >
+              <a href="#" class="res-btn" onclick="showLiveAlerts()"
+                ><i class="fas fa-square-check"></i> Red Flag Notifications</a
+              >
+              <a href="#" class="res-btn" onclick="showLiveAlerts()"
+                ><i class="fas fa-wind"></i> Air Quality Index (AQI)</a
+              >
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="sidebar">
+        <h3 class="sidebar-title">Read Next</h3>
+
+        <div class="read-next-card">
+          <div class="thumb-box">
+            <iframe
+              src="https://www.youtube.com/embed/UoeRqQRAd3M"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p>Building Your Wildfire Kit</p>
+        </div>
+
+        <div class="read-next-card">
+          <div class="thumb-box">
+            <iframe
+              src="https://www.youtube.com/embed/xsM1-tDlqEg"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p>Safe Defensible Space</p>
+        </div>
+
+        <div class="read-next-card">
+          <div class="thumb-box">
+            <iframe
+              src="https://www.youtube.com/embed/QOJJdmdv--0"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p>Evacuation Procedures</p>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      function toggleAccordion(element) {
+        const content = element.nextElementSibling;
+        const chevron = element.querySelector(".chevron");
+        const isActive = content.classList.contains("active");
+
+        document
+          .querySelectorAll(".card-content")
+          .forEach((c) => c.classList.remove("active"));
+        document
+          .querySelectorAll(".chevron")
+          .forEach((i) => (i.style.transform = "rotate(0deg)"));
+
+        if (!isActive) {
+          content.classList.add("active");
+          chevron.style.transform = "rotate(90deg)";
+        }
+      }
+
+      function showToast(message) {
+        const container = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fas fa-circle-info"></i> <span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          setTimeout(() => toast.remove(), 400);
+        }, 4000);
+      }
+
+      function showLiveAlerts() {
+        showToast("No active wildfire threats in your current area.");
+      }
+
+      function findSafeZones() {
+        showToast("Locating nearby fire-safe shelters...");
+      }
+    </script>
+    <script src="../8.AIAssistant/chatbot.js"></script>
+  </body>
+</html>
