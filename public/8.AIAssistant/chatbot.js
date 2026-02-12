@@ -290,3 +290,9 @@ sendBtn.addEventListener('click', sendMessage);
 input.addEventListener('keydown', e => {
   if (e.key === 'Enter') sendMessage();
 });
+
+// Expose SafeBot opener for external buttons (Home Page)
+window.openChatbot = function () {
+  popup.style.display = 'flex';
+  input.focus();
+};
