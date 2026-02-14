@@ -118,8 +118,19 @@ cd public
 
 Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting issues or pull requests.
 
-**Use colors:** 
+**Use colors:** <br>
 <img width="964" height="313" alt="Section 1" src="https://github.com/user-attachments/assets/bd7649a2-ea88-4054-923d-dbbd8377fca7" />
+
+## Contributors
+
+<p style="font-size:16px; font-weight:600;">Thanks to all contributors and community members for supporting and improving SafeHaven. 🙌</p><br>
+
+<a href="https://github.com/archangel2006/SafeHaven/graphs/contributors">
+  <img 
+    src="https://contrib.rocks/image?repo=archangel2006/SafeHaven&size=120&v=1"
+    alt="Contributors profile images for the SafeHaven repository"
+  />
+</a>
 
 ## 📜 Code of Conduct
 
@@ -129,10 +140,4 @@ Read more in [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 ## 📄 License
 
 This project is licensed under the MIT License.  
-See [LICENSE.md](./LICENSE.md) for details.
-
-## 🙌 Acknowledgements
-
-Thanks to all contributors and community members who help improve SafeHaven.  
-
-
+See [LICENSE.md](./LICENSE.md) for details. 
