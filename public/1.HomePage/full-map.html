@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SafeHaven | Full Map View</title>
+
 <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
-
 
 <!-- Leaflet -->
 <link
@@ -73,7 +73,8 @@ body {
   background: #2563eb;
 }
 
-.map-topbar button:hover {
+.map-topbar button:hover,
+.map-topbar a:hover {
   background: #4076ec;
 }
 
@@ -81,6 +82,7 @@ body {
 #map {
   height: calc(100vh - 58px);
   width: 100%;
+  outline: none;
 }
 
 /* SEARCH BAR */
@@ -117,29 +119,58 @@ body {
 
 <body>
 
-<!-- TOP BAR -->
-<div class="map-topbar">
-  <h1>📍 Full Map View – New Delhi</h1>
+<!-- HEADER LANDMARK -->
+<header class="map-topbar" role="banner">
+  <h1>
+    <span aria-hidden="true">📍</span>
+    Full Map View – New Delhi
+  </h1>
 
-  <div class="map-actions">
-     <!-- MAP HOME BUTTON -->
-    <button onclick="resetToHome()">🏠 Map Home</button>
-    <!-- BACK BUTTON (unchanged) -->
-    <a href="../index.html">← Back to Home</a>
+  <nav class="map-actions" aria-label="Map Controls">
+    
+    <!-- MAP HOME BUTTON -->
+    <button 
+      type="button"
+      onclick="resetToHome()" 
+      aria-label="Reset map to India Gate location"
+    >
+      <span aria-hidden="true">🏠</span>
+      Map Home
+    </button>
 
-   
-  </div>
-</div>
+    <!-- BACK BUTTON -->
+    <a 
+      href="../index.html" 
+      role="button"
+      aria-label="Go back to home page"
+    >
+      ← Back to Home
+    </a>
 
-<!-- MAP -->
-<div id="map"></div>
+  </nav>
+</header>
+
+<!-- MAIN LANDMARK -->
+<main role="main">
+  
+  <!-- MAP REGION -->
+  <div 
+    id="map" 
+    role="application"
+    aria-label="Interactive map of New Delhi"
+    tabindex="0"
+  ></div>
+
+</main>
 
 <script>
 /* Home location: India Gate */
 const homeLocation = [28.6129, 77.2295];
 
 /* Initialize map */
-const map = L.map("map").setView(homeLocation, 12);
+const map = L.map("map", {
+  keyboard: true
+}).setView(homeLocation, 12);
 
 /* Tile layer */
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -179,7 +210,22 @@ map.on("click", e => {
     )
     .openPopup();
 });
+
+/* Keyboard support for marker drop */
+document.getElementById("map").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const center = map.getCenter();
+    L.marker(center)
+      .addTo(map)
+      .bindPopup(
+        `Latitude: ${center.lat.toFixed(4)}<br>
+         Longitude: ${center.lng.toFixed(4)}`
+      )
+      .openPopup();
+  }
+});
 </script>
+
 <script src="../8.AIAssistant/chatbot.js"></script>
 
 </body>
