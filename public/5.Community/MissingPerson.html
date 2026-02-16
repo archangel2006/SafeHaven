@@ -150,38 +150,99 @@
     @media(max-width:600px){
         .search-container input { width: 90%; }
     }
+    /* ====== MAIN LAYOUT ====== */
+.main-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+    width: 320px;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* ====== CONTENT AREA ====== */
+.content-area {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Fix grid spacing issue */
+.missing-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Ensure card width doesn't stretch */
+.missing-item {
+    width: 100%;
+}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+}
+
 </style>
 </head>
 <body>
-
 <header>
-     Missing Persons
+    Missing Persons
     <p>Locate and report missing people during disasters. Mark someone as found or search by name/location.</p>
 </header>
 
-<!-- SEARCH -->
-<div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search by name, location or age..." oninput="searchMissing()">
+<div class="main-layout">
+
+    <!-- ===== LEFT SIDEBAR FORM ===== -->
+    <aside class="sidebar">
+        <div class="form-container">
+            <h3>Report a Missing Person</h3>
+            <input type="text" id="name" placeholder="Full Name">
+            <input type="number" id="age" placeholder="Age">
+            <input type="text" id="location" placeholder="Last Seen Location">
+            <select id="status">
+                <option value="missing">Missing</option>
+                <option value="found">Found</option>
+            </select>
+            <input type="file" id="imageUpload">
+            <button onclick="addMissingPerson()">Submit Report</button>
+        </div>
+    </aside>
+
+    <!-- ===== RIGHT CONTENT AREA ===== -->
+    <section class="content-area">
+
+        <!-- SEARCH -->
+        <div class="search-container">
+            <input type="text" id="searchInput"
+                placeholder="Search by name, location or age..."
+                oninput="searchMissing()">
+        </div>
+
+        <!-- GRID -->
+        <div class="missing-container" id="missing-list"></div>
+
+    </section>
 </div>
 
-<!-- MISSING PERSONS GRID -->
-<div class="missing-container" id="missing-list">
-    <!-- Example card -->
-</div>
-
-<!-- REPORT FORM -->
-<div class="form-container">
-    <h3>Report a Missing Person</h3>
-    <input type="text" id="name" placeholder="Full Name">
-    <input type="number" id="age" placeholder="Age">
-    <input type="text" id="location" placeholder="Last Seen Location">
-    <select id="status">
-        <option value="missing">Missing</option>
-        <option value="found">Found</option>
-    </select>
-    <input type="file" id="imageUpload">
-    <button onclick="addMissingPerson()">Submit Report</button>
-</div>
 
 <script>
 let missingPeople = [
@@ -254,20 +315,34 @@ let missingPeople = [
 ];
 
 
-// ====== RENDER GRID ======
-function renderMissing() {
+// ====== MARK AS FOUND ======
+function markFound(index){
+    missingPeople[index].status = "found";
+    renderMissing();
+}
+function renderMissing(filteredList = missingPeople) {
     const container = document.getElementById("missing-list");
     container.innerHTML = "";
-    missingPeople.forEach((person, index) => {
+
+    filteredList.forEach((person, index) => {
         const card = document.createElement("div");
         card.classList.add("missing-item");
+
         card.innerHTML = `
             <img src="${person.img}" alt="${person.name}">
             <div class="missing-content">
-                <p><strong>${person.name}</strong><br>Age: ${person.age}, Location: ${person.location}</p>
+                <p>
+                    <strong>${person.name}</strong><br>
+                    Age: ${person.age}<br>
+                    Location: ${person.location}
+                </p>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <span class="status ${person.status}">${person.status.toUpperCase()}</span>
-                    ${person.status === "missing" ? `<button class="mark-found-btn" onclick="markFound(${index})">Mark as Found</button>` : ""}
+                    <span class="status ${person.status}">
+                        ${person.status.toUpperCase()}
+                    </span>
+                    ${person.status === "missing"
+                        ? `<button class="mark-found-btn" onclick="markFound(${missingPeople.indexOf(person)})">Mark as Found</button>`
+                        : ""}
                 </div>
             </div>
         `;
@@ -275,35 +350,18 @@ function renderMissing() {
     });
 }
 
-// ====== SEARCH ======
 function searchMissing() {
     const query = document.getElementById("searchInput").value.toLowerCase();
-    const container = document.getElementById("missing-list");
-    container.innerHTML = "";
-    missingPeople.forEach((person, index) => {
-        if(person.name.toLowerCase().includes(query) || person.location.toLowerCase().includes(query) || person.age.toString() === query){
-            const card = document.createElement("div");
-            card.classList.add("missing-item");
-            card.innerHTML = `
-                <img src="${person.img}" alt="${person.name}">
-                <div class="missing-content">
-                    <p><strong>${person.name}</strong><br>Age: ${person.age}, Location: ${person.location}</p>
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <span class="status ${person.status}">${person.status.toUpperCase()}</span>
-                        ${person.status === "missing" ? `<button class="mark-found-btn" onclick="markFound(${index})">Mark as Found</button>` : ""}
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        }
-    });
+
+    const filtered = missingPeople.filter(person =>
+        person.name.toLowerCase().includes(query) ||
+        person.location.toLowerCase().includes(query) ||
+        person.age.toString().includes(query)
+    );
+
+    renderMissing(filtered);
 }
 
-// ====== MARK AS FOUND ======
-function markFound(index){
-    missingPeople[index].status = "found";
-    renderMissing();
-}
 
 // ====== ADD NEW MISSING PERSON ======
 function addMissingPerson() {
@@ -340,6 +398,7 @@ function addMissingPerson() {
 // Initial render
 renderMissing();
 </script>
+
 
 </body>
 </html>
