@@ -227,66 +227,70 @@
       color: gray;
       margin-top: 4px;
     }
-/* ================= CHAT INPUT FIX ================= */
 
-.chat-input {
-  padding: 12px 15px;
-  border-top: 1px solid #ddd;
-  background: white;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+    /* ================= CHAT INPUT FIX ================= */
 
-/* Remove global 100% width effect */
-.chat-input select,
-.chat-input input[type="text"],
-.chat-input input[type="file"] {
-  width: auto;
-}
+    .chat-input {
+      padding: 12px 15px;
+      border-top: 1px solid #ddd;
+      background: white;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
-/* Select Styling */
-.chat-input select {
-  flex: 0 0 140px;   /* fixed width */
-  padding: 8px 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  font-size: 13px;
-  background: #f5f7fa;
-  cursor: pointer;
-}
+    /* Remove global 100% width effect */
+    .chat-input select,
+    .chat-input input[type="text"],
+    .chat-input input[type="file"] {
+      width: auto;
+    }
 
-/* Message Input */
-.chat-input input[type="text"] {
-  flex: 1;   /* take remaining space */
-  padding: 10px 15px;
-  border-radius: 25px;
-  border: 1px solid #ccc;
-  outline: none;
-  min-width: 0; /* prevents shrinking bug */
-}
+    /* Select Styling */
+    .chat-input select {
+      flex: 0 0 140px;
+      /* fixed width */
+      padding: 8px 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      background: #f5f7fa;
+      cursor: pointer;
+    }
 
-/* File Input */
-.chat-input input[type="file"] {
-  flex: 0 0 auto;
-  font-size: 12px;
-}
+    /* Message Input */
+    .chat-input input[type="text"] {
+      flex: 1;
+      /* take remaining space */
+      padding: 10px 15px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      outline: none;
+      min-width: 0;
+      /* prevents shrinking bug */
+    }
 
-/* Button */
-.chat-input button {
-  flex: 0 0 auto;
-  background: linear-gradient(135deg, #0052cc, #003d99);
-  color: white;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+    /* File Input */
+    .chat-input input[type="file"] {
+      flex: 0 0 auto;
+      font-size: 12px;
+    }
 
-.chat-input button:hover {
-  opacity: 0.9;
-}
+    /* Button */
+    .chat-input button {
+      flex: 0 0 auto;
+      background: linear-gradient(135deg, #0052cc, #003d99);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .chat-input button:hover {
+      opacity: 0.9;
+    }
 
 
 
@@ -988,6 +992,14 @@
       width: 100%;
     }
 
+    .forum-header {
+      margin-top: 50px;
+    }
+
+    .page-header {
+      margin-top: 50px;
+    }
+
     .content-area {
       width: 100%;
       min-width: 0;
@@ -1037,25 +1049,27 @@
     .content-area::-webkit-scrollbar-thumb:hover {
       background: #002f6c;
     }
+
     .tab-content {
-  display: none;
-}
+      display: none;
+    }
 
-.active-tab {
-  display: block;
-}
+    .active-tab {
+      display: block;
+    }
 
-.tab-btn.active-btn {
-  background: #0052cc;
-  color: white;
-}
-.sidebarr {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    height: ;
-}
+    .tab-btn.active-btn {
+      background: #0052cc;
+      color: white;
+    }
+
+    .sidebarr {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      height: ;
+    }
   </style>
 </head>
 
@@ -1078,9 +1092,9 @@
 
   <!-- ================= TABS ================= -->
   <div class="tabs-container">
-   <button class="tab-btn" data-tab="discussionTab">Discussion Board</button>
-<button class="tab-btn" data-tab="forumTab">Community Forum</button>
-<button class="tab-btn" data-tab="missingTab">Missing Person</button>
+    <button class="tab-btn" data-tab="discussionTab">Discussion Board</button>
+    <button class="tab-btn" data-tab="forumTab">Community Forum</button>
+    <button class="tab-btn" data-tab="missingTab">Missing Person</button>
 
   </div>
 
@@ -1171,7 +1185,7 @@
               <option value="volunteer">Volunteer 🤝</option>
             </select>
 
-            <input type="text" id="messageInput" placeholder="Type your message..." required>
+            <input type="text" id="messageInput" placeholder="Type your message...">
 
             <input type="file" id="imageInput" accept="image/*">
 
@@ -1315,26 +1329,26 @@
     </section>
 
     <script>
-document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", function () {
 
-  const tabButtons = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
 
-  tabButtons.forEach(button => {
-    button.addEventListener("click", function () {
+        tabButtons.forEach(button => {
+          button.addEventListener("click", function () {
 
-      const tabId = this.dataset.tab;
+            const tabId = this.dataset.tab;
 
-      tabContents.forEach(tab => tab.classList.remove("active-tab"));
-      tabButtons.forEach(btn => btn.classList.remove("active-btn"));
+            tabContents.forEach(tab => tab.classList.remove("active-tab"));
+            tabButtons.forEach(btn => btn.classList.remove("active-btn"));
 
-      document.getElementById(tabId).classList.add("active-tab");
-      this.classList.add("active-btn");
-    });
-  });
+            document.getElementById(tabId).classList.add("active-tab");
+            this.classList.add("active-btn");
+          });
+        });
 
-});
-</script>
+      });
+    </script>
 
 
     <script>
@@ -1690,8 +1704,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <script>
 
-
-
       let currentGroup = "general";
 
       let groupMessages = {
@@ -1721,35 +1733,52 @@ document.addEventListener("DOMContentLoaded", function () {
         let username = document.getElementById("username").value.trim();
         let message = document.getElementById("messageInput").value.trim();
         let type = document.getElementById("messageType").value;
+        let imageFile = document.getElementById("imageInput").files[0];
 
         if (!username) {
           alert("Please enter your name in profile settings.");
           return;
         }
 
-        if (!message) {
-          alert("Please type a message.");
+        // Allow message OR image
+        if (!message && !imageFile) {
+          alert("Please type a message or select an image.");
           return;
         }
 
+        function createAndStoreMessage(imageData = null) {
+          let msgObj = {
+            id: Date.now(),
+            username,
+            message,
+            image: imageData,
+            type,
+            replies: []
+          };
 
-        let msgObj = {
-          id: Date.now(),
-          username,
-          message,
-          type,
-          replies: []
-        };
+          if (parentId) {
+            let parent = findMessageById(groupMessages[currentGroup], parentId);
+            if (parent) parent.replies.push(msgObj);
+          } else {
+            groupMessages[currentGroup].push(msgObj);
+          }
 
-        if (parentId) {
-          let parent = findMessageById(groupMessages[currentGroup], parentId);
-          if (parent) parent.replies.push(msgObj);
-        } else {
-          groupMessages[currentGroup].push(msgObj);
+          // Reset inputs
+          document.getElementById("messageInput").value = "";
+          document.getElementById("imageInput").value = "";
+
+          renderMessages();
         }
 
-        document.getElementById("messageInput").value = "";
-        renderMessages();
+        if (imageFile) {
+          let reader = new FileReader();
+          reader.onload = function (e) {
+            createAndStoreMessage(e.target.result);
+          };
+          reader.readAsDataURL(imageFile);
+        } else {
+          createAndStoreMessage();
+        }
       };
 
       /* ================= FIND MESSAGE ================= */
@@ -1762,6 +1791,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
+      /* ================= GROUP TITLE ================= */
+
       function getGroupTitle(group) {
         switch (group) {
           case "general": return "📍 General - City";
@@ -1771,7 +1802,6 @@ document.addEventListener("DOMContentLoaded", function () {
           default: return "Chat";
         }
       }
-
 
       /* ================= RENDER ================= */
 
@@ -1801,15 +1831,17 @@ document.addEventListener("DOMContentLoaded", function () {
           typeLabel = `<div class="message-type type-volunteer">Volunteer</div>`;
 
         content.innerHTML = `
-            ${typeLabel}
-            <strong>${msg.username}</strong><br>
-            ${msg.message}
-            <div class="reply-btn" onclick="prepareReply(${msg.id})">Reply</div>
-        `;
+    ${typeLabel}
+    <strong>${msg.username}</strong><br>
+    ${msg.message ? `<div>${msg.message}</div>` : ""}
+    ${msg.image ? `<img src="${msg.image}" style="max-width:200px; margin-top:6px; border-radius:6px;">` : ""}
+    <div class="reply-btn" onclick="prepareReply(${msg.id})">Reply</div>
+  `;
 
         msgDiv.appendChild(avatar);
         msgDiv.appendChild(content);
 
+        // Render replies recursively
         if (msg.replies.length > 0) {
           let repliesDiv = document.createElement("div");
           repliesDiv.classList.add("replies");
@@ -1835,6 +1867,7 @@ document.addEventListener("DOMContentLoaded", function () {
         form.onsubmit = function (e) {
           sendMessage(e, parentId);
 
+          // Reset back to normal submit
           form.onsubmit = function (ev) {
             sendMessage(ev);
           };
@@ -1860,7 +1893,8 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.readAsDataURL(file);
       };
 
-      /* Close dropdown */
+      /* ================= CLOSE DROPDOWN ================= */
+
       window.addEventListener("click", function (e) {
         const menu = document.getElementById("profileDropdown");
         const avatar = document.getElementById("profilePicTop");
@@ -1870,8 +1904,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-
     </script>
+
 
 
   </div>
