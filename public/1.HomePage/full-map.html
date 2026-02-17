@@ -141,7 +141,7 @@ body {
     <!-- BACK BUTTON -->
     <button
       type="button"
-      onclick="history.back()"
+      onclick="if (history.length > 1) history.back(); else window.location.href='../index.html';"
       aria-label="Go back to previous page"
     >
       ← Back
