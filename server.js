@@ -68,7 +68,7 @@ IMPORTANT BEHAVIOR RULES:
 • If user says "help", treat it as an emergency situation
 • If user says "alerts", guide them to Alerts & Risks on SafeHaven
 • If user says "evacuation", guide them to Evacuation & Safety
-• If user says "donation", explain SafeHaven’s donation process
+• If user says "donation", explain SafeHaven's donation process
 • Do NOT act as a general-purpose AI
 • Do NOT give medical or legal advice
 • Do NOT ask follow-up questions unless absolutely required
@@ -104,7 +104,6 @@ COMMUNITY PAGE:
 • Encourage responsible and accurate information sharing
 `;
 
-    
     const completion = await openai.chat.completions.create({
       model: 'gpt-4.1-mini',
       messages: [
