@@ -129,23 +129,24 @@ body {
   <nav class="map-actions" aria-label="Map Controls">
     
     <!-- MAP HOME BUTTON -->
-    <button 
-      type="button"
-      onclick="resetToHome()" 
-      aria-label="Reset map to India Gate location"
+    <a 
+      href="../index.html"
+      role="button"
+      aria-label="Go to home page"
     >
       <span aria-hidden="true">🏠</span>
       Map Home
-    </button>
+    </a>
 
     <!-- BACK BUTTON -->
-    <a 
-      href="../index.html" 
-      role="button"
-      aria-label="Go back to home page"
+    <button
+      type="button"
+      onclick="history.back()"
+      aria-label="Go back to previous page"
     >
-      ← Back to Home
-    </a>
+      ← Back
+    </button>
+
 
   </nav>
 </header>
@@ -182,12 +183,6 @@ const homeMarker = L.marker(homeLocation)
   .addTo(map)
   .bindPopup("<b>India Gate</b><br>New Delhi, India")
   .openPopup();
-
-/* Reset map to home */
-function resetToHome() {
-  map.setView(homeLocation, 12);
-  homeMarker.openPopup();
-}
 
 /* Geocoder */
 const geocoder = L.Control.geocoder({
