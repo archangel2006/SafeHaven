@@ -3,45 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hurricane Safety - Safe Haven</title>
+    <title>Hurricanes/Typhoons Safety Tips</title>
     <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Base Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #3c5da2;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .brand { font-weight: bold; font-size: 22px; text-transform: lowercase; }
+        .navbar i { cursor: pointer; }
+
+        /* Layout */
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: 20px auto;
+            gap: 25px;
+            padding: 0 20px;
+        }
+        .main-content { flex: 2.5; }
+        .sidebar { flex: 1; }
+
+        h1.page-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+        h1.page-title span { color: #5a7184; font-weight: 400; }
+
+        /* Video Container */
+        .video-box {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .video-box iframe { width: 100%; height: 100%; border: none; }
+
+        /* Accordions */
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e1e8f0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .card-header {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .info-card.what { border-left: 5px solid #3c5da2; }
+        .info-card.warning { border-left: 5px solid #3182ce; }
+        .info-card.before { border-left: 5px solid #f6ad55; }
+        .info-card.during { border-left: 5px solid #e53e3e; }
+        .info-card.resources { border-left: 5px solid #3182ce; }
+
+        .card-header i:first-child { 
+            margin-right: 15px; 
+            font-size: 20px; 
+            width: 25px; 
+            text-align: center; 
+        }
+        .card-header h3 { font-size: 17px; flex-grow: 1; font-weight: 600; color: #2d3748; }
+        .card-header .chevron { color: #cbd5e0; font-size: 14px; }
+        
+        .card-content {
+            padding: 20px;
+            border-top: 1px solid #f0f4f8;
+            font-size: 15px;
+            color: #4a5568;
+            display: none;
+        }
+        .card-content.active { display: block; }
+
+        /* Safety Lists */
+        .safety-list { list-style: none; padding-left: 5px; }
+        .safety-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; }
+        .safety-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; }
+
+        /* Resource Grid */
+        .resource-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #edf2f7; }
+        .res-btn {
+            background: white;
+            padding: 15px;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            border: 0.5px solid #edf2f7;
+            transition: background 0.2s;
+        }
+        .res-btn:hover { background: #f7fafc; }
+        .res-btn i { color: #3c5da2; font-size: 16px; width: 20px; }
+
+        /* Sidebar */
+        .sidebar-title { margin-bottom: 15px; font-size: 19px; color: #1a365d; font-weight: 700; }
+        .read-next-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .read-next-card:hover { transform: translateY(-3px); }
+        .thumb-box { height: 130px; position: relative; }
+        .thumb-box iframe { width: 100%; height: 100%; border: none; }
+        .read-next-card p { padding: 12px 15px; font-size: 14px; font-weight: 600; color: #2d3748; }
+
+        /* Toast Notifications */
+        #toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 90%; max-width: 400px; }
+        .toast {
+            background: #333; color: white; padding: 16px 20px; border-radius: 12px;
+            display: flex; align-items: center; gap: 12px; margin-top: 10px;
+            animation: slideUp 0.4s ease forwards; border-left: 5px solid #3c5da2;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .safety-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
+
+    <nav class="navbar">
+        <i class="fas fa-arrow-left" onclick="history.back()"></i>
+        <div class="brand">Hurricanes/Typhoons</div>
+        <i class="far fa-user-circle fa-lg"></i>
+    </nav>
+
+    <div id="toast-container"></div>
+
     <div class="container">
-        <header>
-            <h1>Hurricane/Typhoon Safety</h1>
-        </header>
+        <main class="main-content">
+            <h1 class="page-title">Hurricanes <span>Safety Tips</span></h1>
+            
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/aEkAzbM4_HU?rel=0" title="Hurricanes Safety Tips" allowfullscreen></iframe>
+            </div>
 
-        <section class="disaster-info">
-            <h2>What is a Hurricane/Typhoon?</h2>
-            <img src="https://i.pinimg.com/474x/c7/ca/64/c7ca642c77887dd8ac61eee4a0b39c9c.jpg" alt="Hurricane" class="disaster-img" width="300px" height="200px">
-            <p>Hurricanes and typhoons are powerful tropical storms that can bring heavy rain, strong winds, and flooding to coastal areas.</p>
-        </section>
+            <div class="info-card what">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-check-circle" style="color: #3182ce;"></i>
+                    <h3>What are Hurricanes/Typhoons?</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    Hurricanes and typhoons are powerful tropical storms that form over warm ocean waters, bringing strong winds, heavy rain, and flooding. They are the same type of storm—called a tropical cyclone but are named hurricanes in the Atlantic and Northeast Pacific, and typhoons in the Northwest Pacific.
+                </div>
+            </div>
 
-        <section class="safety-measures">
-            <h2>Safety Measures During a Hurricane/Typhoon</h2>
-            <ul>
-                <li>Move to a safe location or evacuate if instructed by authorities.</li>
-                <li>Stay indoors during the storm and away from windows.</li>
-                <li>Keep an emergency kit with food, water, medications, and important documents.</li>
-            </ul>
-            <img src="https://i.pinimg.com/474x/d3/8e/af/d38eafcc24b7ef17456e4865e434ad67.jpg" alt="Hurricane" class="disaster-img" width="500px" height="200px">
-        </section>
+            <div class="info-card warning">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-bell" style="color: #3182ce;"></i>
+                    <h3>Early Warning Signs</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i> Sudden drop in air pressure</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i> Strong winds and dark storm clouds forming over the ocean</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i> Continuous heavy rain and rising sea waves</li>
+                    </ul>
+                </div>
+            </div>
 
-        <section class="real-life-cases">
-            <h2>Real-Life Hurricane/Typhoon Cases</h2>
-            <p>In 2013, Typhoon Haiyan devastated parts of the Philippines, causing widespread destruction and loss of life.</p>
-            <a href="https://www.bbc.com/news/world-24856367">Learn More About Typhoon Haiyan</a>
-        </section>
+            <div class="info-card before">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-clipboard-list" style="color: #ed8936;"></i>
+                    <h3>Before an Hurricanes/Typhoons(Prepare)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-couch" style="color: #ed8936;"></i> Secure windows, doors, and loose outdoor items.</li>
+                        <li><i class="fas fa-briefcase" style="color: #3182ce;"></i> Prepare an emergency kit</li>
+                        <li><i class="fas fa-hand-holding-medical" style="color: #4299e1;"></i> Learn first aid basics</li>
+                    </ul>
+                </div>
+            </div>
 
-        <footer>
-            <p>For more hurricane safety tips, visit <a href="https://www.fema.gov/hurricane-safety-home">FEMA Hurricane Safety</a></p>
-        </footer>
+            <div class="info-card during">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-house-crack" style="color: #e53e3e;"></i>
+                    <h3>During an Hurricanes(Stay Safe)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <div class="safety-grid">
+                        <ul class="safety-list">
+                            <li><i class="fas fa-check-circle" style="color: #48bb78;"></i> Stay indoors in a safe room.</li>
+                            <li><i class="fas fa-leaf" style="color: #48bb78;"></i> Stay indoors in a safe room.</li>
+                            <li><i class="fas fa-file-lines" style="color: #4299e1;"></i> Listen to official weather updates.</li>
+                        </ul>
+                        <ul class="safety-list">
+                            <li><i class="fas fa-times" style="color: #e53e3e;"></i>Don’t go outside during the storm.</li>
+                            <li><i class="fas fa-times" style="color: #e53e3e;"></i> Don’t touch fallen power lines.</li>
+                            <li><i class="fas fa-fire" style="color: #ed8936;"></i> Don’t drive through flooded roads.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card resources">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-globe" style="color: #3182ce;"></i>
+                    <h3>Additional Resources</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content" style="padding: 0;">
+                    <div class="resource-grid">
+                        <a href="#" class="res-btn" onclick="findSafeZones()"><i class="fas fa-location-dot"></i> View Nearby Safe Zones</a>
+                        <a href="#" class="res-btn" onclick="window.print()"><i class="fas fa-download"></i> Download Emergency Kit List</a>
+                        <a href="#" class="res-btn" onclick="showLiveAlerts()"><i class="fas fa-square-check"></i> See Live Emergency Alerts</a>
+                        <a href="#" class="res-btn" onclick="showLiveAlerts()"><i class="fas fa-volume-up"></i> See Live Emergency Alerts</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Read Next</h3>
+            
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/3YFSneQddOg?rel=0" allowfullscreen></iframe>
+                </div>
+                <p>Building Your Emergency Kit</p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/9KdumJQYwSw?rel=0" allowfullscreen></iframe>
+                </div>
+                <p>Tips to follow Before, During and After Typhoons</p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/TqZ3M7xh8jM?rel=0" allowfullscreen></iframe>
+                </div>
+                <p>How to Stay Calm During Hurricanes</p>
+            </div>
+        </aside>
     </div>
-    <script src="../8.AIAssistant/chatbot.js"></script>
+
+    <script>
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const chevron = element.querySelector('.chevron');
+            const isActive = content.classList.contains('active');
+            
+            document.querySelectorAll('.card-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.chevron').forEach(i => i.style.transform = 'rotate(0deg)');
+
+            if (!isActive) {
+                content.classList.add('active');
+                chevron.style.transform = 'rotate(90deg)';
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas fa-circle-info"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        function showLiveAlerts() {
+            showToast("No active Hurricanes threats in your current area.");
+        }
+
+        function findSafeZones() {
+            showToast("Locating nearby emergency shelters...");
+        }
+    </script>
+    <script src="../../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>
