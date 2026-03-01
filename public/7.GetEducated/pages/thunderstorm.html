@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thunderstorm Safety Tips</title>
+    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #3c5da2;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .brand {
+            font-weight: bold;
+            font-size: 22px;
+            text-transform: lowercase;
+        }
+
+        .navbar i {
+            cursor: pointer;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: 20px auto;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .main-content {
+            flex: 2.5;
+        }
+
+        .sidebar {
+            flex: 1;
+        }
+
+        h1.page-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+
+        h1.page-title span {
+            color: #5a7184;
+            font-weight: 400;
+        }
+
+        /* Video Container */
+        .video-box {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Accordions */
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e1e8f0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        /* Border Logic exactly like Earthquake template */
+        .info-card.what {
+            border-left: 5px solid #3c5da2;
+        }
+
+        .info-card.warning {
+            border-left: 5px solid #3182ce;
+        }
+
+        .info-card.before {
+            border-left: 5px solid #f6ad55;
+        }
+
+        .info-card.during {
+            border-left: 5px solid #e53e3e;
+        }
+
+        .info-card.resources {
+            border-left: 5px solid #3182ce;
+        }
+
+        .card-header i:first-child {
+            margin-right: 15px;
+            font-size: 20px;
+            width: 25px;
+            text-align: center;
+        }
+
+        .card-header h3 {
+            font-size: 17px;
+            flex-grow: 1;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .card-header .chevron {
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+
+        .card-content {
+            padding: 20px;
+            border-top: 1px solid #f0f4f8;
+            font-size: 15px;
+            color: #4a5568;
+            display: none;
+        }
+
+        .card-content.active {
+            display: block;
+        }
+
+        /* Safety Lists */
+        .safety-list {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .safety-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 15px;
+        }
+
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .res-btn {
+            background: white;
+            padding: 15px;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            border: 0.5px solid #edf2f7;
+            transition: background 0.2s;
+        }
+
+        .res-btn:hover {
+            background: #f7fafc;
+        }
+
+        .res-btn i {
+            color: #3c5da2;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar-title {
+            margin-bottom: 15px;
+            font-size: 19px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+
+        .read-next-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .read-next-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .thumb-box {
+            height: 130px;
+            position: relative;
+        }
+
+        .thumb-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .read-next-card p {
+            padding: 12px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .toast {
+            background: #333;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            animation: slideUp 0.4s ease forwards;
+            border-left: 5px solid #3c5da2;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <i class="fas fa-arrow-left" onclick="history.back()"></i>
+        <div class="brand">thunderstorm</div>
+        <i class="far fa-user-circle fa-lg"></i>
+    </nav>
+
+    <div id="toast-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1 class="page-title">Thunderstorm &amp; Lightning <span>Safety Tips</span></h1>
+
+            <!-- Main Featured Video -->
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/Lv6PGb_4deY"
+                    title="What Is Thunder and How Lightning Is Formed" allowfullscreen></iframe>
+            </div>
+
+            <!-- What Is a Thunderstorm -->
+            <div class="info-card what">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-check-circle" style="color: #3182ce;"></i>
+                    <h3>What Is a Thunderstorm?</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    A thunderstorm is a weather event that produces lightning, thunder, heavy rain, strong winds, and
+                    sometimes hail or tornadoes. Thunderstorms form when warm, moist air rises rapidly into the
+                    atmosphere and collides with cooler air. Lightning is one of the most dangerous aspects of
+                    thunderstorms - it can strike miles away from the storm's center, even under clear skies, and kills
+                    hundreds of people worldwide each year.
+                </div>
+            </div>
+
+            <!-- Early Warning Signs -->
+            <div class="info-card warning">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-bell" style="color: #3182ce;"></i>
+                    <h3>Early Warning Signs</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i>
+                            Rapidly darkening skies or sudden change in sky color (green or yellow tinge)</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i>
+                            Increasing wind speeds or sudden calm before the storm hits</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i>
+                            Distant rumbles of thunder - if you can hear thunder, lightning can reach you</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i>
+                            Tall, dark cumulonimbus clouds building on the horizon</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i>
+                            Hair standing on end or a tingling sensation - a sign lightning may be imminent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Before a Thunderstorm -->
+            <div class="info-card before">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-clipboard-list" style="color: #ed8936;"></i>
+                    <h3>Before a Thunderstorm (Prepare)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-mobile-alt" style="color: #3182ce;"></i>
+                            Sign up for local weather alerts and monitor forecasts during storm season</li>
+                        <li><i class="fas fa-briefcase" style="color: #ed8936;"></i>
+                            Prepare an emergency kit with water, food, flashlight, batteries, and first aid supplies
+                        </li>
+                        <li><i class="fas fa-tree" style="color: #48bb78;"></i>
+                            Trim trees and branches near your home that could fall and cause damage</li>
+                        <li><i class="fas fa-plug" style="color: #e53e3e;"></i>
+                            Install surge protectors and consider an uninterruptible power supply (UPS) for electronics
+                        </li>
+                        <li><i class="fas fa-map-marked-alt" style="color: #2c3e6b;"></i>
+                            Identify safe indoor shelter locations in your home, workplace, and surrounding
+                            neighbourhood</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- During a Thunderstorm -->
+            <div class="info-card during">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-bolt" style="color: #e53e3e;"></i>
+                    <h3>During a Thunderstorm (Stay Safe)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <div class="safety-grid">
+                        <ul class="safety-list">
+                            <li><i class="fas fa-house" style="color: #48bb78;"></i>
+                                Go indoors immediately - a sturdy building or hard-topped vehicle is safest</li>
+                            <li><i class="fas fa-hand" style="color: #48bb78;"></i>
+                                Stay away from windows, doors, and exterior walls</li>
+                            <li><i class="fas fa-compress" style="color: #48bb78;"></i>
+                                If caught outdoors, crouch low with feet together - do not lie flat</li>
+                            <li><i class="fas fa-clock" style="color: #48bb78;"></i>
+                                Wait 30 minutes after the last thunder before going outside</li>
+                        </ul>
+                        <ul class="safety-list">
+                            <ul class="safety-list">
+                                <li><i class="fas fa-times" style="color: #e53e3e;"></i>
+                                    Don't shelter under trees, isolated structures, or near metal objects</li>
+                                <li><i class="fas fa-times" style="color: #e53e3e;"></i>
+                                    Don't use corded phones, electrical appliances, or plumbing during the storm</li>
+                                <li><i class="fas fa-times" style="color: #e53e3e;"></i>
+                                    Don't remain in open fields, hilltops, or near water bodies</li>
+                                <li><i class="fas fa-exclamation-triangle" style="color: #ed8936;"></i>
+                                    Don't ignore emergency alerts or evacuation orders</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Resources -->
+            <div class="info-card resources">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-globe" style="color: #3182ce;"></i>
+                    <h3>Additional Resources</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content" style="padding: 0;">
+                    <div class="resource-grid">
+                        <a href="#" class="res-btn" onclick="findSafeZones()"><i class="fas fa-location-dot"></i>
+                            View Nearby Safe Zones</a>
+                        <a href="#" class="res-btn" onclick="window.print()"><i class="fas fa-download"></i>
+                            Download Emergency Kit List</a>
+                        <a href="#" class="res-btn" onclick="showLiveAlerts()"><i
+                                class="fas fa-triangle-exclamation"></i>
+                            Storm Watches & Warnings</a>
+                        <a href="#" class="res-btn" onclick="showRecoveryChecklist()"><i
+                                class="fas fa-clipboard-check"></i>
+                            Lightning Safety Checklist</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Read Next</h3>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/-RVsxCGLwIs" title="Building Your Emergency Kit"
+                        allowfullscreen></iframe>
+                </div>
+                <p>Building Your Emergency Kit</p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/SH3PDx94pWY" title="Thunderstorm Warning Signs"
+                        allowfullscreen></iframe>
+                </div>
+                <p>Thunderstorm Warning Signs</p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/eNxDgd3D_bU" title="How to Survive a Lightning Strike"
+                        allowfullscreen></iframe>
+                </div>
+                <p>How to Survive a Lightning Strike</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const chevron = element.querySelector('.chevron');
+            const isActive = content.classList.contains('active');
+
+            document.querySelectorAll('.card-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.chevron').forEach(i => i.style.transform = 'rotate(0deg)');
+
+            if (!isActive) {
+                content.classList.add('active');
+                chevron.style.transform = 'rotate(90deg)';
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas fa-circle-info"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        function findSafeZones() {
+            showToast("Locating nearby storm shelters and safe zones...");
+        }
+
+        function showLiveAlerts() {
+            showToast("No active storm watches or warnings in your current area.");
+        }
+
+        function showRecoveryChecklist() {
+            showToast("Stay indoors 30 min after last thunder, avoid downed power lines, report hazards to authorities.");
+        }
+    </script>
+    <script src="../../8.AIAssistant/chatbot.js"></script>
+</body>
+
+</html>
