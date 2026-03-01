@@ -1,180 +1,755 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer - Safe Haven</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volunteer - Safe Haven</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
+  <!-- Favicon -->
+  <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png" />
 
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-        .risk-dashboard .panel-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-.risk-dashboard .panel {
-  width: 22%;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
+  <style>
+    :root {
+      --primary: #2458a6;
+      --primary-light: #3f70ba;
+      --accent: #28a745;
+      --bg: #f4f4f4;
+      --card-bg: #ffffff;
+      --border-soft: #d9e1ec;
+      --text-main: #1f2933;
+      --text-muted: #6b7280;
+    }
 
-.risk-dashboard .panel img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-}
+    * { box-sizing: border-box; }
 
-/* FORM */
-.risk-dashboard form {
-  background: white;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+    }
 
-.risk-dashboard input,
-.risk-dashboard select,
-.risk-dashboard button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
+    /* NAVBAR */
+    .top-nav {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .top-nav-left,
+    .top-nav-center,
+    .top-nav-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .top-nav-left { justify-content: flex-start; }
+    .top-nav-center { justify-content: center; }
+    .top-nav-right { justify-content: flex-end; }
 
-/* BUTTON */
-.risk-dashboard button {
-  background-color: #28a745;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
+    .top-logo-img {
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #ffffff;
+    }
+    .top-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .top-user-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 2px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
 
-.risk-dashboard button:hover {
-  background-color: #218838;
-}
+    /* MAIN LAYOUT */
+    .page-container {
+      max-width: 1080px;
+      margin: 20px auto 40px;
+      padding: 0 16px;
+    }
+    h2.section-title {
+      text-align: center;
+      margin: 24px 0 16px;
+      font-size: 22px;
+    }
 
-/* GRAPH */
-.risk-dashboard .graph-container {
-  margin-top: 40px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 80%;
-  margin-inline: auto;
-}
+    /* ROLE CARDS */
+    .panel-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+    }
+    .panel {
+      flex: 1 1 210px;
+      max-width: 240px;
+      background: #d5e5f8;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      text-align: left;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .panel:nth-child(2),
+    .panel:nth-child(4) {
+      background: #c0d7f5;
+    }
+    .panel img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      display: block;
+    }
+    .panel-content { padding: 12px 14px 14px; }
+    .panel h3 {
+      margin: 0 0 4px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .panel p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .panel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+    }
 
-       
+    /* FORM CARD */
+    .form-card {
+      margin-top: 24px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+      padding: 18px 20px 20px;
+    }
+    .form-card h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      text-align: center;
+      font-size: 20px;
+    }
+    .form-grid-1col { display: grid; gap: 8px; }
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-soft);
+      font-size: 14px;
+      outline: none;
+      background: #f9fafb;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+      background: #ffffff;
+    }
 
-    </style>
+    /* SECTION BLOCKS (collapsible) */
+    .section-block { margin-top: 12px; }
+
+    .section-header {
+      padding: 8px 12px;
+      background: #e5edf6;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 6px;
+      border: 1px solid var(--border-soft);
+      cursor: pointer;
+      user-select: none;
+    }
+    .section-header.pref { background: #ffe9c8; }
+
+    .section-header .title-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* chevron like dropdown */
+    .chevron {
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid #64748b;
+      border-bottom: 2px solid #64748b;
+      transform: rotate(45deg);
+      transition: transform 0.15s ease;
+      margin-right: 2px;
+    }
+    .section-header.open .chevron {
+      transform: rotate(-135deg);
+    }
+
+    .section-body-wrapper {
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+      border: 1px solid var(--border-soft);
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      background: #ffffff;
+    }
+    .section-body {
+      padding: 10px 12px 12px;
+      font-size: 13px;
+    }
+
+    /* AREA OF INTEREST – no outer box, only header + internal lines */
+    .area-interest-body-inner {
+      border-top: 1px solid #e2e8f0;
+      border-radius: 0 0 6px 6px;
+    }
+    .area-interest-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .area-col-no-box {
+      padding: 6px 12px 8px;
+    }
+    .area-col-no-box + .area-col-no-box {
+      border-left: 1px solid #e2e8f0;
+    }
+    .area-row-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .area-row-item:last-child { margin-bottom: 0; }
+    .area-row-item input { accent-color: var(--primary); }
+
+    /* Availability + Preferred times */
+    .availability-pref-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .availability-body { background: #f7fafc; }
+    .availability-row { padding: 8px 4px; }
+
+    .availability-row.top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .availability-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 180px;
+    }
+    .availability-extra-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+    }
+
+    .avail-divider {
+      border: 0;
+      border-top: 1px solid #e2e8f0;
+      margin: 6px 0;
+    }
+    .availability-info-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 4px 0 0 22px;
+    }
+    .avail-icon { font-size: 16px; }
+    .avail-icon.danger { font-size: 16px; }
+    .availability-note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: #e5f3ff;
+      border-radius: 4px;
+      padding: 8px 10px;
+    }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .radio-item input { accent-color: var(--primary); }
+
+    .preferred-times-cols {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+    .radio-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .checkbox-item input { accent-color: var(--primary); }
+
+    .emergency-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .consent-row {
+      margin-top: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .consent-row input {
+      margin-top: 2px;
+      accent-color: var(--primary);
+    }
+    .btn-primary {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px 0;
+      border: none;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .btn-primary:hover {
+      background: #1f8a39;
+      transform: translateY(-1px);
+    }
+
+    /* IMPACT SECTION (smaller card, centered title) */
+    .impact-section {
+      margin-top: 26px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+      padding: 14px 16px 16px;          /* smaller padding */
+      max-width: 900px;                 /* smaller width */
+      margin-inline: auto;              /* center the card */
+    }
+    .impact-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .impact-header-left {
+      flex: 1;
+      text-align: center;               /* center title + subtitle */
+    }
+    .impact-header-left h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .impact-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .impact-badge {
+      font-size: 13px;
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-align: right;
+      min-width: 130px;
+    }
+    .impact-badge span { display: block; }
+    .impact-badge .count {
+      font-weight: 800;
+      font-size: 18px;                  /* bigger number */
+      color: var(--primary);
+    }
+    .impact-legend {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .graph-container {
+      margin-top: 4px;
+      height: 260px;                    /* smaller graph height */
+    }
+
+    @media (max-width: 768px) {
+      .availability-pref-grid { grid-template-columns: 1fr; }
+      .impact-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .impact-badge { align-self: flex-end; }
+      .area-interest-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="risk-dashboard">
-    <div class="container">
-        <h2>Volunteer Roles</h2>
-        <div class="panel-container">
-            <div class="panel" style="background-color:#c5e1f3;">
-                <img src="https://i.pinimg.com/474x/35/6d/e7/356de79f39c71a655e68e3b265108455.jpg" alt="Medical Assistance">
-                <h3>🚑 Medical Assistance</h3>
-                <p>Help in emergency first aid</p>
-            </div>
-            <div class="panel" style="background-color:#aecdf1;">
-                <img src="https://i.pinimg.com/736x/4e/00/4e/4e004eb7195a52bc508209611fa910ed.jpg" alt="Rescue Operations">
-                <h3>🚜 Rescue Operations</h3>
-                <p>On-ground rescue missions</p>
-            </div>
-            <div class="panel" style="background-color:#c5e1f3;">
-                <img src="https://i.pinimg.com/474x/ed/0e/0d/ed0e0d54aae6ff49b203ec0d8518549e.jpg" alt="Supply Distribution">
-                <h3>📦 Supply Distribution</h3>
-                <p>Help distribute food, water & essentials</p>
-            </div>
-            <div class="panel" style="background-color:#aecdf1;">
-                <img src="https://i.pinimg.com/474x/7e/6c/74/7e6c746d981cebbe8d9501f56d5d81d6.jpg" alt="Awareness & Education">
-                <h3>📢 Awareness & Education</h3>
-                <p>Teach disaster preparedness in communities</p>
-            </div>
-        </div>
-
-        <h2>Volunteer Registration Form</h2>
-        <form id="volunteerForm" style="background-color:azure" >
-            <input type="text" placeholder="Name" id="name" required>
-            <input type="number" placeholder="Age" id="age" required>
-            <input type="text" placeholder="Location" id="location" required>
-            <input type="tel" placeholder="Contact Info" id="contact" required>
-            <select id="skill">
-                <option value="Medical">Medical</option>
-                <option value="Rescue">Rescue</option>
-                <option value="Logistics">Logistics</option>
-                <option value="Awareness & Education">Awareness & Education</option>
-            </select>
-            <select id="availability">
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Remote Help">Remote Help</option>
-            </select>
-            <button type="submit">Register</button>
-        </form>
-
-        <div class="graph-container">
-            <h2>📊 Volunteer Impact</h2>
-            <canvas id="volunteerChart"></canvas>
-        </div>
+  <!-- NAVBAR -->
+  <header class="top-nav">
+    <div class="top-nav-left">
+      <img src="../../assets/9.GetInvolved/LOGO.jpg" alt="SafeHaven logo" class="top-logo-img" />
     </div>
-</div>
+    <div class="top-nav-center">
+      <span class="top-title">Volunteer</span>
+    </div>
+    <div class="top-nav-right">
+      <span class="top-user-icon">👤</span>
+    </div>
+  </header>
 
-    <script>
-        // Handle form submission
-        document.getElementById("volunteerForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            alert("Registered Successfully! You will be receiving our call in about 60 seconds.");
-            document.getElementById("volunteerForm").reset();
-        });
+  <main class="page-container">
+    <!-- VOLUNTEER ROLES -->
+    <h2 class="section-title">Volunteer Roles</h2>
+    <div class="panel-container">
+      <div class="panel">
+        <img src="https://i.pinimg.com/474x/35/6d/e7/356de79f39c71a655e68e3b265108455.jpg" alt="Medical Assistance" />
+        <div class="panel-content">
+          <h3>🚑 Medical Assistance</h3>
+          <p>Help in emergency first aid</p>
+        </div>
+      </div>
+      <div class="panel">
+        <img src="https://i.pinimg.com/736x/4e/00/4e/4e004eb7195a52bc508209611fa910ed.jpg" alt="Rescue Operations" />
+        <div class="panel-content">
+          <h3>🚜 Rescue Operations</h3>
+          <p>On-ground rescue missions</p>
+        </div>
+      </div>
+      <div class="panel">
+        <img src="https://i.pinimg.com/474x/ed/0e/0d/ed0e0d54aae6ff49b203ec0d8518549e.jpg" alt="Supply Distribution" />
+        <div class="panel-content">
+          <h3>📦 Supply Distribution</h3>
+          <p>Help distribute food, water & essentials</p>
+        </div>
+      </div>
+      <div class="panel">
+        <img src="https://i.pinimg.com/474x/7e/6c/74/7e6c746d981cebbe8d9501f56d5d81d6.jpg" alt="Awareness & Education" />
+        <div class="panel-content">
+          <h3>📢 Awareness & Education</h3>
+          <p>Teach disaster preparedness in communities</p>
+        </div>
+      </div>
+    </div>
 
-        // Chart.js Graph
-        const ctx = document.getElementById('volunteerChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Medical Assistance', 'Rescue Operations', 'Supply Distribution', 'Awareness & Education'],
-                datasets: [{
-                    label: 'Lives Impacted',
-                    data: [5000, 8000, 6000, 7000],
-                    backgroundColor: ['#ff5733', '#33ff57', '#3377ff', '#ff33a6']
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+    <!-- REGISTRATION FORM -->
+    <section class="form-card">
+      <h2>Volunteer Registration</h2>
+
+      <form id="volunteerForm">
+        <!-- top basic fields -->
+        <div class="form-grid-1col">
+          <input class="form-input" type="text" placeholder="Name" id="name" required />
+          <input class="form-input" type="number" placeholder="Age" id="age" required />
+          <input class="form-input" type="text" placeholder="Location" id="location" required />
+          <input class="form-input" type="tel" placeholder="Contact Info" id="contact" required />
+          <select class="form-select" id="skill">
+            <option value="">Medical</option>
+            <option value="Rescue">Rescue</option>
+            <option value="Logistics">Logistics</option>
+            <option value="Awareness & Education">Awareness & Education</option>
+          </select>
+        </div>
+
+        <!-- AREA OF INTEREST (collapsible, open by default) -->
+        <div class="section-block">
+          <div class="section-header collapsible-header open" data-target="area-body">
+            <div class="title-left">
+              <span>Area of Interest</span>
+            </div>
+            <span class="chevron"></span>
+          </div>
+          <div id="area-body" class="section-body-wrapper">
+            <div class="section-body area-interest-body-inner">
+              <div class="area-interest-row">
+                <!-- Column 1 -->
+                <div class="area-col-no-box">
+                  <label class="area-row-item">
+                    <input type="checkbox" checked />
+                    <span>Medical Assistance</span>
+                  </label>
+                  <label class="area-row-item">
+                    <input type="checkbox" checked />
+                    <span>Supply Distribution</span>
+                  </label>
+                </div>
+                <!-- Column 2 -->
+                <div class="area-col-no-box">
+                  <label class="area-row-item">
+                    <input type="checkbox" />
+                    <span>Rescue Operations</span>
+                  </label>
+                  <label class="area-row-item">
+                    <input type="checkbox" />
+                    <span>Phone Helpline Support</span>
+                  </label>
+                </div>
+                <!-- Column 3 -->
+                <div class="area-col-no-box">
+                  <label class="area-row-item">
+                    <input type="checkbox" />
+                    <span>Awareness & Education</span>
+                  </label>
+                  <label class="area-row-item">
+                    <input type="checkbox" />
+                    <span>Phone Helpline Support</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AVAILABILITY + PREFERRED TIMES -->
+        <div class="availability-pref-grid">
+          <!-- Availability (collapsible, open) -->
+          <div class="section-block">
+            <div class="section-header collapsible-header open" data-target="availability-body">
+              <div class="title-left">
+                <span>Availability</span>
+              </div>
+              <span class="chevron"></span>
+            </div>
+            <div id="availability-body" class="section-body-wrapper">
+              <div class="section-body availability-body">
+                <!-- Part-time row -->
+                <div class="availability-row top-row">
+                  <div class="availability-main">
+                    <label class="radio-item">
+                      <input type="radio" name="availability-type" checked />
+                      <span><strong>Part‑Time</strong> (On‑Ground)</span>
+                    </label>
+                  </div>
+                  <div class="availability-extra-inline">
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>1–4 hours / day</span>
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>4–8 hours / day</span>
+                    </label>
+                  </div>
+                </div>
+
+                <hr class="avail-divider" />
+
+                <!-- Remote volunteer row -->
+                <div class="availability-row">
+                  <div class="availability-main">
+                    <span class="avail-icon">📞</span>
+                    <label class="radio-item">
+                      <input type="radio" name="availability-type" />
+                      <span><strong>Remote Volunteer</strong></span>
+                    </label>
+                  </div>
+                  <div class="availability-info-text">
+                    Help from home: Phone helpline, data entry, awareness calls
+                  </div>
+                </div>
+
+                <hr class="avail-divider" />
+
+                <!-- Emergency only row -->
+                <div class="availability-row">
+                  <div class="availability-main">
+                    <span class="avail-icon danger">🔴</span>
+                    <label class="radio-item">
+                      <input type="radio" name="availability-type" />
+                      <span><strong>Emergency Only</strong></span>
+                    </label>
+                  </div>
+                  <div class="availability-info-text">
+                    Available during disasters · On‑call basis
+                  </div>
+                </div>
+
+                <div class="availability-note">
+                  You don't need to be on the ground to <strong>make a difference</strong>. Even one hour of help can save lives.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preferred Times (collapsible, open) -->
+          <div class="section-block">
+            <div class="section-header pref collapsible-header open" data-target="pref-body">
+              <div class="title-left">
+                <span>Preferred Times</span>
+              </div>
+              <span class="chevron"></span>
+            </div>
+            <div id="pref-body" class="section-body-wrapper">
+              <div class="section-body">
+                <div class="preferred-times-cols">
+                  <div class="radio-col">
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>Morning</span>
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>Evening</span>
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>Flexible</span>
+                    </label>
+                  </div>
+                  <div class="radio-col">
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>Afternoon</span>
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>1–2 hrs per week</span>
+                    </label>
+                    <label class="checkbox-item">
+                      <input type="checkbox" />
+                      <span>3–5 hrs per week</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="emergency-row">
+                  <select class="form-select" id="emergency-contact">
+                    <option value="">Emergency Contact</option>
+                    <option value="Parent">Parent</option>
+                    <option value="Spouse">Spouse</option>
+                    <option value="Friend">Friend</option>
+                  </select>
+                </div>
+
+                <div class="consent-row">
+                  <input type="checkbox" required />
+                  <span>I understand risks and agree to participate voluntarily.</span>
+                </div>
+
+                <!-- Register button (right section) -->
+                <button type="submit" class="btn-primary">Register</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- IMPACT CHART (centered title, smaller card) -->
+    <section class="impact-section">
+      <div class="impact-header">
+        <div class="impact-header-left">
+          <h2>📊 Volunteer Impact</h2>
+          <p class="impact-subtitle">Lives impacted across different roles</p>
+        </div>
+        <div class="impact-badge">
+          <span>Registered Volunteers</span>
+          <span class="count">1,258</span>
+        </div>
+      </div>
+      <p class="impact-legend">Lives Impacted</p>
+      <div class="graph-container">
+        <canvas id="volunteerChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Form submit
+    document.getElementById("volunteerForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      alert("Registered Successfully! You will be receiving our call in about 60 seconds.");
+      this.reset();
+    });
+
+    // Collapsible sections (Area, Availability, Preferred Times)
+    document.querySelectorAll(".collapsible-header").forEach(function(header) {
+      const targetId = header.getAttribute("data-target");
+      const bodyWrapper = document.getElementById(targetId);
+      const bodyContent = bodyWrapper.firstElementChild;
+
+      // open by default
+      bodyWrapper.style.maxHeight = bodyContent.scrollHeight + "px";
+
+      header.addEventListener("click", function () {
+        header.classList.toggle("open");
+        if (bodyWrapper.style.maxHeight && bodyWrapper.style.maxHeight !== "0px") {
+          bodyWrapper.style.maxHeight = "0px";
+        } else {
+          bodyWrapper.style.maxHeight = bodyContent.scrollHeight + "px";
+        }
+      });
+    });
+
+    // Chart
+    const ctx = document.getElementById("volunteerChart").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Medical Assistance", "Rescue Operations", "Supply Distribution", "Awareness & Education"],
+        datasets: [
+          {
+            label: "Lives Impacted",
+            data: [5000, 8000, 6000, 7000],
+            backgroundColor: ["#ff5733", "#33ff57", "#3377ff", "#ff33a6"]
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return "Lives Impacted: " + ctx.parsed.y.toLocaleString();
+              }
             }
-        });
-    </script>
-    <script src="../8.AIAssistant/chatbot.js"></script>
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1000 }
+          }
+        }
+      }
+    });
+  </script>
+  <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>
