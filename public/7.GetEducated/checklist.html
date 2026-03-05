@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Checklist</title>
+
+<style>
+body{
+font-family: 'Poppins', sans-serif;
+background:linear-gradient(135deg,#eef2ff,#f8fbff);
+margin:0;
+padding:0;
+}
+
+/* main container */
+.container{
+max-width:900px;
+margin:50px auto;
+background:white;
+padding:35px;
+border-radius:18px;
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+animation:fadeIn 0.6s ease;
+}
+
+h1{
+text-align:center;
+color:#0b3d91;
+margin-bottom:35px;
+font-size:34px;
+letter-spacing:1px;
+}
+
+/* accordion boxes */
+.box{
+background:linear-gradient(135deg,#eef3ff,#ffffff);
+margin-bottom:18px;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,0.12);
+transition:0.3s;
+}
+
+.box:hover{
+transform:translateY(-3px);
+}
+
+/* header */
+.box-header{
+padding:20px;
+font-size:19px;
+font-weight:600;
+display:flex;
+justify-content:space-between;
+cursor:pointer;
+background:linear-gradient(90deg,#4facfe,#00c6ff);
+color:white;
+letter-spacing:0.5px;
+}
+
+.arrow{
+font-size:22px;
+transition:0.4s;
+}
+
+/* content */
+.content{
+display:none;
+padding:22px;
+background:#ffffff;
+animation:fadeIn 0.4s ease;
+}
+
+.content h3{
+color:#0b3d91;
+margin-top:10px;
+margin-bottom:6px;
+}
+
+.content p{
+margin:6px 0 15px;
+line-height:1.7;
+color:#333;
+}
+
+/* divider */
+.content h3::before{
+content:"✔ ";
+color:#00b894;
+}
+
+/* animation */
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* mobile responsive */
+@media(max-width:600px){
+.container{
+margin:20px;
+padding:20px;
+}
+
+h1{
+font-size:24px;
+}
+
+.box-header{
+font-size:16px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Emergency Safety Checklist</h1>
+<p style="text-align:center;color:gray;margin-bottom:30px;">
+Click on any disaster to view safety checklist and emergency kit.
+</p>
+
+
+<!-- EARTHQUAKE -->
+<div class="box">
+<div class="box-header" onclick="toggle(this)">
+Earthquake <span class="arrow">▼</span>
+</div>
+<div class="content">
+<h3>Do's</h3>
+<p>Drop, Cover, Hold<br>Stay away from windows<br>Move to open area</p>
+
+<h3>Don'ts</h3>
+<p>Do not panic<br>Do not use elevator</p>
+
+<h3>Emergency Kit</h3>
+<p>Water, First aid, Torch, Power bank</p>
+</div>
+</div>
+
+<!-- FLOOD -->
+<div class="box">
+<div class="box-header" onclick="toggle(this)">
+Flood <span class="arrow">▼</span>
+</div>
+<div class="content">
+<h3>Do's</h3>
+<p>Move to higher ground<br>Switch off electricity</p>
+
+<h3>Don'ts</h3>
+<p>Do not walk in moving water</p>
+
+<h3>Emergency Kit</h3>
+<p>Dry food, Water, Medicines</p>
+</div>
+</div>
+
+<!-- FIRE -->
+<div class="box">
+<div class="box-header" onclick="toggle(this)">
+Fire <span class="arrow">▼</span>
+</div>
+<div class="content">
+<h3>Do's</h3>
+<p>Use stairs<br>Call emergency</p>
+
+<h3>Don'ts</h3>
+<p>Do not use lift</p>
+
+<h3>Emergency Kit</h3>
+<p>Fire extinguisher, Mask</p>
+</div>
+</div>
+
+<!-- HURRICANE -->
+<div class="box">
+<div class="box-header" onclick="toggle(this)">
+Hurricane <span class="arrow">▼</span>
+</div>
+<div class="content">
+<h3>Do's</h3>
+<p>Stay indoors<br>Secure windows</p>
+
+<h3>Don'ts</h3>
+<p>Do not go near sea</p>
+
+<h3>Emergency Kit</h3>
+<p>Radio, Food, Water</p>
+</div>
+</div>
+
+<!-- WILDFIRE -->
+<div class="box">
+<div class="box-header" onclick="toggle(this)">
+Wildfire <span class="arrow">▼</span>
+</div>
+<div class="content">
+<h3>Do's</h3>
+<p>Evacuate early<br>Wear mask</p>
+
+<h3>Don'ts</h3>
+<p>Do not stay in fire zone</p>
+
+<h3>Emergency Kit</h3>
+<p>Mask, Water, Emergency bag</p>
+</div>
+</div>
+
+<!-- VOLCANO -->
+<div class="box">
+<div class="box-header" onclick="toggle(this)">
+Volcano <span class="arrow">▼</span>
+</div>
+<div class="content">
+<h3>Do's</h3>
+<p>Stay indoors<br>Wear goggles</p>
+
+<h3>Don'ts</h3>
+<p>Avoid lava areas</p>
+
+<h3>Emergency Kit</h3>
+<p>Mask, Water, Food</p>
+</div>
+</div>
+
+<!-- TERRORISM -->
+<div class="box">
+<div class="box-header" onclick="toggle(this)">
+Terrorism <span class="arrow">▼</span>
+</div>
+<div class="content">
+<h3>Do's</h3>
+<p>Stay alert<br>Follow police instructions</p>
+
+<h3>Don'ts</h3>
+<p>Do not panic<br>Do not spread rumours</p>
+
+<h3>Emergency Kit</h3>
+<p>Phone, First aid, Emergency contacts</p>
+</div>
+</div>
+
+</div>
+
+<script>
+function toggle(element){
+let content=element.nextElementSibling;
+let arrow=element.querySelector(".arrow");
+
+if(content.style.display==="block"){
+content.style.display="none";
+arrow.style.transform="rotate(0deg)";
+}else{
+content.style.display="block";
+arrow.style.transform="rotate(180deg)";
+}
+}
+</script>
+
+</body>
+</html>

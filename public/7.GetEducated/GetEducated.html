@@ -1,173 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Educated - Safe Haven</title>
-    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Educated - Safe Haven</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+<link rel="icon" href="../../assets/1.HomePage/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
-        .dashboard {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #007bff;
-            padding: 15px;
-            color: white;
-            font-size: 20px;
-        }
-
-        .dashboard a {
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-        }
-
-        .dashboard h2 {
-            margin: 0;
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .panel-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-
-        .panel {
-            width: 30%;
-            background-color: #ffffff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .panel img {
-            width: 80%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .panel h3 {
-            color: #333;
-            margin-top: 15px;
-        }
-
-        .panel p {
-            color: #555;
-        }
-
-        .panel:hover {
-            transform: scale(1.05);
-        }
-
-        .panel a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .panel a:hover {
-            text-decoration: underline;
-        }
-/* ---------- TABLET (≤ 1024px) ---------- */
-@media (max-width: 1024px) {
-    .container {
-        width: 90%;
-    }
-
-    .panel {
-        width: 45%;
-    }
+<style>
+*{box-sizing:border-box;}
+body{
+font-family:'Poppins',sans-serif;
+background:#f4f6fb;
+margin:0;
 }
 
-/* ---------- MOBILE (≤ 768px) ---------- */
-@media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
 
-    .panel-container {
-        justify-content: center;
-    }
-
-    .panel {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .panel img {
-        width: 100%;
-    }
-.panel:hover {
-                transform: none;   /* stop zoom effect */
-            }
-
-            h2 {
-                font-size: 20px;
-            }
-
-            .panel h3 {
-                font-size: 16px;
-            }
-            .panel p {
-                font-size: 14px;
-            }
-        }
-        
-/* ---------- SMALL MOBILE (≤ 480px) ---------- */
-@media (max-width: 480px) {
-    .dashboard h2 {
-        font-size: 16px;
-    }
-
-    .panel {
-        padding: 15px;
-    }
-
-    .panel h3 {
-        font-size: 15px;
-    }
-
-    .panel p {
-        font-size: 13px;
-    }
+/* HEADER */
+.dashboard{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#007bff;
+padding:15px;
+color:white;
+font-size:20px;
+}
+.dashboard a{
+color:white;
+text-decoration:none;
+font-size:24px;
+}
+.dashboard h2{
+margin:0;
+flex-grow:1;
+text-align:center;
 }
 
-    </style>
+/* MAIN */
+.container{
+width:80%;
+margin:auto;
+padding:20px;
+text-align:center;
+}
+
+.panel-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:space-around;
+}
+
+.panel{
+width:30%;
+background:white;
+padding:20px;
+margin:20px 0;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+.panel:hover{transform:scale(1.05);}
+.panel img{width:80%;border-radius:10px;}
+.panel a{
+display:inline-block;
+margin-top:10px;
+color:#007bff;
+font-weight:bold;
+text-decoration:none;
+}
+
+/* ===== CHECKLIST TOP ===== */
+/* ===== CHECKLIST PREMIUM UI ===== */
+.checklist-section{
+margin:40px auto;
+padding:25px;
+max-width:650px;   /* pehle 920px tha */
+background:linear-gradient(135deg,#eef2ff,#ffffff);
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+text-align:center;
+}
+
+.checklist-section h2{
+font-size:30px;
+font-weight:700;
+color:#0d6efd;
+letter-spacing:0.5px;
+}
+
+.checklist-section p{
+color:#666;
+font-size:15px;
+margin-bottom:25px;
+}
+
+/* dropdown */
+#disasterSelect{
+padding:12px;
+width:70%;
+border-radius:10px;
+border:2px solid #0d6efd;
+font-size:15px;
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+#disasterSelect:focus{
+border-color:#ff6b00;
+box-shadow:0 0 10px rgba(255,107,0,0.4);
+}
+
+/* result card */
+.result-box{
+margin-top:20px;
+padding:18px;
+border-radius:14px;
+background:white;
+box-shadow:0 6px 18px rgba(0,0,0,0.1);
+animation:fade 0.3s ease;
+max-width:550px;
+margin-left:auto;
+margin-right:auto;
+}
+
+
+/* section headings */
+.result-box h3{
+padding:8px 16px;
+border-radius:8px;
+color:white;
+font-size:16px;
+font-weight:600;
+display:inline-block;
+margin-top:12px;   
+margin-bottom:5px;
+}
+
+
+/* colors */
+.result-box h3:nth-of-type(1){background:#22c55e;} /* green */
+.result-box h3:nth-of-type(2){background:#ef4444;} /* red */
+.result-box h3:nth-of-type(3){background:#f59e0b;} /* orange */
+
+/* list */
+.result-box ul{
+margin-top:5px;
+margin-bottom:8px;
+padding-left:18px;
+}
+
+
+.result-box li{
+margin:10px 0;
+font-size:16px;
+color:#333;
+font-weight:500;
+}
+
+/* animation */
+@keyframes fade{
+from{opacity:0;transform:translateY(15px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+
+</style>
 </head>
+
 <body>
+
+
+<div class="dashboard">
+<a href="../HomePage.html">🏠</a>
+<h2>Get Educated</h2>
+</div>
+
+<div class="container">
+<h2>Disaster Awareness and Preparedness</h2>
+
+<!-- ===== CHECKLIST TOP ===== -->
+<div class="checklist-section">
+<h2>🚨 Emergency Checklist Generator</h2>
+<p>Select disaster to view Do’s, Don’ts & Emergency Kit</p>
+
+<select id="disasterSelect">
+<option value="">Select Disaster</option>
+<option value="earthquake">Earthquake</option>
+<option value="flood">Flood</option>
+<option value="fire">Fire</option>
+<option value="wildfire">Wildfire</option>
+<option value="hurricane">Hurricane</option>
+<option value="volcano">Volcano</option>
+<option value="terrorism">Terrorism</option>
+<option value="tsunami">Tsunami</option>
+<option value="landslide">Landslide</option>
+</select>
+
+
+<div id="checklistResult" class="result-box"></div>
+</div>
+
+<h2 style="
+margin-top:35px;
+font-weight:700;
+color:#0d6efd;
+text-align:center;">
+📘 To get more knowledge about disasters, view the content given below
+</h2>
+
+<!-- DISASTER PANELS -->
+<div class="panel-container">
+
+<div class="panel">
+<img src="assets/earthquake.jpg">
+<h3>🌪 Earthquakes</h3>
+<p>Learn about earthquake safety.</p>
+<a href="earthquake.html">Learn More</a>
+</div>
+
+<div class="panel">
+<img src="assets/flood.jpg">
+<h3>🌊 Floods</h3>
+<p>Understand flood risks.</p>
+<a href="flood.html">Learn More</a>
+</div>
+
+<div class="panel">
+<img src="assets/wildfire.jpg">
+<h3>🔥 Wildfires</h3>
+<p>Fire safety & preparation.</p>
+<a href="wildfire.html">Learn More</a>
+</div>
+
+<div class="panel">
+<img src="assets/hurricane.jpg">
+<h3>🌀 Hurricanes</h3>
+<p>Prepare for hurricanes.</p>
+<a href="hurricane.html">Learn More</a>
+</div>
+
+<div class="panel">
+<img src="assets/volcano.jpg">
+<h3>🌋 Volcano</h3>
+<p>Volcanic safety info.</p>
+<a href="volcano.html">Learn More</a>
+</div>
+
+<div class="panel">
+<img src="assets/terrorism.jpg">
+<h3>🧯 Terrorism</h3>
+<p>Emergency response tips.</p>
+<a href="terrorism.html">Learn More</a>
+</div>
+
+</div>
+</div>
+
+<script src="../8.AIAssistant/chatbot.js"></script>
+
+<!-- ===== JS ===== -->
+<script>
+const disasterData={
+earthquake:{dos:["Drop Cover Hold","Stay away from windows","Move open area"],donts:["Do not panic","Do not use lift"],kit:["Water","First aid","Torch"]},
+flood:{dos:["Move higher ground","Switch off electricity"],donts:["Do not walk water"],kit:["Dry food","Water","Medicines"]},
+fire:{dos:["Use stairs","Call emergency"],donts:["Do not use lift"],kit:["Extinguisher","Mask"]},
+wildfire:{dos:["Evacuate early","Wear mask"],donts:["Do not stay"],kit:["Water","Mask"]},
+hurricane:{dos:["Stay indoors","Secure windows"],donts:["Do not go near sea"],kit:["Food","Radio","Water"]},
+volcano:{
+dos:["Wear mask","Move to safe zone","Stay indoors"],
+donts:["Do not go near lava"],
+kit:["Mask","Water","Goggles"]
+},
+
+terrorism:{
+dos:["Stay alert","Follow authorities","Find safe shelter"],
+donts:["Do not panic","Do not spread rumors"],
+kit:["Phone","Emergency contacts","First aid"]
+},
+
+tsunami:{
+dos:["Move to higher ground","Stay away from coast"],
+donts:["Do not go near sea"],
+kit:["Water","Food","Torch"]
+},
+
+landslide:{
+dos:["Move away from slopes","Stay alert"],
+donts:["Do not stay near cliffs"],
+kit:["Emergency bag","Water","First aid"]
+},
+
+};
+
+document.getElementById("disasterSelect").addEventListener("change",function(){
+let v=this.value;
+let r=document.getElementById("checklistResult");
+if(!v){r.innerHTML="";return;}
+let d=disasterData[v];
+
+r.innerHTML=`
+<h3>Do's</h3>
+<ul>${d.dos.map(i=>`<li>${i}</li>`).join("")}</ul>
+<h3>Don'ts</h3>
+<ul>${d.donts.map(i=>`<li>${i}</li>`).join("")}</ul>
+<h3>Emergency Kit</h3>
+<ul>${d.kit.map(i=>`<li>${i}</li>`).join("")}</ul>
+`;
+});
+</script>
 
     <div class="dashboard">
         <a href="HomePage.html">🏠</a>
@@ -247,6 +391,7 @@
         </div>
     </div>
     <script src="../8.AIAssistant/chatbot.js"></script>
+
 
 </body>
 </html>
