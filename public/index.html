@@ -32,7 +32,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 24px;
-            padding: 14px 28px;
+            padding: 18px 28px;
             background: linear-gradient(90deg, #4467b1, #3f5ea3);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
             position: relative;
@@ -74,38 +74,6 @@
             letter-spacing: 1.4px;
             line-height: 1.1;
             white-space: nowrap;
-        }
-
-        .navbar-links {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-width: 0;
-            flex: 1 1 auto;
-        }
-
-        .navbar-links a {
-            color: rgba(255, 255, 255, 0.92);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 1.2;
-            padding: 9px 14px;
-            border-radius: 999px;
-            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .navbar-links a:hover {
-            background: rgba(255, 255, 255, 0.16);
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
-
-        .navbar-links a:focus-visible {
-            outline: 3px solid rgba(255, 255, 255, 0.9);
-            outline-offset: 3px;
         }
 
         .navbar-right {
@@ -661,21 +629,7 @@
         @media (max-width: 1024px) {
             .top-panel {
                 gap: 16px;
-                padding: 12px 20px;
-            }
-
-            .navbar-links {
-                gap: 4px;
-            }
-
-            .navbar-links a {
-                padding: 8px 10px;
-                font-size: 13px;
-            }
-
-            .navbar-right {
-                gap: 10px;
-                font-size: 13px;
+                padding: 16px 20px;
             }
 
             .container {
@@ -697,31 +651,18 @@
         @media (max-width: 768px) {
             .top-panel {
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: space-between;
                 gap: 12px;
-                padding: 14px 18px;
+                padding: 16px 18px;
             }
 
             .navbar-left {
                 flex: 1 1 auto;
-                justify-content: center;
-            }
-
-            .navbar-links {
-                order: 3;
-                flex-basis: 100%;
-                justify-content: center;
-                gap: 8px;
-            }
-
-            .navbar-links a {
-                padding: 8px 12px;
-                font-size: 13px;
             }
 
             .navbar-right {
                 flex: 1 1 auto;
-                justify-content: center;
+                justify-content: flex-end;
                 gap: 10px;
                 font-size: 13px;
             }
@@ -755,7 +696,7 @@
 
         @media (max-width: 480px) {
             .top-panel {
-                padding: 12px 14px;
+                padding: 14px 14px;
             }
 
             .top-panel h1 {
@@ -766,17 +707,6 @@
             .top-panel img {
                 height: 36px;
                 width: 36px;
-            }
-
-            .navbar-links {
-                width: 100%;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .navbar-links a {
-                padding: 8px 10px;
-                font-size: 12.5px;
             }
 
             .navbar-right {
@@ -821,12 +751,6 @@
             </a>
             <h1>SAFE HAVEN</h1>
         </div>
-
-        <nav class="navbar-links" aria-label="Primary navigation">
-            <a href="../2.AlertsRisks/AlertsRisks.html">Alerts & Risks</a>
-            <a href="../5.Community/Community.html">Community</a>
-            <a href="../6.DisasterUpdates/DisasterUpdates.html">Disaster Updates</a>
-        </nav>
 
         <div class="navbar-right" aria-label="Location and alert status">
             <span class="navbar-status">📍 Pune, IN</span>
