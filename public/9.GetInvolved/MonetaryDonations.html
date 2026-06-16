@@ -13,19 +13,28 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <button class="back-btn" onclick="window.history.back()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-        </button>
-        <h1 class="header-title">Monetary Donations</h1>
-        <button class="profile-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="10" r="3"/>
-                <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
-            </svg>
-        </button>
+        <div class="header-left">
+            <button class="back-btn" onclick="window.history.back()" aria-label="Go back">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+        </div>
+        <div class="header-center">
+            <img src="../../assets/1.HomePage/favicon-32x32.png" alt="SafeHaven" class="header-logo-img" onerror="this.style.display='none'">
+            <div class="header-title-group">
+                <span class="header-brand">SafeHaven</span>
+                <h1 class="header-title">Monetary Donations</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="profile-btn" aria-label="Profile">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                </svg>
+            </button>
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -250,36 +259,85 @@
 
         /* Header Styles */
         .header {
-            background-color: #5568b8;
-            padding: 16px 20px;
+            background: linear-gradient(135deg, #3b4fa8 0%, #5568b8 60%, #6678c8 100%);
+            padding: 0 20px;
+            height: 64px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 12px rgba(53, 75, 168, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left,
+        .header-right {
+            display: flex;
+            align-items: center;
+            min-width: 48px;
+        }
+
+        .header-right {
+            justify-content: flex-end;
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo-img {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .header-title-group {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            gap: 3px;
+        }
+
+        .header-brand {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .header-title {
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
         }
 
         .back-btn, .profile-btn {
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             color: white;
             cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            transition: background-color 0.2s, transform 0.1s;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .back-btn:hover, .profile-btn:hover {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.22);
         }
 
-        .header-title {
-            color: white;
-            font-size: 22px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        .back-btn:active, .profile-btn:active {
+            transform: scale(0.94);
         }
 
         /* Main Content */
@@ -516,12 +574,42 @@
                 grid-template-columns: 1fr;
             }
 
+            .header {
+                height: 56px;
+                padding: 0 14px;
+            }
+
             .header-title {
-                font-size: 18px;
+                font-size: 15px;
+            }
+
+            .header-brand {
+                font-size: 9px;
+            }
+
+            .back-btn, .profile-btn {
+                width: 34px;
+                height: 34px;
+                border-radius: 8px;
+            }
+
+            .header-logo-img {
+                width: 22px;
+                height: 22px;
             }
 
             .main-content {
                 padding: 24px 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header-brand {
+                display: none;
+            }
+
+            .header-title {
+                font-size: 14px;
             }
         }
 
@@ -537,8 +625,8 @@
             .disaster-title {
                 font-size: 18px;
             }
-        </script>
-    </div>
+        }
+        </style>
     <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>
