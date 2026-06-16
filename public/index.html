@@ -120,30 +120,65 @@
             font-weight: 500;
         }
 
-        .sos-button {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            color: white;
-            padding: 16px 40px;
-            border: none;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
+        .sos-section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
             margin-bottom: 32px;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+        }
+
+        .sos-note {
+            color: #6c757d;
+            font-size: 18px;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .call-button {
+            margin-top: 22px;
+            padding: 14px 28px;
+            border: 1px solid #d1d5db;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+            background: white;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        }
+
+        .call-button:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .sos-button {
+            background: linear-gradient(135deg, #ff3b4a, #d90429);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 14px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow:
+                0 6px 18px rgba(217, 4, 41, 0.35),
+                0 0 30px rgba(255, 59, 74, 0.15);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
         }
 
         .sos-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+            transform: translateY(-3px);
+            box-shadow:
+                0 10px 24px rgba(217, 4, 41, 0.4),
+                0 0 40px rgba(255, 59, 74, 0.25);
         }
 
         .sos-button:active {
             transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
         }
 
         .container {
@@ -757,12 +792,21 @@
         </div>
     </div>
 
-    <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
-    <button class="sos-button" onclick="sendSOS()">🚨 Emergency! SOS!</button>
-
     <div class="container">
         <!-- Emergency Action Cards -->
         <div class="cards-section">
+            <!-- SOS SECTION -->
+            <div class="sos-section">
+                <p class="sos-note">Use only in life-threatening situations</p>
+
+                <button class="sos-button" onclick="sendSOS()">
+                    🚨 EMERGENCY SOS
+                </button><br>
+
+                <button class="call-button" onclick="window.location.href='tel:112'">
+                    📞 Call Emergency Services
+                </button>
+            </div>
             <div class="section-header">
                 <h3 class="section-title">🚨 Critical Emergency Actions</h3>
             </div>
@@ -923,6 +967,16 @@
         </div>
     </section>
 
+    <div id="sos-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:white; border-radius:16px; padding:32px; max-width:400px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+            <div style="font-size:48px;">🚨</div>
+            <h2 style="color:#dc3545; margin:12px 0;">SOS Alert Sent!</h2>
+            <p style="color:#555; margin-bottom:8px;">Your location has been sent to emergency services.</p>
+            <p style="color:#555; margin-bottom:24px;">Help will reach you soon. Stay calm and stay safe.</p>
+            <button onclick="closeSOS()" style="background:#dc3545; color:white; border:none; padding:12px 32px; border-radius:8px; font-size:16px; cursor:pointer;">OK</button>
+        </div>
+    </div>
+
     <script>
         // TAB SWITCHING FUNCTIONALITY
         document.querySelectorAll('.tab').forEach(tab => {
@@ -967,13 +1021,11 @@
         });
 
         // SOS FUNCTIONALITY
-        let clickCount = 0;
         function sendSOS() {
-            clickCount++;
-            if (clickCount === 3) {
-                alert("SOS sent with your location and phone number successfully!");
-                clickCount = 0;
-            }
+            document.getElementById('sos-modal').style.display = 'flex';
+        }
+        function closeSOS() {
+            document.getElementById('sos-modal').style.display = 'none';
         }
 
         // SAFEBOT FUNCTION
