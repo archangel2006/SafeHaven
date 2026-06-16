@@ -30,22 +30,87 @@
         .top-panel {
             display: flex;
             align-items: center;
-            padding: 24px 30px;
-            background: linear-gradient(135deg, #52caec 0%, #3ba8cc 100%);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
+            gap: 24px;
+            padding: 18px 28px;
+            background: linear-gradient(90deg, #4467b1, #3f5ea3);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: fit-content;
+        }
+
+        .navbar-left a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-left a:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.9);
+            outline-offset: 3px;
         }
 
         .top-panel img {
-            height: 60px;
-            margin-right: 16px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            height: 38px;
+            width: 38px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
         }
 
         .top-panel h1 {
             color: white;
-            font-size: 28px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 16px;
+            color: white;
+            font-size: 14px;
             font-weight: 600;
+            min-width: fit-content;
+        }
+
+        .navbar-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .profile-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.16);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .profile-icon:hover {
+            background: rgba(255, 255, 255, 0.24);
+            transform: translateY(-1px);
         }
 
         .main-tagline {
@@ -560,6 +625,11 @@
 
         /* Responsive Design */
         @media (max-width: 1024px) {
+            .top-panel {
+                gap: 16px;
+                padding: 16px 20px;
+            }
+
             .container {
                 flex-direction: column;
                 align-items: center;
@@ -577,6 +647,28 @@
         }
 
         @media (max-width: 768px) {
+            .top-panel {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 16px 18px;
+            }
+
+            .navbar-left {
+                flex: 1 1 auto;
+            }
+
+            .navbar-right {
+                flex: 1 1 auto;
+                justify-content: flex-end;
+                gap: 10px;
+                font-size: 13px;
+            }
+
+            .top-panel h1 {
+                font-size: 20px;
+            }
+
             .grid-container {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
@@ -601,6 +693,36 @@
         }
 
         @media (max-width: 480px) {
+            .top-panel {
+                padding: 14px 14px;
+            }
+
+            .top-panel h1 {
+                font-size: 19px;
+                letter-spacing: 1px;
+            }
+
+            .top-panel img {
+                height: 36px;
+                width: 36px;
+            }
+
+            .navbar-right {
+                width: 100%;
+                justify-content: space-between;
+                gap: 8px;
+                font-size: 12.5px;
+            }
+
+            .navbar-status {
+                justify-content: center;
+            }
+
+            .profile-icon {
+                width: 32px;
+                height: 32px;
+            }
+
             .grid-container {
                 grid-template-columns: 1fr;
             }
@@ -608,14 +730,6 @@
             .container {
                 padding: 0 12px;
                 gap: 20px;
-            }
-
-            .top-panel {
-                padding: 16px 20px;
-            }
-
-            .top-panel h1 {
-                font-size: 22px;
             }
         }
 
@@ -629,10 +743,18 @@
 
 <body>
     <div class="top-panel">
-        <a href="index.html">
-            <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
-        </a>
-        <h1>Safe Haven</h1>
+        <div class="navbar-left">
+            <a href="index.html" aria-label="Safe Haven home">
+                <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
+            </a>
+            <h1>SAFE HAVEN</h1>
+        </div>
+
+        <div class="navbar-right" aria-label="Location and alert status">
+            <span class="navbar-status">📍 Pune, IN</span>
+            <span class="navbar-status">🔔 Alerts On</span>
+            <span class="profile-icon" aria-label="Profile">👤</span>
+        </div>
     </div>
 
     <p class="main-tagline">Report Hazard, Find Safety, Get Help</p>
