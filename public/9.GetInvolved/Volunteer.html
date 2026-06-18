@@ -10,6 +10,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../components/navbar.css" />
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
@@ -31,49 +34,6 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
-    }
-
-    /* NAVBAR */
-    .top-nav {
-      background: var(--primary);
-      color: #ffffff;
-      padding: 10px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .top-nav-left,
-    .top-nav-center,
-    .top-nav-right {
-      flex: 1;
-      display: flex;
-      align-items: center;
-    }
-    .top-nav-left { justify-content: flex-start; }
-    .top-nav-center { justify-content: center; }
-    .top-nav-right { justify-content: flex-end; }
-
-    .top-logo-img {
-      height: 36px;
-      width: 36px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #ffffff;
-    }
-    .top-title {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .top-user-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      border: 2px solid #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
     }
 
     /* MAIN LAYOUT */
@@ -419,18 +379,8 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <header class="top-nav">
-    <div class="top-nav-left">
-      <img src="../../assets/9.GetInvolved/LOGO.jpg" alt="SafeHaven logo" class="top-logo-img" />
-    </div>
-    <div class="top-nav-center">
-      <span class="top-title">Volunteer</span>
-    </div>
-    <div class="top-nav-right">
-      <span class="top-user-icon">👤</span>
-    </div>
-  </header>
+  <div id="sh-navbar-root"></div>
+  <script src="../components/navbar.js" data-sh-navbar data-page-title="Volunteer"></script>
 
   <main class="page-container">
     <!-- VOLUNTEER ROLES -->

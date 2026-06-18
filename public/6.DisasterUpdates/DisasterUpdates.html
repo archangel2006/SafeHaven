@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../components/navbar.css">
+    <link rel="stylesheet" href="../components/navbar.css">
 
     <style>
         :root {
@@ -38,49 +40,6 @@
             background-color: #f6f8fa;
             color: var(--dark);
             line-height: 1.6;
-        }
-
-        /* Navbar */
-        .top-panel {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 30px;
-            height: 80px;
-            background: #001a4d;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo-link {
-            position: absolute;
-            left: 30px;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .logo-link:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-        }
-
-        .logo-link img {
-            height: 45px;
-            border-radius: 12px;
-            background: white;
-            padding: 2px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .top-panel h1 {
-            color: white;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
         /* Control Strip */
@@ -386,10 +345,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .top-panel h1 {
-                font-size: 20px;
-            }
-
             .hero-section h2 {
                 font-size: 30px;
             }
@@ -402,29 +357,14 @@
             .live-info {
                 justify-content: center;
             }
-
-            .logo-link {
-                position: static;
-                margin-bottom: 10px;
-            }
-
-            .top-panel {
-                flex-direction: column;
-                height: auto;
-                padding: 15px;
-            }
         }
     </style>
 </head>
 
 <body>
 
-    <header class="top-panel">
-        <a href="../index.html" class="logo-link">
-            <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Home">
-        </a>
-        <h1>Disaster Updates</h1>
-    </header>
+    <div id="sh-navbar-root"></div>
+    <script src="../components/navbar.js" data-sh-navbar data-page-title="Disaster Updates"></script>
 
     <div class="control-strip">
         <div class="live-info">
