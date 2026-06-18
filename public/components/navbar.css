@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&display=swap');
+
+.sh-navbar-shell {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.sh-navbar {
+    --sh-nav-bg: #425e97;
+    --sh-nav-hover: rgba(255, 255, 255, 0.12);
+    --sh-nav-active: rgba(255, 255, 255, 0.22);
+    --sh-nav-text: #ffffff;
+    background: var(--sh-nav-bg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: initial;
+}
+
+/* logo | title | profile + hamburger */
+.sh-navbar__main {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    min-height: 58px;
+}
+
+.sh-navbar__left {
+    display: flex;
+    align-items: center;
+    justify-self: start;
+    z-index: 1;
+}
+
+.sh-navbar__center {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    min-width: 0;
+    max-width: 100%;
+    text-align: center;
+}
+
+.sh-navbar__center h1 {
+    margin: 0;
+    color: var(--sh-nav-text);
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.15rem, 4vw, 1.65rem);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    width: 100%;
+}
+
+.sh-navbar__right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    justify-self: end;
+    z-index: 1;
+}
+
+.sh-navbar__logo-link {
+    display: inline-flex;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.sh-navbar__logo-link:hover {
+    transform: scale(1.04);
+}
+
+.sh-navbar__logo-link:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+.sh-navbar__logo-wrap {
+    background: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    display: inline-flex;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sh-navbar__logo-wrap img {
+    height: 34px;
+    width: auto;
+    border-radius: 6px;
+    display: block;
+}
+
+.sh-navbar__profile {
+    color: var(--sh-nav-text);
+    font-size: 28px;
+    line-height: 1;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.sh-navbar__profile:hover {
+    opacity: 0.85;
+}
+
+.sh-navbar__toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.sh-navbar__toggle:hover {
+    background: var(--sh-nav-hover);
+}
+
+.sh-navbar__toggle-bar {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--sh-nav-text);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.sh-navbar__toggle[aria-expanded="true"] .sh-navbar__toggle-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.sh-navbar__toggle[aria-expanded="true"] .sh-navbar__toggle-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.sh-navbar__toggle[aria-expanded="true"] .sh-navbar__toggle-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* desktop nav links are stored in hamburger too */
+.sh-navbar__desktop-links {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 20px 12px;
+}
+
+.sh-navbar__desktop-links a {
+    color: var(--sh-nav-text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.sh-navbar__desktop-links a:hover,
+.sh-navbar__desktop-links a.is-active {
+    background: var(--sh-nav-active);
+}
+
+/* hamburger dropdown */
+.sh-navbar__mobile-links {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--sh-nav-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    max-height: 70vh;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.sh-navbar__mobile-links.is-open {
+    display: block;
+}
+
+.sh-navbar__mobile-links li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sh-navbar__mobile-links a {
+    display: block;
+    color: var(--sh-nav-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 14px 20px;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.sh-navbar__mobile-links a:hover,
+.sh-navbar__mobile-links a.is-active {
+    background: var(--sh-nav-hover);
+}
+
+.sh-navbar__status--desktop {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    
+    padding: 10px 24px 12px;
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* status — mobile white bar below navbar */
+.sh-navbar__status--mobile {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.sh-navbar__status-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+/* tablet & mobile */
+@media (max-width: 1024px) {
+    .sh-navbar--has-status .sh-navbar__status--mobile {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .sh-navbar__main {
+        padding: 10px 16px;
+    }
+
+    .sh-navbar__status--mobile {
+        justify-content: space-between;
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .sh-navbar__logo-wrap img {
+        height: 32px;
+    }
+
+    .sh-navbar__profile {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sh-navbar__main {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .sh-navbar__right {
+        gap: 6px;
+    }
+}

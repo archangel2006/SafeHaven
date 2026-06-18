@@ -8,8 +8,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../components/navbar.css" />
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -18,14 +18,7 @@
       padding: 0;
       color: #333;
     }
-    header {
-      background: linear-gradient(90deg, #d32f2f, #b71c1c);
-      padding: 1.5rem;
-      color: #fff;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-    }
+    header { display: none; }
     .alert-banner {
       background: #ff5252;
       color: #fff;
@@ -148,7 +141,8 @@
   </style>
 </head>
 <body>
-  <header>Evacuation & Safety Dashboard</header>
+  <div id="sh-navbar-root"></div>
+  <script src="../components/navbar.js" data-sh-navbar data-page-title="Evacuation Safety"></script>
   
   <div class="alert-banner">
     FLOOD ALERT: EVACUATE IMMEDIATELY!
