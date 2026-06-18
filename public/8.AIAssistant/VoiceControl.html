@@ -8,8 +8,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../components/navbar.css" />
   <style>
     :root {
       --primary-color: #4a00e0;
@@ -24,14 +24,7 @@
       padding: 0;
       text-align: center;
     }
-    header {
-      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-      color: #fff;
-      padding: 1.5rem;
-      font-size: 2.5rem;
-      text-align: center;
-      font-weight: bold;
-    }
+    header { display: none; }
     .container {
       max-width: 800px;
       margin: 2rem auto;
@@ -94,7 +87,8 @@
   </style>
 </head>
 <body>
-  <header>Voice Control</header>
+  <div id="sh-navbar-root"></div>
+  <script src="../components/navbar.js" data-sh-navbar data-page-title="AI Assistant"></script>
   <div class="container">
     <div class="instructions">
       <h2>Voice Control Instructions</h2>
