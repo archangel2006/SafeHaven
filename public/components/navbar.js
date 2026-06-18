@@ -11,8 +11,8 @@
         { id: 'community', label: 'Community', path: '5.Community/Community.html' },
         { id: 'updates', label: 'Disaster Updates', path: '6.DisasterUpdates/DisasterUpdates.html' },
         { id: 'educated', label: 'Get Educated', path: '7.GetEducated/GetEducated.html' },
-        { id: 'involved', label: 'Get Involved', path: '9.GetInvolved/Volunteer.html' },
-        { id: 'ai', label: 'AI Assistant', path: '8.AIAssistant/VoiceControl.html' }
+        { id: 'donate', label: 'Donate', path: '9.GetInvolved/Donate.html' },
+        { id: 'volunteer', label: 'Volunteer', path: '9.GetInvolved/Volunteer.html' }
     ];
 
     function cfg() {
@@ -44,8 +44,10 @@
         if (p.includes('5.community')) return 'community';
         if (p.includes('6.disasterupdates')) return 'updates';
         if (p.includes('7.geteducated')) return 'educated';
-        if (p.includes('8.aiassistant')) return 'ai';
-        if (p.includes('9.getinvolved')) return 'involved';
+        if (p.includes('9.getinvolved')) {
+            if (p.includes('volunteer.html')) return 'volunteer';
+            return 'donate';
+        }
         return '';
     }
 

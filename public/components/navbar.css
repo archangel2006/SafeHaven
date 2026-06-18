@@ -14,12 +14,14 @@
     background: var(--sh-nav-bg);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
     font-family: Arial, Helvetica, sans-serif;
+    text-align: initial;
 }
 
 /* logo | title | profile + hamburger */
 .sh-navbar__main {
+    position: relative;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 12px;
     padding: 12px 20px;
@@ -29,12 +31,17 @@
 .sh-navbar__left {
     display: flex;
     align-items: center;
+    justify-self: start;
+    z-index: 1;
 }
 
 .sh-navbar__center {
     display: flex;
     justify-content: center;
+    justify-self: center;
     min-width: 0;
+    max-width: 100%;
+    text-align: center;
 }
 
 .sh-navbar__center h1 {
@@ -48,12 +55,17 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
+    width: 100%;
 }
 
 .sh-navbar__right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 10px;
+    justify-self: end;
+    z-index: 1;
 }
 
 .sh-navbar__logo-link {
@@ -171,6 +183,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     max-height: 70vh;
     overflow-y: auto;
+    text-align: center;
 }
 
 .sh-navbar__mobile-links.is-open {
@@ -188,6 +201,7 @@
     font-weight: 600;
     font-size: 16px;
     padding: 14px 20px;
+    text-align: center;
     transition: background 0.2s;
 }
 
