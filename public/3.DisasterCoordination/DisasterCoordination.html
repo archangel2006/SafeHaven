@@ -8,9 +8,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
-  <!-- Google Font & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../components/navbar.css" />
   <style>
     :root {
       --primary-color: #ff416c;
@@ -30,15 +29,7 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    header {
-      background: var(--header-bg);
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
-      font-size: 2.8rem;
-      font-weight: bold;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-    }
+    header { display: none; }
     /* Hero Section */
     .hero {
       position: relative;
@@ -137,7 +128,8 @@
   </style>
 </head>
 <body>
-  <header>Disaster Coordination Platform</header>
+  <div id="sh-navbar-root"></div>
+  <script src="../components/navbar.js" data-sh-navbar data-page-title="Disaster Coordination"></script>
   
   <!-- Hero Section -->
   <section class="hero">
