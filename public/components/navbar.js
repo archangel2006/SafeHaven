@@ -112,6 +112,13 @@
         nav.appendChild(linkList(LINKS, r, cur, false));
         nav.appendChild(linkList(LINKS, r, cur, true));
 
+        var desktopRight = document.createElement('div');
+        desktopRight.className = 'sh-navbar__desktop-right';
+        desktopRight.innerHTML =
+            '<a href="' + r + '10.Auth/Login.html" class="sh-navbar__profile" aria-label="Profile">' +
+            '<i class="far fa-user-circle"></i></a>';
+        nav.appendChild(desktopRight);
+
         if (c.showStatus) {
             var sd = document.createElement('div');
             sd.className = 'sh-navbar__status sh-navbar__status--desktop';
@@ -168,3 +175,4 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 })();
+
