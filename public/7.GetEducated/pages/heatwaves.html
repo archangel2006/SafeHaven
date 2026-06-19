@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heatwave Safety Tips</title>
+    <link rel="icon" href="../../../assets/1.HomePage/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../components/navbar.css" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: 20px auto;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .main-content {
+            flex: 2.5;
+        }
+
+        .sidebar {
+            flex: 1;
+        }
+
+        h1.page-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+
+        h1.page-title span {
+            color: #5a7184;
+            font-weight: 400;
+        }
+
+        .video-box {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e1e8f0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .info-card.what     { border-left: 5px solid #3c5da2; }
+        .info-card.warning  { border-left: 5px solid #e53e3e; }
+        .info-card.before   { border-left: 5px solid #f6ad55; }
+        .info-card.during   { border-left: 5px solid #e53e3e; }
+        .info-card.resources { border-left: 5px solid #3182ce; }
+
+        .card-header i:first-child {
+            margin-right: 15px;
+            font-size: 20px;
+            width: 25px;
+            text-align: center;
+        }
+
+        .card-header h3 {
+            font-size: 17px;
+            flex-grow: 1;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .card-header .chevron {
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+
+        .card-content {
+            padding: 20px;
+            border-top: 1px solid #f0f4f8;
+            font-size: 15px;
+            color: #4a5568;
+            display: none;
+        }
+
+        .card-content.active {
+            display: block;
+        }
+
+        .safety-list {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .safety-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 15px;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .res-btn {
+            background: white;
+            padding: 15px;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            border: 0.5px solid #edf2f7;
+            transition: background 0.2s;
+        }
+
+        .res-btn:hover { background: #f7fafc; }
+
+        .res-btn i {
+            color: #3c5da2;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .sidebar-title {
+            margin-bottom: 15px;
+            font-size: 19px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+
+        .read-next-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .read-next-card:hover { transform: translateY(-3px); }
+
+        .thumb-box {
+            height: 130px;
+            position: relative;
+        }
+
+        .thumb-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .read-next-card p {
+            padding: 12px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .toast {
+            background: #333;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            animation: slideUp 0.4s ease forwards;
+            border-left: 5px solid #3c5da2;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .safety-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="sh-navbar-root"></div>
+    <script src="../../components/navbar.js" data-sh-navbar data-page-title="Heatwaves"></script>
+
+    <div id="toast-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1 class="page-title">Heatwave <span>Safety Tips</span></h1>
+
+            <!-- Main Featured Video -->
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/-JDMD0vAdGM"
+                    title="Heatwave Safety – What You Need to Know" allowfullscreen></iframe>
+            </div>
+
+            <!-- What Is a Heatwave -->
+            <div class="info-card what">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-check-circle" style="color: #3182ce;"></i>
+                    <h3>What Is a Heatwave?</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    A heatwave is a prolonged period of excessively hot weather, often combined with high humidity,
+                    that significantly exceeds the normal temperatures for a region. Heatwaves are among the deadliest
+                    natural hazards — they cause more deaths globally than floods, hurricanes, and tornadoes combined.
+                    Rising global temperatures driven by climate change are making heatwaves more frequent, longer-lasting,
+                    and more intense, affecting millions of people each year.
+                </div>
+            </div>
+
+            <!-- Warning Signs -->
+            <div class="info-card warning">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-triangle-exclamation" style="color: #e53e3e;"></i>
+                    <h3>Warning Signs of Heat-Related Illness</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #f6ad55; margin-top: 8px;"></i>
+                            <span><strong>Heat Cramps:</strong> Muscle pain or spasms in the abdomen, arms, or legs — usually the first sign of heat illness.</span></li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #ed8936; margin-top: 8px;"></i>
+                            <span><strong>Heat Exhaustion:</strong> Heavy sweating, weakness, cold/pale/clammy skin, weak pulse, nausea, fainting.</span></li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #e53e3e; margin-top: 8px;"></i>
+                            <span><strong>Heat Stroke (Emergency 🚨):</strong> Body temperature above 39.4°C (103°F), hot/red/dry skin, rapid pulse, possible unconsciousness. Call emergency services immediately.</span></li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i>
+                            <span><strong>Dehydration:</strong> Dark yellow urine, dry mouth, dizziness, and reduced urination are early warning signs.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Before a Heatwave -->
+            <div class="info-card before">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-clipboard-list" style="color: #ed8936;"></i>
+                    <h3>Before a Heatwave (Prepare)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-location-dot" style="color: #3182ce;"></i>
+                            <span>Know the location of your nearest cooling center (library, mall, community hall).</span></li>
+                        <li><i class="fas fa-briefcase" style="color: #3182ce;"></i>
+                            <span>Prepare an emergency kit with bottled water, electrolyte drinks, a battery fan, sunscreen, and a first aid manual.</span></li>
+                        <li><i class="fas fa-window-maximize" style="color: #ed8936;"></i>
+                            <span>Install reflective window coverings or blackout curtains to keep your home cooler.</span></li>
+                        <li><i class="fas fa-bell" style="color: #48bb78;"></i>
+                            <span>Sign up for local weather alerts and heatwave warnings from your national weather service.</span></li>
+                        <li><i class="fas fa-people-group" style="color: #e53e3e;"></i>
+                            <span>Check on elderly neighbours, young children, and people with chronic illness — they are most at risk.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- During a Heatwave -->
+            <div class="info-card during">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-sun" style="color: #e53e3e;"></i>
+                    <h3>During a Heatwave (Stay Safe)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <div class="safety-grid">
+                        <ul class="safety-list">
+                            <li><i class="fas fa-check-circle" style="color: #48bb78;"></i>
+                                <span>Stay indoors during peak heat (11 AM – 4 PM) and use AC or fans.</span></li>
+                            <li><i class="fas fa-glass-water" style="color: #4299e1;"></i>
+                                <span>Drink water regularly — don't wait until you feel thirsty.</span></li>
+                            <li><i class="fas fa-shirt" style="color: #48bb78;"></i>
+                                <span>Wear loose, lightweight, light-coloured clothing.</span></li>
+                            <li><i class="fas fa-shower" style="color: #4299e1;"></i>
+                                <span>Take cool (not cold) showers to lower your body temperature.</span></li>
+                        </ul>
+                        <ul class="safety-list">
+                            <li><i class="fas fa-times" style="color: #e53e3e;"></i>
+                                <span>Never leave children, elderly, or pets in parked vehicles.</span></li>
+                            <li><i class="fas fa-times" style="color: #e53e3e;"></i>
+                                <span>Avoid alcohol and caffeine — they increase dehydration.</span></li>
+                            <li><i class="fas fa-times" style="color: #e53e3e;"></i>
+                                <span>Don't do strenuous outdoor activity during peak heat hours.</span></li>
+                            <li><i class="fas fa-exclamation-triangle" style="color: #ed8936;"></i>
+                                <span>Close curtains on sun-facing windows during the day.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Resources -->
+            <div class="info-card resources">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-globe" style="color: #3182ce;"></i>
+                    <h3>Additional Resources</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content" style="padding: 0;">
+                    <div class="resource-grid">
+                        <a href="#" class="res-btn" onclick="findCoolingCenters()">
+                            <i class="fas fa-location-dot"></i> Find Nearby Cooling Centers</a>
+                        <a href="#" class="res-btn" onclick="window.print()">
+                            <i class="fas fa-download"></i> Download Emergency Kit List</a>
+                        <a href="#" class="res-btn" onclick="showLiveAlerts()">
+                            <i class="fas fa-square-check"></i> See Live Heat Alerts</a>
+                        <a href="#" class="res-btn" onclick="showRecoveryChecklist()">
+                            <i class="fas fa-clipboard-check"></i> Heatwave Recovery Checklist</a>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Watch Next</h3>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/qhpLvZAezdU"
+                        title="Heatwave Safety Short" allowfullscreen></iframe>
+                </div>
+                <p>Heatwave Safety — Quick Tips</p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/jvGC_dQJUtE"
+                        title="How to Treat Heat Stroke" allowfullscreen></iframe>
+                </div>
+                <p>How to Treat Heat Stroke</p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/u75svo0KdTo"
+                        title="Extreme Heat Survival Tips" allowfullscreen></iframe>
+                </div>
+                <p>Extreme Heat Survival Tips</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const chevron = element.querySelector('.chevron');
+            const isActive = content.classList.contains('active');
+
+            document.querySelectorAll('.card-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.chevron').forEach(i => i.style.transform = 'rotate(0deg)');
+
+            if (!isActive) {
+                content.classList.add('active');
+                chevron.style.transform = 'rotate(90deg)';
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas fa-circle-info"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        function showLiveAlerts() {
+            showToast("No active extreme heat alerts in your current area.");
+        }
+
+        function findCoolingCenters() {
+            showToast("Locating nearby cooling centers and emergency shelters...");
+        }
+
+        function showRecoveryChecklist() {
+            showToast("Recovery: Rehydrate slowly, rest indoors, seek medical help if symptoms persist.");
+        }
+    </script>
+    <script src="../../8.AIAssistant/chatbot.js"></script>
+</body>
+
+</html>
