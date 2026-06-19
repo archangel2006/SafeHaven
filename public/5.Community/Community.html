@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Community</title>
   <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../components/navbar.css" />
 
   <style>
     *,
@@ -27,36 +29,6 @@
       color: #333;
       scroll-behavior: smooth;
     }
-
-
-
-    header.dashboard-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      /* left, center, right */
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      position: relative;
-      color: #fff;
-    }
-
-    .header-left img {
-      height: 60px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
-
-    .header-center {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 2rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
 
     /* ====== CONTAINER ====== */
     .container {
@@ -1074,21 +1046,8 @@
 </head>
 
 <body>
-  <!-- ================= MAIN HEADER ================= -->
-  <header class="dashboard-header">
-    <div class="header-left">
-      <a href="index.html">
-        <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
-      </a>
-    </div>
-
-    <div class="header-center">
-      <span>Community</span>
-    </div>
-
-    <div class="header-right"></div>
-  </header>
-
+  <div id="sh-navbar-root"></div>
+  <script src="../components/navbar.js" data-sh-navbar data-page-title="Community"></script>
 
   <!-- ================= TABS ================= -->
   <div class="tabs-container">

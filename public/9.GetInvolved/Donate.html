@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="../components/navbar.css" />
     <style>
         :root {
             /* Official Palette */
@@ -34,54 +36,6 @@
             color: var(--text-dark);
             margin: 0;
             padding: 0;
-        }
-
-        /* --- SCALED Navbar --- */
-        header {
-            background-color: var(--main-theme);
-            padding: 0 32px;
-            height: 72px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-logo-box {
-            width: 52px;
-            height: 52px;
-            background: white;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-        }
-
-        .header-logo-box img {
-            height: 100%;
-            width: auto;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 0;
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        /* White Symbolic Person Icon */
-        .user-icon {
-            width: 42px;
-            height: 42px;
-            fill: white;
-            cursor: pointer;
         }
 
         /* --- SCALED Page Layout --- */
@@ -311,14 +265,8 @@
 </head>
 
 <body>
-
-    <header>
-        <div class="header-logo-box">
-            <img src="donation_assets/LOGO.jpg" alt="Safe Haven Logo">
-        </div>
-        <h1>Donate</h1>
-        <svg class="user-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-    </header>
+    <div id="sh-navbar-root"></div>
+    <script src="../components/navbar.js" data-sh-navbar data-page-title="Donate"></script>
 
     <div class="page-wrapper">
 

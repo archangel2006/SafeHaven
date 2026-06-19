@@ -8,8 +8,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../components/navbar.css" />
   <style>
     * { box-sizing: border-box; }
     body {
@@ -19,43 +19,13 @@
       padding: 0;
       color: #333;
     }
-    header {
-      background: linear-gradient(90deg, #4467b1, #3f5ea3);
-      padding: 24px 24px;
-      color: #fff;
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      gap: 15px;
-      font-size: 1.4rem;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    header a {
-      display: flex;
-      margin-right: auto;
-    }
-    header img {
-      height: 40px; 
-      width: auto; 
-      border-radius: 6px;
-      display: block;
-    }
-    header span {
-      flex-grow: 1;
-      text-align: center;
-      margin-right: 40px;
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
+
     .main-content {
       max-width: 1000px;
       margin: 0 auto;
       padding: 20px 16px 40px;
     }
+
     .alert-banner {
       background: #dc3545;
       color: #fff;
@@ -249,7 +219,6 @@
       text-align: center;
     }
     @media (max-width: 600px) {
-      header { font-size: 1.15rem; padding: 14px 16px; }
       .map-container { height: 220px; }
       .safe-zone-grid { grid-template-columns: 1fr; }
       .safe-zone-item { flex-direction: row; }
@@ -257,12 +226,9 @@
   </style>
 </head>
 <body>
-  <header>
-    <a href="index.html" aria-label="Safe Haven home">
-      <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
-    </a>
-    <span>Evacuation & Safety Dashboard</span>
-  </header>
+
+<div id="sh-navbar-root"></div>
+<script src="../components/navbar.js" data-sh-navbar data-page-title="Evacuation Safety"></script>
 
   <div class="main-content">
     <div class="alert-banner">
