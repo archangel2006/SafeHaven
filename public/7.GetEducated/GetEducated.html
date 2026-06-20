@@ -7,10 +7,11 @@
     <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
-
+ 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../components/navbar.css" />
-
+    
     <style>
         * {
             box-sizing: border-box;
@@ -21,25 +22,25 @@
             margin: 0;
             padding: 0;
         }
-
+  
         .container {
             width: 80%;
             margin: auto;
             padding: 20px;
             text-align: center;
         }
-
+ 
         h2 {
             color: #333;
             margin-bottom: 20px;
         }
-
+ 
         .panel-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
-
+ 
         .panel {
             width: 30%;
             background-color: #ffffff;
@@ -51,26 +52,26 @@
             cursor: pointer;
             transition: transform 0.3s;
         }
-
+ 
         .panel img {
             width: 80%;
             height: auto;
             border-radius: 10px;
         }
-
+ 
         .panel h3 {
             color: #333;
             margin-top: 15px;
         }
-
+ 
         .panel p {
             color: #555;
         }
-
+ 
         .panel:hover {
             transform: scale(1.05);
         }
-
+ 
         .panel a {
             display: inline-block;
             margin-top: 10px;
@@ -78,48 +79,48 @@
             text-decoration: none;
             font-weight: bold;
         }
-
+ 
         .panel a:hover {
             text-decoration: underline;
         }
-
+ 
         /* ---------- TABLET (≤ 1024px) ---------- */
         @media (max-width: 1024px) {
             .container {
                 width: 90%;
             }
-
+ 
             .panel {
                 width: 45%;
             }
         }
-
+ 
         /* ---------- MOBILE (≤ 768px) ---------- */
         @media (max-width: 768px) {
             .container {
                 width: 95%;
             }
-
+ 
             .panel-container {
                 justify-content: center;
             }
-
+ 
             .panel {
                 width: 100%;
                 max-width: 400px;
             }
-
+ 
             .panel img {
                 width: 100%;
             }
             .panel:hover {
                 transform: none;   /* stop zoom effect */
             }
-
+ 
             h2 {
                 font-size: 20px;
             }
-
+ 
             .panel h3 {
                 font-size: 16px;
             }
@@ -133,87 +134,136 @@
             .panel {
                 padding: 15px;
             }
-
+ 
             .panel h3 {
                 font-size: 15px;
             }
-
+ 
             .panel p {
                 font-size: 13px;
             }
         }
-
+ 
     </style>
 </head>
 <body>
-
     <div id="sh-navbar-root"></div>
     <script src="../components/navbar.js" data-sh-navbar data-page-title="Get Educated"></script>
+    <!-- <nav class="global-navbar">
+        <div class="nav-left">
+            <a href="../index.html">
+                <div class="logo-wrapper">
+                    <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
+                </div>
+            </a>
+        </div>
+ 
+        <div class="nav-center">
+            <h1>Get Educated</h1>
+        </div>
+ 
+        <div class="nav-right">
+            <a href="#" class="profile-icon"><i class="far fa-user-circle"></i></a>
+            <button class="mobile-menu-toggle" aria-label="Open Menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+ 
+        <ul class="nav-links">
+            <li><a href="../index.html" class="nav-item">Home</a></li>
+            <li><a href="../2.AlertsRisks/AlertsRisks.html" class="nav-item">Alerts</a></li>
+            <li><a href="../3.DisasterCoordination/DisasterCoordination.html" class="nav-item">Coordination</a></li>
+            <li><a href="../4.EvacuationSafety/EvacuationSafety.html" class="nav-item">Evacuation</a></li>
+            <li><a href="../5.Community/Community.html" class="nav-item">Community</a></li>
+            <li><a href="../6.DisasterUpdates/DisasterUpdates.html" class="nav-item">Updates</a></li>
+            <li><a href="../7.GetEducated/GetEducated.html" class="nav-item">Get Educated</a></li>
+        </ul>
+    </nav> -->
     <div class="container">
         <h2>Disaster Awareness and Preparedness</h2>
-
+ 
         <div class="panel-container">
-
+ 
             <div class="panel">
                 <img src="assets/earthquake.jpg" alt="Earthquake">
                 <h3>🌪 Earthquakes</h3>
                 <p>Learn about the causes, safety measures, and preparedness tips for earthquakes.</p>
                 <a href="pages/earthquake.html">Learn More</a>
             </div>
-
+ 
             <div class="panel">
                 <img src="assets/flood.jpg" alt="Flood">
                 <h3>🌊 Floods</h3>
                 <p>Understand flood risks, evacuation strategies, and how to protect your community.</p>
                 <a href="pages/flood.html">Learn More</a>
             </div>
-
+ 
             <div class="panel">
                 <img src="assets/wildfire.jpg" alt="Wildfire">
                 <h3>🔥 Wildfires</h3>
                 <p>Get information on fire safety, preparation tips, and property protection during wildfires.</p>
                 <a href="pages/wildfire.html">Learn More</a>
             </div>
-
+ 
             <div class="panel">
                 <img src="assets/hurricane.jpg" alt="Hurricane">
                 <h3>🌀 Hurricanes/Typhoons</h3>
                 <p>Learn how to prepare, recognize warning signs, and evacuate during a hurricane or typhoon.</p>
                 <a href="pages/hurricane.html">Learn More</a>
             </div>
-
+ 
             <div class="panel">
                 <img src="assets/volcano.jpg" alt="Volcano">
                 <h3>🌋 Volcanic Eruptions</h3>
                 <p>Understand volcanic eruption risks, safety measures, and how to stay safe.</p>
                 <a href="pages/volcano.html">Learn More</a>
             </div>
-
+ 
             <div class="panel">
                 <img src="assets/terrorism.jpg" alt="Terrorism">
                 <h3>🧯 Terrorism/Chemical Attacks</h3>
                 <p>Learn how to respond to terrorism or chemical attack situations and stay safe.</p>
                 <a href="pages/chemical.html">Learn More</a>
             </div>
-
+ 
             <div class="panel">
                 <img src="assets/landslide.jpg" alt="Landslide">
                 <h3>Landslide</h3>
                 <p>Learn about landslide risks, warning signs, and how to prepare for and respond to landslides.</p>
                 <a href="pages/landslide.html">Learn More</a>
             </div>
-
+ 
             <div class="panel">
                 <img src="assets/thunderstorm.jpg" alt="Thunderstorm">
                 <h3>Thunderstorm</h3>
                 <p>Learn about thunderstorm hazards, lightning safety, and how to protect yourself during severe storms.</p>
                 <a href="pages/thunderstorm.html">Learn More</a>
             </div>
-
+ 
+            <div class="panel">
+                <img src="assets/heatwaves.jpg"  alt="Heatwave">
+                <h3>Heatwaves</h3>
+                <p>Understand the dangers of extreme heat, warning signs of heat illness, and how to stay safe during a heatwave.</p>
+                <a href="pages/heatwaves.html">Learn More</a>
+            </div>
+ 
         </div>
     </div>
     
+    <!-- <script>
+        // NAVBAR MOBILE TOGGLE FUNCTIONALITY
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+ 
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script> -->
     <script src="../8.AIAssistant/chatbot.js"></script>
-
+ 
 </body>
 </html>
