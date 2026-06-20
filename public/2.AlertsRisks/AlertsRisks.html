@@ -14,8 +14,8 @@
   <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
 
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="../components/navbar.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
   <!-- Removed Leaflet libraries as they're no longer needed -->
@@ -31,38 +31,6 @@
     body {
       text-align: center;
       background-color: #f8f9fa;
-    }
-
-    header.dashboard-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      /* left, center, right */
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      position: relative;
-      color: #fff;
-    }
-
-    .header-left img {
-      height: 60px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
-
-    .header-center {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 2rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .header-right {
-      width: 60px;
-      /* same as logo width, keeps center perfectly centered */
     }
 
     .emergency-banner {
@@ -177,7 +145,7 @@
     /* Card Base */
     .alert-card {
       display: flex;
-      align-items;
+      align-items: center;
       gap: 1rem;
       background: #fff;
       color: #333;
@@ -806,22 +774,8 @@
 </head>
 
 <body>
-  <header class="dashboard-header">
-    <div class="header-left">
-      <a href="index.html">
-        <img src="https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg" alt="Safe Haven Logo">
-      </a>
-    </div>
-
-    <div class="header-center">
-      <i class="fas fa-exclamation-triangle"></i>
-      <span>Alerts & Risks</span>
-    </div>
-
-    <div class="header-right">
-
-    </div>
-  </header>
+  <div id="sh-navbar-root"></div>
+  <script src="../components/navbar.js" data-sh-navbar data-page-title="Alerts & Risks"></script>
   <div class="page-container">
 
     <section class="emergency-banner">

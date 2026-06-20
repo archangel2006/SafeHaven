@@ -8,231 +8,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <button class="back-btn" onclick="window.history.back()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-        </button>
-        <h1 class="header-title">Monetary Donations</h1>
-        <button class="profile-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="10" r="3"/>
-                <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
-            </svg>
-        </button>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="donations-grid">
-            <!-- Kerala Floods 2024 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/kerala-floods.jpeg" alt="Kerala Floods 2024" class="disaster-image">
-                    <span class="disaster-type">Flood Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Kerala Floods</h3>
-                    <p class="disaster-date">Date: August 2024</p>
-                    <p class="disaster-description">Severe monsoon floods displaced thousands across Kerala, affecting multiple districts.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹18,50,000" data-target="₹25,00,000">
-                            <div class="progress-bar" style="width: 74%"></div>
-                        </div>
-                        <span class="urgent-badge">URGENT</span>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Kerala Floods', 'August 2024')">Donate</button>
-            </div>
-
-            <!-- Assam Floods 2024 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/assam-floods.jpeg" alt="Assam Floods 2024" class="disaster-image">
-                    <span class="disaster-type">Flood Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Assam Floods</h3>
-                    <p class="disaster-date">Date: June 2024</p>
-                    <p class="disaster-description">Heavy rainfall caused devastating floods in Assam, affecting millions of people.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹12,40,000" data-target="₹20,00,000">
-                            <div class="progress-bar" style="width: 62%"></div>
-                        </div>
-                        <span class="urgent-badge">URGENT</span>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Assam Floods', 'June 2024')">Donate</button>
-            </div>
-
-            <!-- Uttarakhand Floods 2023 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/uttarakhand-floods.jpeg" alt="Uttarakhand Floods 2023" class="disaster-image">
-                    <span class="disaster-type">Flood Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Uttarakhand Flash Floods</h3>
-                    <p class="disaster-date">Date: October 2023</p>
-                    <p class="disaster-description">Cloudburst triggered flash floods in Uttarakhand, causing landslides and damage.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹15,00,000" data-target="₹15,00,000">
-                            <div class="progress-bar achieved" style="width: 100%"></div>
-                        </div>
-                        <span class="target-badge">Target Met</span>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Uttarakhand Flash Floods', 'October 2023')">Donate</button>
-            </div>
-
-            <!-- Gujarat Earthquake 2023 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/gujarat-earthquake.jpeg" alt="Gujarat Earthquake 2023" class="disaster-image">
-                    <span class="disaster-type earthquake">Earthquake Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Gujarat Earthquake</h3>
-                    <p class="disaster-date">Date: March 2023</p>
-                    <p class="disaster-description">A 5.5 magnitude earthquake struck Gujarat, damaging buildings and infrastructure.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹8,20,000" data-target="₹12,00,000">
-                            <div class="progress-bar earthquake-bar" style="width: 68%"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Gujarat Earthquake', 'March 2023')">Donate</button>
-            </div>
-
-            <!-- Manipur Wildfire 2024 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/manipur-wildfire.jpeg" alt="Manipur Wildfire 2024" class="disaster-image">
-                    <span class="disaster-type wildfire">Wildfire Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Manipur Forest Fires</h3>
-                    <p class="disaster-date">Date: April 2024</p>
-                    <p class="disaster-description">Widespread forest fires in Manipur destroyed vegetation and threatened communities.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹6,50,000" data-target="₹10,00,000">
-                            <div class="progress-bar wildfire-bar" style="width: 65%"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Manipur Forest Fires', 'April 2024')">Donate</button>
-            </div>
-
-            <!-- Odisha Cyclone 2024 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/odisha-cyclone.jpeg" alt="Odisha Cyclone 2024" class="disaster-image">
-                    <span class="disaster-type cyclone">Cyclone Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Cyclone Dana - Odisha</h3>
-                    <p class="disaster-date">Date: October 2024</p>
-                    <p class="disaster-description">Cyclone Dana made landfall in Odisha, causing extensive damage to coastal areas.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹22,00,000" data-target="₹30,00,000">
-                            <div class="progress-bar cyclone-bar" style="width: 73%"></div>
-                        </div>
-                        <span class="urgent-badge">URGENT</span>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Cyclone Dana - Odisha', 'October 2024')">Donate</button>
-            </div>
-
-            <!-- Himachal Pradesh Landslide 2023 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/himachalPradesh-landslide.jpeg" alt="Himachal Pradesh Landslide 2023" class="disaster-image">
-                    <span class="disaster-type landslide">Landslide Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Himachal Pradesh Landslides</h3>
-                    <p class="disaster-date">Date: July 2023</p>
-                    <p class="disaster-description">Heavy monsoon rains triggered multiple landslides across Himachal Pradesh.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹11,00,000" data-target="₹18,00,000">
-                            <div class="progress-bar landslide-bar" style="width: 61%"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Himachal Pradesh Landslides', 'July 2023')">Donate</button>
-            </div>
-
-            <!-- Maharashtra Drought 2024 -->
-            <div class="disaster-card">
-                <div class="disaster-image-container">
-                    <img src="/9.GetInvolved/monetary_assets/maharashtra-drought.jpeg" alt="Maharashtra Drought 2024" class="disaster-image">
-                    <span class="disaster-type drought">Drought Disaster</span>
-                </div>
-                <div class="disaster-content">
-                    <h3 class="disaster-title">Maharashtra Drought Relief</h3>
-                    <p class="disaster-date">Date: May 2024</p>
-                    <p class="disaster-description">Severe drought conditions affected farmers and communities in Maharashtra.</p>
-                    
-                    <div class="progress-container">
-                        <div class="progress-bar-wrapper" data-raised="₹9,80,000" data-target="₹16,00,000">
-                            <div class="progress-bar drought-bar" style="width: 61%"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="donate-btn" onclick="redirectToForm('Maharashtra Drought Relief', 'May 2024')">Donate</button>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        
-        // Redirect to central donation form
-        function redirectToForm(disasterName, disasterDate) {
-            window.location.href = `Forms.html?disaster=${encodeURIComponent(disasterName)}&date=${encodeURIComponent(disasterDate)}`;
-        }
-
-        // Add hover tooltips for progress bars
-        document.addEventListener('DOMContentLoaded', function() {
-            const progressWrappers = document.querySelectorAll('.progress-bar-wrapper');
-            
-            progressWrappers.forEach(wrapper => {
-                const raised = wrapper.getAttribute('data-raised');
-                const target = wrapper.getAttribute('data-target');
-                
-                if (raised && target) {
-                    // Create tooltip
-                    const tooltip = document.createElement('div');
-                    tooltip.className = 'progress-tooltip';
-                    tooltip.textContent = `${raised} raised of ${target}`;
-                    wrapper.appendChild(tooltip);
-                    
-                    // Show/hide tooltip on hover
-                    wrapper.addEventListener('mouseenter', () => {
-                        tooltip.style.opacity = '1';
-                        tooltip.style.visibility = 'visible';
-                    });
-                    
-                    wrapper.addEventListener('mouseleave', () => {
-                        tooltip.style.opacity = '0';
-                        tooltip.style.visibility = 'hidden';
-                    });
-                }
-            });
-        });
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="../components/navbar.css" />
 
     <style>
         * {
@@ -246,40 +23,6 @@
             background: #ffffff;
             min-height: 100vh;
             color: #333;
-        }
-
-        /* Header Styles */
-        .header {
-            background-color: #5568b8;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .back-btn, .profile-btn {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .back-btn:hover, .profile-btn:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .header-title {
-            color: white;
-            font-size: 22px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
         }
 
         /* Main Content */
@@ -516,10 +259,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .header-title {
-                font-size: 18px;
-            }
-
             .main-content {
                 padding: 24px 16px;
             }
@@ -537,8 +276,218 @@
             .disaster-title {
                 font-size: 18px;
             }
-        </script>
-    </div>
+        }
+    </style>
+</head>
+<body>
+    <div id="sh-navbar-root"></div>
+    <script src="../components/navbar.js" data-sh-navbar data-page-title="Monetary Donations"></script>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="donations-grid">
+            <!-- Kerala Floods 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/kerala-floods.jpeg" alt="Kerala Floods 2024" class="disaster-image">
+                    <span class="disaster-type">Flood Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Kerala Floods</h3>
+                    <p class="disaster-date">Date: August 2024</p>
+                    <p class="disaster-description">Severe monsoon floods displaced thousands across Kerala, affecting multiple districts.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹18,50,000" data-target="₹25,00,000">
+                            <div class="progress-bar" style="width: 74%"></div>
+                        </div>
+                        <span class="urgent-badge">URGENT</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Kerala Floods', 'August 2024')">Donate</button>
+            </div>
+
+            <!-- Assam Floods 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/assam-floods.jpeg" alt="Assam Floods 2024" class="disaster-image">
+                    <span class="disaster-type">Flood Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Assam Floods</h3>
+                    <p class="disaster-date">Date: June 2024</p>
+                    <p class="disaster-description">Heavy rainfall caused devastating floods in Assam, affecting millions of people.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹12,40,000" data-target="₹20,00,000">
+                            <div class="progress-bar" style="width: 62%"></div>
+                        </div>
+                        <span class="urgent-badge">URGENT</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Assam Floods', 'June 2024')">Donate</button>
+            </div>
+
+            <!-- Uttarakhand Floods 2023 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/uttarakhand-floods.jpeg" alt="Uttarakhand Floods 2023" class="disaster-image">
+                    <span class="disaster-type">Flood Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Uttarakhand Flash Floods</h3>
+                    <p class="disaster-date">Date: October 2023</p>
+                    <p class="disaster-description">Cloudburst triggered flash floods in Uttarakhand, causing landslides and damage.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹15,00,000" data-target="₹15,00,000">
+                            <div class="progress-bar achieved" style="width: 100%"></div>
+                        </div>
+                        <span class="target-badge">Target Met</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Uttarakhand Flash Floods', 'October 2023')">Donate</button>
+            </div>
+
+            <!-- Gujarat Earthquake 2023 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/gujarat-earthquake.jpeg" alt="Gujarat Earthquake 2023" class="disaster-image">
+                    <span class="disaster-type earthquake">Earthquake Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Gujarat Earthquake</h3>
+                    <p class="disaster-date">Date: March 2023</p>
+                    <p class="disaster-description">A 5.5 magnitude earthquake struck Gujarat, damaging buildings and infrastructure.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹8,20,000" data-target="₹12,00,000">
+                            <div class="progress-bar earthquake-bar" style="width: 68%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Gujarat Earthquake', 'March 2023')">Donate</button>
+            </div>
+
+            <!-- Manipur Wildfire 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/manipur-wildfire.jpeg" alt="Manipur Wildfire 2024" class="disaster-image">
+                    <span class="disaster-type wildfire">Wildfire Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Manipur Forest Fires</h3>
+                    <p class="disaster-date">Date: April 2024</p>
+                    <p class="disaster-description">Widespread forest fires in Manipur destroyed vegetation and threatened communities.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹6,50,000" data-target="₹10,00,000">
+                            <div class="progress-bar wildfire-bar" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Manipur Forest Fires', 'April 2024')">Donate</button>
+            </div>
+
+            <!-- Odisha Cyclone 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/odisha-cyclone.jpeg" alt="Odisha Cyclone 2024" class="disaster-image">
+                    <span class="disaster-type cyclone">Cyclone Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Cyclone Dana - Odisha</h3>
+                    <p class="disaster-date">Date: October 2024</p>
+                    <p class="disaster-description">Cyclone Dana made landfall in Odisha, causing extensive damage to coastal areas.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹22,00,000" data-target="₹30,00,000">
+                            <div class="progress-bar cyclone-bar" style="width: 73%"></div>
+                        </div>
+                        <span class="urgent-badge">URGENT</span>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Cyclone Dana - Odisha', 'October 2024')">Donate</button>
+            </div>
+
+            <!-- Himachal Pradesh Landslide 2023 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/himachalPradesh-landslide.jpeg" alt="Himachal Pradesh Landslide 2023" class="disaster-image">
+                    <span class="disaster-type landslide">Landslide Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Himachal Pradesh Landslides</h3>
+                    <p class="disaster-date">Date: July 2023</p>
+                    <p class="disaster-description">Heavy monsoon rains triggered multiple landslides across Himachal Pradesh.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹11,00,000" data-target="₹18,00,000">
+                            <div class="progress-bar landslide-bar" style="width: 61%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Himachal Pradesh Landslides', 'July 2023')">Donate</button>
+            </div>
+
+            <!-- Maharashtra Drought 2024 -->
+            <div class="disaster-card">
+                <div class="disaster-image-container">
+                    <img src="/9.GetInvolved/monetary_assets/maharashtra-drought.jpeg" alt="Maharashtra Drought 2024" class="disaster-image">
+                    <span class="disaster-type drought">Drought Disaster</span>
+                </div>
+                <div class="disaster-content">
+                    <h3 class="disaster-title">Maharashtra Drought Relief</h3>
+                    <p class="disaster-date">Date: May 2024</p>
+                    <p class="disaster-description">Severe drought conditions affected farmers and communities in Maharashtra.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar-wrapper" data-raised="₹9,80,000" data-target="₹16,00,000">
+                            <div class="progress-bar drought-bar" style="width: 61%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="donate-btn" onclick="redirectToForm('Maharashtra Drought Relief', 'May 2024')">Donate</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        
+        // Redirect to central donation form
+        function redirectToForm(disasterName, disasterDate) {
+            window.location.href = `Forms.html?disaster=${encodeURIComponent(disasterName)}&date=${encodeURIComponent(disasterDate)}`;
+        }
+
+        // Add hover tooltips for progress bars
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressWrappers = document.querySelectorAll('.progress-bar-wrapper');
+            
+            progressWrappers.forEach(wrapper => {
+                const raised = wrapper.getAttribute('data-raised');
+                const target = wrapper.getAttribute('data-target');
+                
+                if (raised && target) {
+                    // Create tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'progress-tooltip';
+                    tooltip.textContent = `${raised} raised of ${target}`;
+                    wrapper.appendChild(tooltip);
+                    
+                    // Show/hide tooltip on hover
+                    wrapper.addEventListener('mouseenter', () => {
+                        tooltip.style.opacity = '1';
+                        tooltip.style.visibility = 'visible';
+                    });
+                    
+                    wrapper.addEventListener('mouseleave', () => {
+                        tooltip.style.opacity = '0';
+                        tooltip.style.visibility = 'hidden';
+                    });
+                }
+            });
+        });
+    </script>
     <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
 </html>
