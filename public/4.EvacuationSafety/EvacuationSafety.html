@@ -104,7 +104,7 @@
       transform: translateY(-2px);
     }
 
-    /* Numbered circular badge */
+    
     .zone-badge {
       width: 32px;
       height: 32px;
@@ -119,7 +119,7 @@
       font-size: 0.95rem;
     }
 
-    /* Different accent colors per badge, like the reference */
+    
     .safe-zone-item:nth-child(1) .zone-badge { background: #dc3545; }
     .safe-zone-item:nth-child(1) { border-left-color: #dc3545; }
     .safe-zone-item:nth-child(2) .zone-badge { background: #2776de; }
@@ -165,7 +165,7 @@
       background: #1a5fbf;
     }
 
-    /* Closest Safe Zone highlight box */
+    
     .closest-zone-box {
       grid-column: 1 / -1;
       background: #eaf2ff;
@@ -218,11 +218,36 @@
       font-weight: 500;
       text-align: center;
     }
-    @media (max-width: 600px) {
-      .map-container { height: 220px; }
-      .safe-zone-grid { grid-template-columns: 1fr; }
-      .safe-zone-item { flex-direction: row; }
+    @media (max-width: 900px) and (min-width: 601px) {
+      .main-content { max-width: 700px; }
     }
+
+    @media (max-width: 600px) {
+      .main-content { padding: 16px 12px 32px; }
+      .map-container { height: 200px; }
+      .safe-zone-grid { grid-template-columns: 1fr; }
+      .safe-zone-item {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 12px;
+      }
+      .safe-zone-details { min-width: 140px; }
+      .go-button { font-size: 0.75rem; padding: 6px 12px; }
+      .closest-zone-box { flex-direction: column; text-align: center; }
+      .alert-banner { font-size: 0.9rem; padding: 10px 12px; }
+      }
+      @media (max-width: 900px) and (min-width: 601px) {
+        .main-content { max-width: 700px; }
+        .safe-zone-grid { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 400px) {
+        .map-container { height: 170px; }
+        .safe-zone-details .address {
+          white-space: normal;
+          overflow: visible;
+        }
+      }
   </style>
 </head>
 <body>
