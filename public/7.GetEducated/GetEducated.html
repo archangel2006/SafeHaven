@@ -72,17 +72,27 @@
             transform: scale(1.05);
         }
  
-        .panel a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
- 
-        .panel a:hover {
-            text-decoration: underline;
-        }
+   .panel a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.panel a:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.panel a:focus {
+    outline: 3px solid rgba(0, 123, 255, 0.3);
+    outline-offset: 2px;
+}
  
         /* ---------- TABLET (≤ 1024px) ---------- */
         @media (max-width: 1024px) {
