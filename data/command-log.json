@@ -1,0 +1,177 @@
+[
+  {
+    "id": 1782076872662,
+    "type": "dispatch",
+    "text": "Action executed: report",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T21:21:12.662Z"
+  },
+  {
+    "id": 1782076872597,
+    "type": "alert",
+    "text": "Test",
+    "actor": "QA",
+    "timestamp": "2026-06-21T21:21:12.597Z"
+  },
+  {
+    "id": 1782076853110,
+    "type": "dispatch",
+    "text": "Action executed: evacuate for zones A, B",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T21:20:53.110Z"
+  },
+  {
+    "id": 1782076823513,
+    "type": "dispatch",
+    "text": "Action executed: broadcast for zones A",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T21:20:23.513Z"
+  },
+  {
+    "id": 1782076775912,
+    "type": "dispatch",
+    "text": "Action executed: broadcast for zones A",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T21:19:35.913Z"
+  },
+  {
+    "id": 1782076675851,
+    "type": "dispatch",
+    "text": "Action executed: broadcast for zones A, B",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T21:17:55.851Z"
+  },
+  {
+    "id": 1782076675795,
+    "type": "dispatch",
+    "text": "Final test entry",
+    "actor": "QA Test",
+    "timestamp": "2026-06-21T21:17:55.795Z"
+  },
+  {
+    "id": 1782074989241,
+    "type": "dispatch",
+    "text": "Action executed: broadcast for zones A",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T20:49:49.241Z"
+  },
+  {
+    "id": 1782074753596,
+    "type": "update",
+    "text": "Final test",
+    "actor": "QA",
+    "timestamp": "2026-06-21T20:45:53.596Z"
+  },
+  {
+    "id": 1782074738648,
+    "type": "dispatch",
+    "text": "Action executed: broadcast for zones A",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T20:45:38.648Z"
+  },
+  {
+    "id": 1782074730083,
+    "type": "update",
+    "text": "Test entry",
+    "actor": "Tester",
+    "timestamp": "2026-06-21T20:45:30.083Z"
+  },
+  {
+    "id": 1782072679357,
+    "type": "dispatch",
+    "text": "Action executed: broadcast for zones A",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T20:11:19.357Z"
+  },
+  {
+    "id": 1782067779100,
+    "type": "dispatch",
+    "text": "Action executed: broadcast for zones A, B",
+    "actor": "Command Dashboard",
+    "timestamp": "2026-06-21T18:49:39.100Z"
+  },
+  {
+    "id": 1,
+    "type": "alert",
+    "text": "Critical structural damage reported at Zone A - Downtown. Search & rescue deployed.",
+    "actor": "Cmdr. Reyes",
+    "timestamp": "2026-06-21T08:35:00-08:00"
+  },
+  {
+    "id": 2,
+    "type": "dispatch",
+    "text": "3 ambulances dispatched to Harbor freeway overpass collapse.",
+    "actor": "Dispatch Unit",
+    "timestamp": "2026-06-21T08:37:00-08:00"
+  },
+  {
+    "id": 3,
+    "type": "update",
+    "text": "Shelter #4 (Lincoln High) now at 78% capacity. Opening overflow at Convention Center.",
+    "actor": "Shelter Ops",
+    "timestamp": "2026-06-21T08:40:00-08:00"
+  },
+  {
+    "id": 4,
+    "type": "assign",
+    "text": "Rescue Team Bravo assigned to Zone C - Harbor for structural extraction.",
+    "actor": "Cmdr. Tanaka",
+    "timestamp": "2026-06-21T08:44:00-08:00"
+  },
+  {
+    "id": 5,
+    "type": "alert",
+    "text": "Aftershock warning issued. All teams advised to reassess structural safety.",
+    "actor": "Seismic Unit",
+    "timestamp": "2026-06-21T08:47:00-08:00"
+  },
+  {
+    "id": 6,
+    "type": "dispatch",
+    "text": "Fire Truck Unit 7 and 8 dispatched to Westside gas leak report.",
+    "actor": "Dispatch Unit",
+    "timestamp": "2026-06-21T08:50:00-08:00"
+  },
+  {
+    "id": 7,
+    "type": "update",
+    "text": "Comms relay tower B restored. Partial coverage resumed for Zone B.",
+    "actor": "Comms Team",
+    "timestamp": "2026-06-21T08:54:00-08:00"
+  },
+  {
+    "id": 8,
+    "type": "assign",
+    "text": "Medical triage station established at Zone A park. 3 paramedic units on site.",
+    "actor": "Medical Lead",
+    "timestamp": "2026-06-21T08:57:00-08:00"
+  },
+  {
+    "id": 9,
+    "type": "dispatch",
+    "text": "Evacuation bus convoy (6 buses) routed to Convention Center shelter.",
+    "actor": "Transport Unit",
+    "timestamp": "2026-06-21T09:02:00-08:00"
+  },
+  {
+    "id": 10,
+    "type": "alert",
+    "text": "Power outage confirmed across Zone A and Zone D. Utility crews en route.",
+    "actor": "Infrastructure",
+    "timestamp": "2026-06-21T09:07:00-08:00"
+  },
+  {
+    "id": 11,
+    "type": "update",
+    "text": "Water supply tanker deployed to Zone C. Distribution begins at 09:00.",
+    "actor": "Logistics",
+    "timestamp": "2026-06-21T09:12:00-08:00"
+  },
+  {
+    "id": 12,
+    "type": "assign",
+    "text": "Incident Command Post established at City Hall. All unit leads report in.",
+    "actor": "Cmdr. Reyes",
+    "timestamp": "2026-06-21T09:17:00-08:00"
+  }
+]
