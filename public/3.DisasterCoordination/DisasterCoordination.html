@@ -127,6 +127,11 @@
     }
   </style>
 </head>
+<script>
+function activateSOS() {
+    document.getElementById("sosPanel").style.display = "block";
+}
+</script>
 <body>
   <div id="sh-navbar-root"></div>
   <script src="../components/navbar.js" data-sh-navbar data-page-title="Disaster Coordination"></script>
@@ -145,7 +150,9 @@
     <div class="card">
       <h2>Emergency Call & Data Processing</h2>
       <p>Initiate immediate alerts and report incidents in real time.</p>
-      <button onclick="window.open('sos.html', '_blank')">Activate SOS</button>
+      <button onclick="activateSOS()">
+  Activate SOS
+</button>
     </div>
     
     <!-- Emergency Coordination System Card -->
