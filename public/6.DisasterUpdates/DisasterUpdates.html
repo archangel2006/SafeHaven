@@ -561,13 +561,13 @@
     <script>
         // Weather and Time Fetching
         async function fetchLiveInfo() {
-            const apiKey = "dfe237a4e8c943519ac100729252202";
             const city = "New Delhi";
 
             try {
-                const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`);
+                const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
                 const data = await response.json();
-                document.getElementById('weather').innerText = `${city}: ${data.current.condition.text}, ${data.current.temp_c}°C`;
+                if (!response.ok) throw new Error(data.error);
+                document.getElementById('weather').innerText = `${data.city}: ${data.condition}, ${data.temp_c}°C`;
             } catch (e) { document.getElementById('weather').innerText = "Weather unavailable"; }
 
             function updateTime() {

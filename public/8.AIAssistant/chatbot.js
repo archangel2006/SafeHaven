@@ -9,7 +9,10 @@ const chatbotHTML = `
   <!-- Chat popup -->
   <div id="chatbot-popup">
     <div id="chatbot-header">
-      <span>🚨 Disaster Help Bot</span>
+      <div class="chatbot-header-main">
+        <span>🚨 Disaster Help Bot</span>
+        <span id="chatbot-weather" class="chatbot-weather" title="Current weather"></span>
+      </div>
       <button id="chatbot-close">✖</button>
     </div>
     <div id="chatbot-messages"></div>
@@ -82,6 +85,22 @@ const chatbotHTML = `
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.chatbot-header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.chatbot-weather {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #chatbot-close {
@@ -192,6 +211,20 @@ const closeBtn = document.getElementById('chatbot-close');
 const sendBtn = document.getElementById('chatbot-send');
 const input = document.getElementById('chatbot-input');
 const messagesDiv = document.getElementById('chatbot-messages');
+const weatherEl = document.getElementById('chatbot-weather');
+
+async function fetchChatbotWeather(city = 'New Delhi') {
+  try {
+    const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    weatherEl.textContent = `🌤 ${data.city}: ${data.condition}, ${data.temp_c}°C`;
+  } catch {
+    weatherEl.textContent = '';
+  }
+}
+
+fetchChatbotWeather();
 
 // 2️⃣ Add default SafeHaven welcome message
 const welcomeMessage = document.createElement('div');
@@ -262,7 +295,7 @@ async function sendMessage() {
   conversation.push({ role: 'user', content: userMessage });
 
   try {
-    const res = await fetch('http://localhost:3000/chatbot', {
+    const res = await fetch('/chatbot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ conversation })
