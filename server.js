@@ -28,6 +28,41 @@ try {
   console.log('OpenAI not configured, chatbot API will be unavailable');
 }
 
+// Weather proxy 
+app.get('/api/weather', async (req, res) => {
+  try {
+    const apiKey = process.env.WEATHER_API_KEY;
+    if (!apiKey) {
+      return res.status(503).json({ error: 'Weather service is currently unavailable.' });
+    }
+
+    const city = typeof req.query.city === 'string' && req.query.city.trim()
+      ? req.query.city.trim()
+      : 'New Delhi';
+
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(city)}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: 'Failed to fetch weather data.' });
+    }
+
+    const data = await response.json();
+    res.json({
+      city: data.location?.name || city,
+      region: data.location?.region,
+      country: data.location?.country,
+      condition: data.current?.condition?.text,
+      temp_c: data.current?.temp_c,
+      humidity: data.current?.humidity,
+      wind_kph: data.current?.wind_kph
+    });
+  } catch (error) {
+    console.error('Weather API Error:', error);
+    res.status(500).json({ error: 'Failed to fetch weather data.' });
+  }
+});
+
 // Chatbot endpoint
 app.post('/chatbot', async (req, res) => {
   try {
