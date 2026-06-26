@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="../components/navbar.css" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- for better typography-->
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{
             box-sizing: border-box;
@@ -18,15 +21,70 @@
             padding: 0;
         }
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             margin: 0;
             padding:0;
             background-color: #f4f4f4;
             text-align: center;
             overflow-x: hidden;
         }
+         .profile-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-logo-box {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+        .header-logo-box img {
+            height: 100%;
+            width: auto;
+        }
+        .header {
+            background-color: #5568b8;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .profile-btn:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .header-title {
+            color: white;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
         h2{
-            margin-top: 24px;
+            margin-top: 24px; 
+        }
+        .helper-text{
+            color:#666;
+            font-size:14px;
         }
         .donation-form {
             background: white;
@@ -52,6 +110,7 @@
         } 
         .field-label{
             display: block;
+            font-family:sans-serif;
             font-weight: 600;
             margin-bottom: 8px;
             font-size: 14px;
@@ -89,15 +148,18 @@
             gap: 8px;
             cursor: pointer; 
             font-size: 16px;
+            font-family:'Poppins', sans-serif;
+            color: #333;
         }
         .radio-option input{
             transform:scale(1.2);
             width: auto;
             margin :0;
         }
-
         .location-row{
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
         input[type="radio"] {
             accent-color:green;
@@ -125,13 +187,15 @@
             border-radius: 8px;
             font-size: 19px;
             color: white;
-            background-color: gray;
+            background-color:gray;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: not-allowed;
             transition: 0.3s;
         }
         .submit-btn.active {
             background-color: #28a745;
-            cursor: pointer;
+            cursor: pointer; 
         }
         .last-line{
             margin-top: 20px;
@@ -175,32 +239,49 @@
     </style>
 </head>
 <body>
-    <div id="sh-navbar-root"></div>
-    <script src="../components/navbar.js" data-sh-navbar data-page-title="Material Donations"></script>
-
-    <h2>Material Donation Form</h2>    
+     <!-- Header -->
+     <header class="header">
+        <div class="header-logo-box">
+            <img src="donation_assets/LOGO.jpg" alt="Safe Haven Logo">
+        </div>
+        <h1 class="header-title">Material Donations</h1>
+        <button class="profile-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="10" r="3"/>
+                <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+            </svg>
+        </button>
+        <i class="fas fa-bars" style="color:white"></i>
+    </header>
+    <!--Main Content-->
+    <h2> 📦 Material Donation </h2> </br>
+    <p class="helper-text">Help us deliver the right supplies</p>   
     <form class="donation-form" onsubmit="handleSubmit(event)">
         <div class="row">
             <div class="field">
-                <label for="donationType">What are you donating?</label>
+                <label for="donationType" class="field-label">1.What are you donating?</label>
                 <select id="donationType" required onchange="validateForm()">
-                <option value="" disabled selected>Select Donation Type</option>
+                <option value="" disabled selected >Select Donation Type</option>
                 <option>Food</option>
                 <option>Clothes</option>
                 <option>Medical Kits</option>
                 </select>
             </div>
             <div class="field">
-                <label>Quantity</label>
-                <div class="quantity-wrapper">
-                    <input type="text" id="Quantity" placeholder="Enter Quantity" required oninput="validateForm()">
-                    <span>kg</span>
+                <label class="field-label">2.Quantity</label>
+                <p class="helper-text">
+                    Enter approximate quantity available for donation .
+                </p></br>
+                <div class="quantity-wrapper"  >
+                    <input type="number" id="Quantity" placeholder="Enter Quantity" required oninput="validateForm()" min="1">
+                    <span id="helper">kg</span>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="field">
-                <label class="field-label">Condition</label>
+                <label class="field-label">3.Condition</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="Condition" value="New" oninput="validateForm()">
@@ -212,21 +293,22 @@
                     </label>
                     <label class="radio-option">
                         <input type="radio" name="Condition" value="Expiry Date" oninput="validateForm()">
-                        Expiry Date
+                        Expiry Date</br>
+                        (For medicines)
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <label>Location</label>
+            <label class="field-label">4.Location</label>
         </div>
         <div class="row location-row">
             <input type="text" placeholder="City" id="city" oninput="validateForm()">
-            <input type="text" placeholder="Pincode" id="pincode" oninput="validateForm()">
+            <input type="text" placeholder="Pincode" id="pincode" oninput="validateForm()"  maxlength="6" required>
         </div>
         <div class="row">
             <div class="field-full-width">
-                <label class="field-label">Pickup or Drop-off</label>
+                <label class="field-label">5.Pickup or Drop-off</label>
                 <div class="radio-group">
                     <label class="radio-option">
                          <input type="radio" name="Delivery" value="Drop" required oninput="validateForm()">
@@ -240,14 +322,64 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit</button>
+        <p id="errorMsg"
+            style="color:red;font-size:14px;margin-top:10px;">
+        </p>
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit Donation Details</button>
         <div class="last-line">
             <p>We accept unopened,quality items only. we'll contact you for pickup/drop details.</p>
         </div>
     </form>
 <script>
+    donationType.addEventListener("change", () => {
+
+    switch(donationType.value){
+
+        case "Medical Kits":
+            helper.textContent = "kits";
+            break;
+
+        case "Food":
+            helper.textContent = "kg";
+            break;
+
+        case "Clothes":
+            helper.textContent = "pieces";
+            break;
+
+        default:
+            helper.textContent = "kg";
+    }
+
+});
+Quantity.addEventListener("input", () => {
+
+    if(Quantity.value < 0){
+        Quantity.value = "";
+        alert("Negative values are not allowed");
+    }
+
+});
+ city.addEventListener("input", () => {
+
+   if(/[^a-zA-Z\s]/g.test(city.value)) {
+        alert("Special characters and numbers are not allowed");
+        city.value = city.value.replace(/[^a-zA-Z\s]/g,'');  
+    }
+    
+    
+
+});
+ pincode.addEventListener("input", () => {
+    pincode.value = pincode.value.replace(/\D/g, "");
+
+    if(pincode.value.length > 6){
+        pincode.value = pincode.value.slice(0,6);
+    }
+});
     function validateForm() {
         const donationType = document.getElementById("donationType").value;
+        const helper =document.getElementById("helper");
         const Quantity = document.getElementById("Quantity").value.trim();
         const City = document.getElementById("city").value.trim();
         const Pincode = document.getElementById("pincode").value.trim();
