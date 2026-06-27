@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avalanche Safety Tips</title>
+    <link rel="icon" href="../../../assets/1.HomePage/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../components/navbar.css" />
+ 
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+ 
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+ 
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: 20px auto;
+            gap: 25px;
+            padding: 0 20px;
+        }
+ 
+        .main-content { flex: 2.5; }
+        .sidebar { flex: 1; }
+ 
+        h1.page-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+ 
+        h1.page-title span {
+            color: #5a7184;
+            font-weight: 400;
+        }
+ 
+        .video-box {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+ 
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+ 
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e1e8f0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+ 
+        .info-card.what      { border-left: 5px solid #3c5da2; }
+        .info-card.warning   { border-left: 5px solid #e53e3e; }
+        .info-card.before    { border-left: 5px solid #f6ad55; }
+        .info-card.during    { border-left: 5px solid #e53e3e; }
+        .info-card.after     { border-left: 5px solid #48bb78; }
+        .info-card.resources { border-left: 5px solid #3182ce; }
+ 
+        .card-header {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+ 
+        .card-header i:first-child {
+            margin-right: 15px;
+            font-size: 20px;
+            width: 25px;
+            text-align: center;
+        }
+ 
+        .card-header h3 {
+            font-size: 17px;
+            flex-grow: 1;
+            font-weight: 600;
+            color: #2d3748;
+        }
+ 
+        .card-header .chevron {
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+ 
+        .card-content {
+            padding: 20px;
+            border-top: 1px solid #f0f4f8;
+            font-size: 15px;
+            color: #4a5568;
+            display: none;
+        }
+ 
+        .card-content.active { display: block; }
+ 
+        .safety-list {
+            list-style: none;
+            padding-left: 5px;
+        }
+ 
+        .safety-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+ 
+        .safety-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 15px;
+        }
+ 
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid #edf2f7;
+        }
+ 
+        .res-btn {
+            background: white;
+            padding: 15px;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            border: 0.5px solid #edf2f7;
+            transition: background 0.2s;
+        }
+ 
+        .res-btn:hover { background: #f7fafc; }
+        .res-btn i { color: #3c5da2; font-size: 16px; width: 20px; }
+ 
+        .sidebar-title {
+            margin-bottom: 15px;
+            font-size: 19px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+ 
+        .read-next-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+ 
+        .read-next-card:hover { transform: translateY(-3px); }
+ 
+        .thumb-box {
+            height: 130px;
+            position: relative;
+        }
+ 
+        .thumb-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+ 
+        .read-next-card p {
+            padding: 12px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+ 
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 90%;
+            max-width: 400px;
+        }
+ 
+        .toast {
+            background: #333;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            animation: slideUp 0.4s ease forwards;
+            border-left: 5px solid #3c5da2;
+        }
+ 
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+ 
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .safety-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div id="sh-navbar-root"></div>
+    <script src="../../components/navbar.js" data-sh-navbar data-page-title="Avalanche"></script>
+ 
+    <div id="toast-container"></div>
+ 
+    <div class="container">
+        <main class="main-content">
+            <h1 class="page-title">Avalanche <span>Safety Tips</span></h1>
+ 
+            <!-- Main Featured Video -->
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/zb3gaW8Lz0s"
+                    title="Avalanche Safety – What You Need to Know" allowfullscreen></iframe>
+            </div>
+ 
+            <!-- What Is an Avalanche -->
+            <div class="info-card what">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-check-circle" style="color: #3182ce;"></i>
+                    <h3>What Is an Avalanche?</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    An avalanche is a rapid flow of snow down a slope, often triggered by natural causes such as
+                    heavy snowfall, rain, wind, or rapid temperature changes, or by human activity such as skiing
+                    or explosions. Avalanches can reach speeds of up to 300 km/h (190 mph) and carry enormous
+                    amounts of snow, ice, and debris. They are one of the most dangerous natural hazards in
+                    mountainous regions, killing hundreds of people every year worldwide.
+                </div>
+            </div>
+ 
+            <!-- Warning Signs -->
+            <div class="info-card warning">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-triangle-exclamation" style="color: #e53e3e;"></i>
+                    <h3>Warning Signs of Avalanche Risk</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-circle" style="font-size:6px;color:#f6ad55;margin-top:8px;"></i>
+                            <span><strong>Recent avalanche activity:</strong> Fresh avalanche debris or cracks in the snow are strong warning signs.</span></li>
+                        <li><i class="fas fa-circle" style="font-size:6px;color:#ed8936;margin-top:8px;"></i>
+                            <span><strong>Hollow "whumpf" sound:</strong> A collapsing sound underfoot means weak snow layers are present.</span></li>
+                        <li><i class="fas fa-circle" style="font-size:6px;color:#e53e3e;margin-top:8px;"></i>
+                            <span><strong>Shooting cracks:</strong> Cracks shooting out from your footsteps or skis indicate unstable snow.</span></li>
+                        <li><i class="fas fa-circle" style="font-size:6px;color:#3182ce;margin-top:8px;"></i>
+                            <span><strong>Heavy snowfall or rain:</strong> New snow loading within 24 hours significantly increases risk.</span></li>
+                        <li><i class="fas fa-circle" style="font-size:6px;color:#805ad5;margin-top:8px;"></i>
+                            <span><strong>Wind loading:</strong> Strong winds blowing snow onto lee slopes creates unstable slabs.</span></li>
+                    </ul>
+                </div>
+            </div>
+ 
+            <!-- Before -->
+            <div class="info-card before">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-clipboard-list" style="color: #ed8936;"></i>
+                    <h3>Before Going into Avalanche Terrain (Prepare)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                            <span>Check the local avalanche forecast before heading out — always know the danger rating for the day.</span></li>
+                        <li><i class="fas fa-briefcase" style="color:#3182ce;"></i>
+                            <span>Carry the essential rescue equipment: avalanche transceiver (beacon), probe, and shovel — and know how to use them.</span></li>
+                        <li><i class="fas fa-people-group" style="color:#3182ce;"></i>
+                            <span>Never travel alone in avalanche terrain — always go with a group and take an avalanche safety course.</span></li>
+                        <li><i class="fas fa-map" style="color:#ed8936;"></i>
+                            <span>Plan your route carefully — avoid steep slopes (30–45°), convex rolls, and lee slopes after wind events.</span></li>
+                        <li><i class="fas fa-bell" style="color:#48bb78;"></i>
+                            <span>Tell someone your plans — where you're going and when you expect to return.</span></li>
+                    </ul>
+                </div>
+            </div>
+ 
+            <!-- During -->
+            <div class="info-card during">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-person-running" style="color: #e53e3e;"></i>
+                    <h3>During an Avalanche (Survive)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <div class="safety-grid">
+                        <ul class="safety-list">
+                            <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                                <span>Try to escape to the side of the avalanche path if possible.</span></li>
+                            <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                                <span>Ditch heavy gear (skis, poles, backpack) to move faster.</span></li>
+                            <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                                <span>If caught, fight to stay on the surface — swim motions help.</span></li>
+                            <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                                <span>As the snow slows, cover your face and create an air pocket.</span></li>
+                        </ul>
+                        <ul class="safety-list">
+                            <li><i class="fas fa-times" style="color:#e53e3e;"></i>
+                                <span>Don't shout — save your oxygen and energy.</span></li>
+                            <li><i class="fas fa-times" style="color:#e53e3e;"></i>
+                                <span>Don't try to dig upward if buried — spit to find which way is down.</span></li>
+                            <li><i class="fas fa-exclamation-triangle" style="color:#ed8936;"></i>
+                                <span>Try to keep one hand above the snow surface as it slows.</span></li>
+                            <li><i class="fas fa-exclamation-triangle" style="color:#ed8936;"></i>
+                                <span>Stay calm — panic wastes oxygen in your air pocket.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- After -->
+            <div class="info-card after">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-hand-holding-heart" style="color: #48bb78;"></i>
+                    <h3>After an Avalanche (Rescue)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                            <span>Call emergency services immediately — every minute counts for buried victims.</span></li>
+                        <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                            <span>Use your avalanche beacon to locate buried victims — switch to search mode.</span></li>
+                        <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                            <span>Probe the snow to pinpoint the exact location before digging.</span></li>
+                        <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                            <span>Dig strategically from the side — not straight down — to reach the victim faster.</span></li>
+                        <li><i class="fas fa-exclamation-triangle" style="color:#ed8936;"></i>
+                            <span>Watch for secondary avalanches — the slope may still be unstable.</span></li>
+                        <li><i class="fas fa-check-circle" style="color:#48bb78;"></i>
+                            <span>Treat victims for hypothermia and traumatic injuries while waiting for help.</span></li>
+                    </ul>
+                </div>
+            </div>
+ 
+            <!-- Resources -->
+            <div class="info-card resources">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-globe" style="color: #3182ce;"></i>
+                    <h3>Additional Resources</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content" style="padding: 0;">
+                    <div class="resource-grid">
+                        <a href="https://avalanche.org" target="_blank" class="res-btn" onclick="return true;">
+                            <i class="fas fa-globe"></i> Avalanche Forecast</a>
+                        <a href="#" class="res-btn" onclick="window.print(); return false;">
+                            <i class="fas fa-download"></i> Download Safety Checklist</a>
+                        <a href="#" class="res-btn" onclick="showBeaconTips(); return false;">
+                            <i class="fas fa-broadcast-tower"></i> Beacon Search Tips</a>
+                        <a href="#" class="res-btn" onclick="showRescueChecklist(); return false;">
+                            <i class="fas fa-clipboard-check"></i> Rescue Checklist</a>
+                    </div>
+                </div>
+            </div>
+ 
+        </main>
+ 
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Watch Next</h3>
+ 
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/PqQkSBWUhH0"
+                        title="Avalanche Safety kit" allowfullscreen></iframe>
+                </div>
+                <p>Avalanche Safety kit</p>
+            </div>
+ 
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/X90kUtxMd_Q"
+                        title="How to Use an Avalanche Beacon" allowfullscreen></iframe>
+                </div>
+                <p>How to Use an Avalanche Beacon</p>
+            </div>
+ 
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe src="https://www.youtube.com/embed/RnCCqHOiX5Q"
+                        title="Avalanche Safety tips" allowfullscreen></iframe>
+                </div>
+                <p>Avalanche Safety tips</p>
+            </div>
+        </aside>
+    </div>
+ 
+    <script>
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const chevron = element.querySelector('.chevron');
+            const isActive = content.classList.contains('active');
+ 
+            document.querySelectorAll('.card-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.chevron').forEach(i => i.style.transform = 'rotate(0deg)');
+ 
+            if (!isActive) {
+                content.classList.add('active');
+                chevron.style.transform = 'rotate(90deg)';
+            }
+        }
+ 
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas fa-circle-info"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+ 
+        function showBeaconTips() {
+            showToast("Beacon search: Switch to search mode, follow signal, probe to pinpoint, then dig.");
+        }
+ 
+        function showRescueChecklist() {
+            showToast("Rescue: 1) Call emergency services 2) Beacon search 3) Probe 4) Dig 5) Treat for hypothermia.");
+        }
+    </script>
+    <script src="../../8.AIAssistant/chatbot.js"></script>
+</body>
+ 
+</html>
+ 
