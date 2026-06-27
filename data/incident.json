@@ -1,0 +1,13 @@
+{
+  "type": "Earthquake - Magnitude 6.8",
+  "severity": "critical",
+  "location": "34.0522° N, 118.2437° W — Los Angeles, CA",
+  "startTime": "2026-06-21T08:32:00-08:00",
+  "affectedZones": [
+    "Zone A - Downtown",
+    "Zone B - Westside",
+    "Zone C - Harbor",
+    "Zone D - Valley"
+  ],
+  "affectedCount": 12400
+}
