@@ -23,7 +23,7 @@
             active: s.getAttribute('data-active') || '',
             base: s.getAttribute('data-base') || '',
             showStatus: s.getAttribute('data-show-status') === 'true',
-            location: s.getAttribute('data-location') || 'Delhi'
+            location: s.getAttribute('data-location') || 'Delhi, IN'
         };
     }
 
