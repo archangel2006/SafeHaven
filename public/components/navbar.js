@@ -23,7 +23,7 @@
             active: s.getAttribute('data-active') || '',
             base: s.getAttribute('data-base') || '',
             showStatus: s.getAttribute('data-show-status') === 'true',
-            location: s.getAttribute('data-location') || 'Pune, IN'
+            location: s.getAttribute('data-location') || 'Delhi, IN'
         };
     }
 
@@ -76,9 +76,9 @@
     }
 
     function statusHTML(loc) {
-        return '<span class="sh-navbar__status-item">📍 ' + loc + '</span>' +
-            '<span class="sh-navbar__status-item">🔔 Alerts On</span>';
-    }
+    return '<span class="sh-navbar__status-item" style="user-select: none; cursor: default;">📍 ' + loc + '</span>' +
+           '<span class="sh-navbar__status-item" style="user-select: none; cursor: default;">🔔 Alerts On</span>';
+}
 
     function build(c, r, cur) {
         var shell = document.createElement('div');
