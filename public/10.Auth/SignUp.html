@@ -91,6 +91,9 @@
             color: #888; 
             display: flex; 
             align-items: center;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
         /* OTP Section Spacing */
@@ -205,59 +208,59 @@
         <div class="input-group">
             <div class="field-box full">
                 <span class="label">Full Name</span>
-                <input type="text" id="name" placeholder="John Doe">
+                <input type="text" id="name" role="textbox" aria-label="Full name" placeholder="John Doe" tabindex="0">
             </div>
             <div class="field-box">
                 <span class="label">Email</span>
-                <input type="email" id="email" placeholder="john@example.com">
+                <input type="email" id="email" role="textbox" aria-label="Email address" placeholder="john@example.com" tabindex="0">
             </div>
             <div class="field-box">
                 <span class="label">Phone</span>
-                <input type="text" id="phone" placeholder="1234567890">
+                <input type="text" id="phone" role="textbox" aria-label="Phone number" placeholder="1234567890" tabindex="0">
             </div>
             
             <div class="field-box">
                 <span class="label">Password</span>
                 <div class="password-wrapper">
-                    <input type="password" id="password" placeholder="••••••••">
-                    <span class="toggle-password" onclick="togglePass('password', 'eye1')">
+                    <input type="password" id="password" role="textbox" aria-label="Password" placeholder="••••••••" tabindex="0">
+                    <button type="button" class="toggle-password" onclick="togglePass('password', 'eye1')" role="button" aria-label="Toggle password visibility" tabindex="0">
                         <svg id="eye1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    </span>
+                    </button>
                 </div>
             </div>
 
             <div class="field-box">
                 <span class="label">Confirm Password</span>
                 <div class="password-wrapper">
-                    <input type="password" id="confirmPassword" placeholder="••••••••">
-                    <span class="toggle-password" onclick="togglePass('confirmPassword', 'eye2')">
+                    <input type="password" id="confirmPassword" role="textbox" aria-label="Confirm password" placeholder="••••••••" tabindex="0">
+                    <button type="button" class="toggle-password" onclick="togglePass('confirmPassword', 'eye2')" role="button" aria-label="Toggle confirm password visibility" tabindex="0">
                         <svg id="eye2" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    </span>
+                    </button>
                 </div>
             </div>
         </div>
 
         <div class="otp-row">
-            <button onclick="sendOTP()" style="background: var(--main-blue); font-size: 12px; padding: 8px; width: auto; padding: 8px 15px;">Send OTP</button>
-            <div class="otp-boxes">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
+            <button onclick="sendOTP()" role="button" aria-label="Send one-time password to your email or phone" tabindex="0" style="background: var(--main-blue); font-size: 12px; padding: 8px; width: auto; padding: 8px 15px;">Send OTP</button>
+            <div class="otp-boxes" role="group" aria-label="Enter 6-digit OTP code">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 1" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 2" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 3" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 4" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 5" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 6" inputmode="numeric" tabindex="0">
             </div>
         </div>
 
-        <div id="error" class="error"></div>
+        <div id="error" class="error" role="alert" aria-live="assertive"></div>
 
         <div class="checkbox-group">
-            <input type="checkbox" id="terms">
+            <input type="checkbox" id="terms" aria-label="Agree to Terms of Service and Privacy Policy">
             <label for="terms">By signing up, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.</label>
         </div>
 
-        <button onclick="signup()">Create Account</button>
-        <button class="google-btn">
+        <button onclick="signup()" role="button" aria-label="Create your SafeHaven account" tabindex="0">Create Account</button>
+        <button class="google-btn" type="button" role="button" aria-label="Sign up with Google account" tabindex="0">
             <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" width="18"> Continue with Google
         </button>
 

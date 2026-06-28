@@ -372,7 +372,7 @@
                 <div class="pulse"></div> LIVE
             </div>
             <div class="info-pill">
-                <i class="fas fa-sun"></i> <span id="weather">Tokyo: 12°C</span>
+                <i class="fas fa-sun" aria-hidden="true"></i> <span id="weather" aria-live="polite" aria-atomic="true">Tokyo: 12°C</span>
             </div>
             <div class="info-pill">
                 <i class="fas fa-clock"></i> <span id="time">12:30 PM JST</span>
@@ -380,7 +380,7 @@
         </div>
         <div class="search-container">
             <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search by location, disaster type, or keywords...">
+            <input type="text" id="searchInput" role="searchbox" aria-label="Search disaster updates by location, disaster type, or keywords" placeholder="Search by location, disaster type, or keywords..." tabindex="0">
         </div>
     </div>
 

@@ -143,17 +143,17 @@
 </head>
 <body>
   <header>
-    <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
+    <button type="button" class="back-btn" onclick="goBack()" role="button" aria-label="Go back to disaster coordination page" tabindex="0"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
     Rescue Communication
   </header>
   <div class="container">
     <div class="chat-box" id="chatBox">
-      <div class="chat-messages" id="chatMessages">
+      <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-label="Rescue team chat messages">
         <!-- Chat messages will appear here -->
       </div>
       <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()">
-        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        <input type="text" id="chatInput" role="textbox" aria-label="Type your distress message to rescue teams" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()" tabindex="0">
+        <button onclick="sendMessage()" role="button" aria-label="Send message to rescue team" tabindex="0"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
       </div>
     </div>
   </div>
