@@ -4,15 +4,15 @@
     var LOGO = 'https://i.pinimg.com/474x/f4/79/4a/f4794a6bc83c46af8a4f287d45dc5f6f.jpg';
 
     var LINKS = [
-        { id: 'home', label: 'Home', path: 'index.html' },
-        { id: 'alerts', label: 'Alerts & Risks', path: '2.AlertsRisks/AlertsRisks.html' },
-        { id: 'coordination', label: 'Disaster Coordination', path: '3.DisasterCoordination/DisasterCoordination.html' },
-        { id: 'evacuation', label: 'Evacuation Safety', path: '4.EvacuationSafety/EvacuationSafety.html' },
-        { id: 'community', label: 'Community', path: '5.Community/Community.html' },
-        { id: 'updates', label: 'Disaster Updates', path: '6.DisasterUpdates/DisasterUpdates.html' },
-        { id: 'educated', label: 'Get Educated', path: '7.GetEducated/GetEducated.html' },
-        { id: 'donate', label: 'Donate', path: '9.GetInvolved/Donate.html' },
-        { id: 'volunteer', label: 'Volunteer', path: '9.GetInvolved/Volunteer.html' }
+        { id: 'home', label: 'Home', path: 'index.html', ariaLabel: 'Go to SafeHaven home page' },
+        { id: 'alerts', label: 'Alerts & Risks', path: '2.AlertsRisks/AlertsRisks.html', ariaLabel: 'View active disaster alerts and risk information' },
+        { id: 'coordination', label: 'Disaster Coordination', path: '3.DisasterCoordination/DisasterCoordination.html', ariaLabel: 'Open disaster coordination and rescue hub' },
+        { id: 'evacuation', label: 'Evacuation Safety', path: '4.EvacuationSafety/EvacuationSafety.html', ariaLabel: 'View evacuation routes and safety guidelines' },
+        { id: 'community', label: 'Community', path: '5.Community/Community.html', ariaLabel: 'Join community discussions and local updates' },
+        { id: 'updates', label: 'Disaster Updates', path: '6.DisasterUpdates/DisasterUpdates.html', ariaLabel: 'Read live disaster updates in your area' },
+        { id: 'educated', label: 'Get Educated', path: '7.GetEducated/GetEducated.html', ariaLabel: 'Learn disaster preparedness and safety education' },
+        { id: 'donate', label: 'Donate', path: '9.GetInvolved/Donate.html', ariaLabel: 'Donate to verified disaster relief efforts' },
+        { id: 'volunteer', label: 'Volunteer', path: '9.GetInvolved/Volunteer.html', ariaLabel: 'Register as a disaster response volunteer' }
     ];
 
     function cfg() {
@@ -54,12 +54,19 @@
     function linkList(items, r, cur, mobile) {
         var el = document.createElement(mobile ? 'ul' : 'div');
         el.className = mobile ? 'sh-navbar__mobile-links' : 'sh-navbar__desktop-links';
-        if (mobile) el.id = 'sh-navbar-menu';
+        if (mobile) {
+            el.id = 'sh-navbar-menu';
+            el.setAttribute('role', 'menu');
+            el.setAttribute('aria-label', 'Mobile navigation links');
+        }
 
         items.forEach(function (item) {
             var a = document.createElement('a');
             a.href = r + item.path;
             a.textContent = item.label;
+            a.setAttribute('role', 'link');
+            a.setAttribute('aria-label', item.ariaLabel || item.label);
+            a.setAttribute('tabindex', '0');
             if (item.id === cur) {
                 a.className = 'is-active';
                 a.setAttribute('aria-current', 'page');
@@ -76,8 +83,8 @@
     }
 
     function statusHTML(loc) {
-    return '<span class="sh-navbar__status-item" style="user-select: none; cursor: default;">📍 ' + loc + '</span>' +
-           '<span class="sh-navbar__status-item" style="user-select: none; cursor: default;">🔔 Alerts On</span>';
+    return '<span class="sh-navbar__status-item" style="user-select: none; cursor: default;" aria-label="Current location: ' + loc + '"><span aria-hidden="true">📍</span> ' + loc + '</span>' +
+           '<span class="sh-navbar__status-item" style="user-select: none; cursor: default;" aria-label="Disaster alerts are enabled"><span aria-hidden="true">🔔</span> Alerts On</span>';
 }
 
     function build(c, r, cur) {
@@ -86,6 +93,8 @@
 
         var nav = document.createElement('nav');
         nav.className = 'sh-navbar';
+        nav.setAttribute('role', 'navigation');
+        nav.setAttribute('aria-label', 'Main navigation');
         if (c.showStatus) nav.classList.add('sh-navbar--has-status');
 
         var main = document.createElement('div');
@@ -96,13 +105,15 @@
             '<span class="sh-navbar__logo-wrap"><img src="' + LOGO + '" alt="Safe Haven"></span></a></div>' +
             '<div class="sh-navbar__center"><h1>' + c.title + '</h1></div>' +
             '<div class="sh-navbar__right">' +
-            '<a href="' + r + '10.Auth/Login.html" class="sh-navbar__profile" aria-label="Profile">' +
-            '<i class="far fa-user-circle"></i></a></div>';
+            '<a href="' + r + '10.Auth/Login.html" class="sh-navbar__profile" role="link" aria-label="Sign in to your SafeHaven account" tabindex="0">' +
+            '<i class="far fa-user-circle" aria-hidden="true"></i></a></div>';
 
         var toggle = document.createElement('button');
         toggle.className = 'sh-navbar__toggle';
         toggle.type = 'button';
-        toggle.setAttribute('aria-label', 'Open menu');
+        toggle.setAttribute('role', 'button');
+        toggle.setAttribute('tabindex', '0');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-controls', 'sh-navbar-menu');
         toggle.innerHTML = '<span class="sh-navbar__toggle-bar"></span><span class="sh-navbar__toggle-bar"></span><span class="sh-navbar__toggle-bar"></span>';

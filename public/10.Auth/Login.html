@@ -104,6 +104,9 @@
             color: #888; 
             display: flex; 
             align-items: center;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
         /* OTP Styling */
@@ -190,38 +193,38 @@
         
         <div class="input-container">
             <span class="label">Email or Phone Number</span>
-            <input type="text" id="loginId" placeholder="name@example.com or 9876543210">
+            <input type="text" id="loginId" role="textbox" aria-label="Email or phone number" placeholder="name@example.com or 9876543210" tabindex="0">
         </div>
         
         <div class="input-container">
             <span class="label">Password</span>
             <div class="password-wrapper">
-                <input type="password" id="password" placeholder="••••••••">
-                <span class="toggle-password" onclick="togglePassword()">
+                <input type="password" id="password" role="textbox" aria-label="Password" placeholder="••••••••" tabindex="0">
+                <button type="button" class="toggle-password" onclick="togglePassword()" role="button" aria-label="Toggle password visibility" tabindex="0">
                     <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
-                </span>
+                </button>
             </div>
         </div>
 
         <div class="otp-row">
-            <button onclick="sendOTP()" class="otp-btn">Send OTP</button>
-            <div class="otp-boxes">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
-                <input type="text" class="otp-input" maxlength="1">
+            <button onclick="sendOTP()" class="otp-btn" role="button" aria-label="Send one-time password to your email or phone" tabindex="0">Send OTP</button>
+            <div class="otp-boxes" role="group" aria-label="Enter 6-digit OTP code">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 1" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 2" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 3" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 4" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 5" inputmode="numeric" tabindex="0">
+                <input type="text" class="otp-input" maxlength="1" role="textbox" aria-label="OTP digit 6" inputmode="numeric" tabindex="0">
             </div>
         </div>
         
-        <div id="error" class="error"></div>
+        <div id="error" class="error" role="alert" aria-live="assertive"></div>
 
-        <button onclick="login()">Login</button>
-        <button class="google-btn">
+        <button onclick="login()" role="button" aria-label="Log in to SafeHaven responder dashboard" tabindex="0">Login</button>
+        <button class="google-btn" type="button" role="button" aria-label="Sign in with Google account" tabindex="0">
             <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" width="18"> Continue with Google
         </button>
 

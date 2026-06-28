@@ -100,14 +100,14 @@
 </head>
 <body>
   <header>
-    <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
+    <button type="button" class="back-btn" onclick="goBack()" role="button" aria-label="Go back to disaster coordination page" tabindex="0"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
     Emergency Coordination System
   </header>
   <div class="container">
     <p class="info">
       Monitor and manage real-time resource allocation and communication among responders.
     </p>
-    <div class="dashboard" id="dashboard">
+    <div class="dashboard" id="dashboard" aria-live="polite" aria-atomic="true" aria-label="Emergency resource availability dashboard">
       <h2>Resource Dashboard</h2>
       <div class="resource">
         <strong>Ambulances:</strong> <span id="ambulanceCount">5</span> available
@@ -121,7 +121,7 @@
       <div class="resource">
         <strong>Communication Channels:</strong> Operational
       </div>
-      <button class="refresh-btn" onclick="updateResources()">Refresh Resources</button>
+      <button class="refresh-btn" onclick="updateResources()" role="button" aria-label="Refresh available emergency resource counts" tabindex="0">Refresh Resources</button>
     </div>
     <p class="info" style="margin-top:2rem;">
       Use this system to coordinate rapid deployment and ensure efficient response.

@@ -780,7 +780,7 @@
 
     <section class="emergency-banner">
       <div class="banner-content">
-        <i class="fas fa-broadcast-tower"></i>
+        <i class="fas fa-broadcast-tower" aria-hidden="true"></i>
 
         <div class="banner-text">
           <h3>CRITICAL ALERT</h3>
@@ -790,7 +790,7 @@
           </p>
         </div>
 
-        <button class="banner-btn" id="viewSafetyBtn" onclick="openSafetyModal()">View Safety Instructions</button>
+        <button class="banner-btn" id="viewSafetyBtn" onclick="openSafetyModal()" role="button" aria-label="View cyclone safety instructions" tabindex="0">View Safety Instructions</button>
       </div>
     </section>
     <section class="alerts-section">
@@ -1050,11 +1050,11 @@
   </script>
 
   <!-- Safety Instructions Modal -->
-  <div id="safetyModal" class="safety-modal">
+  <div id="safetyModal" class="safety-modal" role="dialog" aria-modal="true" aria-labelledby="safety-modal-title" aria-hidden="true">
     <div class="safety-modal-content">
       <div class="modal-header">
-        <h2><i class="fas fa-shield-alt"></i> Cyclone Safety Instructions</h2>
-        <button class="modal-close" onclick="closeSafetyModal()">&times;</button>
+        <h2 id="safety-modal-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> Cyclone Safety Instructions</h2>
+        <button class="modal-close" onclick="closeSafetyModal()" role="button" aria-label="Close safety instructions dialog" tabindex="0">&times;</button>
       </div>
       <div class="modal-body">
         <div class="safety-section">
@@ -1112,13 +1112,18 @@
   <script>
     // Safety Modal Functions
     function openSafetyModal() {
-      document.getElementById('safetyModal').style.display = 'block';
+      const modal = document.getElementById('safetyModal');
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
 
     function closeSafetyModal() {
-      document.getElementById('safetyModal').style.display = 'none';
+      const modal = document.getElementById('safetyModal');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = 'auto'; // Restore scrolling
+      document.getElementById('viewSafetyBtn').focus();
     }
 
     // Close modal when clicking outside of it

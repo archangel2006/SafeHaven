@@ -308,7 +308,7 @@
 <body>
 
     <nav class="navbar">
-        <i class="fas fa-arrow-left" onclick="history.back()"></i>
+        <button type="button" class="nav-back" onclick="history.back()" role="button" aria-label="Go back to disaster education hub" tabindex="0"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
         <div class="brand">thunderstorm</div>
         <i class="far fa-user-circle fa-lg"></i>
     </nav>
@@ -518,6 +518,7 @@
             showToast("Stay indoors 30 min after last thunder, avoid downed power lines, report hazards to authorities.");
         }
     </script>
+    <script src="../../components/a11y.js"></script>
     <script src="../../8.AIAssistant/chatbot.js"></script>
 </body>
 

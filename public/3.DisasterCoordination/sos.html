@@ -113,7 +113,7 @@
 </head>
 <body>
   <header>
-    <i class="fas fa-arrow-left back-btn" onclick="goBack()"></i>
+    <button type="button" class="back-btn" onclick="goBack()" role="button" aria-label="Go back to disaster coordination page" tabindex="0"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
     SOS Emergency Reporting
   </header>
   <div class="container">
@@ -121,7 +121,7 @@
       Report an emergency with a single tap. Your alert is sent immediately to local responders.
     </p>
     <!-- Single SOS Button -->
-    <button class="sos-btn" onclick="activateSOS()">Activate SOS</button>
+    <button class="sos-btn" onclick="activateSOS()" role="button" aria-label="Activate emergency SOS - notify local responders immediately" tabindex="0">Activate SOS</button>
     <p class="info" style="margin-top:2rem;">
       Once activated, follow the instructions below for evacuation and first-aid.
     </p>

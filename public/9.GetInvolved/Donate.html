@@ -276,11 +276,11 @@
         </div>
 
         <div class="donation-options">
-            <button class="btn-glass monetary-btn" onclick="window.location.href='MonetaryDonations.html'">
-                💵 Monetary Donations
+            <button class="btn-glass monetary-btn" onclick="window.location.href='MonetaryDonations.html'" role="button" aria-label="Make a monetary donation to disaster relief" tabindex="0">
+                <span aria-hidden="true">💵</span> Monetary Donations
             </button>
-            <button class="btn-glass material-btn" onclick="window.location.href='MaterialDonations.html'">
-                📦 Material Donations
+            <button class="btn-glass material-btn" onclick="window.location.href='MaterialDonations.html'" role="button" aria-label="Donate material supplies for disaster relief" tabindex="0">
+                <span aria-hidden="true">📦</span> Material Donations
             </button>
         </div>
 
@@ -331,9 +331,9 @@
                 </div>
             </div>
             <div class="pagination">
-                <button class="dot active" onclick="moveCarousel(0)"></button>
-                <button class="dot" onclick="moveCarousel(1)"></button>
-                <button class="dot" onclick="moveCarousel(2)"></button>
+                <button class="dot active" onclick="moveCarousel(0)" role="button" aria-label="Show testimonial 1" aria-pressed="true" tabindex="0"></button>
+                <button class="dot" onclick="moveCarousel(1)" role="button" aria-label="Show testimonial 2" aria-pressed="false" tabindex="0"></button>
+                <button class="dot" onclick="moveCarousel(2)" role="button" aria-label="Show testimonial 3" aria-pressed="false" tabindex="0"></button>
             </div>
         </div>
 
