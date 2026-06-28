@@ -338,6 +338,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             user-select: none;
+            font-family: inherit;
         }
 
         .tab:hover {
@@ -419,6 +420,10 @@
             border-radius: 12px;
             font-size: 13px;
             cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
         }
 
         .safebot-box p {
@@ -455,7 +460,9 @@
 
         .gi-link {
             flex: 1;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
         }
 
@@ -467,6 +474,9 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .volunteer-btn {
@@ -643,24 +653,26 @@
         <!-- Emergency Action Cards -->
         <div class="cards-section">
             <!-- SOS SECTION -->
-            <div class="sos-section">
-                <p class="sos-note">Use only in life-threatening situations</p>
+            <div class="sos-section" role="region" aria-labelledby="sos-heading">
+                <p class="sos-note" id="sos-heading">Use only in life-threatening situations</p>
 
-                <button class="sos-button" onclick="sendSOS()">
-                    🚨 EMERGENCY SOS
+                <button class="sos-button" type="button" onclick="sendSOS()"
+                    aria-label="Emergency SOS button - sends immediate alert to emergency services">
+                    <span aria-hidden="true">🚨</span> EMERGENCY SOS
                 </button><br>
 
-                <button class="call-button" onclick="window.location.href='tel:112'">
-                    📞 Call Emergency Services
+                <button class="call-button" type="button" onclick="window.location.href='tel:112'"
+                    aria-label="Call emergency services at 112">
+                    <span aria-hidden="true">📞</span> Call Emergency Services
                 </button>
             </div>
             <div class="section-header">
-                <h3 class="section-title">🚨 Critical Emergency Actions</h3>
+                <h3 class="section-title" id="critical-actions"><span aria-hidden="true">🚨</span> Critical Emergency Actions</h3>
             </div>
-            <div class="grid-container">
+            <div class="grid-container" role="navigation" aria-labelledby="critical-actions">
                 <div class="grid-item">
-                    <a href="./2.AlertsRisks/AlertsRisks.html">
-                        <div class="card-icon-wrapper">⚠️</div>
+                    <a href="./2.AlertsRisks/AlertsRisks.html" aria-label="View active alerts and disaster risks">
+                        <div class="card-icon-wrapper" aria-hidden="true">⚠️</div>
                         <div class="card-content">
                             <div class="card-title">Alerts & Risks</div>
                             <div class="card-description">Hazard warnings & current risks</div>
@@ -668,8 +680,8 @@
                     </a>
                 </div>
                 <div class="grid-item">
-                    <a href="./3.DisasterCoordination/DisasterCoordination.html">
-                        <div class="card-icon-wrapper">🚨</div>
+                    <a href="./3.DisasterCoordination/DisasterCoordination.html" aria-label="Open disaster coordination hub">
+                        <div class="card-icon-wrapper" aria-hidden="true">🚨</div>
                         <div class="card-content">
                             <div class="card-title">Disaster Coordination</div>
                             <div class="card-description">Connect responders, resources and aid</div>
@@ -677,8 +689,8 @@
                     </a>
                 </div>
                 <div class="grid-item">
-                    <a href="./4.EvacuationSafety/EvacuationSafety.html">
-                        <div class="card-icon-wrapper">🛟</div>
+                    <a href="./4.EvacuationSafety/EvacuationSafety.html" aria-label="View evacuation routes and safety guidance">
+                        <div class="card-icon-wrapper" aria-hidden="true">🛟</div>
                         <div class="card-content">
                             <div class="card-title">Evacuation Safety</div>
                             <div class="card-description">Safe routes & tips</div>
@@ -688,12 +700,12 @@
             </div>
 
             <div class="section-header">
-                <h3 class="section-title">📚 Support & Learning</h3>
+                <h3 class="section-title" id="support-learning"><span aria-hidden="true">📚</span> Support & Learning</h3>
             </div>
-            <div class="grid-container">
+            <div class="grid-container" role="navigation" aria-labelledby="support-learning">
                 <div class="grid-item">
-                    <a href="./5.Community/Community.html">
-                        <div class="card-icon-wrapper">👥</div>
+                    <a href="./5.Community/Community.html" aria-label="Connect with local community support">
+                        <div class="card-icon-wrapper" aria-hidden="true">👥</div>
                         <div class="card-content">
                             <div class="card-title">Community</div>
                             <div class="card-description">Help & connect locally</div>
@@ -701,8 +713,8 @@
                     </a>
                 </div>
                 <div class="grid-item">
-                    <a href="./6.DisasterUpdates/DisasterUpdates.html">
-                        <div class="card-icon-wrapper">📰</div>
+                    <a href="./6.DisasterUpdates/DisasterUpdates.html" aria-label="View live disaster updates in your area">
+                        <div class="card-icon-wrapper" aria-hidden="true">📰</div>
                         <div class="card-content">
                             <div class="card-title">Disaster Updates</div>
                             <div class="card-description">Live updates in your area</div>
@@ -710,8 +722,8 @@
                     </a>
                 </div>
                 <div class="grid-item">
-                    <a href="./7.GetEducated/GetEducated.html">
-                        <div class="card-icon-wrapper">📚</div>
+                    <a href="./7.GetEducated/GetEducated.html" aria-label="Learn disaster preparedness and safety education">
+                        <div class="card-icon-wrapper" aria-hidden="true">📚</div>
                         <div class="card-content">
                             <div class="card-title">Get Educated</div>
                             <div class="card-description">Learn to stay safe</div>
@@ -728,47 +740,50 @@
                     <h3 class="ec-title">EMERGENCY ASSISTANCE</h3>
 
                     <!-- TAB UI -->
-                    <div class="ec-tabs">
-                        <div class="tab active" data-tab="india">India</div>
-                        <div class="tab" data-tab="global">Global</div>
-                        <span class="icon-tab">🧡🕊️</span>
+                    <div class="ec-tabs" role="tablist" aria-label="Emergency contact numbers by region">
+                        <button type="button" class="tab active" role="tab" id="tab-india"
+                            aria-selected="true" aria-controls="india-list" data-tab="india">India</button>
+                        <button type="button" class="tab" role="tab" id="tab-global"
+                            aria-selected="false" aria-controls="global-list" data-tab="global">Global</button>
+                        <span class="icon-tab" aria-hidden="true">🧡🕊️</span>
                     </div>
 
                     <!-- INDIA LIST -->
-                    <div class="ec-list active" id="india-list">
+                    <div class="ec-list active" id="india-list" role="tabpanel" aria-labelledby="tab-india">
                         <div class="ec-item">
-                            <span>🇮🇳 Police: <strong>100</strong></span>
-                            <button class="copy-btn" data-copy="100">Copy</button>
+                            <span><span aria-hidden="true">🇮🇳</span> Police: <strong>100</strong></span>
+                            <button type="button" class="copy-btn" data-copy="100" aria-label="Copy police emergency number 100">Copy</button>
                         </div>
                         <div class="ec-item">
-                            <span>🚑 Ambulance: <strong>102</strong></span>
-                            <button class="copy-btn" data-copy="102">Copy</button>
+                            <span><span aria-hidden="true">🚑</span> Ambulance: <strong>102</strong></span>
+                            <button type="button" class="copy-btn" data-copy="102" aria-label="Copy ambulance number 102">Copy</button>
                         </div>
                         <div class="ec-item">
-                            <span>🧯 Fire: <strong>101</strong></span>
-                            <button class="copy-btn" data-copy="101">Copy</button>
+                            <span><span aria-hidden="true">🧯</span> Fire: <strong>101</strong></span>
+                            <button type="button" class="copy-btn" data-copy="101" aria-label="Copy fire emergency number 101">Copy</button>
                         </div>
                     </div>
 
                     <!-- GLOBAL LIST -->
-                    <div class="ec-list" id="global-list">
+                    <div class="ec-list" id="global-list" role="tabpanel" aria-labelledby="tab-global" hidden>
                         <div class="ec-item">
-                            <span>🌍 Emergency: <strong>112</strong></span>
-                            <button class="copy-btn" data-copy="112">Copy</button>
+                            <span><span aria-hidden="true">🌍</span> Emergency: <strong>112</strong></span>
+                            <button type="button" class="copy-btn" data-copy="112" aria-label="Copy global emergency number 112">Copy</button>
                         </div>
                         <div class="ec-item">
-                            <span>🚑 Ambulance: <strong>911</strong></span>
-                            <button class="copy-btn" data-copy="911">Copy</button>
+                            <span><span aria-hidden="true">🚑</span> Ambulance: <strong>911</strong></span>
+                            <button type="button" class="copy-btn" data-copy="911" aria-label="Copy ambulance number 911">Copy</button>
                         </div>
                     </div>
 
                     <!-- SAFE BOT -->
                     <div class="safebot">
                         <p class="safebot-title">Need Guidance Right Now?</p>
-                        <div class="safebot-box" onclick="openSafeBot()">
-                            <strong>🤖 Ask SafeBot:</strong>
+                        <button type="button" class="safebot-box" onclick="openSafeBot()"
+                            aria-label="Ask SafeBot: What should I do during an earthquake?">
+                            <strong><span aria-hidden="true">🤖</span> Ask SafeBot:</strong>
                             <p>What should I do during an earthquake?</p>
-                        </div>
+                        </button>
                     </div>
                 </div>
 
@@ -778,11 +793,11 @@
                     <p class="gi-desc">Support our mission to assist in times of crisis.</p>
 
                     <div class="gi-buttons">
-                        <a href="./9.GetInvolved/Volunteer.html" class="gi-link">
-                            <button class="volunteer-btn">Volunteer</button>
+                        <a href="./9.GetInvolved/Volunteer.html" class="gi-link volunteer-btn" aria-label="Volunteer to help during disasters">
+                            Volunteer
                         </a>
-                        <a href="./9.GetInvolved/Donate.html" class="gi-link">
-                            <button class="donate-btn">Donate</button>
+                        <a href="./9.GetInvolved/Donate.html" class="gi-link donate-btn" aria-label="Donate to disaster relief efforts">
+                            Donate
                         </a>
                     </div>
                 </div>
@@ -791,13 +806,16 @@
     </div>
 
    <!-- Map Section -->
-  <section class="map-section" id="map-section">
+  <section class="map-section" id="map-section" aria-labelledby="map-section-title">
         <div class="map-header">
-            <h2>📍 Location Near You</h2>
+            <h2 id="map-section-title"><span aria-hidden="true">📍</span> Location Near You</h2>
 
             <div class="map-actions">
-                <button id="homeButton" class="home-btn">🏠 Home</button>
-                <a href="./1.HomePage/full-map.html" target="_blank" class="view-map">
+                <button type="button" id="homeButton" class="home-btn" aria-label="Reset map to home location">
+                    <span aria-hidden="true">🏠</span> Home
+                </button>
+                <a href="./1.HomePage/full-map.html" target="_blank" rel="noopener noreferrer" class="view-map"
+                    aria-label="View full map in a new tab">
                     View Full Map →
                 </a>
             </div>
@@ -805,7 +823,7 @@
 
         <div class="map-card">
             <div class="map-wrapper" id="mapWrapper">
-                <div id="map"></div>
+                <div id="map" role="application" aria-label="Interactive map showing your location"></div>
             </div>
 
             <div class="map-footer">
@@ -814,33 +832,47 @@
         </div>
     </section>
 
-    <div id="sos-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
+    <div id="sos-modal" role="dialog" aria-modal="true" aria-labelledby="sos-modal-title" aria-describedby="sos-modal-desc"
+        aria-hidden="true"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
         <div style="background:white; border-radius:16px; padding:32px; max-width:400px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.3);">
-            <div style="font-size:48px;">🚨</div>
-            <h2 style="color:#dc3545; margin:12px 0;">SOS Alert Sent!</h2>
-            <p style="color:#555; margin-bottom:8px;">Your location has been sent to emergency services.</p>
+            <div style="font-size:48px;" aria-hidden="true">🚨</div>
+            <h2 id="sos-modal-title" style="color:#dc3545; margin:12px 0;">SOS Alert Sent!</h2>
+            <p id="sos-modal-desc" style="color:#555; margin-bottom:8px;">Your location has been sent to emergency services.</p>
             <p style="color:#555; margin-bottom:24px;">Help will reach you soon. Stay calm and stay safe.</p>
-            <button onclick="closeSOS()" style="background:#dc3545; color:white; border:none; padding:12px 32px; border-radius:8px; font-size:16px; cursor:pointer;">OK</button>
+            <button type="button" onclick="closeSOS()" aria-label="Close SOS confirmation dialog"
+                style="background:#dc3545; color:white; border:none; padding:12px 32px; border-radius:8px; font-size:16px; cursor:pointer;">OK</button>
         </div>
     </div>
 
     <script>
         // TAB SWITCHING FUNCTIONALITY
+        function activateTab(tab) {
+            const targetTab = tab.getAttribute('data-tab');
+
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+
+            document.querySelectorAll('.ec-list').forEach(list => {
+                list.classList.remove('active');
+                list.hidden = true;
+            });
+            const panel = document.getElementById(targetTab + '-list');
+            panel.classList.add('active');
+            panel.hidden = false;
+        }
+
         document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const targetTab = this.getAttribute('data-tab');
-                
-                // Remove active class from all tabs
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // Hide all lists
-                document.querySelectorAll('.ec-list').forEach(list => list.classList.remove('active'));
-                
-                // Show target list
-                document.getElementById(targetTab + '-list').classList.add('active');
+            tab.addEventListener('click', () => activateTab(tab));
+            tab.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    activateTab(tab);
+                }
             });
         });
 
@@ -855,10 +887,12 @@
                     const originalText = this.textContent;
                     this.textContent = 'Copied!';
                     this.classList.add('copied');
+                    this.setAttribute('aria-label', 'Copied ' + textToCopy + ' to clipboard');
                     
                     setTimeout(() => {
                         this.textContent = originalText;
                         this.classList.remove('copied');
+                        this.setAttribute('aria-label', 'Copy emergency number ' + textToCopy);
                     }, 2000);
                 }).catch(err => {
                     console.error('Failed to copy:', err);
@@ -869,11 +903,19 @@
 
         // SOS FUNCTIONALITY
         function sendSOS() {
-            document.getElementById('sos-modal').style.display = 'flex';
+            const modal = document.getElementById('sos-modal');
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
         }
         function closeSOS() {
-            document.getElementById('sos-modal').style.display = 'none';
+            const modal = document.getElementById('sos-modal');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
         }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeSOS();
+        });
 
         // SAFEBOT FUNCTION
         function openSafeBot() {

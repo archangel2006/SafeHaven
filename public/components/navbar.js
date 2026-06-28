@@ -54,12 +54,15 @@
     function linkList(items, r, cur, mobile) {
         var el = document.createElement(mobile ? 'ul' : 'div');
         el.className = mobile ? 'sh-navbar__mobile-links' : 'sh-navbar__desktop-links';
+        el.setAttribute('role', 'navigation');
+        el.setAttribute('aria-label', mobile ? 'Mobile main navigation' : 'Main navigation');
         if (mobile) el.id = 'sh-navbar-menu';
 
         items.forEach(function (item) {
             var a = document.createElement('a');
             a.href = r + item.path;
             a.textContent = item.label;
+            a.setAttribute('aria-label', 'Navigate to ' + item.label);
             if (item.id === cur) {
                 a.className = 'is-active';
                 a.setAttribute('aria-current', 'page');
@@ -76,8 +79,10 @@
     }
 
     function statusHTML(loc) {
-        return '<span class="sh-navbar__status-item">📍 ' + loc + '</span>' +
-            '<span class="sh-navbar__status-item">🔔 Alerts On</span>';
+        return '<span class="sh-navbar__status-item" aria-label="Current location: ' + loc + '">' +
+            '<span aria-hidden="true">📍</span> ' + loc + '</span>' +
+            '<span class="sh-navbar__status-item" aria-label="Alerts are enabled">' +
+            '<span aria-hidden="true">🔔</span> Alerts On</span>';
     }
 
     function build(c, r, cur) {
@@ -86,18 +91,20 @@
 
         var nav = document.createElement('nav');
         nav.className = 'sh-navbar';
+        nav.setAttribute('role', 'navigation');
+        nav.setAttribute('aria-label', 'Safe Haven main navigation');
         if (c.showStatus) nav.classList.add('sh-navbar--has-status');
 
         var main = document.createElement('div');
         main.className = 'sh-navbar__main';
         main.innerHTML =
             '<div class="sh-navbar__left">' +
-            '<a href="' + r + 'index.html" class="sh-navbar__logo-link" aria-label="Home">' +
-            '<span class="sh-navbar__logo-wrap"><img src="' + LOGO + '" alt="Safe Haven"></span></a></div>' +
+            '<a href="' + r + 'index.html" class="sh-navbar__logo-link" aria-label="Safe Haven home">' +
+            '<span class="sh-navbar__logo-wrap"><img src="' + LOGO + '" alt="Safe Haven logo"></span></a></div>' +
             '<div class="sh-navbar__center"><h1>' + c.title + '</h1></div>' +
             '<div class="sh-navbar__right">' +
-            '<a href="' + r + '10.Auth/Login.html" class="sh-navbar__profile" aria-label="Profile">' +
-            '<i class="far fa-user-circle"></i></a></div>';
+            '<a href="' + r + '10.Auth/Login.html" class="sh-navbar__profile" aria-label="Login or profile">' +
+            '<i class="far fa-user-circle" aria-hidden="true"></i></a></div>';
 
         var toggle = document.createElement('button');
         toggle.className = 'sh-navbar__toggle';
@@ -105,7 +112,7 @@
         toggle.setAttribute('aria-label', 'Open menu');
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-controls', 'sh-navbar-menu');
-        toggle.innerHTML = '<span class="sh-navbar__toggle-bar"></span><span class="sh-navbar__toggle-bar"></span><span class="sh-navbar__toggle-bar"></span>';
+        toggle.innerHTML = '<span class="sh-navbar__toggle-bar" aria-hidden="true"></span><span class="sh-navbar__toggle-bar" aria-hidden="true"></span><span class="sh-navbar__toggle-bar" aria-hidden="true"></span>';
         main.querySelector('.sh-navbar__right').appendChild(toggle);
 
         nav.appendChild(main);
@@ -115,11 +122,15 @@
         if (c.showStatus) {
             var sd = document.createElement('div');
             sd.className = 'sh-navbar__status sh-navbar__status--desktop';
+            sd.setAttribute('role', 'status');
+            sd.setAttribute('aria-live', 'polite');
             sd.innerHTML = statusHTML(c.location);
             nav.appendChild(sd);
 
             var sm = document.createElement('div');
             sm.className = 'sh-navbar__status sh-navbar__status--mobile';
+            sm.setAttribute('role', 'status');
+            sm.setAttribute('aria-live', 'polite');
             sm.innerHTML = statusHTML(c.location);
             shell.appendChild(nav);
             shell.appendChild(sm);

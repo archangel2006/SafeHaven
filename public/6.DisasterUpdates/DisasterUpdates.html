@@ -358,6 +358,18 @@
                 justify-content: center;
             }
         }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 
@@ -366,21 +378,24 @@
     <div id="sh-navbar-root"></div>
     <script src="../components/navbar.js" data-sh-navbar data-page-title="Disaster Updates"></script>
 
-    <div class="control-strip">
-        <div class="live-info">
-            <div class="info-pill">
-                <div class="pulse"></div> LIVE
+    <div class="control-strip" role="region" aria-label="Live disaster updates controls">
+        <div class="live-info" aria-live="polite" aria-atomic="true">
+            <div class="info-pill" aria-label="Live updates active">
+                <div class="pulse" aria-hidden="true"></div> LIVE
             </div>
             <div class="info-pill">
-                <i class="fas fa-sun"></i> <span id="weather">Tokyo: 12°C</span>
+                <i class="fas fa-sun" aria-hidden="true"></i> <span id="weather">Loading weather...</span>
             </div>
             <div class="info-pill">
-                <i class="fas fa-clock"></i> <span id="time">12:30 PM JST</span>
+                <i class="fas fa-clock" aria-hidden="true"></i> <span id="time">Loading time...</span>
             </div>
         </div>
         <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Search by location, disaster type, or keywords...">
+            <label for="searchInput" class="visually-hidden">Search disaster updates by location, type, or keywords</label>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input type="search" id="searchInput" role="searchbox"
+                aria-label="Search disaster updates by location, disaster type, or keywords"
+                placeholder="Search by location, disaster type, or keywords...">
         </div>
     </div>
 

@@ -1,29 +1,45 @@
 const chatbotHTML = `
 <div id="chatbot-container">
-  <!-- Floating circular button with custom image -->
-  <button id="chatbot-toggle" title="Chat with SafeHaven">
+  <button id="chatbot-toggle" type="button"
+    aria-label="Open SafeHaven disaster help chatbot"
+    aria-expanded="false"
+    aria-controls="chatbot-popup">
     <img src="https://i.pinimg.com/474x/84/8a/66/848a6696ad98779868a826290b7b8dbd.jpg" 
-         alt="AI Assistant" id="chatbot-icon" />
+         alt="" id="chatbot-icon" aria-hidden="true" />
   </button>
 
-  <!-- Chat popup -->
-  <div id="chatbot-popup">
+  <div id="chatbot-popup" role="dialog" aria-modal="true"
+    aria-labelledby="chatbot-header-title" aria-hidden="true">
     <div id="chatbot-header">
       <div class="chatbot-header-main">
-        <span>🚨 Disaster Help Bot</span>
-        <span id="chatbot-weather" class="chatbot-weather" title="Current weather"></span>
+        <span id="chatbot-header-title">🚨 Disaster Help Bot</span>
+        <span id="chatbot-weather" class="chatbot-weather" aria-live="polite" aria-atomic="true"></span>
       </div>
-      <button id="chatbot-close">✖</button>
+      <button id="chatbot-close" type="button" aria-label="Close disaster help chatbot">✖</button>
     </div>
-    <div id="chatbot-messages"></div>
+    <div id="chatbot-messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="Chat messages"></div>
     <div id="chatbot-input-container">
-      <input type="text" id="chatbot-input" placeholder="Ask about disaster safety, help, or donations..." />
-      <button id="chatbot-send">➡️</button>
+      <label for="chatbot-input" class="visually-hidden">Ask about disaster safety, help, or donations</label>
+      <input type="text" id="chatbot-input"
+        aria-label="Type your disaster safety question"
+        placeholder="Ask about disaster safety, help, or donations..." />
+      <button id="chatbot-send" type="button" aria-label="Send message">➡️</button>
     </div>
   </div>
 </div>
 
 <style>
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 #chatbot-container {
   position: fixed;
   bottom: 20px;
@@ -270,13 +286,24 @@ RULES:
 ];
 
 // 4️⃣ Toggle popup
+function setChatbotOpen(open) {
+  popup.style.display = open ? 'flex' : 'none';
+  popup.setAttribute('aria-hidden', open ? 'false' : 'true');
+  toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  toggleBtn.setAttribute('aria-label', open ? 'Close disaster help chatbot' : 'Open SafeHaven disaster help chatbot');
+  if (open) input.focus();
+}
+
 toggleBtn.addEventListener('click', () => {
-  popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
-  if (popup.style.display === 'flex') input.focus();
+  setChatbotOpen(popup.style.display !== 'flex');
 });
 
 // 5️⃣ Close popup
-closeBtn.addEventListener('click', () => popup.style.display = 'none');
+closeBtn.addEventListener('click', () => setChatbotOpen(false));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && popup.style.display === 'flex') setChatbotOpen(false);
+});
 
 // 6️⃣ Send message
 async function sendMessage() {
@@ -326,6 +353,5 @@ input.addEventListener('keydown', e => {
 
 // Expose SafeBot opener for external buttons (Home Page)
 window.openChatbot = function () {
-  popup.style.display = 'flex';
-  input.focus();
+  setChatbotOpen(true);
 };

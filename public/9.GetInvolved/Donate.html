@@ -276,11 +276,13 @@
         </div>
 
         <div class="donation-options">
-            <button class="btn-glass monetary-btn" onclick="window.location.href='MonetaryDonations.html'">
-                💵 Monetary Donations
+            <button type="button" class="btn-glass monetary-btn" onclick="window.location.href='MonetaryDonations.html'"
+                aria-label="Make a monetary donation to disaster relief">
+                <span aria-hidden="true">💵</span> Monetary Donations
             </button>
-            <button class="btn-glass material-btn" onclick="window.location.href='MaterialDonations.html'">
-                📦 Material Donations
+            <button type="button" class="btn-glass material-btn" onclick="window.location.href='MaterialDonations.html'"
+                aria-label="Donate material supplies for disaster relief">
+                <span aria-hidden="true">📦</span> Material Donations
             </button>
         </div>
 
@@ -330,10 +332,10 @@
                     </div>
                 </div>
             </div>
-            <div class="pagination">
-                <button class="dot active" onclick="moveCarousel(0)"></button>
-                <button class="dot" onclick="moveCarousel(1)"></button>
-                <button class="dot" onclick="moveCarousel(2)"></button>
+            <div class="pagination" role="group" aria-label="Testimonial carousel navigation">
+                <button type="button" class="dot active" onclick="moveCarousel(0)" aria-label="View testimonial 1" aria-current="true"></button>
+                <button type="button" class="dot" onclick="moveCarousel(1)" aria-label="View testimonial 2"></button>
+                <button type="button" class="dot" onclick="moveCarousel(2)" aria-label="View testimonial 3"></button>
             </div>
         </div>
 

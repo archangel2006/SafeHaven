@@ -342,7 +342,17 @@
       position: relative;
     }
 
-    .profile-menu img {
+    .profile-trigger {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 50%;
+      line-height: 0;
+    }
+
+    .profile-menu img,
+    .profile-trigger img {
       width: 42px;
       height: 42px;
       border-radius: 50%;
@@ -422,6 +432,10 @@
       cursor: pointer;
       font-size: 18px;
       color: #999;
+      background: none;
+      border: none;
+      padding: 0;
+      line-height: 1;
     }
 
     .close-btn:hover {
@@ -1050,50 +1064,56 @@
   <script src="../components/navbar.js" data-sh-navbar data-page-title="Community"></script>
 
   <!-- ================= TABS ================= -->
-  <div class="tabs-container">
-    <button class="tab-btn" data-tab="discussionTab">Discussion Board</button>
-    <button class="tab-btn" data-tab="forumTab">Community Forum</button>
-    <button class="tab-btn" data-tab="missingTab">Missing Person</button>
-
+  <div class="tabs-container" role="tablist" aria-label="Community sections">
+    <button type="button" class="tab-btn" role="tab" id="tab-discussion" data-tab="discussionTab"
+      aria-selected="true" aria-controls="discussionTab">Discussion Board</button>
+    <button type="button" class="tab-btn" role="tab" id="tab-forum" data-tab="forumTab"
+      aria-selected="false" aria-controls="forumTab">Community Forum</button>
+    <button type="button" class="tab-btn" role="tab" id="tab-missing" data-tab="missingTab"
+      aria-selected="false" aria-controls="missingTab">Missing Person</button>
   </div>
 
 
   <!-- ================= MAIN CONTAINER ================= -->
   <div class="container">
-    <section id="discussionTab" class="tab-content active-tab">
+    <section id="discussionTab" class="tab-content active-tab" role="tabpanel" aria-labelledby="tab-discussion">
 
       <div class="top-header">
         <h2>Discussion Board (Group Chat)</h2>
 
         <div class="header-right">
-          <div class="status">
-            🟢 <span id="activeCount">24</span> Active Participants
+          <div class="status" role="status" aria-live="polite">
+            <span aria-hidden="true">🟢</span> <span id="activeCount">24</span> Active Participants
           </div>
 
           <div class="profile-menu">
-            <img src="https://ui-avatars.com/api/?name=User&background=0052cc&color=fff" id="profilePicTop"
+            <button type="button" class="profile-trigger" id="profilePicTopBtn"
+              aria-label="Open profile settings" aria-expanded="false" aria-controls="profileDropdown"
               onclick="toggleProfileMenu()">
+              <img src="https://ui-avatars.com/api/?name=User&background=0052cc&color=fff" id="profilePicTop" alt="Your profile picture">
+            </button>
 
-            <div class="profile-dropdown" id="profileDropdown">
+            <div class="profile-dropdown" id="profileDropdown" role="dialog" aria-labelledby="profile-dropdown-title" aria-hidden="true">
 
               <div class="dropdown-header">
-                <span>Profile Settings</span>
-                <span class="close-btn" onclick="toggleProfileMenu()">×</span>
+                <span id="profile-dropdown-title">Profile Settings</span>
+                <button type="button" class="close-btn" onclick="toggleProfileMenu()" aria-label="Close profile settings">×</button>
               </div>
 
               <div class="profile-preview">
-                <img src="https://ui-avatars.com/api/?name=User&background=0052cc&color=fff" id="profilePic">
+                <img src="https://ui-avatars.com/api/?name=User&background=0052cc&color=fff" id="profilePic" alt="Your profile picture">
 
                 <label for="profileInput" class="change-photo">
                   Change Photo
                 </label>
 
-                <input type="file" id="profileInput" accept="image/*" onchange="updateProfile()">
+                <input type="file" id="profileInput" accept="image/*" onchange="updateProfile()"
+                  aria-label="Upload profile photo">
               </div>
 
               <div class="profile-edit">
-                <label>Your Name</label>
-                <input type="text" id="username" placeholder="Enter your name">
+                <label for="username">Your Name</label>
+                <input type="text" id="username" placeholder="Enter your name" aria-label="Enter your display name">
               </div>
 
             </div>
@@ -1107,20 +1127,24 @@
         <div class="sidebarr">
           <h3>Discussion Groups</h3>
 
-          <div class="group active" onclick="switchGroup('general', this)">
-            📍 General - City
+          <div class="group active" role="button" tabindex="0" aria-label="General city discussion group"
+            onclick="switchGroup('general', this)">
+            <span aria-hidden="true">📍</span> General - City
           </div>
 
-          <div class="group" onclick="switchGroup('shelter', this)">
-            🏠 Shelter Updates
+          <div class="group" role="button" tabindex="0" aria-label="Shelter updates discussion group"
+            onclick="switchGroup('shelter', this)">
+            <span aria-hidden="true">🏠</span> Shelter Updates
           </div>
 
-          <div class="group" onclick="switchGroup('volunteer', this)">
-            🤝 Volunteer Coordination
+          <div class="group" role="button" tabindex="0" aria-label="Volunteer coordination discussion group"
+            onclick="switchGroup('volunteer', this)">
+            <span aria-hidden="true">🤝</span> Volunteer Coordination
           </div>
 
-          <div class="group" onclick="switchGroup('medical', this)">
-            🚑 Medical Assistance
+          <div class="group" role="button" tabindex="0" aria-label="Medical assistance discussion group"
+            onclick="switchGroup('medical', this)">
+            <span aria-hidden="true">🚑</span> Medical Assistance
           </div>
         </div>
 
@@ -1131,24 +1155,27 @@
             <h4 id="currentGroupTitle">General - City</h4>
           </div>
 
-          <div class="chat-container" id="chatContainer">
+          <div class="chat-container" id="chatContainer" role="log" aria-live="polite" aria-label="Discussion messages">
             <div style="text-align:center; font-size:13px; color:gray;">
               Welcome. Share verified updates only.
             </div>
           </div>
 
-          <form class="chat-input" onsubmit="sendMessage(event)">
-            <select id="messageType">
+          <form class="chat-input" onsubmit="sendMessage(event)" aria-label="Send a community message">
+            <label for="messageType" class="visually-hidden">Message type</label>
+            <select id="messageType" aria-label="Select message type">
               <option value="normal">Normal</option>
               <option value="question">Question ❓</option>
               <option value="volunteer">Volunteer 🤝</option>
             </select>
 
-            <input type="text" id="messageInput" placeholder="Type your message...">
+            <label for="messageInput" class="visually-hidden">Message text</label>
+            <input type="text" id="messageInput" placeholder="Type your message..." aria-label="Type your message">
 
-            <input type="file" id="imageInput" accept="image/*">
+            <label for="imageInput" class="visually-hidden">Attach image</label>
+            <input type="file" id="imageInput" accept="image/*" aria-label="Attach an image to your message">
 
-            <button type="submit">Send</button>
+            <button type="submit" aria-label="Send message">Send</button>
           </form>
 
         </div>
@@ -1160,38 +1187,46 @@
     <!-- =============== COMMUNITY FORUM ================= -->
     <!-- ================================================= -->
 
-    <section id="forumTab" class="tab-content">
+    <section id="forumTab" class="tab-content" role="tabpanel" aria-labelledby="tab-forum" hidden>
 
       <header class="forum-header">
         <h2>Community Forum (Posts)</h2>
       </header>
 
       <!-- Filters -->
-      <div class="filters">
-        <button class="active" data-category="all" onclick="filterCategory(this)">
+      <div class="filters" role="group" aria-label="Filter forum posts by category">
+        <button type="button" class="active" data-category="all" onclick="filterCategory(this)"
+          aria-label="Show all forum posts" aria-pressed="true">
           All
         </button>
 
-        <button data-category="water" onclick="filterCategory(this)">
-          💧 Water
+        <button type="button" data-category="water" onclick="filterCategory(this)"
+          aria-label="Filter water-related posts" aria-pressed="false">
+          <span aria-hidden="true">💧</span> Water
         </button>
 
-        <button data-category="food" onclick="filterCategory(this)">
-          🍲 Food
+        <button type="button" data-category="food" onclick="filterCategory(this)"
+          aria-label="Filter food-related posts" aria-pressed="false">
+          <span aria-hidden="true">🍲</span> Food
         </button>
 
-        <button data-category="shelter" onclick="filterCategory(this)">
-          🏠 Shelter
+        <button type="button" data-category="shelter" onclick="filterCategory(this)"
+          aria-label="Filter shelter-related posts" aria-pressed="false">
+          <span aria-hidden="true">🏠</span> Shelter
         </button>
 
-        <button data-category="medical" onclick="filterCategory(this)">
-          🚑 Medical Aid
+        <button type="button" data-category="medical" onclick="filterCategory(this)"
+          aria-label="Filter medical aid posts" aria-pressed="false">
+          <span aria-hidden="true">🚑</span> Medical Aid
         </button>
       </div>
 
       <!-- Search -->
       <div class="search-bar">
-        <input type="text" id="forumSearchInput" placeholder="Search for updates..." oninput="searchUpdates()">
+        <label for="forumSearchInput" class="visually-hidden">Search forum updates</label>
+        <input type="search" id="forumSearchInput" role="searchbox"
+          placeholder="Search for updates..." oninput="searchUpdates()"
+          aria-label="Search community forum updates">
       </div>
 
       <!-- Posts Container -->
@@ -1202,7 +1237,7 @@
     <!-- =============== MISSING PERSONS ================= -->
     <!-- ================================================= -->
 
-    <section id="missingTab" class="tab-content">
+    <section id="missingTab" class="tab-content" role="tabpanel" aria-labelledby="tab-missing" hidden>
 
       <div class="missing-wrapper">
 
@@ -1298,11 +1333,20 @@
 
             const tabId = this.dataset.tab;
 
-            tabContents.forEach(tab => tab.classList.remove("active-tab"));
-            tabButtons.forEach(btn => btn.classList.remove("active-btn"));
+            tabContents.forEach(tab => {
+              tab.classList.remove("active-tab");
+              tab.hidden = true;
+            });
+            tabButtons.forEach(btn => {
+              btn.classList.remove("active-btn");
+              btn.setAttribute("aria-selected", "false");
+            });
 
-            document.getElementById(tabId).classList.add("active-tab");
+            const panel = document.getElementById(tabId);
+            panel.classList.add("active-tab");
+            panel.hidden = false;
             this.classList.add("active-btn");
+            this.setAttribute("aria-selected", "true");
           });
         });
 
@@ -1836,8 +1880,11 @@
       /* ================= PROFILE MENU ================= */
 
       window.toggleProfileMenu = function () {
-        document.getElementById("profileDropdown")
-          .classList.toggle("active");
+        const dropdown = document.getElementById("profileDropdown");
+        const trigger = document.getElementById("profilePicTopBtn");
+        const isOpen = dropdown.classList.toggle("active");
+        dropdown.setAttribute("aria-hidden", isOpen ? "false" : "true");
+        if (trigger) trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
       };
 
       window.updateProfile = function () {
@@ -1856,10 +1903,12 @@
 
       window.addEventListener("click", function (e) {
         const menu = document.getElementById("profileDropdown");
-        const avatar = document.getElementById("profilePicTop");
+        const trigger = document.getElementById("profilePicTopBtn");
 
-        if (menu && !menu.contains(e.target) && e.target !== avatar) {
+        if (menu && trigger && !menu.contains(e.target) && !trigger.contains(e.target)) {
           menu.classList.remove("active");
+          menu.setAttribute("aria-hidden", "true");
+          trigger.setAttribute("aria-expanded", "false");
         }
       });
 
