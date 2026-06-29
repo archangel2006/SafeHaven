@@ -467,6 +467,7 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            transition: transform 0.3s ease,box-shadow 0.3s ease;
         }
 
         .volunteer-btn {
@@ -479,6 +480,11 @@
             background: #2776de;
             color: #ffffff;
             border: none;	
+        }
+
+        .volunteer-btn:hover,.donate-btn:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
         }
 
         .map-section {
