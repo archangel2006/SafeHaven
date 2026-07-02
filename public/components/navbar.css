@@ -285,88 +285,100 @@
     }
 }
 
-/* ── Desktop Right Sidebar Navigation ── */
+/* ── Desktop Right Sidebar Drawer ── */
+.sh-sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 1998;
+}
+.sh-sidebar-overlay.is-open { display: block; }
+
+.sh-sidebar {
+    position: fixed;
+    top: 0; right: -280px;
+    width: 260px;
+    height: 100vh;
+    background: #425e97;
+    z-index: 1999;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 16px rgba(0,0,0,0.2);
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+.sh-sidebar.is-open { right: 0; }
+
+.sh-sidebar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.sh-sidebar__header span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.sh-sidebar__close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    line-height: 1;
+    transition: background 0.2s;
+}
+.sh-sidebar__close:hover { background: rgba(255,255,255,0.15); }
+
+.sh-sidebar__links {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 10px;
+    gap: 4px;
+}
+.sh-sidebar__links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.sh-sidebar__links a:hover,
+.sh-sidebar__links a.is-active {
+    background: rgba(255,255,255,0.18);
+}
+
+/* Sidebar toggle button — desktop only */
+.sh-sidebar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    align-items: center;
+    justify-content: center;
+}
+.sh-sidebar-toggle:hover { background: rgba(255,255,255,0.15); }
+
 @media (min-width: 1025px) {
-
-    /* Make the shell a flex row so sidebar sits beside content */
-    .sh-navbar-shell {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        display: flex;
-        flex-direction: row;
-        height: 100vh;
-        width: 220px;
-        float: left;
-    }
-
-    .sh-navbar {
-        display: flex;
-        flex-direction: column;
-        width: 220px;
-        height: 100vh;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.12);
-    }
-
-    /* Stack logo and title vertically */
-    .sh-navbar__main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 16px 16px;
-        gap: 10px;
-        grid-template-columns: unset;
-        min-height: unset;
-    }
-
-    .sh-navbar__left { justify-self: unset; }
-    .sh-navbar__center { justify-self: unset; }
-    .sh-navbar__right { justify-self: unset; }
-
-    .sh-navbar__center h1 {
-        font-size: 1rem;
-        white-space: normal;
-        text-align: center;
-    }
-
-    /* Hide hamburger toggle on desktop */
+    .sh-sidebar-toggle { display: flex; }
     .sh-navbar__toggle { display: none; }
+}
 
-    /* Show desktop sidebar links vertically */
-    .sh-navbar__desktop-links {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: stretch;
-        gap: 2px;
-        padding: 8px 10px;
-        flex-grow: 1;
-        overflow-y: auto;
-    }
-
-    .sh-navbar__desktop-links a {
-        font-size: 13px;
-        padding: 10px 14px;
-        border-radius: 8px;
-        text-align: left;
-        white-space: normal;
-    }
-
-    /* Hide mobile hamburger dropdown on desktop */
-    .sh-navbar__mobile-links { display: none !important; }
-
-    /* Status bar goes below links in sidebar */
-    .sh-navbar__status--desktop {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        padding: 12px 14px;
-        font-size: 12px;
-        border-top: 1px solid rgba(255,255,255,0.15);
-        background: rgba(0,0,0,0.1);
-        border-bottom: none;
-        color: #fff;
-        box-shadow: none;
-    }
+@media (max-width: 1024px) {
+    .sh-sidebar { display: none; }
+    .sh-sidebar-overlay { display: none !important; }
 }
