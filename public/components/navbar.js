@@ -163,8 +163,78 @@
         if (mount) mount.replaceWith(bar);
         else document.body.insertBefore(bar, document.body.firstChild);
         menu(bar);
+        buildSidebar(LINKS, r, cur);
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
+
+    function buildSidebar(links, r, cur) {
+        // Overlay
+        var overlay = document.createElement('div');
+        overlay.className = 'sh-sidebar-overlay';
+        overlay.addEventListener('click', closeSidebar);
+
+        // Sidebar panel
+        var sidebar = document.createElement('div');
+        sidebar.className = 'sh-sidebar';
+        sidebar.id = 'sh-sidebar';
+
+        // Header with close button
+        var header = document.createElement('div');
+        header.className = 'sh-sidebar__header';
+        header.innerHTML = '<span>Menu</span>';
+
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'sh-sidebar__close';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.setAttribute('aria-label', 'Close menu');
+        closeBtn.addEventListener('click', closeSidebar);
+        header.appendChild(closeBtn);
+
+        // Links
+        var linkContainer = document.createElement('div');
+        linkContainer.className = 'sh-sidebar__links';
+        links.forEach(function(item) {
+            var a = document.createElement('a');
+            a.href = r + item.path;
+            a.textContent = item.label;
+            if (item.id === cur) {
+                a.className = 'is-active';
+                a.setAttribute('aria-current', 'page');
+            }
+            linkContainer.appendChild(a);
+        });
+
+        sidebar.appendChild(header);
+        sidebar.appendChild(linkContainer);
+        document.body.appendChild(overlay);
+        document.body.appendChild(sidebar);
+
+        // Add toggle button to navbar right
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'sh-sidebar-toggle';
+        toggleBtn.setAttribute('aria-label', 'Open sidebar menu');
+        toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        toggleBtn.addEventListener('click', openSidebar);
+
+        var navRight = document.querySelector('.sh-navbar__right');
+        if (navRight) navRight.appendChild(toggleBtn);
+
+        function openSidebar() {
+            sidebar.classList.add('is-open');
+            overlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('is-open');
+            overlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSidebar();
+        });
+    }
 })();
