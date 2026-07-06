@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Air Quality Emergencies / Smog</title>
+
+<link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Segoe UI',Arial,sans-serif;
+background:#f4f6fb;
+color:#333;
+line-height:1.6;
+overflow-x:hidden;
+
+}
+
+.navbar{
+
+background:#3c5da2;
+padding:12px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+position:sticky;
+top:0;
+z-index:1000;
+
+}
+
+.navbar i{
+
+cursor:pointer;
+
+}
+
+.brand{
+
+font-size:22px;
+font-weight:bold;
+
+}
+
+.container{
+
+display:flex;
+max-width:1100px;
+margin:20px auto;
+padding:0 20px;
+gap:25px;
+
+}
+
+.main-content{
+
+flex:2.5;
+
+}
+
+.sidebar{
+
+flex:1;
+
+}
+
+.page-title{
+
+font-size:28px;
+color:#1a365d;
+font-weight:700;
+margin-bottom:18px;
+
+}
+
+.page-title span{
+
+color:#5a7184;
+font-weight:400;
+
+}
+
+.video-box{
+
+position:relative;
+background:#000;
+border-radius:12px;
+overflow:hidden;
+aspect-ratio:16/9;
+margin-bottom:25px;
+box-shadow:0 4px 15px rgba(0,0,0,.1);
+
+}
+
+.video-box iframe{
+
+width:100%;
+height:100%;
+border:none;
+
+}
+
+.info-card{
+
+background:white;
+border-radius:12px;
+margin-bottom:15px;
+overflow:hidden;
+border:1px solid #e2e8f0;
+box-shadow:0 2px 6px rgba(0,0,0,.05);
+
+}
+
+.card-header{
+
+padding:18px;
+display:flex;
+align-items:center;
+cursor:pointer;
+
+}
+
+.card-header i:first-child{
+
+margin-right:15px;
+font-size:20px;
+width:25px;
+text-align:center;
+
+}
+
+.card-header h3{
+
+flex:1;
+font-size:17px;
+color:#2d3748;
+
+}
+
+.chevron{
+
+color:#999;
+
+}
+
+.card-content{
+
+display:none;
+padding:20px;
+border-top:1px solid #edf2f7;
+font-size:15px;
+color:#4a5568;
+
+}
+
+.card-content.active{
+
+display:block;
+
+}
+
+.what{
+
+border-left:5px solid #3182ce;
+
+}
+
+.warning{
+
+border-left:5px solid #4299e1;
+
+}
+
+.before{
+
+border-left:5px solid #ed8936;
+
+}
+
+.during{
+
+border-left:5px solid #e53e3e;
+
+}
+
+.resources{
+
+border-left:5px solid #3182ce;
+
+}
+
+.safety-list{
+
+list-style:none;
+
+}
+
+.safety-list li{
+
+display:flex;
+gap:12px;
+margin-bottom:12px;
+
+}
+
+.safety-grid{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+
+}
+.resource-grid{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+border-top:1px solid #edf2f7;
+
+}
+
+.res-btn{
+
+background:white;
+padding:15px;
+text-decoration:none;
+color:#4a5568;
+display:flex;
+align-items:center;
+gap:12px;
+font-size:14px;
+font-weight:600;
+border:.5px solid #edf2f7;
+transition:.3s;
+
+}
+
+.res-btn:hover{
+
+background:#f7fafc;
+
+}
+
+.res-btn i{
+
+color:#3182ce;
+
+}
+
+.sidebar-title{
+
+font-size:20px;
+font-weight:700;
+color:#1a365d;
+margin-bottom:15px;
+
+}
+
+.read-next-card{
+
+background:white;
+border-radius:12px;
+overflow:hidden;
+margin-bottom:20px;
+box-shadow:0 4px 10px rgba(0,0,0,.05);
+transition:.3s;
+text-decoration:none;
+display:block;
+color:#222;
+
+}
+
+.read-next-card:hover{
+
+transform:translateY(-3px);
+
+}
+
+.thumb-box{
+
+height:150px;
+
+}
+
+.thumb-box iframe{
+
+width:100%;
+height:100%;
+border:none;
+
+}
+
+.read-next-card p{
+
+padding:12px 15px;
+font-weight:600;
+font-size:15px;
+
+}
+
+#toast-container{
+
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+max-width:420px;
+z-index:9999;
+
+}
+
+.toast{
+
+background:#333;
+color:white;
+padding:16px;
+border-radius:12px;
+display:flex;
+gap:12px;
+margin-top:10px;
+border-left:5px solid #3182ce;
+animation:slideUp .4s ease;
+
+}
+
+@keyframes slideUp{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@media(max-width:850px){
+
+.container{
+
+flex-direction:column;
+
+}
+
+.safety-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<i class="fas fa-arrow-left"
+onclick="history.back()"></i>
+
+<div class="brand">
+
+Air Quality
+
+</div>
+
+<i class="far fa-user-circle fa-lg"></i>
+
+</nav>
+
+<div id="toast-container"></div>
+
+<div class="container">
+
+<main class="main-content">
+
+<h1 class="page-title">
+
+Air Quality Emergencies
+<span>/ Smog</span>
+
+</h1>
+
+<div class="video-box">
+
+<iframe
+src="https://www.youtube.com/embed/e6rglsLy1Ys"
+allowfullscreen>
+</iframe>
+
+</div>
+<div class="info-card what">
+    <div class="card-header" onclick="toggleAccordion(this)">
+        <i class="fas fa-smog" style="color: #3182ce;"></i>
+        <h3>What Is Air Pollution & Smog?</h3>
+        <i class="fas fa-chevron-right chevron"></i>
+    </div>
+
+    <div class="card-content">
+        Air pollution occurs when harmful gases, smoke, dust, and microscopic particles contaminate the atmosphere. During severe pollution events, these pollutants mix with fog to create smog, reducing visibility and making the air hazardous to breathe. High levels of pollutants such as PM2.5, PM10, ozone, and nitrogen dioxide can trigger respiratory illnesses, worsen heart conditions, and pose serious health risks, especially for children, older adults, pregnant women, and people with asthma.
+    </div>
+</div>
+
+<div class="info-card warning">
+    <div class="card-header" onclick="toggleAccordion(this)">
+        <i class="fas fa-triangle-exclamation" style="color: #3182ce;"></i>
+        <h3>Warning Signs of Poor Air Quality</h3>
+        <i class="fas fa-chevron-right chevron"></i>
+    </div>
+
+    <div class="card-content">
+        <ul class="safety-list">
+            <li><i class="fas fa-circle" style="font-size:6px;color:#3182ce;margin-top:8px;"></i> Thick haze or smog reducing visibility across roads and buildings.</li>
+
+            <li><i class="fas fa-circle" style="font-size:6px;color:#3182ce;margin-top:8px;"></i> Air Quality Index (AQI) reported as <strong>Poor</strong>, <strong>Very Poor</strong>, or <strong>Severe</strong>.</li>
+
+            <li><i class="fas fa-circle" style="font-size:6px;color:#3182ce;margin-top:8px;"></i> Burning eyes, throat irritation, coughing, headaches, or difficulty breathing.</li>
+
+            <li><i class="fas fa-circle" style="font-size:6px;color:#3182ce;margin-top:8px;"></i> Government or weather agencies issuing air pollution or smog advisories.</li>
+
+            <li><i class="fas fa-circle" style="font-size:6px;color:#3182ce;margin-top:8px;"></i> Persistent smoke, industrial emissions, wildfire smoke, or dust storms affecting the surrounding area.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="info-card before">
+    <div class="card-header" onclick="toggleAccordion(this)">
+        <i class="fas fa-clipboard-list" style="color:#ed8936;"></i>
+        <h3>Before an Air Pollution Emergency (Prepare)</h3>
+        <i class="fas fa-chevron-right chevron"></i>
+    </div>
+
+    <div class="card-content">
+        <ul class="safety-list">
+            <li><i class="fas fa-mask-face" style="color:#ed8936;"></i> Keep certified N95 or KN95 masks available for every family member.</li>
+
+            <li><i class="fas fa-mobile-screen-button" style="color:#3182ce;"></i> Monitor the Air Quality Index (AQI) using trusted weather or environmental apps.</li>
+
+            <li><i class="fas fa-house" style="color:#48bb78;"></i> Ensure windows and doors can be closed tightly to prevent polluted air from entering.</li>
+
+            <li><i class="fas fa-fan" style="color:#4299e1;"></i> Maintain air purifiers and replace filters regularly if available.</li>
+
+            <li><i class="fas fa-briefcase-medical" style="color:#48bb78;"></i> Keep prescribed inhalers, medicines, and emergency medical supplies easily accessible.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="info-card during">
+    <div class="card-header" onclick="toggleAccordion(this)">
+        <i class="fas fa-lungs" style="color:#e53e3e;"></i>
+        <h3>During a Smog Emergency (Stay Safe)</h3>
+        <i class="fas fa-chevron-right chevron"></i>
+    </div>
+
+    <div class="card-content">
+        <div class="safety-grid">
+
+            <ul class="safety-list">
+                <li><i class="fas fa-check-circle" style="color:#48bb78;"></i> Stay indoors as much as possible and keep windows and doors closed.</li>
+
+                <li><i class="fas fa-check-circle" style="color:#48bb78;"></i> Wear an N95 or KN95 mask if outdoor travel is unavoidable.</li>
+
+                <li><i class="fas fa-check-circle" style="color:#48bb78;"></i> Reduce outdoor exercise and strenuous physical activities.</li>
+
+                <li><i class="fas fa-check-circle" style="color:#48bb78;"></i> Drink plenty of water and seek medical care if breathing problems become severe.</li>
+            </ul>
+
+            <ul class="safety-list">
+                <li><i class="fas fa-times" style="color:#e53e3e;"></i> Don't burn waste, leaves, or firewood during high pollution periods.</li>
+
+                <li><i class="fas fa-times" style="color:#e53e3e;"></i> Don't keep windows open when AQI levels are hazardous.</li>
+
+                <li><i class="fas fa-times" style="color:#e53e3e;"></i> Don't ignore persistent coughing, wheezing, or chest discomfort.</li>
+
+                <li><i class="fas fa-times" style="color:#e53e3e;"></i> Don't rely on ordinary cloth masks for protection against fine particulate matter.</li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div class="info-card resources">
+    <div class="card-header" onclick="toggleAccordion(this)">
+        <i class="fas fa-globe" style="color: #3182ce;"></i>
+        <h3>Helpful Resources</h3>
+        <i class="fas fa-chevron-right chevron"></i>
+    </div>
+
+    <div class="card-content" style="padding: 0;">
+        <div class="resource-grid">
+
+            <a href="#" class="res-btn" onclick="findSafeZones()">
+                <i class="fas fa-location-dot"></i>
+                Find Clean Air Centers
+            </a>
+
+            <a href="#" class="res-btn" onclick="window.print()">
+                <i class="fas fa-download"></i>
+                Download Smog Safety Checklist
+            </a>
+
+            <a href="#" class="res-btn" onclick="showLiveAlerts()">
+                <i class="fas fa-wind"></i>
+                Check Live AQI Alerts
+            </a>
+
+            <a href="#" class="res-btn" onclick="showHealthTips()">
+                <i class="fas fa-heart-pulse"></i>
+                Health Protection Tips
+            </a>
+
+        </div>
+    </div>
+</div>
+
+</main>
+
+<aside class="sidebar">
+
+    <h3 class="sidebar-title">Read Next</h3>
+
+    <div class="read-next-card">
+        <div class="thumb-box">
+            <iframe
+                src="https://www.youtube.com/embed/1Nh_vxpycEA"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <p>Understanding Air Pollution and AQI</p>
+   </div>
+
+    <div class="read-next-card">
+        <div class="thumb-box">
+            <iframe
+                src="https://www.youtube.com/embed/e6rglsLy1Ys"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <p>How to Protect Yourself During Smog</p>
+    </div>
+
+    <div class="read-next-card">
+        <div class="thumb-box">
+            <iframe
+                src="https://www.youtube.com/embed/0gjnhBfvnZs"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <p>Health Effects of Air Pollution</p>
+    </div>
+
+</aside>
+
+</div>
+
+<script>
+
+function toggleAccordion(element) {
+
+    const content = element.nextElementSibling;
+    const chevron = element.querySelector('.chevron');
+    const isActive = content.classList.contains('active');
+
+    document.querySelectorAll('.card-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.chevron').forEach(i => i.style.transform = 'rotate(0deg)');
+
+    if (!isActive) {
+        content.classList.add('active');
+        chevron.style.transform = 'rotate(90deg)';
+    }
+}
+
+function showToast(message) {
+
+    const container = document.getElementById('toast-container');
+
+    const toast = document.createElement('div');
+
+    toast.className = 'toast';
+
+    toast.innerHTML = `<i class="fas fa-circle-info"></i><span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 400);
+    }, 4000);
+}
+
+function showLiveAlerts() {
+    showToast("Current AQI is within safe limits. No severe air quality alerts at this time.");
+}
+
+function findSafeZones() {
+    showToast("Searching for nearby clean indoor public spaces...");
+}
+
+function showHealthTips() {
+    showToast("Wear an N95 mask, stay indoors, and avoid strenuous outdoor activities during poor air quality.");
+}
+
+</script>
+
+<script src="../../8.AIAssistant/chatbot.js"></script>
+
+</body>
+</html>
