@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandemic & Disease Outbreaks</title>
+    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Base Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #3c5da2;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .brand { font-weight: bold; font-size: 22px; text-transform: lowercase; }
+        .navbar i { cursor: pointer; }
+
+        /* Layout */
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: 20px auto;
+            gap: 25px;
+            padding: 0 20px;
+        }
+        .main-content { flex: 2.5; }
+        .sidebar { flex: 1; }
+
+        h1.page-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+        h1.page-title span { color: #5a7184; font-weight: 400; }
+
+        /* Video Container */
+        .video-box {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .video-box iframe { width: 100%; height: 100%; border: none; }
+
+        /* Accordions */
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e1e8f0;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .card-header {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .info-card.what { border-left: 5px solid #3c5da2; }
+        .info-card.warning { border-left: 5px solid #3182ce; }
+        .info-card.before { border-left: 5px solid #f6ad55; }
+        .info-card.during { border-left: 5px solid #e53e3e; }
+        .info-card.resources { border-left: 5px solid #3182ce; }
+
+        .card-header i:first-child { 
+            margin-right: 15px; 
+            font-size: 20px; 
+            width: 25px; 
+            text-align: center; 
+        }
+        .card-header h3 { font-size: 17px; flex-grow: 1; font-weight: 600; color: #2d3748; }
+        .card-header .chevron { color: #cbd5e0; font-size: 14px; }
+        
+        .card-content {
+            padding: 20px;
+            border-top: 1px solid #f0f4f8;
+            font-size: 15px;
+            color: #4a5568;
+            display: none;
+        }
+        .card-content.active { display: block; }
+
+        /* Safety Lists */
+        .safety-list { list-style: none; padding-left: 5px; }
+        .safety-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; }
+        .safety-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; }
+
+        /* Resource Grid */
+        .resource-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #edf2f7; }
+        .res-btn {
+            background: white;
+            padding: 15px;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            border: 0.5px solid #edf2f7;
+            transition: background 0.2s;
+        }
+        .res-btn:hover { background: #f7fafc; }
+        .res-btn i { color: #3c5da2; font-size: 16px; width: 20px; }
+
+        /* Sidebar */
+        .sidebar-title { margin-bottom: 15px; font-size: 19px; color: #1a365d; font-weight: 700; }
+        .read-next-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .read-next-card:hover { transform: translateY(-3px); }
+        .thumb-box { height: 130px; position: relative; }
+        .thumb-box iframe { width: 100%; height: 100%; border: none; }
+        .read-next-card p { padding: 12px 15px; font-size: 14px; font-weight: 600; color: #2d3748; }
+
+        /* Toast Notifications */
+        #toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 90%; max-width: 400px; }
+        .toast {
+            background: #333; color: white; padding: 16px 20px; border-radius: 12px;
+            display: flex; align-items: center; gap: 12px; margin-top: 10px;
+            animation: slideUp 0.4s ease forwards; border-left: 5px solid #3c5da2;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .safety-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <i class="fas fa-arrow-left" onclick="history.back()"></i>
+        <div class="brand">Pandemic & Disease Outbreaks</div>
+        <i class="far fa-user-circle fa-lg"></i>
+    </nav>
+
+    <div id="toast-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1 class="page-title">Pandemic & <span>Disease Outbreak Safety</span></h1>
+            
+            <div class="video-box">
+                <iframe width="1296" height="729" src="https://www.youtube.com/embed/_AvlRw2L87Q" title="Pandemics, Epidemics, and Outbreaks: What&#39;s the Difference? | GoodRx" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <div class="info-card what">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-check-circle" style="color: #3182ce;"></i>
+                    <h3>What Is a Pandemic?</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    A pandemic is the worldwide spread of an infectious disease that affects large numbers of people across multiple countries or continents. It can spread rapidly through close contact, contaminated surfaces, or airborne transmission depending on the disease. Public health measures help reduce transmission and protect communities.
+                </div>
+            </div>
+
+            <div class="info-card warning">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-bell" style="color: #3182ce;"></i>
+                    <h3>Early Warning Signs</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i> Reports of increasing local infection cases</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i> Government or health department advisories</li>
+                        <li><i class="fas fa-circle" style="font-size: 6px; color: #3182ce; margin-top: 8px;"></i> Unusual clusters of fever, cough, or respiratory illness</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card before">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-clipboard-list" style="color: #ed8936;"></i>
+                    <h3>Before an Outbreak (Prepare)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <ul class="safety-list">
+                        <li><i class="fas fa-pump-soap" style="color:#3182ce;"></i> Keep soap, sanitizer, and disinfectants available</li>
+                        <li><i class="fas fa-kit-medical" style="color:#4299e1;"></i> Maintain a first aid and medicine supply</li>
+                        <li><i class="fas fa-mask-face" style="color:#ed8936;"></i> Store quality face masks if recommended</li>
+                        <li><i class="fas fa-syringe" style="color:#48bb78;"></i> Stay up to date with recommended vaccinations</li>
+                        <li><i class="fas fa-users" style="color:#3182ce;"></i> Create a family emergency communication plan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-card during">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-shield-virus" style="color: #e53e3e;"></i>
+                    <h3>During a Pandemic (Stay Safe)</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content">
+                    <div class="safety-grid">
+                        <ul class="safety-list">
+                            <li><i class="fas fa-check-circle" style="color:#48bb78;"></i> Wash hands frequently with soap</li>
+                            <li><i class="fas fa-mask-face" style="color:#48bb78;"></i> Wear a mask when recommended</li>
+                            <li><i class="fas fa-people-arrows" style="color:#4299e1;"></i> Maintain physical distancing in crowded places</li>
+                            <li><i class="fas fa-house" style="color:#3182ce;"></i> Stay home if you feel unwell</li>
+                        </ul>
+            
+                        <ul class="safety-list">
+                            <li><i class="fas fa-times" style="color:#e53e3e;"></i> Avoid crowded gatherings during outbreaks</li>
+                            <li><i class="fas fa-times" style="color:#e53e3e;"></i> Don't spread unverified health information</li>
+                            <li><i class="fas fa-handshake-slash" style="color:#ed8936;"></i> Avoid close contact with sick individuals</li>
+                            <li><i class="fas fa-user-doctor" style="color:#3182ce;"></i> Seek medical care if symptoms become severe</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card resources">
+                <div class="card-header" onclick="toggleAccordion(this)">
+                    <i class="fas fa-globe" style="color: #3182ce;"></i>
+                    <h3>Additional Resources</h3>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </div>
+                <div class="card-content" style="padding: 0;">
+                    <div class="resource-grid">
+                        <a href="#" class="res-btn" onclick="findNearbyHospitals()"><i class="fas fa-hospital"></i> Nearby Hospitals</a>
+                        <a href="#" class="res-btn" onclick="window.print()"><i class="fas fa-file-medical"></i> Health Checklist</a>
+                        <a href="#" class="res-btn" onclick="showHealthAlerts()"><i class="fas fa-bell"></i> Live Health Alerts</a>
+                        <a href="#" class="res-btn" onclick="showVaccinationCenters()"><i class="fas fa-syringe"></i> Vaccination Centers</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Read Next</h3>
+            
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe width="1296" height="729" src="https://www.youtube.com/embed/UG8YbNbdaco" title="How pandemics spread" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <p>How viruses and disease spreads </p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe width="1296" height="729" src="https://www.youtube.com/embed/-1fDSWIqAGo" title="Disease Outbreak Preparedness - LSHTM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <p>Disease Outbreak Preparedness</p>
+            </div>
+
+            <div class="read-next-card">
+                <div class="thumb-box">
+                    <iframe width="1296" height="729" src="https://www.youtube.com/embed/wefiAkgs09M" title="We can prevent the next epidemic - George Zaidan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <p>What makes for an effective outbreak response?</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const chevron = element.querySelector('.chevron');
+            const isActive = content.classList.contains('active');
+            
+            document.querySelectorAll('.card-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.chevron').forEach(i => i.style.transform = 'rotate(0deg)');
+
+            if (!isActive) {
+                content.classList.add('active');
+                chevron.style.transform = 'rotate(90deg)';
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas fa-circle-info"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 4000);
+        }
+
+        function findNearbyHospitals() {
+            window.open("https://www.google.com/maps/search/nearby+hospitals", "_blank");
+        }
+
+        function showHealthAlerts() {
+            window.open("https://www.who.int/emergencies", "_blank");
+        }
+
+        function showVaccinationCenters() {
+            window.open("https://www.google.com/maps/search/vaccination+center+near+me", "_blank");
+        }
+
+    </script>
+    <script src="../../8.AIAssistant/chatbot.js"></script>
+</body>
+</html>
