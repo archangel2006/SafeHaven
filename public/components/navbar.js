@@ -29,9 +29,17 @@
 
     function root(base) {
         if (base) return base;
-        var segs = location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
-        if (segs.length && segs[segs.length - 1].endsWith('.html')) segs.pop();
-        return segs.length ? '../'.repeat(segs.length) : './';
+        const path = location.pathname.replace(/\\/g, "/");
+        // Homepage
+        if (path.endsWith("/public/index.html")) {
+            return "./";
+        }
+        // Pages inside folders (2.AlertsRisks, 7.GetEducated, etc.)
+        if (path.includes("/public/")) {
+            return "../";
+        }
+
+        return "./";
     }
 
     function activeId(set) {
