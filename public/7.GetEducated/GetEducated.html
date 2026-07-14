@@ -96,6 +96,63 @@
             outline-offset: 2px;
         }
 
+        /* ---------- Search Bar ---------- */
+        /* ---------- Search Bar ---------- */
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0 35px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 520px;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            padding: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+
+        .search-box i {
+            color: #888;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        #searchInput {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 0;
+            font-size: 16px;
+            background: transparent;
+        }
+
+        #noResults {
+            display: none;
+            margin: 40px auto;
+            padding: 18px 24px;
+            max-width: 450px;
+            background-color: #fff3f3;
+            border: 1px solid #ffb3b3;
+            border-left: 5px solid #dc3545;
+            border-radius: 10px;
+            color: #b02a37;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
         /* ---------- TABLET (≤ 1024px) ---------- */
         @media (max-width: 1024px) {
             .container {
@@ -142,6 +199,21 @@
             .panel p {
                 font-size: 14px;
             }
+
+            .search-container {
+                margin: 20px 0 30px;
+            }
+
+            #searchInput {
+                width: 100%;
+                font-size: 15px;
+            }
+
+            #noResults {
+                max-width: 100%;
+                font-size: 16px;
+                padding: 15px 20px;
+            }
         }
 
         /* ---------- SMALL MOBILE (≤ 480px) ---------- */
@@ -157,6 +229,11 @@
             .panel p {
                 font-size: 13px;
             }
+
+            #searchInput {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -165,146 +242,195 @@
     <div id="sh-navbar-root"></div>
     <script src="../components/navbar.js" data-sh-navbar data-page-title="Get Educated"></script>
 
-    <div class="container">
-        <h2>Disaster Awareness and Preparedness</h2>
-
-        <div class="panel-container">
-
-            <div class="panel">
-                <img src="assets/earthquake.jpg" alt="Earthquake">
-                <h3>🌪 Earthquakes</h3>
-                <p>Learn about the causes, safety measures, and preparedness tips for earthquakes.</p>
-                <a href="pages/earthquake.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/flood.jpg" alt="Flood">
-                <h3>🌊 Floods</h3>
-                <p>Understand flood risks, evacuation strategies, and how to protect your community.</p>
-                <a href="pages/flood.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/wildfire.jpg" alt="Wildfire">
-                <h3>🔥 Wildfires</h3>
-                <p>Get information on fire safety, preparation tips, and property protection during wildfires.</p>
-                <a href="pages/wildfire.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/hurricane.jpg" alt="Hurricane">
-                <h3>🌀 Hurricanes/Typhoons</h3>
-                <p>Learn how to prepare, recognize warning signs, and evacuate during a hurricane or typhoon.</p>
-                <a href="pages/hurricane.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/drought.png" alt="Drought">
-                <h3>🌵 Drought</h3>
-                <p>Learn about drought causes, warning signs, water conservation, and preparedness measures.</p>
-                <a href="pages/drought.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/coldwave.png" alt="Cold Wave">
-                <h3>🥶 Cold Wave</h3>
-                <p>Learn about cold wave hazards, warning signs, winter preparedness, and how to stay safe during
-                    extreme cold conditions.</p>
-                <a href="pages/coldwave.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/volcano.jpg" alt="Volcano">
-                <h3>🌋 Volcanic Eruptions</h3>
-                <p>Understand volcanic eruption risks, safety measures, and how to stay safe.</p>
-                <a href="pages/volcano.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/tsunami1.png" alt="Tsunami">
-                <h3>🌊 Tsunami</h3>
-                <p>Understand Tsunami risks, safety measures, and how to stay safe in a Tsunami.</p>
-                <a href="pages/tsunami.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/terrorism.jpg" alt="Terrorism">
-                <h3>🧯 Terrorism/Chemical Attacks</h3>
-                <p>Learn how to respond to terrorism or chemical attack situations and stay safe.</p>
-                <a href="pages/chemical.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/building.png" alt="Building collapse safety">
-                <h3>🚧🏢 Building collapse safety</h3>
-                <p>Evacuate immediately, stay away from the structure, and call emergency services.</p>
-                <a href="pages/building-collapse-safety.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/Industrial.png" alt="Industrial accidents">
-                <h3>🏭 Industrial Accidents</h3>
-                <p>Learn how to stay safe during industrial accidents, chemical spills, and factory emergencies.</p>
-                <a href="pages/industrial-accidents.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-
-                <img src="assets/landslide.jpg" alt="Landslide">
-                <h3>Landslide</h3>
-                <p>Learn about landslide risks, warning signs, and how to prepare for and respond to landslides.</p>
-                <a href="pages/landslide.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/thunderstorm.jpg" alt="Thunderstorm">
-                <h3>Thunderstorm</h3>
-                <p>Learn about thunderstorm hazards, lightning safety, and how to protect yourself during severe storms.
-                </p>
-                <a href="pages/thunderstorm.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/heatwaves.jpg" alt="Heatwave">
-                <h3>Heatwaves</h3>
-                <p>Understand the dangers of extreme heat, warning signs of heat illness, and how to stay safe during a
-                    heatwave.</p>
-                <a href="pages/heatwaves.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/avalanche.png" alt="Avalanche">
-                <h3>🏔️ Avalanche</h3>
-                <p>Learn about avalanche risks, warning signs, survival techniques, and how to rescue buried victims.
-                </p>
-                <a href="pages/avalanche.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/lightning-strike.png" alt="Lightning Strike">
-                <h3>⚡ Lightning Strikes</h3>
-                <p>Learn about lightning safety, warning signs, common myths, and what to do if someone is struck.</p>
-                <a href="pages/lightning-strike.html">Learn More</a>
-            </div>
-
-            <div class="panel">
-                <img src="assets/pandemic.png" alt="Terrorism">
-                <h3>🦠 Pandemic & Disease Outbreaks</h3>
-                <p>Learn how to protect yourself and your community during pandemics and infectious disease outbreaks.</p>
-                <a href="pages/pandemic.html">Learn More</a>
-             </div>
-          
-             <div class="panel">
-                <img src="assets/air-quality.jpg" alt="Air Quality">
-                <h3>🌫️ Air Quality Emergencies</h3>
-                <p>Learn about air pollution, smog, AQI levels, health risks, and essential safety measures to protect yourself during poor air quality events.</p>
-                <a href="pages/air-quality.html">Learn More</a>
-            </div>
-
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search disasters...">
         </div>
+    </div>
+    <div class="panel-container">
+
+        <div class="panel">
+            <img src="assets/earthquake.jpg" alt="Earthquake">
+            <h3>🌪 Earthquakes</h3>
+            <p>Learn about the causes, safety measures, and preparedness tips for earthquakes.</p>
+            <a href="pages/earthquake.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/flood.jpg" alt="Flood">
+            <h3>🌊 Floods</h3>
+            <p>Understand flood risks, evacuation strategies, and how to protect your community.</p>
+            <a href="pages/flood.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/wildfire.jpg" alt="Wildfire">
+            <h3>🔥 Wildfires</h3>
+            <p>Get information on fire safety, preparation tips, and property protection during wildfires.</p>
+            <a href="pages/wildfire.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/hurricane.jpg" alt="Hurricane">
+            <h3>🌀 Hurricanes/Typhoons</h3>
+            <p>Learn how to prepare, recognize warning signs, and evacuate during a hurricane or typhoon.</p>
+            <a href="pages/hurricane.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/drought.png" alt="Drought">
+            <h3>🌵 Drought</h3>
+            <p>Learn about drought causes, warning signs, water conservation, and preparedness measures.</p>
+            <a href="pages/drought.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/coldwave.png" alt="Cold Wave">
+            <h3>🥶 Cold Wave</h3>
+            <p>Learn about cold wave hazards, warning signs, winter preparedness, and how to stay safe during
+                extreme cold conditions.</p>
+            <a href="pages/coldwave.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/volcano.jpg" alt="Volcano">
+            <h3>🌋 Volcanic Eruptions</h3>
+            <p>Understand volcanic eruption risks, safety measures, and how to stay safe.</p>
+            <a href="pages/volcano.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/tsunami1.png" alt="Tsunami">
+            <h3>🌊 Tsunami</h3>
+            <p>Understand Tsunami risks, safety measures, and how to stay safe in a Tsunami.</p>
+            <a href="pages/tsunami.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/terrorism.jpg" alt="Terrorism">
+            <h3>🧯 Terrorism/Chemical Attacks</h3>
+            <p>Learn how to respond to terrorism or chemical attack situations and stay safe.</p>
+            <a href="pages/chemical.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/building.png" alt="Building collapse safety">
+            <h3>🚧🏢 Building collapse safety</h3>
+            <p>Evacuate immediately, stay away from the structure, and call emergency services.</p>
+            <a href="pages/building-collapse-safety.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/Industrial.png" alt="Industrial accidents">
+            <h3>🏭 Industrial Accidents</h3>
+            <p>Learn how to stay safe during industrial accidents, chemical spills, and factory emergencies.</p>
+            <a href="pages/industrial-accidents.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+
+            <img src="assets/landslide.jpg" alt="Landslide">
+            <h3>Landslide</h3>
+            <p>Learn about landslide risks, warning signs, and how to prepare for and respond to landslides.</p>
+            <a href="pages/landslide.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/thunderstorm.jpg" alt="Thunderstorm">
+            <h3>Thunderstorm</h3>
+            <p>Learn about thunderstorm hazards, lightning safety, and how to protect yourself during severe storms.
+            </p>
+            <a href="pages/thunderstorm.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/heatwaves.jpg" alt="Heatwave">
+            <h3>Heatwaves</h3>
+            <p>Understand the dangers of extreme heat, warning signs of heat illness, and how to stay safe during a
+                heatwave.</p>
+            <a href="pages/heatwaves.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/avalanche.png" alt="Avalanche">
+            <h3>🏔️ Avalanche</h3>
+            <p>Learn about avalanche risks, warning signs, survival techniques, and how to rescue buried victims.
+            </p>
+            <a href="pages/avalanche.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/lightning-strike.png" alt="Lightning Strike">
+            <h3>⚡ Lightning Strikes</h3>
+            <p>Learn about lightning safety, warning signs, common myths, and what to do if someone is struck.</p>
+            <a href="pages/lightning-strike.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/pandemic.png" alt="Terrorism">
+            <h3>🦠 Pandemic & Disease Outbreaks</h3>
+            <p>Learn how to protect yourself and your community during pandemics and infectious disease outbreaks.</p>
+            <a href="pages/pandemic.html">Learn More</a>
+        </div>
+
+        <div class="panel">
+            <img src="assets/air-quality.jpg" alt="Air Quality">
+            <h3>🌫️ Air Quality Emergencies</h3>
+            <p>Learn about air pollution, smog, AQI levels, health risks, and essential safety measures to protect
+                yourself during poor air quality events.</p>
+            <a href="pages/air-quality.html">Learn More</a>
+        </div>
+
+    </div>
+
+    <p id="noResults" style="display: none;">
+        No results found.
+    </p>
     </div>
 
     <script src="../8.AIAssistant/chatbot.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const searchInput = document.getElementById("searchInput");
+            const cards = document.querySelectorAll(".panel");
+            const noResults = document.getElementById("noResults");
+
+            searchInput.addEventListener("input", function () {
+
+                const searchText = this.value.toLowerCase().trim();
+
+                let visibleCards = 0;
+
+                cards.forEach(card => {
+
+                    const title = card.querySelector("h3").textContent.toLowerCase();
+                    const description = card.querySelector("p").textContent.toLowerCase();
+
+                    if (
+                        title.includes(searchText) ||
+                        description.includes(searchText)
+                    ) {
+                        card.style.display = "block";
+                        visibleCards++;
+                    } else {
+                        card.style.display = "none";
+                    }
+
+                });
+
+                if (visibleCards === 0) {
+                    noResults.style.display = "block";
+                } else {
+                    noResults.style.display = "none";
+                }
+
+            });
+
+        });
+    </script>
 
 </body>
 
