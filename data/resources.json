@@ -1,0 +1,7 @@
+{
+  "ambulances": { "count": 12, "status": "operational" },
+  "fireTrucks": { "count": 5, "status": "limited" },
+  "rescueTeams": { "count": 18, "status": "operational" },
+  "shelters": { "count": 6, "status": "operational" },
+  "communications": { "count": 2, "status": "critical" }
+}

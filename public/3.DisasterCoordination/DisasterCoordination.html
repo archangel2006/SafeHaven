@@ -1,178 +1,1499 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Disaster Coordination Platform</title>
-  <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="stylesheet" href="../components/navbar.css" />
-  <style>
-    :root {
-      --primary-color: #ff416c;
-      --secondary-color: #ff4b2b;
-      --accent-color: #e63946;
-      --bg-color: #f6f9fc;
-      --card-bg: #ffffff;
-      --header-bg: linear-gradient(135deg, #ff416c, #ff4b2b);
-      --hero-overlay: rgba(0,0,0,0.55);
-    }
-    /* Global Reset & Styles */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-color);
-      color: #333;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    header { display: none; }
-    /* Hero Section */
-    .hero {
-      position: relative;
-      background: url('https://source.unsplash.com/1600x900/?disaster,coordination') no-repeat center center/cover;
-      height: 65vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--hero-overlay);
-      animation: fadeIn 2s ease;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      color: #fff;
-      animation: slideIn 1.5s ease-out;
-      padding: 0 1rem;
-    }
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
-    }
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    /* Cards Container */
-    .cards-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .card {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 1.8rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      text-align: center;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-    }
-    .card h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary-color);
-    }
-    .card p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .card button {
-      padding: 0.8rem 1.5rem;
-      background: var(--secondary-color);
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.4s ease, transform 0.4s ease;
-    }
-    .card button:hover {
-      background: var(--accent-color);
-      transform: scale(1.05);
-    }
-    footer {
-      background: var(--primary-color);
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-    }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.8rem; }
-      .cards-container { grid-template-columns: 1fr; }
-    }
-  </style>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Disaster Coordination</title>
+    <link rel="icon" href="../../assets/1.HomePage/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/1.HomePage/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/1.HomePage/favicon-16x16.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="../components/navbar.css" />
+    <style>
+        :root {
+            --primary-color: #ff416c;
+            --secondary-color: #ff4b2b;
+            --accent-color: #e63946;
+            --bg-color: #f6f9fc;
+            --card-bg: #ffffff;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: none;
+        }
+
+        /* ===== STATUS BANNER ===== */
+        .status-banner {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: #fff;
+            padding: 1.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+        }
+
+        .banner-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .banner-event {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .event-type {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .severity-badge {
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .severity-critical {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .severity-limited {
+            background: var(--warning);
+            color: #1e293b;
+        }
+
+        .severity-operational {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .refresh-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        .refresh-btn i.spinning {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .last-updated {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .banner-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item i {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+
+        .affected-zones {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .zone-pill {
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .dashboard-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+        }
+
+        /* ===== OVERVIEW STATS ROW ===== */
+        .overview-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .stat-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .stat-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+        .stat-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .stat-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .stat-info p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* ===== RESOURCE CARDS ===== */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 1.3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .resource-card.status-operational::before { background: var(--success); }
+        .resource-card.status-limited::before { background: var(--warning); }
+        .resource-card.status-critical::before { background: var(--danger); }
+
+        .resource-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .resource-status {
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .resource-status.operational { background: #d1fae5; color: #065f46; }
+        .resource-status.limited { background: #fef3c7; color: #92400e; }
+        .resource-status.critical { background: #fee2e2; color: #991b1b; }
+
+        .resource-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .resource-count {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+
+        .resource-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .resource-bar {
+            margin-top: 0.75rem;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .resource-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        .resource-bar-fill.operational { background: var(--success); }
+        .resource-bar-fill.limited { background: var(--warning); }
+        .resource-bar-fill.critical { background: var(--danger); }
+
+        /* ===== SOS ACTIVATION SECTION ===== */
+        .sos-section {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--danger);
+        }
+
+        .sos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .sos-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sos-header h2 i {
+            color: var(--danger);
+        }
+
+        .sos-activate-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .sos-activate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .sos-activate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .sos-progress {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fef2f2;
+            border-radius: 10px;
+            border: 1px solid #fecaca;
+        }
+
+        .sos-progress.active {
+            display: block;
+        }
+
+        .sos-progress-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .sos-spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #fecaca;
+            border-top-color: var(--danger);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .sos-progress-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #991b1b;
+        }
+
+        .sos-progress-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sos-progress-steps li {
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+            color: #7f1d1d;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sos-progress-steps li.done {
+            color: var(--success);
+        }
+
+        .sos-progress-steps li.done::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+
+        .sos-progress-steps li.active::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            animation: pulse 1s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .sos-checklist {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .sos-checklist.active {
+            display: block;
+        }
+
+        .sos-checklist h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .checklist-card {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .checklist-card h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .checklist-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checklist-card ul li {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 0.2rem 0;
+        }
+
+        .responder-eta {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 10px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .responder-eta.active {
+            display: block;
+        }
+
+        .responder-eta h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e40af;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .eta-items {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .eta-item {
+            font-size: 0.85rem;
+        }
+
+        .eta-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #1e40af;
+        }
+
+        .eta-item span {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* ===== BOTTOM GRID: COMMAND LOG + QUICK ACTIONS ===== */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 1rem 1.3rem;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-header h2 i {
+            color: var(--primary-color);
+        }
+
+        .panel-badge {
+            padding: 0.2rem 0.6rem;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .panel-body {
+            padding: 0;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+        .panel-body::-webkit-scrollbar { width: 5px; }
+        .panel-body::-webkit-scrollbar-track { background: transparent; }
+        .panel-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        .log-entry {
+            padding: 0.85rem 1.3rem;
+            border-bottom: 1px solid #f8fafc;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            transition: background 0.2s ease;
+        }
+
+        .log-entry:hover { background: #f8fafc; }
+        .log-entry:last-child { border-bottom: none; padding-bottom: 1rem; }
+
+        .log-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 0.45rem;
+            flex-shrink: 0;
+        }
+
+        .log-dot.dispatch { background: var(--info); }
+        .log-dot.update { background: var(--success); }
+        .log-dot.alert { background: var(--danger); }
+        .log-dot.assign { background: var(--warning); }
+
+        .log-body { flex: 1; min-width: 0; }
+
+        .log-text {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .log-meta {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        /* ===== QUICK ACTIONS ===== */
+        .quick-actions {
+            padding: 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            font-family: inherit;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            border-color: var(--primary-color);
+            background: #fff5f7;
+        }
+
+        .action-btn i {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .act-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .act-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .act-green { background: linear-gradient(135deg, #10b981, #059669); }
+        .act-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .act-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+        .action-text { flex: 1; }
+
+        .action-text strong {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .action-text span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== PARTNER COORDINATION ===== */
+        .partners-section {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.5rem;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .partner-card {
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .partner-card:hover {
+            border-color: var(--primary-color);
+            background: #fff5f7;
+        }
+
+        .partner-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .partner-icon.gov { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .partner-icon.ngo { background: linear-gradient(135deg, #10b981, #059669); }
+        .partner-icon.private { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .partner-icon.community { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+        .partner-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .partner-status {
+            padding: 0.15rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .partner-status.active { background: #d1fae5; color: #065f46; }
+        .partner-status.standby { background: #fef3c7; color: #92400e; }
+
+        .partner-details {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .partner-details strong {
+            color: var(--text-dark);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* ===== ERROR BANNER ===== */
+        #errorBanner {
+            display: none;
+            background: #fef2f2;
+            border-bottom: 2px solid var(--danger);
+            padding: 0.75rem 2rem;
+            color: #991b1b;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        #errorBanner button {
+            background: none;
+            border: none;
+            color: #991b1b;
+            cursor: pointer;
+            margin-left: 1rem;
+            font-size: 1rem;
+        }
+
+        /* ===== SOS MODAL ===== */
+        .sos-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sos-modal-overlay.active {
+            display: flex;
+        }
+
+        .sos-modal {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .sos-modal-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            color: #fff;
+        }
+
+        .sos-modal h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .sos-modal p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .sos-modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .sos-modal-actions button {
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .sos-confirm-btn {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: #fff;
+        }
+
+        .sos-confirm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .sos-cancel-btn {
+            background: #f1f5f9;
+            color: var(--text-dark);
+            border: 1px solid #e2e8f0 !important;
+        }
+
+        .sos-cancel-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .overview-row { grid-template-columns: repeat(2, 1fr); }
+            .bottom-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .status-banner { padding: 1.2rem 1rem; }
+            .banner-top { flex-direction: column; }
+            .event-type { font-size: 1.3rem; }
+            .banner-meta { gap: 1rem; }
+            .overview-row { grid-template-columns: 1fr 1fr; }
+            .resources-grid { grid-template-columns: 1fr; }
+            .dashboard-content { padding: 1rem; }
+            .checklist-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .overview-row { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
+
 <body>
-  <div id="sh-navbar-root"></div>
-  <script src="../components/navbar.js" data-sh-navbar data-page-title="Disaster Coordination"></script>
-  
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Coordinate, Communicate, Conquer</h1>
-      <p>Your unified platform for managing every phase of disaster response.</p>
+    <div id="sh-navbar-root"></div>
+    <script src="../components/navbar.js?v=2" data-sh-navbar data-page-title="Disaster Coordination"></script>
+
+    <!-- ERROR BANNER -->
+    <div id="errorBanner">
+        <i class="fas fa-circle-exclamation"></i> Unable to reach the server. Showing cached data.
+        <button onclick="document.getElementById('errorBanner').style.display='none'">&times;</button>
     </div>
-  </section>
-  
-  <!-- Feature Cards arranged in two columns -->
-  <section class="cards-container">
-    <!-- Emergency Call & Data Processing Card -->
-    <div class="card">
-      <h2>Emergency Call & Data Processing</h2>
-      <p>Initiate immediate alerts and report incidents in real time.</p>
-      <button onclick="window.open('sos.html', '_blank')">Activate SOS</button>
-    </div>
-    
-    <!-- Emergency Coordination System Card -->
-    <div class="card">
-      <h2>Emergency Coordination System</h2>
-      <p>Manage resources and communication among first responders efficiently.</p>
-      <button onclick="window.open('coordination.html', '_blank')">Access System</button>
-    </div>
-    
-    <!-- Personalized Coordination Hub Card -->
-    <div class="card">
-      <h2>Personalized Coordination Hub</h2>
-      <p>Connect with government, NGOs, and private partners seamlessly.</p>
-      <button onclick="window.open('hub.html', '_blank')">Connect Now</button>
-    </div>
-    
-    <!-- Two-Way Communication Card -->
-    <div class="card">
-      <h2>Two-Way Communication</h2>
-      <p>Exchange real-time distress signals with rescue teams instantly.</p>
-      <button onclick="window.open('rescue.html', '_blank')">Send Signal</button>
-    </div>
-  </section>
-  
-  <footer>
-    © 2025 Disaster Coordination Platform. All rights reserved.
-  </footer>
-  <script src="../8.AIAssistant/chatbot.js"></script>
+
+    <!-- STATUS BANNER -->
+    <section class="status-banner">
+        <div class="banner-top">
+            <div class="banner-event">
+                <span class="event-type"><i class="fas fa-triangle-exclamation"></i> Loading incident...</span>
+                <span class="severity-badge severity-critical" id="severityBadge">Critical</span>
+            </div>
+            <div class="banner-actions">
+                <span class="last-updated" id="lastUpdated">Last updated: --:--:--</span>
+                <button class="refresh-btn" onclick="refreshDashboard()">
+                    <i class="fas fa-sync-alt" id="refreshIcon"></i> Refresh
+                </button>
+            </div>
+        </div>
+        <div class="banner-meta">
+            <div class="meta-item"><i class="fas fa-location-dot"></i> <span id="incidentLocation">Loading...</span></div>
+            <div class="meta-item"><i class="fas fa-clock"></i> <span id="startTime">Loading...</span></div>
+            <div class="meta-item"><i class="fas fa-users"></i> <span id="affectedCount">Loading...</span></div>
+        </div>
+        <div class="affected-zones" id="affectedZones"></div>
+    </section>
+
+    <!-- MAIN DASHBOARD -->
+    <main class="dashboard-content">
+
+        <!-- Overview Stats -->
+        <h3 class="section-title"><i class="fas fa-chart-line"></i> Situation Overview</h3>
+        <div class="overview-row">
+            <div class="stat-card">
+                <div class="stat-icon red"><i class="fas fa-person-falling-burst"></i></div>
+                <div class="stat-info">
+                    <h3 id="totalIncidents">--</h3>
+                    <p>Active Incidents</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange"><i class="fas fa-truck-medical"></i></div>
+                <div class="stat-info">
+                    <h3 id="deployedUnits">--</h3>
+                    <p>Units Deployed</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fas fa-shield-halved"></i></div>
+                <div class="stat-info">
+                    <h3 id="safeZones">--</h3>
+                    <p>Safe Zones Active</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fas fa-people-group"></i></div>
+                <div class="stat-info">
+                    <h3 id="peopleRescued">--</h3>
+                    <p>People Rescued</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resource Cards -->
+        <h3 class="section-title"><i class="fas fa-boxes-stacked"></i> Resource Overview</h3>
+        <div class="resources-grid">
+            <div class="resource-card status-operational">
+                <div class="resource-header">
+                    <div class="resource-icon"><i class="fas fa-truck-medical"></i></div>
+                    <span class="resource-status operational">Operational</span>
+                </div>
+                <div class="resource-name">Ambulances</div>
+                <div class="resource-count" id="ambCount">--</div>
+                <div class="resource-label">units available</div>
+                <div class="resource-bar"><div class="resource-bar-fill operational" style="width: 0%"></div></div>
+            </div>
+            <div class="resource-card status-limited">
+                <div class="resource-header">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)"><i class="fas fa-fire-extinguisher"></i></div>
+                    <span class="resource-status limited">Limited</span>
+                </div>
+                <div class="resource-name">Fire Trucks</div>
+                <div class="resource-count" id="fireCount">--</div>
+                <div class="resource-label">units available</div>
+                <div class="resource-bar"><div class="resource-bar-fill limited" style="width: 0%"></div></div>
+            </div>
+            <div class="resource-card status-operational">
+                <div class="resource-header">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #10b981, #059669)"><i class="fas fa-helmet-safety"></i></div>
+                    <span class="resource-status operational">Operational</span>
+                </div>
+                <div class="resource-name">Rescue Teams</div>
+                <div class="resource-count" id="rescueCount">--</div>
+                <div class="resource-label">teams on standby</div>
+                <div class="resource-bar"><div class="resource-bar-fill operational" style="width: 0%"></div></div>
+            </div>
+            <div class="resource-card status-operational">
+                <div class="resource-header">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb)"><i class="fas fa-house-chimney"></i></div>
+                    <span class="resource-status operational">Operational</span>
+                </div>
+                <div class="resource-name">Shelters</div>
+                <div class="resource-count" id="shelterCount">--</div>
+                <div class="resource-label">shelters open</div>
+                <div class="resource-bar"><div class="resource-bar-fill operational" style="width: 0%"></div></div>
+            </div>
+            <div class="resource-card status-critical">
+                <div class="resource-header">
+                    <div class="resource-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626)"><i class="fas fa-tower-broadcast"></i></div>
+                    <span class="resource-status critical">Critical</span>
+                </div>
+                <div class="resource-name">Communications</div>
+                <div class="resource-count" id="commsCount">--</div>
+                <div class="resource-label">channels active</div>
+                <div class="resource-bar"><div class="resource-bar-fill critical" style="width: 0%"></div></div>
+            </div>
+        </div>
+
+        <!-- SOS Activation -->
+        <div class="sos-section">
+            <div class="sos-header">
+                <h2><i class="fas fa-bell"></i> SOS Activation</h2>
+                <button class="sos-activate-btn" id="sosActivateBtn" onclick="showSOSModal()">
+                    <i class="fas fa-exclamation-triangle"></i> Activate SOS
+                </button>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                Trigger emergency response. Confirmation required before dispatch.
+            </p>
+
+            <!-- SOS Confirmation Modal -->
+            <div class="sos-modal-overlay" id="sosModal">
+                <div class="sos-modal">
+                    <div class="sos-modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h2>Activate SOS?</h2>
+                    <p>This will trigger an emergency broadcast to all units and civilians in affected zones. This action cannot be undone.</p>
+                    <div class="sos-modal-actions">
+                        <button class="sos-cancel-btn" onclick="hideSOSModal()">Cancel</button>
+                        <button class="sos-confirm-btn" onclick="confirmSOS()">Confirm Activation</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOS Progress -->
+            <div class="sos-progress" id="sosProgress">
+                <div class="sos-progress-header">
+                    <div class="sos-spinner"></div>
+                    <span class="sos-progress-text" id="sosProgressText">Activating SOS...</span>
+                </div>
+                <ul class="sos-progress-steps" id="sosSteps">
+                    <li class="active">Broadcasting emergency alert to all zones</li>
+                    <li>Notifying response teams and agencies</li>
+                    <li>Establishing communication channels</li>
+                    <li>Activating evacuation protocols</li>
+                </ul>
+            </div>
+
+            <!-- SOS Checklist (shown after activation) -->
+            <div class="sos-checklist" id="sosChecklist">
+                <h3><i class="fas fa-clipboard-check"></i> Post-Activation Checklist</h3>
+                <div class="checklist-grid">
+                    <div class="checklist-card">
+                        <h4><i class="fas fa-person-walking-arrow-right" style="color: var(--warning)"></i> Evacuation</h4>
+                        <ul>
+                            <li>Confirm evacuation routes are clear</li>
+                            <li>Direct civilians to nearest safe zone</li>
+                            <li>Account for mobility-impaired individuals</li>
+                            <li>Mark evacuated zones on map</li>
+                        </ul>
+                    </div>
+                    <div class="checklist-card">
+                        <h4><i class="fas fa-kit-medical" style="color: var(--danger)"></i> First Aid</h4>
+                        <ul>
+                            <li>Deploy medical teams to triage points</li>
+                            <li>Set up field hospitals if needed</li>
+                            <li>Inventory medical supplies</li>
+                            <li>Coordinate hospital capacity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responder ETA -->
+            <div class="responder-eta" id="responderEta">
+                <h3><i class="fas fa-clock"></i> Responder ETA</h3>
+                <div class="eta-items">
+                    <div class="eta-item">
+                        <strong id="etaAmbulance">~8 min</strong>
+                        <span>Ambulance</span>
+                    </div>
+                    <div class="eta-item">
+                        <strong id="etaFire">~12 min</strong>
+                        <span>Fire Truck</span>
+                    </div>
+                    <div class="eta-item">
+                        <strong id="etaRescue">~15 min</strong>
+                        <span>Rescue Team</span>
+                    </div>
+                    <div class="eta-item">
+                        <strong id="etaPolice">~6 min</strong>
+                        <span>Police Unit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Grid: Command Log + Quick Actions -->
+        <div class="bottom-grid">
+            <!-- Command Log -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-scroll"></i> Command Log</h2>
+                    <span class="panel-badge" id="logCount">0 entries</span>
+                </div>
+                <div class="panel-body" id="commandLog"></div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                </div>
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="executeAction('broadcast', {zones:['A','B','C','D']})">
+                        <i class="fas fa-broadcast-tower act-red"></i>
+                        <div class="action-text">
+                            <strong>Broadcast SOS Alert</strong>
+                            <span>Notify all units and civilians in affected zones</span>
+                        </div>
+                    </button>
+                    <button class="action-btn" onclick="executeAction('reallocate', {})">
+                        <i class="fas fa-arrows-rotate act-blue"></i>
+                        <div class="action-text">
+                            <strong>Reallocate Resources</strong>
+                            <span>Redistribute units based on current priorities</span>
+                        </div>
+                    </button>
+                    <button class="action-btn" onclick="executeAction('evacuate', {zones:['A']})">
+                        <i class="fas fa-person-walking-arrow-right act-orange"></i>
+                        <div class="action-text">
+                            <strong>Issue Evacuation Order</strong>
+                            <span>Send evacuation directive to specified zones</span>
+                        </div>
+                    </button>
+                    <button class="action-btn" onclick="executeAction('report', {})">
+                        <i class="fas fa-file-lines act-green"></i>
+                        <div class="action-text">
+                            <strong>Generate Status Report</strong>
+                            <span>Compile and distribute current situation summary</span>
+                        </div>
+                    </button>
+                    <button class="action-btn" onclick="executeAction('partners', {})">
+                        <i class="fas fa-handshake act-purple"></i>
+                        <div class="action-text">
+                            <strong>Coordinate with Partners</strong>
+                            <span>Connect with NGOs, government, and agencies</span>
+                        </div>
+                    </button>
+                    <button class="action-btn" onclick="window.open('sos.html', '_blank')">
+                        <i class="fas fa-phone act-red"></i>
+                        <div class="action-text">
+                            <strong>Emergency Contacts</strong>
+                            <span>View and call emergency response numbers</span>
+                        </div>
+                    </button>
+                    <button class="action-btn" onclick="window.open('rescue.html', '_blank')">
+                        <i class="fas fa-comments act-blue"></i>
+                        <div class="action-text">
+                            <strong>Two-Way Comms</strong>
+                            <span>Open distress signal channel with rescue teams</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partner Coordination -->
+        <h3 class="section-title"><i class="fas fa-handshake"></i> Partner Coordination</h3>
+        <div class="partners-section">
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="partner-icon gov"><i class="fas fa-landmark"></i></div>
+                        <span class="partner-name">Government Agencies</span>
+                        <span class="partner-status active">Active</span>
+                    </div>
+                    <div class="partner-details">
+                        <strong>FEMA Region IX</strong> &mdash; Coordinating federal response<br>
+                        <strong>State OES</strong> &mdash; Emergency operations active
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="partner-icon ngo"><i class="fas fa-heart"></i></div>
+                        <span class="partner-name">NGOs & Relief Orgs</span>
+                        <span class="partner-status active">Active</span>
+                    </div>
+                    <div class="partner-details">
+                        <strong>Red Cross</strong> &mdash; Shelter operations at 3 sites<br>
+                        <strong>Doctors Without Borders</strong> &mdash; Field medical team deployed
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="partner-icon private"><i class="fas fa-building"></i></div>
+                        <span class="partner-name">Private Responders</span>
+                        <span class="partner-status standby">Standby</span>
+                    </div>
+                    <div class="partner-details">
+                        <strong>City Ambulance Co.</strong> &mdash; 8 units on standby<br>
+                        <strong>SecureLife Inc.</strong> &mdash; Security teams available
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="partner-icon community"><i class="fas fa-people-group"></i></div>
+                        <span class="partner-name">Community Groups</span>
+                        <span class="partner-status active">Active</span>
+                    </div>
+                    <div class="partner-details">
+                        <strong>Neighborhood Watch</strong> &mdash; Zone patrol active<br>
+                        <strong>Volunteer Corps</strong> &mdash; 45 volunteers on standby
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 SafeHaven Disaster Coordination. All rights reserved.
+    </footer>
+
+    <script>
+        /* ===== SOS FLOW ===== */
+        function showSOSModal() {
+            document.getElementById('sosModal').classList.add('active');
+        }
+
+        function hideSOSModal() {
+            document.getElementById('sosModal').classList.remove('active');
+        }
+
+        function confirmSOS() {
+            hideSOSModal();
+            var btn = document.getElementById('sosActivateBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Activating...';
+
+            var progress = document.getElementById('sosProgress');
+            progress.classList.add('active');
+
+            var steps = document.querySelectorAll('#sosSteps li');
+            var current = 0;
+
+            function advanceStep() {
+                if (current > 0) steps[current - 1].classList.remove('active');
+                if (current > 0) steps[current - 1].classList.add('done');
+                if (current < steps.length) {
+                    steps[current].classList.add('active');
+                    document.getElementById('sosProgressText').textContent = steps[current].textContent;
+                    current++;
+                    setTimeout(advanceStep, 1500);
+                } else {
+                    document.getElementById('sosProgressText').textContent = 'SOS Activated Successfully';
+                    document.querySelector('.sos-spinner').style.borderTopColor = 'var(--success)';
+                    document.querySelector('.sos-spinner').style.animation = 'none';
+                    setTimeout(function () {
+                        progress.classList.remove('active');
+                        document.getElementById('sosChecklist').classList.add('active');
+                        document.getElementById('responderEta').classList.add('active');
+                        btn.innerHTML = '<i class="fas fa-check"></i> SOS Active';
+                        btn.style.background = 'linear-gradient(135deg, var(--success), #059669)';
+                    }, 1000);
+                }
+            }
+
+            setTimeout(advanceStep, 500);
+
+            executeAction('broadcast', { zones: ['A', 'B', 'C', 'D'] });
+        }
+
+        /* ===== COMMAND LOG ===== */
+        function formatTime(iso) {
+            var d = new Date(iso);
+            var h = String(d.getHours()).padStart(2, '0');
+            var m = String(d.getMinutes()).padStart(2, '0');
+            return h + ':' + m;
+        }
+
+        function renderCommandLog(entries) {
+            var container = document.getElementById('commandLog');
+            container.innerHTML = entries.map(function (entry) {
+                return '<div class="log-entry">' +
+                    '<span class="log-dot ' + entry.type + '"></span>' +
+                    '<div class="log-body">' +
+                    '<div class="log-text">' + entry.text + '</div>' +
+                    '<div class="log-meta">' +
+                    '<span><i class="fas fa-user"></i> ' + entry.actor + '</span>' +
+                    '<span><i class="fas fa-clock"></i> ' + formatTime(entry.timestamp) + '</span>' +
+                    '</div></div></div>';
+            }).join('');
+            document.getElementById('logCount').textContent = entries.length + ' entries';
+        }
+
+        /* ===== ACTIONS ===== */
+        async function executeAction(type, params) {
+            var btn = event.currentTarget;
+            btn.style.opacity = '0.5';
+            btn.style.pointerEvents = 'none';
+            try {
+                var res = await fetch('/api/actions/' + type, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(params || {})
+                });
+                var data = await res.json();
+                if (data.success) refreshDashboard();
+                return data;
+            } catch (err) {
+                console.error('Action failed:', err);
+                document.getElementById('errorBanner').style.display = 'block';
+            } finally {
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            }
+        }
+
+        /* ===== REFRESH ===== */
+        function updateTimestamp() {
+            var now = new Date();
+            document.getElementById('lastUpdated').textContent =
+                'Last updated: ' + String(now.getHours()).padStart(2, '0') + ':' +
+                String(now.getMinutes()).padStart(2, '0') + ':' +
+                String(now.getSeconds()).padStart(2, '0');
+        }
+
+        function updateSeverityBadge(severity) {
+            var badge = document.getElementById('severityBadge');
+            if (!badge) return;
+            badge.textContent = severity.charAt(0).toUpperCase() + severity.slice(1);
+            badge.className = 'severity-badge severity-' + severity;
+        }
+
+        async function refreshDashboard() {
+            var icon = document.getElementById('refreshIcon');
+            icon.classList.add('spinning');
+
+            try {
+                var results = await Promise.allSettled([
+                    fetch('/api/incident').then(function (r) { return r.json(); }),
+                    fetch('/api/resources').then(function (r) { return r.json(); }),
+                    fetch('/api/stats').then(function (r) { return r.json(); }),
+                    fetch('/api/command-log?limit=20').then(function (r) { return r.json(); })
+                ]);
+
+                var incident = results[0].status === 'fulfilled' ? results[0].value : null;
+                var resources = results[1].status === 'fulfilled' ? results[1].value : null;
+                var stats = results[2].status === 'fulfilled' ? results[2].value : null;
+                var log = results[3].status === 'fulfilled' ? results[3].value : null;
+
+                var hasError = results.some(function (r) { return r.status === 'rejected'; });
+                document.getElementById('errorBanner').style.display = hasError ? 'block' : 'none';
+
+                if (incident) {
+                    document.querySelector('.event-type').innerHTML =
+                        '<i class="fas fa-triangle-exclamation"></i> ' + (incident.type || 'Unknown Event');
+                    updateSeverityBadge(incident.severity || 'critical');
+                    if (incident.location) document.getElementById('incidentLocation').textContent = incident.location;
+                    if (incident.startTime) {
+                        var d = new Date(incident.startTime);
+                        document.getElementById('startTime').textContent = 'Started: ' + d.toLocaleString();
+                    }
+                    if (incident.affectedCount != null) {
+                        document.getElementById('affectedCount').textContent = 'Est. ' + incident.affectedCount.toLocaleString() + ' affected';
+                    }
+                    if (incident.affectedZones && Array.isArray(incident.affectedZones)) {
+                        document.getElementById('affectedZones').innerHTML = incident.affectedZones.map(function (z) {
+                            return '<span class="zone-pill">' + z + '</span>';
+                        }).join('');
+                    }
+                }
+
+                if (resources) {
+                    function setRes(id, data) { var el = document.getElementById(id); if (el) el.textContent = data.count; }
+                    setRes('ambCount', resources.ambulances);
+                    setRes('fireCount', resources.fireTrucks);
+                    setRes('rescueCount', resources.rescueTeams);
+                    setRes('shelterCount', resources.shelters);
+                    setRes('commsCount', resources.communications);
+                }
+
+                if (stats) {
+                    document.getElementById('totalIncidents').textContent = stats.totalIncidents;
+                    document.getElementById('deployedUnits').textContent = stats.deployedUnits;
+                    document.getElementById('safeZones').textContent = stats.safeZones;
+                    document.getElementById('peopleRescued').textContent = stats.peopleRescued;
+                }
+
+                if (log && Array.isArray(log)) renderCommandLog(log);
+
+                updateTimestamp();
+            } catch (err) {
+                console.error('Dashboard refresh failed:', err);
+                document.getElementById('errorBanner').style.display = 'block';
+            } finally {
+                icon.classList.remove('spinning');
+            }
+        }
+
+        /* ===== SSE ===== */
+        function initSSE() {
+            var evtSource = new EventSource('/api/events');
+            evtSource.onmessage = function (e) {
+                try {
+                    var data = JSON.parse(e.data);
+                    if (data.type === 'resource_update' || data.type === 'new_log' || data.type === 'incident_update') {
+                        refreshDashboard();
+                    }
+                } catch (err) { /* ignore */ }
+            };
+            evtSource.onerror = function () { evtSource.close(); };
+        }
+
+        setInterval(refreshDashboard, 30000);
+        refreshDashboard();
+        initSSE();
+    </script>
+    <script src="../8.AIAssistant/chatbot.js"></script>
 </body>
+
 </html>
