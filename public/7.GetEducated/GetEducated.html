@@ -96,6 +96,63 @@
             outline-offset: 2px;
         }
 
+        /* ---------- Search Bar ---------- */
+        /* ---------- Search Bar ---------- */
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0 35px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 520px;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            padding: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+
+        .search-box i {
+            color: #888;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        #searchInput {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 0;
+            font-size: 16px;
+            background: transparent;
+        }
+
+        #noResults {
+            display: none;
+            margin: 40px auto;
+            padding: 18px 24px;
+            max-width: 450px;
+            background-color: #fff3f3;
+            border: 1px solid #ffb3b3;
+            border-left: 5px solid #dc3545;
+            border-radius: 10px;
+            color: #b02a37;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
         /* ---------- TABLET (≤ 1024px) ---------- */
         @media (max-width: 1024px) {
             .container {
@@ -142,6 +199,21 @@
             .panel p {
                 font-size: 14px;
             }
+
+            .search-container {
+                margin: 20px 0 30px;
+            }
+
+            #searchInput {
+                width: 100%;
+                font-size: 15px;
+            }
+
+            #noResults {
+                max-width: 100%;
+                font-size: 16px;
+                padding: 15px 20px;
+            }
         }
 
         /* ---------- SMALL MOBILE (≤ 480px) ---------- */
@@ -157,6 +229,11 @@
             .panel p {
                 font-size: 13px;
             }
+
+            #searchInput {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -164,10 +241,15 @@
 <body>
     <div id="sh-navbar-root"></div>
     <script src="../components/navbar.js" data-sh-navbar data-page-title="Get Educated"></script>
-
     <div class="container">
         <h2>Disaster Awareness and Preparedness</h2>
 
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search disasters...">
+            </div>
+        </div>
         <div class="panel-container">
 
             <div class="panel">
@@ -290,21 +372,68 @@
             <div class="panel">
                 <img src="assets/pandemic.png" alt="Terrorism">
                 <h3>🦠 Pandemic & Disease Outbreaks</h3>
-                <p>Learn how to protect yourself and your community during pandemics and infectious disease outbreaks.</p>
+                <p>Learn how to protect yourself and your community during pandemics and infectious disease outbreaks.
+                </p>
                 <a href="pages/pandemic.html">Learn More</a>
-             </div>
-          
-             <div class="panel">
+            </div>
+
+            <div class="panel">
                 <img src="assets/air-quality.jpg" alt="Air Quality">
                 <h3>🌫️ Air Quality Emergencies</h3>
-                <p>Learn about air pollution, smog, AQI levels, health risks, and essential safety measures to protect yourself during poor air quality events.</p>
+                <p>Learn about air pollution, smog, AQI levels, health risks, and essential safety measures to protect
+                    yourself during poor air quality events.</p>
                 <a href="pages/air-quality.html">Learn More</a>
             </div>
 
         </div>
+
+        <p id="noResults" style="display: none;">
+            No results found.
+        </p>
     </div>
 
     <script src="../8.AIAssistant/chatbot.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const searchInput = document.getElementById("searchInput");
+            const cards = document.querySelectorAll(".panel");
+            const noResults = document.getElementById("noResults");
+
+            searchInput.addEventListener("input", function () {
+
+                const searchText = this.value.toLowerCase().trim();
+
+                let visibleCards = 0;
+
+                cards.forEach(card => {
+
+                    const title = card.querySelector("h3").textContent.toLowerCase();
+                    const description = card.querySelector("p").textContent.toLowerCase();
+
+                    if (
+                        title.includes(searchText) ||
+                        description.includes(searchText)
+                    ) {
+                        card.style.display = "block";
+                        visibleCards++;
+                    } else {
+                        card.style.display = "none";
+                    }
+
+                });
+
+                if (visibleCards === 0) {
+                    noResults.style.display = "block";
+                } else {
+                    noResults.style.display = "none";
+                }
+
+            });
+
+        });
+    </script>
 
 </body>
 
