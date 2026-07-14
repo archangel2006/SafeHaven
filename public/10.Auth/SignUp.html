@@ -22,9 +22,9 @@
         }
         body { 
             margin: 0; 
-            height: 100vh; 
+            min-height: 100vh; 
             display: flex; 
-            overflow: hidden; 
+            flex-direction: row;
             background-color: #fcfcfc; 
         }
         .form-side { 
@@ -33,6 +33,7 @@
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
+            overflow-y: auto;
         }
         .logo { 
             font-size: 24px; 
@@ -102,6 +103,8 @@
             display: flex; 
             justify-content: space-between; 
             margin: 15px 0; 
+            gap: 5px;
+            flex-wrap: wrap;
         }
         .otp-input { 
             width: 40px; 
@@ -111,6 +114,7 @@
             font-weight: bold; 
             border: 2px solid var(--accent-light-blue); 
             border-radius: 6px; 
+            flex: 0 0 auto;
         }
 
         .checkbox-group { 
@@ -194,6 +198,165 @@
             text-decoration: none; 
             font-weight: bold; 
         }
+
+        .otp-btn {
+            background: var(--main-blue);
+            font-size: 12px;
+            padding: 8px 15px;
+            width: auto;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        /* Tablet screens */
+        @media (max-width: 1024px) {
+            .image-side {
+                width: 40%;
+                padding: 30px;
+            }
+            .form-side {
+                width: 60%;
+                padding: 30px 5%;
+            }
+            .input-group {
+                gap: 15px;
+            }
+            .quote-box h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Mobile devices */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .image-side {
+                width: 100%;
+                min-height: 200px;
+                padding: 20px;
+                order: 2;
+            }
+            .form-side {
+                width: 100%;
+                padding: 20px 20px;
+                order: 1;
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+            .logo {
+                font-size: 20px;
+            }
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            .input-group {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .full {
+                grid-column: span 1;
+            }
+            .label {
+                font-size: 12px;
+            }
+            input {
+                font-size: 14px;
+                padding: 8px 0;
+            }
+            .otp-boxes {
+                justify-content: flex-start;
+            }
+            .otp-input {
+                width: 35px;
+                height: 40px;
+                font-size: 16px;
+            }
+            button {
+                font-size: 14px;
+                padding: 12px;
+            }
+            .otp-btn {
+                font-size: 12px;
+                padding: 8px 15px;
+            }
+            .checkbox-group {
+                font-size: 11px;
+                gap: 8px;
+            }
+            .quote-box h1 {
+                font-size: 1.5rem;
+                text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            }
+            .quote-box p {
+                font-size: 12px;
+                border: none;
+                padding: 0;
+                margin-top: 10px;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .form-side {
+                padding: 15px 15px;
+                padding-top: 15px;
+            }
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+            .input-group {
+                gap: 12px;
+            }
+            .field-box {
+                margin-bottom: 5px;
+            }
+            .label {
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+            input {
+                font-size: 13px;
+                padding: 6px 0;
+            }
+            .otp-row {
+                margin-top: 20px;
+                margin-bottom: 0;
+            }
+            .otp-boxes {
+                margin: 10px 0;
+            }
+            .otp-input {
+                width: 32px;
+                height: 38px;
+                font-size: 14px;
+            }
+            button {
+                font-size: 13px;
+                padding: 11px;
+                margin-top: 5px;
+            }
+            .otp-btn {
+                font-size: 11px;
+                padding: 7px 12px;
+                margin-bottom: 8px;
+            }
+            .checkbox-group {
+                font-size: 10px;
+                gap: 6px;
+                margin: 15px 0;
+            }
+            .image-side {
+                min-height: 150px;
+                padding: 15px;
+            }
+            .quote-box h1 {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -238,7 +401,7 @@
         </div>
 
         <div class="otp-row">
-            <button onclick="sendOTP()" style="background: var(--main-blue); font-size: 12px; padding: 8px; width: auto; padding: 8px 15px;">Send OTP</button>
+            <button onclick="sendOTP()" class="otp-btn">Send OTP</button>
             <div class="otp-boxes">
                 <input type="text" class="otp-input" maxlength="1">
                 <input type="text" class="otp-input" maxlength="1">
