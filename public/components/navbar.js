@@ -29,9 +29,15 @@
 
     function root(base) {
         if (base) return base;
-        var segs = location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
-        if (segs.length && segs[segs.length - 1].endsWith('.html')) segs.pop();
-        return segs.length ? '../'.repeat(segs.length) : './';
+
+        var script = document.currentScript || document.querySelector("script[data-sh-navbar]");
+        if (!script) return "./";
+
+        var src = script.getAttribute("src").replace(/\\/g, "/");
+
+        // Count how many "../" prefixes are in the script path
+        var matches = src.match(/\.\.\//g);
+        return matches ? "../".repeat(matches.length) : "./";
     }
 
     function activeId(set) {
