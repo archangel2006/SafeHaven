@@ -27,6 +27,7 @@
         };
     }
 
+    // Determine the site's root from the navbar script path rather than location.pathname so the navbar works consistently regardless of the page URL.
     function root(base) {
         if (base) return base;
 
