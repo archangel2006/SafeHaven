@@ -39,27 +39,28 @@
         .sos-section {
             background: white;
             border-radius: 24px;
-            padding: 40px 30px;
-            margin-bottom: 32px;
+            padding: 10px 30px 18px;
+            margin-bottom: 22px;
             text-align: center;
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
         }
 
         .sos-note {
             color: #6c757d;
-            font-size: 18px;
-            margin-bottom: 28px;
+            font-size: 16px;
+            margin: 0 0 6px;
+            text-align: center;
             font-weight: 500;
         }
 
         .call-button {
-            margin-top: 22px;
-            padding: 14px 28px;
+            margin-top: 10px;
+            padding: 11px 22px;
             border: 1px solid #d1d5db;
             border-radius: 12px;
             background: white;
             cursor: pointer;
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
@@ -73,10 +74,10 @@
         .sos-button {
             background: linear-gradient(135deg, #ff3b4a, #d90429);
             color: white;
-            padding: 18px 50px;
+            padding: 14px 42px;
             border: none;
             border-radius: 14px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
             box-shadow:
@@ -101,9 +102,9 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 32px;
-            margin: 20px;
-            padding: 0 20px;
+            gap: 24px;
+            margin: 14px;
+            padding: 0 14px;
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
@@ -122,12 +123,12 @@
         /* ====== EMERGENCY ACTION CARDS - ENHANCED ====== */
         .cards-section {
             flex: 1;
-            max-width: 800px;
+            max-width: 896px;
         }
 
         .section-header {
             text-align: left;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             padding: 0 8px;
         }
 
@@ -137,7 +138,7 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #6c757d;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             position: relative;
             padding-left: 16px;
         }
@@ -157,8 +158,8 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 16px;
+            margin-bottom: 30px;
         }
 
         .grid-item {
@@ -169,7 +170,7 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
             position: relative;
-            height: 190px;
+            height: 154px;
             display: flex;
             flex-direction: column;
         }
@@ -230,14 +231,14 @@
             height: 100%;
             text-decoration: none;
             color: inherit;
-            padding: 24px;
+            padding: 17px;
         }
 
         .card-icon-wrapper {
-            font-size: 48px;
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 16px;
+            font-size: 40px;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -301,17 +302,17 @@
         /* ====== END CARDS REDESIGN ====== */
 
         .sidebar {
-            width: 340px;
-            min-width: 340px;
+            width: 322px;
+            min-width: 322px;
         }
 
         /* EMERGENCY ASSISTANCE CARD - UPDATED */
         .combined-card {
             background: #ffffff;
             border-radius: 20px;
-            padding: 18px;
+            padding: 16px;
             box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-            margin-bottom: 22px;
+            margin-bottom: 14px;
             text-align: left;
         }
 
@@ -326,7 +327,7 @@
         .ec-tabs {
             display: flex;
             gap: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .tab {
@@ -359,7 +360,7 @@
         .ec-list {
             display: none;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .ec-list.active {
@@ -371,7 +372,7 @@
             justify-content: space-between;
             align-items: center;
             background: #f9fafb;
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-radius: 10px;
             font-size: 14px;
         }
@@ -401,31 +402,6 @@
             border-color: #10b981;
         }
 
-        /* SafeBot */
-        .safebot {
-            margin-top: 14px;
-        }
-
-        .safebot-title {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #374151;
-        }
-
-        .safebot-box {
-            background: #f1f5f9;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .safebot-box p {
-            margin-top: 4px;
-            color: #6b7280;
-        }
-
         .get-involved {
             background-color: #ffffff;
             border-radius: 20px;
@@ -442,9 +418,10 @@
         }
 
         .gi-desc {
-            font-size: 15px;
+            font-size: 14px;
             color: #6b7280;
-            margin-bottom: 24px;
+            line-height: 1.45;
+            margin-bottom: 20px;
         }
 
         .gi-buttons {
@@ -588,6 +565,66 @@
             background: #f8f9fa;
         }
 
+        @media (min-width: 1025px) {
+            .sos-section {
+                padding: 8px 24px 14px;
+                margin-bottom: 16px;
+            }
+
+            .sos-note {
+                font-size: 14px;
+                margin-bottom: 9px;
+            }
+
+            .sos-button {
+                padding: 12px 34px;
+                font-size: 16px;
+            }
+
+            .call-button {
+                margin-top: 10px;
+                padding: 9px 18px;
+                font-size: 14px;
+            }
+
+            .section-header {
+                margin-bottom: 14px;
+            }
+
+            .section-title {
+                margin-bottom: 10px;
+            }
+
+            .grid-container {
+                gap: 12px;
+                margin-bottom: 26px;
+            }
+
+            .grid-item {
+                height: 130px;
+            }
+
+            .grid-item a {
+                padding: 12px;
+            }
+
+            .card-icon-wrapper {
+                font-size: 34px;
+                width: 50px;
+                height: 50px;
+                margin-bottom: 6px;
+            }
+
+            .card-title {
+                font-size: 16px;
+                margin-bottom: 4px;
+            }
+
+            .card-description {
+                font-size: 12px;
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .container {
@@ -631,6 +668,21 @@
         }
 
         @media (max-width: 480px) {
+            .sos-section {
+                padding: 20px 14px;
+            }
+
+            .sos-button,
+            .call-button {
+                width: 100%;
+                max-width: 360px;
+            }
+
+            .sos-button {
+                padding: 14px 18px;
+                font-size: 16px;
+            }
+
             .grid-container {
                 grid-template-columns: 1fr;
             }
@@ -759,8 +811,16 @@
                             <button class="copy-btn" data-copy="102">Copy</button>
                         </div>
                         <div class="ec-item">
-                            <span>🧯 Fire: <strong>101</strong></span>
+                            <span>🧯 Fire Brigade: <strong>101</strong></span>
                             <button class="copy-btn" data-copy="101">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🌪️ Disaster Management: <strong>1078</strong></span>
+                            <button class="copy-btn" data-copy="1078">Copy</button>
+                        </div>
+                        <div class="ec-item">
+                            <span>🛟 NDRF: <strong>011-24363260</strong></span>
+                            <button class="copy-btn" data-copy="011-24363260">Copy</button>
                         </div>
                     </div>
 
@@ -776,20 +836,12 @@
                         </div>
                     </div>
 
-                    <!-- SAFE BOT -->
-                    <div class="safebot">
-                        <p class="safebot-title">Need Guidance Right Now?</p>
-                        <div class="safebot-box" onclick="openSafeBot()">
-                            <strong>🤖 Ask SafeBot:</strong>
-                            <p>What should I do during an earthquake?</p>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- GET INVOLVED CARD -->
                 <div class="get-involved">
                     <h3 class="gi-title">Help Others Stay Safe</h3>
-                    <p class="gi-desc">Support our mission to assist in times of crisis.</p>
+                    <p class="gi-desc">Support our mission during crises.</p>
 
                     <div class="gi-buttons">
                         <a href="./9.GetInvolved/Volunteer.html" class="gi-link">

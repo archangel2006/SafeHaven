@@ -1,9 +1,15 @@
+if (!document.querySelector('link[href*="font-awesome"]')) {
+  const iconStylesheet = document.createElement('link');
+  iconStylesheet.rel = 'stylesheet';
+  iconStylesheet.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
+  document.head.appendChild(iconStylesheet);
+}
+
 const chatbotHTML = `
 <div id="chatbot-container">
-  <!-- Floating circular button with custom image -->
   <button id="chatbot-toggle" title="Chat with SafeHaven">
-    <img src="https://i.pinimg.com/474x/84/8a/66/848a6696ad98779868a826290b7b8dbd.jpg" 
-         alt="AI Assistant" id="chatbot-icon" />
+    <i class="fa-solid fa-robot" aria-hidden="true" id="chatbot-icon"></i>
+    <span class="sr-only">Open SafeHaven AI Assistant</span>
   </button>
 
   <!-- Chat popup -->
@@ -25,9 +31,10 @@ const chatbotHTML = `
 
 <style>
 #chatbot-container {
+  --safehaven-blue: #425e97;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 24px;
+  right: 24px;
   z-index: 9999;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -39,8 +46,9 @@ const chatbotHTML = `
   border: none;
   cursor: pointer;
   padding: 0;
-  background: transparent;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  background: var(--safehaven-blue);
+  border: 2px solid #ffffff;
+  box-shadow: 0 5px 14px rgba(66, 94, 151, 0.36);
   transition: transform 0.3s;
 }
 #chatbot-toggle:hover {
@@ -48,10 +56,20 @@ const chatbotHTML = `
 }
 
 #chatbot-icon {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
+  color: #ffffff;
+  font-size: 27px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 
